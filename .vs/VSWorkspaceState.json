@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\lib",
+    "\\lib\\apps",
+    "\\lib\\apps\\map",
+    "\\lib\\apps\\map\\views"
+  ],
+  "SelectedNode": "\\lib\\apps\\map\\views\\map_view.dart",
+  "PreviewInSolutionExplorer": false
+}
