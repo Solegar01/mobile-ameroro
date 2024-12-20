@@ -7,7 +7,9 @@ import 'package:mobile_ameroro_app/apps/login/controllers/login_controller.dart'
 import 'package:mobile_ameroro_app/apps/login/models/login_request_model.dart';
 import 'package:mobile_ameroro_app/apps/login/repository/login_repository.dart';
 import 'package:mobile_ameroro_app/apps/widgets/text_input_custom.dart';
+import 'package:mobile_ameroro_app/helpers/app_constant.dart';
 import 'package:mobile_ameroro_app/services/api/api_service.dart';
+import 'package:mobile_ameroro_app/apps/widgets/custom_text_form_field.dart';
 
 class LoginView extends StatelessWidget {
   final LoginController controller =
@@ -77,7 +79,9 @@ class LoginView extends StatelessWidget {
                 controller: controller.password,
                 label: 'Password',
                 icon: Icons.lock,
-                suffixIcon: Icons.remove_red_eye_outlined,
+                suffixIcon: controller.obscurePassword.value
+                    ? Icons.visibility_outlined
+                    : Icons.visibility_off_outlined,
                 onTapSuffixIcon: () {
                   controller.obscurePassword.value =
                       !controller.obscurePassword.value;

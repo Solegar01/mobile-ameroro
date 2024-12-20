@@ -53,47 +53,41 @@ class InklinometerView extends StatelessWidget {
       },
       child: ListView(
         children: [
-          GFCard(
-            margin: EdgeInsets.symmetric(horizontal: 10.r),
-            color: GFColors.WHITE,
-            padding: EdgeInsets.zero,
-            elevation: 2.r,
-            content: Padding(
-              padding: EdgeInsets.all(10.r),
-              child: TextFormField(
-                onTap: () async {
-                  await _selectDate(context, controller);
-                },
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Pilih periode';
-                  }
-                  return null;
-                },
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5.r), // Rounded corners
-                    borderSide:
-                        const BorderSide(color: GFColors.DARK), // Border color
-                  ),
-                  labelText: 'Periode',
-                  suffixIcon: Row(
-                    mainAxisAlignment:
-                        MainAxisAlignment.spaceBetween, // added line
-                    mainAxisSize: MainAxisSize.min, // added line
-                    children: <Widget>[
-                      IconButton(
-                        icon: const Icon(Icons.calendar_month),
-                        onPressed: () async {
-                          await _selectDate(context, controller);
-                        },
-                      ),
-                    ],
-                  ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
+            child: TextFormField(
+              onTap: () async {
+                await _selectDate(context, controller);
+              },
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Pilih periode';
+                }
+                return null;
+              },
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.r), // Rounded corners
+                  borderSide:
+                      const BorderSide(color: GFColors.DARK), // Border color
                 ),
-                controller: controller.dateRangeController,
-                readOnly: true,
+                labelText: 'Periode',
+                suffixIcon: Row(
+                  mainAxisAlignment:
+                      MainAxisAlignment.spaceBetween, // added line
+                  mainAxisSize: MainAxisSize.min, // added line
+                  children: <Widget>[
+                    IconButton(
+                      icon: const Icon(Icons.calendar_month),
+                      onPressed: () async {
+                        await _selectDate(context, controller);
+                      },
+                    ),
+                  ],
+                ),
               ),
+              controller: controller.dateRangeController,
+              readOnly: true,
             ),
           ),
           SizedBox(

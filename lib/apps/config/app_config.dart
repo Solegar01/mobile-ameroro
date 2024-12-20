@@ -14,19 +14,20 @@ class AppConfig {
 
   static Color bgLogin = const Color(0xFF07175E);
   static Color focusTextField = const Color(0xFFFFC828);
+  static const Color primaryColor = Color(0xFF07175E);
 
   static ThemeData themeData = ThemeData(
-    primaryColor: GFColors.PRIMARY,
+    primaryColor: primaryColor,
     scaffoldBackgroundColor: GFColors.WHITE,
     colorScheme: const ColorScheme(
-      primary: GFColors.PRIMARY,
+      primary: primaryColor,
       secondary: GFColors.SECONDARY,
-      surface: GFColors.PRIMARY,
+      surface: primaryColor,
       error: GFColors.DANGER,
       onPrimary: GFColors.LIGHT,
       onSecondary: GFColors.SECONDARY,
       onSurface: GFColors.FOCUS,
-      onError: GFColors.DANGER,
+      onError: GFColors.WHITE,
       brightness: Brightness.light,
     ),
   );

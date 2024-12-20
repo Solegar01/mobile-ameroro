@@ -16,7 +16,7 @@ class SplashController extends GetxController with StateMixin<void> {
     change(null, status: RxStatus.loading());
     try {
       await Future.delayed(const Duration(seconds: 3));
-      bool isLogin = await session.getSession("isLogin") == "true";
+      bool isLogin = await session.getSession("rememberMe") == "true";
       if (isLogin) {
         Get.offAll(MyApp());
       } else {

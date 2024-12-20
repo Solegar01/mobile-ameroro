@@ -11,4 +11,8 @@ class AppController extends GetxController {
     log(currentIndex.value.toString());
     update();
   }
+
+  void changeTab(int index) {
+    currentIndex.value = index;
+  }
 }

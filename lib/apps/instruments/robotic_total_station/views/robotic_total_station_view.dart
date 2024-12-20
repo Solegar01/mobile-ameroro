@@ -12,25 +12,9 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-class CoordinateData {
-  final double x;
-  final double y;
-  final double z;
-
-  CoordinateData({required this.x, required this.y, required this.z});
-}
-
 class RoboticTotalStationView extends StatelessWidget {
   final RoboticTotalStationController controller =
       Get.find<RoboticTotalStationController>();
-  final _formKey = GlobalKey<FormState>();
-
-  final List<CoordinateData> data = [
-    CoordinateData(x: 2, y: 5, z: 3),
-    CoordinateData(x: -8, y: -8, z: 5),
-    CoordinateData(x: 4, y: -6, z: 2),
-    CoordinateData(x: -5, y: 7, z: 4),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -70,47 +54,41 @@ class RoboticTotalStationView extends StatelessWidget {
       },
       child: ListView(
         children: [
-          GFCard(
-            margin: EdgeInsets.symmetric(horizontal: 10.r),
-            color: GFColors.WHITE,
-            padding: EdgeInsets.zero,
-            elevation: 2.r,
-            content: Padding(
-              padding: EdgeInsets.all(10.r),
-              child: TextFormField(
-                onTap: () async {
-                  await _selectDate(context, controller);
-                },
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Pilih periode';
-                  }
-                  return null;
-                },
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5.r), // Rounded corners
-                    borderSide:
-                        const BorderSide(color: GFColors.DARK), // Border color
-                  ),
-                  labelText: 'Periode',
-                  suffixIcon: Row(
-                    mainAxisAlignment:
-                        MainAxisAlignment.spaceBetween, // added line
-                    mainAxisSize: MainAxisSize.min, // added line
-                    children: <Widget>[
-                      IconButton(
-                        icon: const Icon(Icons.calendar_month),
-                        onPressed: () async {
-                          await _selectDate(context, controller);
-                        },
-                      ),
-                    ],
-                  ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
+            child: TextFormField(
+              onTap: () async {
+                await _selectDate(context, controller);
+              },
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Pilih periode';
+                }
+                return null;
+              },
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.r), // Rounded corners
+                  borderSide:
+                      const BorderSide(color: GFColors.DARK), // Border color
                 ),
-                controller: controller.dateRangeController,
-                readOnly: true,
+                labelText: 'Periode',
+                suffixIcon: Row(
+                  mainAxisAlignment:
+                      MainAxisAlignment.spaceBetween, // added line
+                  mainAxisSize: MainAxisSize.min, // added line
+                  children: <Widget>[
+                    IconButton(
+                      icon: const Icon(Icons.calendar_month),
+                      onPressed: () async {
+                        await _selectDate(context, controller);
+                      },
+                    ),
+                  ],
+                ),
               ),
+              controller: controller.dateRangeController,
+              readOnly: true,
             ),
           ),
           SizedBox(

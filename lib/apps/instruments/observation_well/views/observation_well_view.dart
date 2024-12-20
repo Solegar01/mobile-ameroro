@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
+import 'package:mobile_ameroro_app/apps/config/app_config.dart';
 import 'package:mobile_ameroro_app/apps/instruments/observation_well/controllers/observation_well_controller.dart';
 import 'package:mobile_ameroro_app/apps/instruments/observation_well/models/observation_well_model.dart';
 import 'package:mobile_ameroro_app/helpers/app_constant.dart';
@@ -57,176 +58,166 @@ class ObservationWellView extends StatelessWidget {
       },
       child: ListView(
         children: [
-          GFCard(
-            margin: EdgeInsets.symmetric(horizontal: 10.r),
-            color: GFColors.WHITE,
-            padding: EdgeInsets.zero,
-            elevation: 2.r,
-            content: Padding(
-              padding: EdgeInsets.all(10.r),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    DropdownSearch<Map<String, dynamic>>(
-                      key: sensorKey,
-                      onChanged: (value) async {
-                        if (value != null) {
-                          controller.selectedSensor.value = value;
-                        }
-                      },
-                      selectedItem:
-                          controller.selectedSensor as Map<String, dynamic>,
-                      items: (filter, infiniteScrollProps) =>
-                          controller.sensors,
-                      validator: (value) {
-                        if (value!['id'].toString().isEmpty) {
-                          return "Required field";
-                        }
-                        return null;
-                      },
-                      decoratorProps: const DropDownDecoratorProps(
-                        decoration: InputDecoration(
-                          labelText: 'Sensor',
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black)),
-                        ),
-                      ),
-                      itemAsString: (Map<String, dynamic> item) =>
-                          item['text'] ?? 'Unknown',
-                      compareFn: (Map<String, dynamic>? item,
-                          Map<String, dynamic>? selectedItem) {
-                        return item?['id'] == selectedItem?['id'];
-                      },
-                      popupProps: const PopupProps.menu(
-                        menuProps: MenuProps(backgroundColor: Colors.white),
-                        fit: FlexFit.loose,
-                        constraints: BoxConstraints(),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10.r,
-                    ),
-                    TextFormField(
-                      onTap: () async {
-                        await _selectDate(context, controller);
-                      },
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Pilih periode';
-                        }
-                        return null;
-                      },
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  DropdownSearch<Map<String, dynamic>>(
+                    key: sensorKey,
+                    onChanged: (value) async {
+                      if (value != null) {
+                        controller.selectedSensor.value = value;
+                      }
+                    },
+                    selectedItem:
+                        controller.selectedSensor as Map<String, dynamic>,
+                    items: (filter, infiniteScrollProps) => controller.sensors,
+                    validator: (value) {
+                      if (value!['id'].toString().isEmpty) {
+                        return "Required field";
+                      }
+                      return null;
+                    },
+                    decoratorProps: const DropDownDecoratorProps(
                       decoration: InputDecoration(
+                        labelText: 'Sensor',
                         border: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.circular(5.r), // Rounded corners
-                          borderSide: const BorderSide(
-                              color: GFColors.DARK), // Border color
-                        ),
-                        labelText: 'Periode',
-                        suffixIcon: Row(
-                          mainAxisAlignment:
-                              MainAxisAlignment.spaceBetween, // added line
-                          mainAxisSize: MainAxisSize.min, // added line
-                          children: <Widget>[
-                            IconButton(
-                              icon: const Icon(Icons.calendar_month),
-                              onPressed: () async {
-                                await _selectDate(context, controller);
-                              },
-                            ),
-                          ],
-                        ),
+                            borderSide: BorderSide(color: Colors.black)),
                       ),
-                      controller: controller.dateRangeController,
-                      readOnly: true,
                     ),
-                    SizedBox(
-                      height: 10.r,
+                    itemAsString: (Map<String, dynamic> item) =>
+                        item['text'] ?? 'Unknown',
+                    compareFn: (Map<String, dynamic>? item,
+                        Map<String, dynamic>? selectedItem) {
+                      return item?['id'] == selectedItem?['id'];
+                    },
+                    popupProps: const PopupProps.menu(
+                      menuProps: MenuProps(backgroundColor: Colors.white),
+                      fit: FlexFit.loose,
+                      constraints: BoxConstraints(),
                     ),
-                    ElevatedButton(
-                      onPressed: () async {
-                        // Validate form and show a message if valid
-                        if (_formKey.currentState?.validate() ?? false) {
-                          await controller.getData();
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: GFColors.WHITE,
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide(color: Colors.blue),
-                          borderRadius:
-                              BorderRadius.circular(30.r), // Rounded corners
-                        ),
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 10.r, vertical: 10.r),
+                  ),
+                  SizedBox(
+                    height: 10.r,
+                  ),
+                  TextFormField(
+                    onTap: () async {
+                      await _selectDate(context, controller);
+                    },
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Pilih periode';
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius:
+                            BorderRadius.circular(5.r), // Rounded corners
+                        borderSide: const BorderSide(
+                            color: GFColors.DARK), // Border color
                       ),
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: Center(
-                          child: Text(
-                            'Tampilkan',
-                            style: TextStyle(
-                              fontSize: 16.r,
-                              color: Colors.blue,
-                            ),
+                      labelText: 'Periode',
+                      suffixIcon: Row(
+                        mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween, // added line
+                        mainAxisSize: MainAxisSize.min, // added line
+                        children: <Widget>[
+                          IconButton(
+                            icon: const Icon(Icons.calendar_month),
+                            onPressed: () async {
+                              await _selectDate(context, controller);
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    controller: controller.dateRangeController,
+                    readOnly: true,
+                  ),
+                  SizedBox(
+                    height: 10.r,
+                  ),
+                  ElevatedButton(
+                    onPressed: () async {
+                      // Validate form and show a message if valid
+                      if (_formKey.currentState?.validate() ?? false) {
+                        await controller.getData();
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: GFColors.WHITE,
+                      shape: RoundedRectangleBorder(
+                        side: const BorderSide(
+                          color: AppConfig.primaryColor,
+                        ),
+                        borderRadius:
+                            BorderRadius.circular(30.r), // Rounded corners
+                      ),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 10.r, vertical: 10.r),
+                    ),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: Center(
+                        child: Text(
+                          'Tampilkan',
+                          style: TextStyle(
+                            fontSize: 16.r,
+                            color: AppConfig.primaryColor,
                           ),
                         ),
                       ),
                     ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 10.r,
-          ),
-          Expanded(
-            child: DefaultTabController(
-              length: 2, // Jumlah tab
-              child: Column(
-                children: [
-                  TabBar(
-                    indicatorSize: TabBarIndicatorSize.tab,
-                    tabs: [
-                      Tab(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'GRAFIK',
-                              selectionColor: context.iconColor,
-                            )
-                          ],
-                        ),
-                      ),
-                      Tab(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'TABEL',
-                              selectionColor: context.iconColor,
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 600.r,
-                    child: TabBarView(
-                      children: [
-                        _chartTab(context, controller),
-                        _tableTab(context, controller),
-                      ],
-                    ),
                   ),
                 ],
               ),
+            ),
+          ),
+          DefaultTabController(
+            length: 2, // Jumlah tab
+            child: Column(
+              children: [
+                TabBar(
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  tabs: [
+                    Tab(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'GRAFIK',
+                            selectionColor: context.iconColor,
+                          )
+                        ],
+                      ),
+                    ),
+                    Tab(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'TABEL',
+                            selectionColor: context.iconColor,
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 600.r,
+                  child: TabBarView(
+                    children: [
+                      _chartTab(context, controller),
+                      _tableTab(context, controller),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
         ],

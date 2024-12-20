@@ -28,6 +28,7 @@ class TextInputCustom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      cursorColor: GFColors.WHITE.withOpacity(0.65),
       controller: controller,
       style: TextStyle(
         fontSize: AppConfig.fontSize,
@@ -36,14 +37,36 @@ class TextInputCustom extends StatelessWidget {
       decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: 0.r),
           labelText: label,
-          labelStyle: TextStyle(fontSize: AppConfig.fontSize),
-          border: const OutlineInputBorder(),
-          enabledBorder: OutlineInputBorder(
+          labelStyle: TextStyle(
+            fontSize: AppConfig.fontSize,
+            color: GFColors.WHITE.withOpacity(0.65),
+          ),
+          border: OutlineInputBorder(
             borderSide: BorderSide(
-              color: GFColors.WHITE.withOpacity(0.35), // Default border color
+              color: GFColors.WHITE.withOpacity(0.65),
               width: 2.0,
             ),
           ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: GFColors.WHITE.withOpacity(0.65),
+              width: 2.0,
+            ),
+          ),
+          disabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: GFColors.WHITE.withOpacity(0.1),
+              width: 2.0,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: GFColors.WHITE.withOpacity(0.65),
+              width: 2.0,
+            ),
+          ),
+          floatingLabelStyle:
+              TextStyle(color: GFColors.WHITE.withOpacity(0.65)),
           prefixIcon: Icon(
             icon,
             color: GFColors.INFO.withOpacity(0.65),
@@ -52,6 +75,7 @@ class TextInputCustom extends StatelessWidget {
               ? GestureDetector(
                   onTap: onTapSuffixIcon,
                   child: Icon(
+                    color: GFColors.INFO.withOpacity(0.65),
                     suffixIcon,
                   ),
                 )

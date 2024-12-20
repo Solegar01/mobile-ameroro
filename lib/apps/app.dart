@@ -1,11 +1,10 @@
-import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mobile_ameroro_app/apps/app_controller.dart';
 import 'package:mobile_ameroro_app/apps/cctv/controllers/cctv_controller.dart';
 import 'package:mobile_ameroro_app/apps/cctv/repository/cctv_repository.dart';
 import 'package:mobile_ameroro_app/apps/cctv/views/cctv_view.dart';
+import 'package:mobile_ameroro_app/apps/config/app_config.dart';
 import 'package:mobile_ameroro_app/apps/home/controllers/home_controller.dart';
 import 'package:mobile_ameroro_app/apps/home/repository/home_repository.dart';
 import 'package:mobile_ameroro_app/apps/home/views/home_view.dart';
@@ -21,129 +20,110 @@ import 'package:mobile_ameroro_app/services/api/api_service.dart';
 
 class MyApp extends StatelessWidget {
   final AppController controller = Get.put(AppController());
+  final List<Widget> _screens = [
+    GetBuilder<HomeController>(
+      init: HomeController(HomeRepository(ApiService())),
+      builder: (controller) => HomeView(),
+    ),
+    GetBuilder<InstrumentController>(
+      init: InstrumentController(),
+      builder: (controller) => InstrumentView(),
+    ),
+    GetBuilder<MapController>(
+      init: MapController(MapRepository(ApiService())),
+      builder: (controller) => PetaView(),
+    ),
+    GetBuilder<CctvController>(
+      init: CctvController(CctvRepository(ApiService())),
+      builder: (controller) => CctvView(),
+    ),
+    GetBuilder<ProfileController>(
+      init: ProfileController(ProfileRepository(ApiService())),
+      builder: (controller) => ProfileView(),
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Obx(() {
-        // Gunakan IndexedStack untuk menampilkan halaman yang sesuai
-        return IndexedStack(
-          index: controller.currentIndex.value,
-          children: [
-            GetBuilder<HomeController>(
-              init: HomeController(HomeRepository(ApiService())),
-              builder: (controller) => HomeView(),
+      body: Obx(() => _screens[controller.currentIndex.value]),
+      bottomNavigationBar: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Obx(
+            () => BottomNavigationBar(
+              backgroundColor: const Color(0xFFE6E9EE),
+              currentIndex: controller.currentIndex.value,
+              onTap: (index) {
+                controller.changeTab(index);
+              },
+              selectedItemColor: AppConfig.primaryColor,
+              unselectedItemColor: const Color(0xFF6B7E8D),
+              type: BottomNavigationBarType.fixed,
+              items: const [
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home),
+                  label: "Home",
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.sensors),
+                  label: "Instrument",
+                ),
+                BottomNavigationBarItem(
+                  icon:
+                      SizedBox.shrink(), // Placeholder for the floating button
+                  label: "",
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.video_call),
+                  label: "CCTV",
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.person),
+                  label: "Profile",
+                ),
+              ],
             ),
-            GetBuilder<InstrumentController>(
-              init: InstrumentController(),
-              builder: (controller) => InstrumentView(),
-            ),
-            GetBuilder<MapController>(
-              init: MapController(MapRepository(ApiService())),
-              builder: (controller) => PetaView(),
-            ),
-            GetBuilder<CctvController>(
-              init: CctvController(CctvRepository(ApiService())),
-              builder: (controller) => CctvView(),
-            ),
-            GetBuilder<ProfileController>(
-              init: ProfileController(ProfileRepository(ApiService())),
-              builder: (controller) => ProfileView(),
-            ),
-          ],
-        );
-      }),
-      bottomNavigationBar: Obx(
-        () => SizedBox(
-          width: double.infinity,
-          child: CustomNavigationBar(
-            items: [
-              CustomNavigationBarItem(
-                icon: Icon(
-                  Icons.home,
-                  size: 20.r,
-                ),
-                title: Text(
-                  'Home',
-                  style: TextStyle(
-                    fontSize: 12.r,
-                  ),
-                ),
-              ),
-              CustomNavigationBarItem(
-                icon: Icon(
-                  Icons.sensors,
-                  size: 20.r,
-                ),
-                title: Text(
-                  'Instrument',
-                  style: TextStyle(
-                    fontSize: 12.r,
-                  ),
-                ),
-              ),
-              CustomNavigationBarItem(
-                icon: const SizedBox(),
-                title: Text(
-                  'Peta Lokasi',
-                  style: TextStyle(
-                    fontSize: 12.r,
-                  ),
-                ),
-              ),
-              CustomNavigationBarItem(
-                icon: Icon(
-                  Icons.video_call,
-                  size: 20.r,
-                ),
-                title: Text(
-                  'CCTV',
-                  style: TextStyle(
-                    fontSize: 12.r,
-                  ),
-                ),
-              ),
-              CustomNavigationBarItem(
-                icon: Icon(
-                  Icons.person,
-                  size: 20.r,
-                ),
-                title: Text(
-                  'Profil',
-                  style: TextStyle(
-                    fontSize: 12.r,
-                  ),
-                ),
-              ),
-            ],
-            currentIndex: controller.currentIndex.value,
-            onTap: (index) {
-              controller.currentIndex.value = index;
-            },
           ),
-        ),
+          // Add the floating button
+          Positioned(
+            bottom: 8.0,
+            left:
+                MediaQuery.of(context).size.width / 2 - 30, // Center the button
+            child: Obx(
+              () => Column(
+                children: [
+                  FloatingActionButton(
+                    shape: const CircleBorder(),
+                    onPressed: () {
+                      controller
+                          .changeTab(2); // Set index for floating button action
+                    },
+                    backgroundColor: controller.currentIndex.value == 2
+                        ? AppConfig.primaryColor
+                        : const Color(0xFF6B7E8D),
+                    child: const Icon(Icons.pin_drop_outlined,
+                        color: Colors.white),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'Peta Lokasi',
+                    style: controller.currentIndex.value == 2
+                        ? const TextStyle(
+                            fontSize: 12, color: AppConfig.primaryColor)
+                        : const TextStyle(
+                            fontSize: 11,
+                            color: Color(0xFF6B7E8D),
+                          ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
-      floatingActionButton: Obx(
-        () => controller.x.value == ""
-            ? FloatingActionButton(
-                heroTag: null,
-                backgroundColor: const Color(0xFF696FDB),
-                elevation: 5.r,
-                onPressed: () {
-                  controller.currentIndex.value = 2;
-                },
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(width: 1.r, color: const Color(0xFF696FDB)),
-                  borderRadius: BorderRadius.circular(100.r),
-                ),
-                child: Icon(
-                  Icons.pin_drop_outlined,
-                  size: 20.r,
-                ),
-              )
-            : const SizedBox(),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }

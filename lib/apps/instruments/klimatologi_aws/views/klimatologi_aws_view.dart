@@ -57,7 +57,7 @@ class KlimatologiAwsView extends StatelessWidget {
         children: [
           _weatherSlider(context, controller),
           Padding(
-            padding: EdgeInsets.all(10.r),
+            padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
             child: TextFormField(
               onTap: () async {
                 await _selectDate(context, controller);

@@ -110,49 +110,42 @@ class AwlrView extends StatelessWidget {
 
   _detail(BuildContext context, AwlrController controller) {
     return RefreshIndicator(
+      color: GFColors.WHITE,
       onRefresh: () async {
         await controller.formInit();
       },
       child: ListView(
         children: [
           _lastDataCard(context, controller),
-          SizedBox(height: 10.r),
-          GFCard(
-            margin: EdgeInsets.symmetric(horizontal: 10.r),
-            color: GFColors.WHITE,
-            padding: EdgeInsets.zero,
-            elevation: 2.r,
-            content: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
-              child: TextFormField(
-                onTap: () async {
-                  await _selectDate(context, controller);
-                },
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Pilih periode';
-                  }
-                  return null;
-                },
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5.r),
-                    borderSide: const BorderSide(color: GFColors.DARK),
-                  ),
-                  labelText: 'Periode',
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.calendar_month),
-                    onPressed: () async {
-                      await _selectDate(context, controller);
-                    },
-                  ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
+            child: TextFormField(
+              onTap: () async {
+                await _selectDate(context, controller);
+              },
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Pilih periode';
+                }
+                return null;
+              },
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.r),
+                  borderSide: const BorderSide(color: GFColors.DARK),
                 ),
-                controller: controller.dateRangeController,
-                readOnly: true,
+                labelText: 'Periode',
+                suffixIcon: IconButton(
+                  icon: const Icon(Icons.calendar_month),
+                  onPressed: () async {
+                    await _selectDate(context, controller);
+                  },
+                ),
               ),
+              controller: controller.dateRangeController,
+              readOnly: true,
             ),
           ),
-          SizedBox(height: 10.r),
           DefaultTabController(
             length: 2,
             child: Column(
@@ -192,48 +185,44 @@ class AwlrView extends StatelessWidget {
   }
 
   Widget _lastDataCard(BuildContext context, AwlrController controller) {
-    return SingleChildScrollView(
-      child: GFCard(
-        margin: EdgeInsets.symmetric(horizontal: 10.r),
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
+      margin: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
+      width: double.infinity,
+      decoration: BoxDecoration(
         color: GFColors.WHITE,
-        padding: EdgeInsets.zero,
-        elevation: 2.r,
-        content: SizedBox(
-          width: double.infinity,
-          child: Column(
+        borderRadius: BorderRadius.circular(10.r),
+        border: Border.all(color: AppConfig.primaryColor, width: 1.r),
+      ),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.all(8.r),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text('DATA TERAKHIR', style: TextStyle(fontSize: 12.r)),
-                        Text(
-                          '${controller.station.value.lastReading == null ? '-' : DateFormatter.formatFullDateTimeToLocal(controller.station.value.lastReading!)} WIB',
-                          style: TextStyle(fontSize: AppConfig.fontSize),
-                        ),
-                        Text(
-                          'TMA Intake: ${controller.station.value.lastData} ${controller.unit}',
-                          style: TextStyle(
-                              fontSize: AppConfig.fontSize,
-                              fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    ),
+                  Text('DATA TERAKHIR', style: TextStyle(fontSize: 12.r)),
+                  Text(
+                    '${controller.station.value.lastReading == null ? '-' : DateFormatter.formatFullDateTimeToLocal(controller.station.value.lastReading!)} WIB',
+                    style: TextStyle(fontSize: AppConfig.fontSize),
                   ),
-                  Padding(
-                    padding: EdgeInsets.all(8.r),
-                    child: _statusContainer(controller),
+                  Text(
+                    'TMA Intake: ${controller.station.value.lastData} ${controller.unit}',
+                    style: TextStyle(
+                        fontSize: AppConfig.fontSize,
+                        fontWeight: FontWeight.bold),
                   )
                 ],
               ),
+              Padding(
+                padding: EdgeInsets.all(8.r),
+                child: _statusContainer(controller),
+              )
             ],
           ),
-        ),
+        ],
       ),
     );
   }
@@ -301,65 +290,6 @@ class AwlrView extends StatelessWidget {
       }
       await controller.getData();
     }
-  }
-
-  Future<DateTime?> showDatePicker(BuildContext context) async {
-    DateTime? result = await showRoundedDatePicker(
-      context: context,
-      barrierDismissible: true,
-      theme: ThemeData(primarySwatch: Colors.blue),
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2024),
-      lastDate: DateTime.now(),
-      locale: const Locale("id", "ID"),
-      borderRadius: 8.r,
-      height: MediaQuery.of(context).size.height * 0.4,
-      styleDatePicker: MaterialRoundedDatePickerStyle(
-        backgroundActionBar: GFColors.WHITE,
-        backgroundHeader: GFColors.PRIMARY,
-        backgroundPicker: GFColors.WHITE,
-        paddingDatePicker: const EdgeInsets.all(0),
-        marginLeftArrowPrevious: 0.r,
-        marginRightArrowNext: 0.r,
-        marginTopArrowNext: 0.r,
-        marginTopArrowPrevious: 0.r,
-        textStyleDayHeader: const TextStyle(
-          color: GFColors.WHITE,
-        ),
-        textStyleButtonNegative: const TextStyle(
-          color: GFColors.DANGER,
-        ),
-        textStyleButtonPositive: const TextStyle(
-          color: GFColors.PRIMARY,
-        ),
-        textStyleDayOnCalendarSelected: const TextStyle(
-          color: GFColors.WHITE,
-        ),
-        backgroundHeaderMonth: GFColors.PRIMARY,
-        textStyleDayOnCalendarDisabled: const TextStyle(
-          color: GFColors.LIGHT,
-        ),
-        textStyleMonthYearHeader: TextStyle(
-          color: GFColors.WHITE,
-          fontSize: AppConfig.fontSize,
-        ),
-        textStyleYearButton: TextStyle(
-          color: GFColors.WHITE,
-          fontSize: 14.r,
-        ),
-        textStyleDayButton: TextStyle(
-          color: GFColors.WHITE,
-          fontSize: 24.r,
-        ),
-        colorArrowNext: GFColors.WHITE,
-        colorArrowPrevious: GFColors.WHITE,
-        decorationDateSelected: const BoxDecoration(
-            color: GFColors.PRIMARY,
-            borderRadius: BorderRadius.all(Radius.circular(100))),
-      ),
-    );
-
-    return result;
   }
 
   Widget detailPos(BuildContext context, Station station) {

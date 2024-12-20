@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
           375, 812), // Ukuran desain yang diinginkan (misalnya iPhone X)
       builder: (context, child) {
         return GetMaterialApp(
-          title: 'Bendungan Sindang Heula',
+          title: 'Bendungan Ameroro',
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
           ],
           supportedLocales: const [
             Locale('en', 'US'), // English
-            Locale('id', 'ID'), // Thai
+            Locale('id', 'ID'), // INDONESIA
           ],
           theme: AppConfig.themeData,
           initialBinding: InitialBindings(),
