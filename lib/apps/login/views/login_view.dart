@@ -7,9 +7,7 @@ import 'package:mobile_ameroro_app/apps/login/controllers/login_controller.dart'
 import 'package:mobile_ameroro_app/apps/login/models/login_request_model.dart';
 import 'package:mobile_ameroro_app/apps/login/repository/login_repository.dart';
 import 'package:mobile_ameroro_app/apps/widgets/text_input_custom.dart';
-import 'package:mobile_ameroro_app/helpers/app_constant.dart';
 import 'package:mobile_ameroro_app/services/api/api_service.dart';
-import 'package:mobile_ameroro_app/apps/widgets/custom_text_form_field.dart';
 
 class LoginView extends StatelessWidget {
   final LoginController controller =

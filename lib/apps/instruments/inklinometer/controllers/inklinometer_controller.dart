@@ -7,9 +7,12 @@ import 'package:mobile_ameroro_app/apps/widgets/custom_toast.dart';
 import 'package:mobile_ameroro_app/helpers/app_constant.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-class InklinometerController extends GetxController with StateMixin {
+class InklinometerController extends GetxController
+    with StateMixin, GetSingleTickerProviderStateMixin {
   final InklinometerRepository repository;
   InklinometerController(this.repository);
+  late TabController tabController;
+
   var selectedSensorIndex = 0.obs;
   RxList<InklinometerModel> listModel = RxList.empty(growable: true);
   var selectedDateRange = Rxn<DateTimeRange>(
@@ -27,6 +30,7 @@ class InklinometerController extends GetxController with StateMixin {
 
   @override
   void onInit() async {
+    tabController = TabController(length: 2, vsync: this);
     await formInit();
     super.onInit();
   }

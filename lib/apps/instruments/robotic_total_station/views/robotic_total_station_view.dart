@@ -1,10 +1,10 @@
 import 'dart:math';
-import 'package:dynamic_tabbar/dynamic_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
+import 'package:mobile_ameroro_app/apps/config/app_config.dart';
 import 'package:mobile_ameroro_app/apps/instruments/robotic_total_station/controllers/robotic_total_station_controller.dart';
 import 'package:mobile_ameroro_app/apps/instruments/robotic_total_station/models/robotic_total_station_model.dart';
 import 'package:mobile_ameroro_app/helpers/app_constant.dart';
@@ -36,7 +36,11 @@ class RoboticTotalStationView extends StatelessWidget {
             ),
             body: controller.obx(
               (state) => _detail(context, controller),
-              onLoading: const Center(child: CircularProgressIndicator()),
+              onLoading: const Center(
+                child: GFLoader(
+                  type: GFLoaderType.circle,
+                ),
+              ),
               onEmpty: const Text('Empty Data'),
               onError: (error) => Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -49,6 +53,7 @@ class RoboticTotalStationView extends StatelessWidget {
 
   _detail(BuildContext context, RoboticTotalStationController controller) {
     return RefreshIndicator(
+      backgroundColor: GFColors.LIGHT,
       onRefresh: () async {
         await controller.formInit();
       },
@@ -119,128 +124,102 @@ class RoboticTotalStationView extends StatelessWidget {
 
   _graphTableTab(
       BuildContext context, RoboticTotalStationController controller) {
-    return DynamicTabBarWidget(
-      // padding: EdgeInsets.all(8.r),
-      indicatorSize: TabBarIndicatorSize.tab,
-      onTap: (index) {
-        controller.changeGrapTabIndex(index);
-      },
-      dynamicTabs: [
-        TabData(
-          index: 0,
-          title: const Tab(child: Center(child: Text('GRAFIK'))),
-          content: _sensorTabs(context, controller),
+    return Column(
+      children: [
+        TabBar(
+          controller: controller.tabController,
+          tabs: const [
+            Tab(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [Text('GRAFIK')],
+              ),
+            ),
+            Tab(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [Text('TABEL')],
+              ),
+            ),
+          ],
         ),
-        TabData(
-          index: 1,
-          title: const Tab(child: Text('TABLE')),
-          content: _tableTab(context, controller),
+        Expanded(
+          child: TabBarView(
+            controller: controller.tabController,
+            children: [
+              _sensorTabs(context, controller),
+              _tableTab(context, controller),
+            ],
+          ),
         ),
       ],
-      // optional properties :-----------------------------
-      isScrollable: false,
-      onTabControllerUpdated: (controller) {
-        debugPrint("onTabControllerUpdated");
-      },
-      onTabChanged: (index) {
-        debugPrint("Tab changed: $index");
-      },
-      onAddTabMoveTo: MoveToTab.last,
-      // onAddTabMoveToIndex: tabs.length - 1, // Random().nextInt(tabs.length);
-      // backIcon: Icon(Icons.keyboard_double_arrow_left),
-      // nextIcon: Icon(Icons.keyboard_double_arrow_right),
-      showBackIcon: false,
-      showNextIcon: false,
-      // indicator: const BoxDecoration(),
-      // leading: Tooltip(
-      //   message: 'Add your desired Leading widget here',
-      //   child: IconButton(
-      //     onPressed: () {},
-      //     icon: const Icon(Icons.more_horiz_rounded),
-      //   ),
-      // ),
-      // trailing: Tooltip(
-      //   message: 'Add your desired Trailing widget here',
-      //   child: IconButton(
-      //     onPressed: () {},
-      //     icon: const Icon(Icons.more_horiz_rounded),
-      //   ),
-      // ),
     );
   }
 
   _sensorTabs(BuildContext context, RoboticTotalStationController controller) {
-    List<String> sensors = ['Perubahan Sumbu Z', 'Pergeseran Arah'];
-    return DynamicTabBarWidget(
-      padding: EdgeInsets.all(8.r),
-      dividerColor: Colors.transparent,
-      tabAlignment: TabAlignment.start,
-      onTap: (index) {
-        controller.changeSensorTabIndex(index);
-      },
-      dynamicTabs: [
-        for (int i = 0; i < sensors.length; i++)
-          TabData(
-            index: i,
-            title: Tab(
-              child: Obx(
-                () => Container(
-                  padding: EdgeInsets.all(8.r),
-                  decoration: BoxDecoration(
-                    border: Border.all(
+    var sensors = controller.sensors;
+
+    return Column(
+      children: [
+        TabBar(
+          tabAlignment: TabAlignment.start,
+          padding: EdgeInsets.only(top: 10.r),
+          indicatorColor: Colors.transparent,
+          isScrollable: true,
+          controller: controller.sensorTabController,
+          dividerHeight: 0.r,
+          onTap: (index) {
+            controller.selectedSensorIndex.value = index;
+          },
+          tabs: [
+            for (int i = 0; i < sensors.length; i++)
+              Tab(
+                child: Obx(
+                  () => Container(
+                    padding: EdgeInsets.all(8.r),
+                    decoration: BoxDecoration(
+                      border: Border.all(
                         color: controller.selectedSensorIndex.value == i
-                            ? Colors.blue
-                            : Colors.grey),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Text(
-                    sensors[i],
-                    style: TextStyle(
-                      color: controller.selectedSensorIndex.value == i
-                          ? Colors.blue
-                          : GFColors.DARK,
+                            ? AppConfig.primaryColor
+                            : GFColors.LIGHT,
+                      ),
+                      borderRadius: BorderRadius.circular(20.r),
+                    ),
+                    child: Text(
+                      sensors[i],
+                      style: TextStyle(
+                        color: controller.selectedSensorIndex.value == i
+                            ? AppConfig.primaryColor
+                            : GFColors.LIGHT,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            content: switch (i) {
-              0 => _sumbuZChart(context, controller),
-              1 => _directionChart(context, controller),
-              int() => _sumbuZChart(context, controller),
-            },
+          ],
+        ),
+        Expanded(
+          child: TabBarView(
+            controller: controller.sensorTabController,
+            children: [
+              for (int i = 0; i < sensors.length; i++)
+                _getChartByIndex(i, context, controller),
+            ],
           ),
+        ),
       ],
-      // optional properties :-----------------------------
-      isScrollable: true,
-      onTabControllerUpdated: (controller) {
-        debugPrint("onTabControllerUpdated");
-      },
-      onTabChanged: (index) {
-        debugPrint("Tab changed: $index");
-      },
-      onAddTabMoveTo: MoveToTab.last,
-      // onAddTabMoveToIndex: tabs.length - 1, // Random().nextInt(tabs.length);
-      // backIcon: Icon(Icons.keyboard_double_arrow_left),
-      // nextIcon: Icon(Icons.keyboard_double_arrow_right),
-      showBackIcon: false,
-      showNextIcon: false,
-      indicator: const BoxDecoration(),
-      // leading: Tooltip(
-      //   message: 'Add your desired Leading widget here',
-      //   child: IconButton(
-      //     onPressed: () {},
-      //     icon: const Icon(Icons.more_horiz_rounded),
-      //   ),
-      // ),
-      // trailing: Tooltip(
-      //   message: 'Add your desired Trailing widget here',
-      //   child: IconButton(
-      //     onPressed: () {},
-      //     icon: const Icon(Icons.more_horiz_rounded),
-      //   ),
-      // ),
     );
+  }
+
+  Widget _getChartByIndex(int index, BuildContext context, var controller) {
+    switch (index) {
+      case 0:
+        return _sumbuZChart(context, controller);
+      case 1:
+        return _directionChart(context, controller);
+      default:
+        return _sumbuZChart(context, controller);
+    }
   }
 
   _directionChart(

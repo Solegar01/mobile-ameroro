@@ -9,9 +9,14 @@ import 'package:mobile_ameroro_app/helpers/app_constant.dart';
 import 'package:mobile_ameroro_app/helpers/app_enum.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-class VNotchController extends GetxController with StateMixin {
+class VNotchController extends GetxController
+    with StateMixin, GetTickerProviderStateMixin {
   final VNotchRepository repository;
   VNotchController(this.repository);
+  late TabController tabController;
+  late TabController sensorTabController;
+  final List<String> sensors = ['TMA', 'Debit', 'Baterai'];
+
   var selectedSensorIndex = 0.obs;
   var selectedTabIndex = 0.obs;
   RxList<VNotchModel> listModel = RxList.empty(growable: true);
@@ -27,6 +32,8 @@ class VNotchController extends GetxController with StateMixin {
 
   @override
   void onInit() async {
+    tabController = TabController(length: 2, vsync: this);
+    sensorTabController = TabController(length: sensors.length, vsync: this);
     await formInit();
     super.onInit();
   }
@@ -35,8 +42,6 @@ class VNotchController extends GetxController with StateMixin {
     dateRangeController.text =
         '${AppConstants().dateFormatID.format(selectedDateRange.value!.start)} - ${AppConstants().dateFormatID.format(selectedDateRange.value!.end)}';
     await getData();
-    selectedSensorIndex.value = 0;
-    selectedTabIndex.value = 0;
   }
 
   Future<TableDataSource> getTableDataSource() async {

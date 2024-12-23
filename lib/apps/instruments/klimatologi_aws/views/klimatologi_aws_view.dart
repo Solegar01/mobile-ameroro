@@ -1,4 +1,3 @@
-import 'package:dynamic_tabbar/dynamic_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -6,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
+import 'package:mobile_ameroro_app/apps/config/app_config.dart';
 import 'package:mobile_ameroro_app/apps/instruments/klimatologi_aws/controllers/klimatologi_aws_controller.dart';
 import 'package:mobile_ameroro_app/apps/instruments/klimatologi_aws/models/klimatologi_aws_model.dart';
 import 'package:mobile_ameroro_app/helpers/app_constant.dart';
@@ -37,7 +37,11 @@ class KlimatologiAwsView extends StatelessWidget {
             ),
             body: controller.obx(
               (state) => _detail(context, controller),
-              onLoading: const Center(child: CircularProgressIndicator()),
+              onLoading: const Center(
+                child: GFLoader(
+                  type: GFLoaderType.circle,
+                ),
+              ),
               onEmpty: const Text('Empty Data'),
               onError: (error) => Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -50,6 +54,7 @@ class KlimatologiAwsView extends StatelessWidget {
 
   _detail(BuildContext context, KlimatologiAwsController controller) {
     return RefreshIndicator(
+      backgroundColor: GFColors.LIGHT,
       onRefresh: () async {
         await controller.formInit();
       },
@@ -129,143 +134,114 @@ class KlimatologiAwsView extends StatelessWidget {
   }
 
   _graphTableTab(BuildContext context, KlimatologiAwsController controller) {
-    return DynamicTabBarWidget(
-      // padding: EdgeInsets.all(8.r),
-      indicatorSize: TabBarIndicatorSize.tab,
-      onTap: (index) {
-        controller.changeGrapTabIndex(index);
-      },
-      dynamicTabs: [
-        TabData(
-          index: 0,
-          title: const Tab(child: Center(child: Text('GRAFIK'))),
-          content: _sensorTabs(context, controller),
+    return Column(
+      children: [
+        TabBar(
+          controller: controller.tabController,
+          tabs: const [
+            Tab(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [Text('GRAFIK')],
+              ),
+            ),
+            Tab(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [Text('TABEL')],
+              ),
+            ),
+          ],
         ),
-        TabData(
-          index: 1,
-          title: const Tab(child: Text('TABLE')),
-          content: _tableTab(context, controller),
+        Expanded(
+          child: TabBarView(
+            controller: controller.tabController,
+            children: [
+              _sensorTabs(context, controller),
+              _tableTab(context, controller),
+            ],
+          ),
         ),
       ],
-      // optional properties :-----------------------------
-      isScrollable: false,
-      onTabControllerUpdated: (controller) {
-        debugPrint("onTabControllerUpdated");
-      },
-      onTabChanged: (index) {
-        debugPrint("Tab changed: $index");
-      },
-      onAddTabMoveTo: MoveToTab.last,
-      // onAddTabMoveToIndex: tabs.length - 1, // Random().nextInt(tabs.length);
-      // backIcon: Icon(Icons.keyboard_double_arrow_left),
-      // nextIcon: Icon(Icons.keyboard_double_arrow_right),
-      showBackIcon: false,
-      showNextIcon: false,
-      // indicator: const BoxDecoration(),
-      // leading: Tooltip(
-      //   message: 'Add your desired Leading widget here',
-      //   child: IconButton(
-      //     onPressed: () {},
-      //     icon: const Icon(Icons.more_horiz_rounded),
-      //   ),
-      // ),
-      // trailing: Tooltip(
-      //   message: 'Add your desired Trailing widget here',
-      //   child: IconButton(
-      //     onPressed: () {},
-      //     icon: const Icon(Icons.more_horiz_rounded),
-      //   ),
-      // ),
     );
   }
 
   _sensorTabs(BuildContext context, KlimatologiAwsController controller) {
-    List<String> sensors = [
-      'Baterai',
-      'Suhu',
-      'Kelembaban',
-      'Titik Embun',
-      'Kecepatan Angin',
-      'Radiasi Matahari',
-      'Curah Hujan',
-      'Tekanan Barometrik'
-    ];
-    return DynamicTabBarWidget(
-      padding: EdgeInsets.all(8.r),
-      dividerColor: Colors.transparent,
-      tabAlignment: TabAlignment.start,
-      onTap: (index) {
-        controller.changeSensorTabIndex(index);
-      },
-      dynamicTabs: [
-        for (int i = 0; i < sensors.length; i++)
-          TabData(
-            index: i,
-            title: Tab(
-              child: Obx(
-                () => Container(
-                  padding: EdgeInsets.all(8.r),
-                  decoration: BoxDecoration(
-                    border: Border.all(
+    var sensors = controller.sensors;
+
+    return Column(
+      children: [
+        TabBar(
+          tabAlignment: TabAlignment.start,
+          padding: EdgeInsets.only(top: 10.r),
+          indicatorColor: Colors.transparent,
+          isScrollable: true,
+          controller: controller.sensorTabController,
+          dividerHeight: 0.r,
+          onTap: (index) {
+            controller.selectedSensorIndex.value = index;
+          },
+          tabs: [
+            for (int i = 0; i < sensors.length; i++)
+              Tab(
+                child: Obx(
+                  () => Container(
+                    padding: EdgeInsets.all(8.r),
+                    decoration: BoxDecoration(
+                      border: Border.all(
                         color: controller.selectedSensorIndex.value == i
-                            ? Colors.blue
-                            : Colors.grey),
-                    borderRadius: BorderRadius.circular(20.r),
-                  ),
-                  child: Text(
-                    sensors[i],
-                    style: TextStyle(
-                      color: controller.selectedSensorIndex.value == i
-                          ? Colors.blue
-                          : GFColors.DARK,
+                            ? AppConfig.primaryColor
+                            : GFColors.LIGHT,
+                      ),
+                      borderRadius: BorderRadius.circular(20.r),
+                    ),
+                    child: Text(
+                      sensors[i],
+                      style: TextStyle(
+                        color: controller.selectedSensorIndex.value == i
+                            ? AppConfig.primaryColor
+                            : GFColors.LIGHT,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            content: switch (i) {
-              0 => _batteryChart(context, controller),
-              1 => _tempChart(context, controller),
-              2 => _huChart(context, controller),
-              3 => _dewChart(context, controller),
-              4 => _wsChart(context, controller),
-              5 => _solarChart(context, controller),
-              6 => _rainFallChart(context, controller),
-              7 => _bpChart(context, controller),
-              int() => _batteryChart(context, controller),
-            },
+          ],
+        ),
+        Expanded(
+          child: TabBarView(
+            controller: controller.sensorTabController,
+            children: [
+              for (int i = 0; i < sensors.length; i++)
+                _getChartByIndex(i, context, controller),
+            ],
           ),
+        ),
       ],
-      // optional properties :-----------------------------
-      isScrollable: true,
-      onTabControllerUpdated: (controller) {
-        debugPrint("onTabControllerUpdated");
-      },
-      onTabChanged: (index) {
-        debugPrint("Tab changed: $index");
-      },
-      onAddTabMoveTo: MoveToTab.last,
-      // onAddTabMoveToIndex: tabs.length - 1, // Random().nextInt(tabs.length);
-      // backIcon: Icon(Icons.keyboard_double_arrow_left),
-      // nextIcon: Icon(Icons.keyboard_double_arrow_right),
-      showBackIcon: false,
-      showNextIcon: false,
-      indicator: const BoxDecoration(),
-      // leading: Tooltip(
-      //   message: 'Add your desired Leading widget here',
-      //   child: IconButton(
-      //     onPressed: () {},
-      //     icon: const Icon(Icons.more_horiz_rounded),
-      //   ),
-      // ),
-      // trailing: Tooltip(
-      //   message: 'Add your desired Trailing widget here',
-      //   child: IconButton(
-      //     onPressed: () {},
-      //     icon: const Icon(Icons.more_horiz_rounded),
-      //   ),
-      // ),
     );
+  }
+
+  Widget _getChartByIndex(int index, BuildContext context, var controller) {
+    switch (index) {
+      case 0:
+        return _batteryChart(context, controller);
+      case 1:
+        return _tempChart(context, controller);
+      case 2:
+        return _huChart(context, controller);
+      case 3:
+        return _dewChart(context, controller);
+      case 4:
+        return _wsChart(context, controller);
+      case 5:
+        return _solarChart(context, controller);
+      case 6:
+        return _rainFallChart(context, controller);
+      case 7:
+        return _bpChart(context, controller);
+      default:
+        return _batteryChart(context, controller);
+    }
   }
 
   _weatherSlider(BuildContext context, KlimatologiAwsController controller) {

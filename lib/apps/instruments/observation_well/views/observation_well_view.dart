@@ -40,7 +40,11 @@ class ObservationWellView extends StatelessWidget {
             ),
             body: controller.obx(
               (state) => _detail(context, controller),
-              onLoading: const Center(child: CircularProgressIndicator()),
+              onLoading: const Center(
+                child: GFLoader(
+                  type: GFLoaderType.circle,
+                ),
+              ),
               onEmpty: const Text('Empty Data'),
               onError: (error) => Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -53,6 +57,7 @@ class ObservationWellView extends StatelessWidget {
 
   _detail(BuildContext context, ObservationWellController controller) {
     return RefreshIndicator(
+      backgroundColor: GFColors.LIGHT,
       onRefresh: () async {
         await controller.formInit();
       },
@@ -177,51 +182,43 @@ class ObservationWellView extends StatelessWidget {
               ),
             ),
           ),
-          DefaultTabController(
-            length: 2, // Jumlah tab
-            child: Column(
-              children: [
-                TabBar(
-                  indicatorSize: TabBarIndicatorSize.tab,
-                  tabs: [
-                    Tab(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'GRAFIK',
-                            selectionColor: context.iconColor,
-                          )
-                        ],
-                      ),
-                    ),
-                    Tab(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'TABEL',
-                            selectionColor: context.iconColor,
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 600.r,
-                  child: TabBarView(
-                    children: [
-                      _chartTab(context, controller),
-                      _tableTab(context, controller),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+          _tabBarView(context, controller),
         ],
       ),
+    );
+  }
+
+  _tabBarView(BuildContext context, ObservationWellController controller) {
+    return Column(
+      children: [
+        TabBar(
+          controller: controller.tabController,
+          tabs: const [
+            Tab(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [Text('GRAFIK')],
+              ),
+            ),
+            Tab(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [Text('TABEL')],
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 600.r,
+          child: TabBarView(
+            controller: controller.tabController,
+            children: [
+              _chartTab(context, controller),
+              _tableTab(context, controller),
+            ],
+          ),
+        ),
+      ],
     );
   }
 

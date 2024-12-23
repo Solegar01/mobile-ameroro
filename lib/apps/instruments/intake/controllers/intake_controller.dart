@@ -10,9 +10,11 @@ import 'package:mobile_ameroro_app/helpers/app_constant.dart';
 import 'package:mobile_ameroro_app/helpers/date_convertion.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-class IntakeController extends GetxController with StateMixin {
+class IntakeController extends GetxController
+    with StateMixin, GetSingleTickerProviderStateMixin {
   final IntakeRepository repository;
   IntakeController(this.repository);
+  late TabController tabController;
 
   RxList<WaterIntake> listIntake = RxList.empty(growable: true);
   var currentIndex = 0.obs;
@@ -65,6 +67,7 @@ class IntakeController extends GetxController with StateMixin {
 
   @override
   void onInit() async {
+    tabController = TabController(length: 2, vsync: this);
     await formInit();
 
     super.onInit();

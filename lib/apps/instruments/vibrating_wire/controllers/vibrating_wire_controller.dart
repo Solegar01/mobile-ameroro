@@ -7,9 +7,11 @@ import 'package:mobile_ameroro_app/apps/widgets/custom_toast.dart';
 import 'package:mobile_ameroro_app/helpers/app_constant.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-class VibratingWireController extends GetxController with StateMixin {
+class VibratingWireController extends GetxController
+    with StateMixin, GetSingleTickerProviderStateMixin {
   final VibratingWireRepository repository;
   VibratingWireController(this.repository);
+  late TabController tabController;
   VibratingWireModel? model;
   final List<Map<String, String>> instrumentTypes = [
     {'id': 'EP', 'text': 'Tubuh Bendungan'},
@@ -33,6 +35,7 @@ class VibratingWireController extends GetxController with StateMixin {
 
   @override
   void onInit() async {
+    tabController = TabController(length: 3, vsync: this);
     await formInit();
     super.onInit();
   }

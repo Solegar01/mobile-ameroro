@@ -96,7 +96,11 @@ class AwlrView extends StatelessWidget {
               ),
               body: controller.obx(
                 (state) => _detail(context, controller),
-                onLoading: const Center(child: CircularProgressIndicator()),
+                onLoading: const Center(
+                  child: GFLoader(
+                    type: GFLoaderType.circle,
+                  ),
+                ),
                 onEmpty: const Text('Empty Data'),
                 onError: (error) => Padding(
                   padding: EdgeInsets.all(8.r),
@@ -110,7 +114,7 @@ class AwlrView extends StatelessWidget {
 
   _detail(BuildContext context, AwlrController controller) {
     return RefreshIndicator(
-      color: GFColors.WHITE,
+      backgroundColor: GFColors.LIGHT,
       onRefresh: () async {
         await controller.formInit();
       },
@@ -146,41 +150,43 @@ class AwlrView extends StatelessWidget {
               readOnly: true,
             ),
           ),
-          DefaultTabController(
-            length: 2,
-            child: Column(
-              children: [
-                TabBar(
-                  indicatorSize: TabBarIndicatorSize.tab,
-                  tabs: [
-                    Tab(
-                      child: Text(
-                        'GRAFIK',
-                        style: TextStyle(color: context.iconColor),
-                      ),
-                    ),
-                    Tab(
-                      child: Text(
-                        'TABEL',
-                        style: TextStyle(color: context.iconColor),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 600.r,
-                  child: TabBarView(
-                    children: [
-                      _chartTab(context, controller),
-                      _tableTab(context, controller),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+          _tabBarView(context, controller),
         ],
       ),
+    );
+  }
+
+  Widget _tabBarView(BuildContext context, AwlrController controller) {
+    return Column(
+      children: [
+        TabBar(
+          controller: controller.tabController,
+          tabs: const [
+            Tab(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [Text('GRAFIK')],
+              ),
+            ),
+            Tab(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [Text('TABEL')],
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 600.r,
+          child: TabBarView(
+            controller: controller.tabController,
+            children: [
+              _chartTab(context, controller),
+              _tableTab(context, controller),
+            ],
+          ),
+        ),
+      ],
     );
   }
 

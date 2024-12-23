@@ -7,9 +7,14 @@ import 'package:mobile_ameroro_app/apps/widgets/custom_toast.dart';
 import 'package:mobile_ameroro_app/helpers/app_constant.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-class RoboticTotalStationController extends GetxController with StateMixin {
+class RoboticTotalStationController extends GetxController
+    with StateMixin, GetTickerProviderStateMixin {
   final RoboticTotalStationRepository repository;
   RoboticTotalStationController(this.repository);
+  late TabController tabController;
+  late TabController sensorTabController;
+  final List<String> sensors = ['Perubahan Sumbu Z', 'Pergeseran Arah'];
+
   var selectedSensorIndex = 0.obs;
   var selectedTabIndex = 0.obs;
   var selectedDateRange = Rxn<DateTimeRange>(DateTimeRange(
@@ -28,6 +33,8 @@ class RoboticTotalStationController extends GetxController with StateMixin {
 
   @override
   void onInit() async {
+    tabController = TabController(length: 2, vsync: this);
+    sensorTabController = TabController(length: sensors.length, vsync: this);
     await formInit();
     super.onInit();
   }
@@ -35,8 +42,6 @@ class RoboticTotalStationController extends GetxController with StateMixin {
   formInit() async {
     dateRangeController.text =
         '${AppConstants().dateFormatID.format(selectedDateRange.value!.start)} - ${AppConstants().dateFormatID.format(selectedDateRange.value!.end)}';
-    selectedSensorIndex.value = 0;
-    selectedTabIndex.value = 0;
     await getData();
   }
 

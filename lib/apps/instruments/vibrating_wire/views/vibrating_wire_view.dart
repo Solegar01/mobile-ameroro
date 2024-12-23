@@ -42,7 +42,11 @@ class VibratingWireView extends StatelessWidget {
             ),
             body: controller.obx(
               (state) => _detail(context, controller),
-              onLoading: const Center(child: CircularProgressIndicator()),
+              onLoading: const Center(
+                child: GFLoader(
+                  type: GFLoaderType.circle,
+                ),
+              ),
               onEmpty: const Text('Empty Data'),
               onError: (error) => Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -55,6 +59,7 @@ class VibratingWireView extends StatelessWidget {
 
   _detail(BuildContext context, VibratingWireController controller) {
     return RefreshIndicator(
+      backgroundColor: GFColors.LIGHT,
       onRefresh: () async {
         await controller.formInit();
       },
@@ -233,58 +238,60 @@ class VibratingWireView extends StatelessWidget {
               ),
             ),
           ),
-          DefaultTabController(
-            length: 3, // Jumlah tab
-            child: Column(
-              children: [
-                TabBar(
-                  indicatorSize: TabBarIndicatorSize.tab,
-                  tabs: [
-                    Tab(
-                      child: Text(
-                        'GAMBAR PONDASI',
-                        selectionColor: context.iconColor,
-                      ),
-                    ),
-                    Tab(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'GRAFIK',
-                            selectionColor: context.iconColor,
-                          )
-                        ],
-                      ),
-                    ),
-                    Tab(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'TABEL',
-                            selectionColor: context.iconColor,
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 680.r,
-                  child: TabBarView(
-                    children: [
-                      _gambarPondasi(context),
-                      _chartTab(context, controller),
-                      _tableTab(context, controller),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+          _tabBarView(context, controller),
         ],
       ),
+    );
+  }
+
+  _tabBarView(BuildContext context, VibratingWireController controller) {
+    return Column(
+      children: [
+        TabBar(
+          controller: controller.tabController,
+          tabs: [
+            Tab(
+              child: Text(
+                'GAMBAR PONDASI',
+                selectionColor: context.iconColor,
+              ),
+            ),
+            Tab(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'GRAFIK',
+                    selectionColor: context.iconColor,
+                  )
+                ],
+              ),
+            ),
+            Tab(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'TABEL',
+                    selectionColor: context.iconColor,
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 680.r,
+          child: TabBarView(
+            controller: controller.tabController,
+            children: [
+              _gambarPondasi(context),
+              _chartTab(context, controller),
+              _tableTab(context, controller),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
@@ -316,7 +323,9 @@ class VibratingWireView extends StatelessWidget {
           height: 300.r,
           fit: BoxFit.contain,
           placeholderBuilder: (context) => const Center(
-            child: CircularProgressIndicator(),
+            child: GFLoader(
+              type: GFLoaderType.circle,
+            ),
           ),
         ),
       ),

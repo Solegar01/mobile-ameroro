@@ -49,7 +49,11 @@ class HomeView extends StatelessWidget {
       ),
       body: controller.obx(
         (state) => _detail(context, controller),
-        onLoading: const Center(child: CircularProgressIndicator()),
+        onLoading: const Center(
+          child: GFLoader(
+            type: GFLoaderType.circle,
+          ),
+        ),
         onEmpty: const Text('Empty Data'),
         onError: (error) => Padding(
           padding: const EdgeInsets.all(8.0),
@@ -61,6 +65,7 @@ class HomeView extends StatelessWidget {
 
   _detail(BuildContext context, HomeController controller) {
     return RefreshIndicator(
+      backgroundColor: GFColors.LIGHT,
       onRefresh: () => controller.formInit(),
       child: ListView(
         children: [

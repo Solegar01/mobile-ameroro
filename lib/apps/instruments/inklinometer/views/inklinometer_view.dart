@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:dynamic_tabbar/dynamic_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -35,7 +34,11 @@ class InklinometerView extends StatelessWidget {
             ),
             body: controller.obx(
               (state) => _detail(context, controller),
-              onLoading: const Center(child: CircularProgressIndicator()),
+              onLoading: const Center(
+                child: GFLoader(
+                  type: GFLoaderType.circle,
+                ),
+              ),
               onEmpty: const Text('Empty Data'),
               onError: (error) => Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -48,6 +51,7 @@ class InklinometerView extends StatelessWidget {
 
   _detail(BuildContext context, InklinometerController controller) {
     return RefreshIndicator(
+      backgroundColor: GFColors.LIGHT,
       onRefresh: () async {
         await controller.formInit();
       },
@@ -126,159 +130,44 @@ class InklinometerView extends StatelessWidget {
   }
 
   _graphTableTab(BuildContext context, InklinometerController controller) {
-    return DynamicTabBarWidget(
-      // padding: EdgeInsets.all(8.r),
-      indicatorSize: TabBarIndicatorSize.tab,
-      onTap: (index) {
-        controller.changeGrapTabIndex(index);
-      },
-      dynamicTabs: [
-        TabData(
-          index: 0,
-          title: const Tab(child: Center(child: Text('GRAFIK'))),
-          content: SingleChildScrollView(
-            child: Column(
-              children: [
-                _faceAChart(context, controller),
-                _faceAChart(context, controller),
-              ],
+    return Column(
+      children: [
+        TabBar(
+          controller: controller.tabController,
+          tabs: const [
+            Tab(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [Text('GRAFIK')],
+              ),
             ),
+            Tab(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [Text('TABEL')],
+              ),
+            ),
+          ],
+        ),
+        Expanded(
+          child: TabBarView(
+            controller: controller.tabController,
+            children: [
+              SingleChildScrollView(
+                child: Column(
+                  children: [
+                    _faceAChart(context, controller),
+                    _faceAChart(context, controller),
+                  ],
+                ),
+              ),
+              _tableTab(context, controller),
+            ],
           ),
         ),
-        TabData(
-          index: 1,
-          title: const Tab(child: Text('TABLE')),
-          content: _tableTab(context, controller),
-        ),
       ],
-      // optional properties :-----------------------------
-      isScrollable: false,
-      onTabControllerUpdated: (controller) {
-        debugPrint("onTabControllerUpdated");
-      },
-      onTabChanged: (index) {
-        debugPrint("Tab changed: $index");
-      },
-      onAddTabMoveTo: MoveToTab.last,
-      // onAddTabMoveToIndex: tabs.length - 1, // Random().nextInt(tabs.length);
-      // backIcon: Icon(Icons.keyboard_double_arrow_left),
-      // nextIcon: Icon(Icons.keyboard_double_arrow_right),
-      showBackIcon: false,
-      showNextIcon: false,
-      // indicator: const BoxDecoration(),
-      // leading: Tooltip(
-      //   message: 'Add your desired Leading widget here',
-      //   child: IconButton(
-      //     onPressed: () {},
-      //     icon: const Icon(Icons.more_horiz_rounded),
-      //   ),
-      // ),
-      // trailing: Tooltip(
-      //   message: 'Add your desired Trailing widget here',
-      //   child: IconButton(
-      //     onPressed: () {},
-      //     icon: const Icon(Icons.more_horiz_rounded),
-      //   ),
-      // ),
     );
   }
-
-  // _sensorTabs(BuildContext context, InklinometerController controller) {
-  //   return DynamicTabBarWidget(
-  //     padding: EdgeInsets.all(8.r),
-  //     dividerColor: Colors.transparent,
-  //     tabAlignment: TabAlignment.start,
-  //     onTap: (index) {
-  //       controller.changeSensorTabIndex(index);
-  //     },
-  //     dynamicTabs: [
-  //       TabData(
-  //         index: 0,
-  //         title: Tab(
-  //           child: Obx(
-  //             () => Container(
-  //                 padding: EdgeInsets.all(8.r),
-  //                 decoration: BoxDecoration(
-  //                   border: Border.all(
-  //                       color: controller.selectedSensorIndex.value == 0
-  //                           ? Colors.blue
-  //                           : Colors.grey),
-  //                   borderRadius: BorderRadius.circular(20),
-  //                 ),
-  //                 child: const Text('TMA')),
-  //           ),
-  //         ),
-  //         content: _tmaChart(context, controller),
-  //       ),
-  //       TabData(
-  //         index: 1,
-  //         title: Tab(
-  //           child: Obx(
-  //             () => Container(
-  //                 padding: EdgeInsets.all(8.r),
-  //                 decoration: BoxDecoration(
-  //                   border: Border.all(
-  //                       color: controller.selectedSensorIndex.value == 1
-  //                           ? Colors.blue
-  //                           : Colors.grey),
-  //                   borderRadius: BorderRadius.circular(20),
-  //                 ),
-  //                 child: const Text('Debit')),
-  //           ),
-  //         ),
-  //         content: _debitChart(context, controller),
-  //       ),
-  //       TabData(
-  //         index: 2,
-  //         title: Tab(
-  //           child: Obx(
-  //             () => Container(
-  //                 padding: EdgeInsets.all(8.r),
-  //                 decoration: BoxDecoration(
-  //                   border: Border.all(
-  //                       color: controller.selectedSensorIndex.value == 2
-  //                           ? Colors.blue
-  //                           : Colors.grey),
-  //                   borderRadius: BorderRadius.circular(20),
-  //                 ),
-  //                 child: const Text('Baterai')),
-  //           ),
-  //         ),
-  //         content: _batteryChart(context, controller),
-  //         // content: const Center(child: Text('Content for Tab 3')),
-  //       ),
-  //     ],
-  //     // optional properties :-----------------------------
-  //     isScrollable: true,
-  //     onTabControllerUpdated: (controller) {
-  //       debugPrint("onTabControllerUpdated");
-  //     },
-  //     onTabChanged: (index) {
-  //       debugPrint("Tab changed: $index");
-  //     },
-  //     onAddTabMoveTo: MoveToTab.last,
-  //     // onAddTabMoveToIndex: tabs.length - 1, // Random().nextInt(tabs.length);
-  //     // backIcon: Icon(Icons.keyboard_double_arrow_left),
-  //     // nextIcon: Icon(Icons.keyboard_double_arrow_right),
-  //     showBackIcon: false,
-  //     showNextIcon: false,
-  //     indicator: const BoxDecoration(),
-  //     // leading: Tooltip(
-  //     //   message: 'Add your desired Leading widget here',
-  //     //   child: IconButton(
-  //     //     onPressed: () {},
-  //     //     icon: const Icon(Icons.more_horiz_rounded),
-  //     //   ),
-  //     // ),
-  //     // trailing: Tooltip(
-  //     //   message: 'Add your desired Trailing widget here',
-  //     //   child: IconButton(
-  //     //     onPressed: () {},
-  //     //     icon: const Icon(Icons.more_horiz_rounded),
-  //     //   ),
-  //     // ),
-  //   );
-  // }
 
   _faceAChart(BuildContext context, InklinometerController controller) {
     return FutureBuilder(

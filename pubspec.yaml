@@ -31,7 +31,6 @@ dependencies:
   connectivity_plus: ^6.1.0
   cupertino_icons: ^1.0.6
   dropdown_search: ^6.0.1
-  dynamic_tabbar: ^1.0.8
   flutter:
     sdk: flutter
   flutter_localization: ^0.2.2

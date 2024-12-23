@@ -13,6 +13,7 @@ class AwlrListView extends GetView<AwlrListController> {
 
   Widget _detail(BuildContext context, AwlrListController controller) {
     return RefreshIndicator(
+      backgroundColor: GFColors.LIGHT,
       onRefresh: () => controller.getAwlrList(),
       child: controller.isLoading.isTrue
           ? const Center(child: CircularProgressIndicator())

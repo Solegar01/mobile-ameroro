@@ -7,9 +7,11 @@ import 'package:mobile_ameroro_app/apps/widgets/custom_toast.dart';
 import 'package:mobile_ameroro_app/helpers/app_constant.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-class ObservationWellController extends GetxController with StateMixin {
+class ObservationWellController extends GetxController
+    with StateMixin, GetSingleTickerProviderStateMixin {
   final ObservationWellRepository repository;
   ObservationWellController(this.repository);
+  late TabController tabController;
 
   ObservationWellModel? model;
   List<Map<String, dynamic>> sensors = List.empty(growable: true);
@@ -31,6 +33,7 @@ class ObservationWellController extends GetxController with StateMixin {
 
   @override
   void onInit() async {
+    tabController = TabController(length: 2, vsync: this);
     await formInit();
     super.onInit();
   }

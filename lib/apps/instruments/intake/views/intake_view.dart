@@ -47,7 +47,11 @@ class IntakeView extends StatelessWidget {
               ),
               body: controller.obx(
                 (state) => _detail(context, controller),
-                onLoading: const Center(child: CircularProgressIndicator()),
+                onLoading: const Center(
+                  child: GFLoader(
+                    type: GFLoaderType.circle,
+                  ),
+                ),
                 onEmpty: const Text('Empty Data'),
                 onError: (error) => Padding(
                   padding: EdgeInsets.all(8.r),
@@ -263,40 +267,36 @@ class IntakeView extends StatelessWidget {
   }
 
   Widget _tabBarView(BuildContext context, IntakeController controller) {
-    return DefaultTabController(
-      length: 2,
-      child: Column(
-        children: [
-          GFCard(
-            margin: EdgeInsets.zero,
-            color: GFColors.WHITE,
-            padding: EdgeInsets.zero,
-            elevation: 2.r,
-            content: const TabBar(
-              indicatorSize: TabBarIndicatorSize.tab,
-              tabs: [
-                Tab(
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [Text('GRAFIK')])),
-                Tab(
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [Text('TABEL')])),
-              ],
+    return Column(
+      children: [
+        TabBar(
+          controller: controller.tabController,
+          tabs: const [
+            Tab(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [Text('GRAFIK')],
+              ),
             ),
-          ),
-          SizedBox(
-            height: 550.r,
-            child: TabBarView(
-              children: [
-                _chartTab(context, controller),
-                _tableTab(context, controller),
-              ],
+            Tab(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [Text('TABEL')],
+              ),
             ),
+          ],
+        ),
+        SizedBox(
+          height: 550.r,
+          child: TabBarView(
+            controller: controller.tabController,
+            children: [
+              _chartTab(context, controller),
+              _tableTab(context, controller),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

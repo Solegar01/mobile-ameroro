@@ -13,9 +13,11 @@ import 'package:mobile_ameroro_app/helpers/app_constant.dart';
 import 'package:mobile_ameroro_app/helpers/date_convertion.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-class AwlrController extends GetxController with StateMixin {
+class AwlrController extends GetxController
+    with StateMixin, GetSingleTickerProviderStateMixin {
   final AwlrRepository repository;
   AwlrController(this.repository);
+  late TabController tabController;
 
   RxList<AwlrModel> listAwlr = RxList.empty(growable: true);
   RxList<AwlrListModel> sensorList = RxList.empty(growable: true);
@@ -39,6 +41,7 @@ class AwlrController extends GetxController with StateMixin {
 
   @override
   void onInit() async {
+    tabController = TabController(length: 2, vsync: this);
     await formInit();
     super.onInit();
   }

@@ -7,9 +7,11 @@ import 'package:mobile_ameroro_app/apps/widgets/custom_toast.dart';
 import 'package:mobile_ameroro_app/helpers/app_constant.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-class OpenStandpipeController extends GetxController with StateMixin {
+class OpenStandpipeController extends GetxController
+    with StateMixin, GetSingleTickerProviderStateMixin {
   final OpenStandpipeRepository repository;
   OpenStandpipeController(this.repository);
+  late TabController tabController;
 
   OpenStandpipeModel? model;
   RxMap<String, dynamic> selectedStation = <String, dynamic>{}.obs;
@@ -30,6 +32,7 @@ class OpenStandpipeController extends GetxController with StateMixin {
 
   @override
   void onInit() async {
+    tabController = TabController(length: 3, vsync: this);
     await formInit();
     super.onInit();
   }
