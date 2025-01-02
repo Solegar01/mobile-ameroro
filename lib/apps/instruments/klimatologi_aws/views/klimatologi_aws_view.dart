@@ -37,11 +37,7 @@ class KlimatologiAwsView extends StatelessWidget {
             ),
             body: controller.obx(
               (state) => _detail(context, controller),
-              onLoading: const Center(
-                child: GFLoader(
-                  type: GFLoaderType.circle,
-                ),
-              ),
+              onLoading: _loader(context, controller),
               onEmpty: const Text('Empty Data'),
               onError: (error) => Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -101,6 +97,123 @@ class KlimatologiAwsView extends StatelessWidget {
           SizedBox(
             height: 650.r,
             child: _graphTableTab(context, controller),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _loader(BuildContext context, KlimatologiAwsController controller) {
+    List<String> loadStr = ['loading...', 'loading...', 'loading...'];
+    return SizedBox(
+      child: ListView(
+        children: [
+          GFCarousel(
+            items: loadStr.map((load) {
+              return GFShimmer(
+                mainColor: Colors.grey[100]!,
+                secondaryColor: Colors.grey[300]!,
+                child: Container(
+                  margin: EdgeInsets.all(8.r),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8.r),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        blurRadius: 5,
+                        spreadRadius: 2,
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }).toList(),
+            autoPlay: false,
+            enlargeMainPage: false,
+            hasPagination: false,
+            passiveIndicator: Colors.grey,
+            activeIndicator: Colors.blue,
+            autoPlayInterval: const Duration(seconds: 5), // Adjust as needed
+            autoPlayAnimationDuration: const Duration(milliseconds: 800),
+            height: 180.r,
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                GFShimmer(
+                  mainColor: Colors.grey[300]!,
+                  secondaryColor: Colors.grey[100]!,
+                  child: Container(
+                    height: 55,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius:
+                          BorderRadius.circular(8), // Optional rounded corners
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Column(
+            children: [
+              TabBar(
+                controller: controller.tabController,
+                tabs: const [
+                  Tab(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [Text('GRAFIK')],
+                    ),
+                  ),
+                  Tab(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [Text('TABEL')],
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 650.r,
+                child: TabBarView(
+                  controller: controller.tabController,
+                  children: [
+                    SingleChildScrollView(
+                      child: GFShimmer(
+                        mainColor: Colors.grey[300]!,
+                        secondaryColor: Colors.grey[100]!,
+                        child: Container(
+                          margin: EdgeInsets.all(10.r),
+                          height: 355.r,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: GFColors.WHITE,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SingleChildScrollView(
+                      child: GFShimmer(
+                        mainColor: Colors.grey[300]!,
+                        secondaryColor: Colors.grey[100]!,
+                        child: Container(
+                          margin: EdgeInsets.all(10.r),
+                          height: 355.r,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: GFColors.WHITE,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -535,19 +648,15 @@ class KlimatologiAwsView extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SingleChildScrollView(
-            child: GFCard(
-              margin: EdgeInsets.all(10.r),
-              color: GFColors.WHITE,
-              padding: EdgeInsets.zero,
-              content: GFShimmer(
-                mainColor: Colors.grey[300]!,
-                secondaryColor: Colors.grey[100]!,
-                child: Container(
-                  height: 300.r,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.r),
-                    color: GFColors.WHITE,
-                  ),
+            child: GFShimmer(
+              mainColor: Colors.grey[300]!,
+              secondaryColor: Colors.grey[100]!,
+              child: Container(
+                margin: EdgeInsets.all(10.r),
+                height: 300.r,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: GFColors.WHITE,
                 ),
               ),
             ),
@@ -752,19 +861,15 @@ class KlimatologiAwsView extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SingleChildScrollView(
-            child: GFCard(
-              margin: EdgeInsets.all(10.r),
-              color: GFColors.WHITE,
-              padding: EdgeInsets.zero,
-              content: GFShimmer(
-                mainColor: Colors.grey[300]!,
-                secondaryColor: Colors.grey[100]!,
-                child: Container(
-                  height: 300.r,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.r),
-                    color: GFColors.WHITE,
-                  ),
+            child: GFShimmer(
+              mainColor: Colors.grey[300]!,
+              secondaryColor: Colors.grey[100]!,
+              child: Container(
+                margin: EdgeInsets.all(10.r),
+                height: 300.r,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: GFColors.WHITE,
                 ),
               ),
             ),
@@ -960,19 +1065,15 @@ class KlimatologiAwsView extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SingleChildScrollView(
-            child: GFCard(
-              margin: EdgeInsets.all(10.r),
-              color: GFColors.WHITE,
-              padding: EdgeInsets.zero,
-              content: GFShimmer(
-                mainColor: Colors.grey[300]!,
-                secondaryColor: Colors.grey[100]!,
-                child: Container(
-                  height: 300.r,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.r),
-                    color: GFColors.WHITE,
-                  ),
+            child: GFShimmer(
+              mainColor: Colors.grey[300]!,
+              secondaryColor: Colors.grey[100]!,
+              child: Container(
+                margin: EdgeInsets.all(10.r),
+                height: 300.r,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: GFColors.WHITE,
                 ),
               ),
             ),
@@ -1215,19 +1316,15 @@ class KlimatologiAwsView extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SingleChildScrollView(
-            child: GFCard(
-              margin: EdgeInsets.all(10.r),
-              color: GFColors.WHITE,
-              padding: EdgeInsets.zero,
-              content: GFShimmer(
-                mainColor: Colors.grey[300]!,
-                secondaryColor: Colors.grey[100]!,
-                child: Container(
-                  height: 300.r,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.r),
-                    color: GFColors.WHITE,
-                  ),
+            child: GFShimmer(
+              mainColor: Colors.grey[300]!,
+              secondaryColor: Colors.grey[100]!,
+              child: Container(
+                margin: EdgeInsets.all(10.r),
+                height: 300.r,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: GFColors.WHITE,
                 ),
               ),
             ),
@@ -1469,19 +1566,15 @@ class KlimatologiAwsView extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SingleChildScrollView(
-            child: GFCard(
-              margin: EdgeInsets.all(10.r),
-              color: GFColors.WHITE,
-              padding: EdgeInsets.zero,
-              content: GFShimmer(
-                mainColor: Colors.grey[300]!,
-                secondaryColor: Colors.grey[100]!,
-                child: Container(
-                  height: 300.r,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.r),
-                    color: GFColors.WHITE,
-                  ),
+            child: GFShimmer(
+              mainColor: Colors.grey[300]!,
+              secondaryColor: Colors.grey[100]!,
+              child: Container(
+                margin: EdgeInsets.all(10.r),
+                height: 300.r,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: GFColors.WHITE,
                 ),
               ),
             ),
@@ -1724,19 +1817,15 @@ class KlimatologiAwsView extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SingleChildScrollView(
-            child: GFCard(
-              margin: EdgeInsets.all(10.r),
-              color: GFColors.WHITE,
-              padding: EdgeInsets.zero,
-              content: GFShimmer(
-                mainColor: Colors.grey[300]!,
-                secondaryColor: Colors.grey[100]!,
-                child: Container(
-                  height: 300.r,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.r),
-                    color: GFColors.WHITE,
-                  ),
+            child: GFShimmer(
+              mainColor: Colors.grey[300]!,
+              secondaryColor: Colors.grey[100]!,
+              child: Container(
+                margin: EdgeInsets.all(10.r),
+                height: 300.r,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: GFColors.WHITE,
                 ),
               ),
             ),
@@ -1978,19 +2067,15 @@ class KlimatologiAwsView extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SingleChildScrollView(
-            child: GFCard(
-              margin: EdgeInsets.all(10.r),
-              color: GFColors.WHITE,
-              padding: EdgeInsets.zero,
-              content: GFShimmer(
-                mainColor: Colors.grey[300]!,
-                secondaryColor: Colors.grey[100]!,
-                child: Container(
-                  height: 300.r,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.r),
-                    color: GFColors.WHITE,
-                  ),
+            child: GFShimmer(
+              mainColor: Colors.grey[300]!,
+              secondaryColor: Colors.grey[100]!,
+              child: Container(
+                margin: EdgeInsets.all(10.r),
+                height: 300.r,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: GFColors.WHITE,
                 ),
               ),
             ),
@@ -2183,19 +2268,15 @@ class KlimatologiAwsView extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SingleChildScrollView(
-            child: GFCard(
-              margin: EdgeInsets.all(10.r),
-              color: GFColors.WHITE,
-              padding: EdgeInsets.zero,
-              content: GFShimmer(
-                mainColor: Colors.grey[300]!,
-                secondaryColor: Colors.grey[100]!,
-                child: Container(
-                  height: 300.r,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.r),
-                    color: GFColors.WHITE,
-                  ),
+            child: GFShimmer(
+              mainColor: Colors.grey[300]!,
+              secondaryColor: Colors.grey[100]!,
+              child: Container(
+                margin: EdgeInsets.all(10.r),
+                height: 300.r,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: GFColors.WHITE,
                 ),
               ),
             ),
@@ -2446,19 +2527,15 @@ class KlimatologiAwsView extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SingleChildScrollView(
-            child: GFCard(
-              margin: EdgeInsets.all(10.r),
-              color: GFColors.WHITE,
-              padding: EdgeInsets.zero,
-              content: GFShimmer(
-                mainColor: Colors.grey[300]!,
-                secondaryColor: Colors.grey[100]!,
-                child: Container(
-                  height: 300.r,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.r),
-                    color: GFColors.WHITE,
-                  ),
+            child: GFShimmer(
+              mainColor: Colors.grey[300]!,
+              secondaryColor: Colors.grey[100]!,
+              child: Container(
+                margin: EdgeInsets.all(10.r),
+                height: 300.r,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: GFColors.WHITE,
                 ),
               ),
             ),

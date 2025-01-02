@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:mobile_ameroro_app/apps/profile/controllers/profile_controller.dart';
@@ -8,205 +9,212 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Profile",
-          style: TextStyle(
-            fontSize: 25,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
+    return GetBuilder<ProfileController>(builder: (controller) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            "Profile",
+            style: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
           ),
+          backgroundColor: const Color.fromARGB(255, 7, 23, 94),
         ),
-        backgroundColor: const Color.fromARGB(255, 7, 23, 94),
-      ),
-      body: Obx(() {
-        if (controller.isLoading.value) {
-          return Center(child: CircularProgressIndicator());
-        }
-        return SingleChildScrollView(
-          child: Column(
-            children: [
-              // Profile Header
-              Container(
-                padding: EdgeInsets.all(20),
-                color: const Color.fromARGB(255, 7, 23, 94),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 30,
-                      backgroundColor: Colors.purple,
-                      child: Text(
-                        controller.user.value.name?.isNotEmpty == true
-                            ? controller.user.value.name![0].toUpperCase()
-                            : '',
-                        style: TextStyle(fontSize: 24, color: Colors.white),
-                      ),
-                    ),
-                    SizedBox(width: 15),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Obx(() => Text(
-                              controller.user.value.name ?? "",
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.white),
-                            )),
-                        SizedBox(height: 4),
-                        Text(
-                          "BENDUNGAN AMERORO",
-                          style: TextStyle(fontSize: 14, color: Colors.white70),
+        body: controller.obx(
+          (state) => SingleChildScrollView(
+            child: Column(
+              children: [
+                // Profile Header
+                Container(
+                  padding: EdgeInsets.all(20),
+                  color: const Color.fromARGB(255, 7, 23, 94),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 30,
+                        backgroundColor: Colors.purple,
+                        child: Text(
+                          controller.user.value.name?.isNotEmpty == true
+                              ? controller.user.value.name![0].toUpperCase()
+                              : '',
+                          style: TextStyle(fontSize: 24, color: Colors.white),
                         ),
-                      ],
-                    ),
-                  ],
+                      ),
+                      SizedBox(width: 15),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Obx(() => Text(
+                                controller.user.value.name ?? "",
+                                style: TextStyle(
+                                    fontSize: 18, color: Colors.white),
+                              )),
+                          SizedBox(height: 4),
+                          Text(
+                            "BENDUNGAN AMERORO",
+                            style:
+                                TextStyle(fontSize: 14, color: Colors.white70),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
 
-              // Informasi Personal Section
-              Container(
-                padding: EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Icon(Icons.person,
-                            color: const Color.fromARGB(255, 173, 173, 175)),
-                        SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            'Informasi Personal',
+                // Informasi Personal Section
+                Container(
+                  padding: EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(Icons.person,
+                              color: const Color.fromARGB(255, 173, 173, 175)),
+                          SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              'Informasi Personal',
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () async {
+                              controller.toProfiledetail(context);
+                            },
+                            child: Row(
+                              children: [
+                                Text(
+                                  'Ubah',
+                                  style: TextStyle(
+                                      color: const Color.fromARGB(
+                                          255, 75, 104, 255)),
+                                ),
+                                SizedBox(width: 5),
+                                Icon(
+                                  Icons.edit,
+                                  size: 18,
+                                  color:
+                                      const Color.fromARGB(255, 75, 104, 255),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      Obx(() => _buildInfoItem(
+                          'Username', controller.user.value.username ?? '')),
+                      Obx(() => _buildInfoItem(
+                          'Nama Lengkap', controller.user.value.name ?? '')),
+                      Obx(() => _buildInfoItem(
+                          'Nomor HP', controller.user.value.phone ?? '')),
+                      Obx(() => _buildInfoItem(
+                          'Email', controller.user.value.email ?? '')),
+                    ],
+                  ),
+                ),
+
+                // Pengaturan Section
+                Container(
+                  padding: EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(Icons.settings,
+                              color: const Color.fromARGB(255, 173, 173, 175)),
+                          SizedBox(width: 8),
+                          Text(
+                            'Pengaturan',
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           ),
-                        ),
-                        TextButton(
-                          onPressed: () async {
-                            controller.toProfiledetail(context);
-                          },
-                          child: Row(
-                            children: [
-                              Text(
-                                'Ubah',
-                                style: TextStyle(
-                                    color: const Color.fromARGB(
-                                        255, 75, 104, 255)),
-                              ),
-                              SizedBox(width: 5),
-                              Icon(
-                                Icons.edit,
-                                size: 18,
-                                color: const Color.fromARGB(255, 75, 104, 255),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    Obx(() => _buildInfoItem(
-                        'Username', controller.user.value.username ?? '')),
-                    Obx(() => _buildInfoItem(
-                        'Nama Lengkap', controller.user.value.name ?? '')),
-                    Obx(() => _buildInfoItem(
-                        'Nomor HP', controller.user.value.phone ?? '')),
-                    Obx(() => _buildInfoItem(
-                        'Email', controller.user.value.email ?? '')),
-                  ],
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      _buildSettingItem('Ubah Kata Sandi', onTap: () {
+                        String userId = '37f75b0c-400b-4f15-b349-b8a0b6a546c3';
+                        showChangePasswordPopup(context, userId, controller);
+                      }),
+                      _buildSettingItem('Versi Aplikasi', trailing: '1.0.0'),
+                    ],
+                  ),
                 ),
-              ),
 
-              // Pengaturan Section
-              Container(
-                padding: EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Icon(Icons.settings,
-                            color: const Color.fromARGB(255, 173, 173, 175)),
-                        SizedBox(width: 8),
-                        Text(
-                          'Pengaturan',
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    _buildSettingItem('Ubah Kata Sandi', onTap: () {
-                      String userId = '37f75b0c-400b-4f15-b349-b8a0b6a546c3';
-                      showChangePasswordPopup(context, userId, controller);
-                    }),
-                    _buildSettingItem('Versi Aplikasi', trailing: '1.0.0'),
-                  ],
-                ),
-              ),
-
-              // Logout Button
-              Container(
-                padding: EdgeInsets.all(20),
-                child: GFButton(
-                  onPressed: () async {
-                    // Menampilkan popup konfirmasi sebelum logout
-                    bool? confirmLogout = await showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          backgroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          title: Center(
-                            child: Text(
-                              'Konfirmasi Logout',
-                              style: TextStyle(color: Colors.black),
+                // Logout Button
+                Container(
+                  padding: EdgeInsets.all(20),
+                  child: GFButton(
+                    onPressed: () async {
+                      // Menampilkan popup konfirmasi sebelum logout
+                      bool? confirmLogout = await showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            backgroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
                             ),
-                          ),
-                          content: Text(
-                            'Apakah Anda yakin ingin menutup aplikasi?',
-                            style: TextStyle(color: Colors.black),
-                          ),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop(false);
-                              },
+                            title: Center(
                               child: Text(
-                                'No',
+                                'Konfirmasi Logout',
                                 style: TextStyle(color: Colors.black),
                               ),
                             ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop(true);
-                              },
-                              child: Text(
-                                'Yes',
-                                style: TextStyle(color: GFColors.DANGER),
-                              ),
+                            content: Text(
+                              'Apakah Anda yakin ingin menutup aplikasi?',
+                              style: TextStyle(color: Colors.black),
                             ),
-                          ],
-                        );
-                      },
-                    );
-                    if (confirmLogout == true) {
-                      await controller.logout();
-                    }
-                  },
-                  text: 'Logout',
-                  color: GFColors.DANGER,
-                  size: GFSize.LARGE,
-                  fullWidthButton: true,
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop(false);
+                                },
+                                child: Text(
+                                  'No',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop(true);
+                                },
+                                child: Text(
+                                  'Yes',
+                                  style: TextStyle(color: GFColors.DANGER),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                      if (confirmLogout == true) {
+                        await controller.logout();
+                      }
+                    },
+                    text: 'Logout',
+                    color: GFColors.DANGER,
+                    size: GFSize.LARGE,
+                    fullWidthButton: true,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        );
-      }),
-    );
+          onLoading: const Center(child: CircularProgressIndicator()),
+          onEmpty: const Text('Empty Data'),
+          onError: (error) => Padding(
+            padding: EdgeInsets.all(8.r),
+            child: Center(child: Text(error!)),
+          ),
+        ),
+      );
+    });
   }
 
   Widget _buildInfoItem(String title, String value) {

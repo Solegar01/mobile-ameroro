@@ -55,7 +55,8 @@ class LoginController extends GetxController
             // ignore: use_build_context_synchronously
             context);
         change(login, status: RxStatus.success());
-        await repository.saveAllSession(login);
+        await repository.saveAllSession(login, rememberMe.value);
+        await repository.cacheLogin(login);
         Get.offAll(MyApp());
       }
     } catch (e) {

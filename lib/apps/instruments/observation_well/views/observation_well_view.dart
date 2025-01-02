@@ -40,11 +40,7 @@ class ObservationWellView extends StatelessWidget {
             ),
             body: controller.obx(
               (state) => _detail(context, controller),
-              onLoading: const Center(
-                child: GFLoader(
-                  type: GFLoaderType.circle,
-                ),
-              ),
+              onLoading: _loader(context, controller),
               onEmpty: const Text('Empty Data'),
               onError: (error) => Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -183,6 +179,118 @@ class ObservationWellView extends StatelessWidget {
             ),
           ),
           _tabBarView(context, controller),
+        ],
+      ),
+    );
+  }
+
+  _loader(BuildContext context, ObservationWellController controller) {
+    return SizedBox(
+      child: ListView(
+        children: [
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                GFShimmer(
+                  mainColor: Colors.grey[300]!,
+                  secondaryColor: Colors.grey[100]!,
+                  child: Container(
+                    height: 55,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius:
+                          BorderRadius.circular(8), // Optional rounded corners
+                    ),
+                  ),
+                ),
+                SizedBox(height: 15.r),
+                GFShimmer(
+                  mainColor: Colors.grey[300]!,
+                  secondaryColor: Colors.grey[100]!,
+                  child: Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius:
+                          BorderRadius.circular(8), // Optional rounded corners
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10.r),
+                GFShimmer(
+                  mainColor: Colors.grey[300]!,
+                  secondaryColor: Colors.grey[100]!,
+                  child: Container(
+                    height: 45,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(
+                          30.r), // Optional rounded corners
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Column(
+            children: [
+              TabBar(
+                controller: controller.tabController,
+                tabs: const [
+                  Tab(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [Text('GRAFIK')],
+                    ),
+                  ),
+                  Tab(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [Text('TABEL')],
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 600.r,
+                child: TabBarView(
+                  controller: controller.tabController,
+                  children: [
+                    SingleChildScrollView(
+                      child: GFShimmer(
+                        mainColor: Colors.grey[300]!,
+                        secondaryColor: Colors.grey[100]!,
+                        child: Container(
+                          margin: EdgeInsets.all(10.r),
+                          height: 300.r,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: GFColors.WHITE,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SingleChildScrollView(
+                      child: GFShimmer(
+                        mainColor: Colors.grey[300]!,
+                        secondaryColor: Colors.grey[100]!,
+                        child: Container(
+                          margin: EdgeInsets.all(10.r),
+                          height: 300.r,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: GFColors.WHITE,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );

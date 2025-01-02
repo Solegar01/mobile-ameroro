@@ -5,6 +5,7 @@ import 'package:mobile_ameroro_app/apps/cctv/views/cctv_view.dart';
 import 'package:mobile_ameroro_app/apps/cctv/views/cctv_detail_view.dart';
 import 'package:mobile_ameroro_app/apps/home/views/home_view.dart';
 import 'package:mobile_ameroro_app/apps/instrument/views/instrument_view.dart';
+import 'package:mobile_ameroro_app/apps/instruments/arr/views/arr_view.dart';
 import 'package:mobile_ameroro_app/apps/instruments/awlr/views/awlr_view.dart';
 import 'package:mobile_ameroro_app/apps/instruments/ews/views/ews_view.dart';
 import 'package:mobile_ameroro_app/apps/instruments/inklinometer/views/inklinometer_view.dart';
@@ -23,9 +24,8 @@ import 'package:mobile_ameroro_app/apps/menu/views/menu_view.dart';
 import 'package:mobile_ameroro_app/apps/profile/views/profile_view.dart';
 import 'package:mobile_ameroro_app/apps/profile/views/profile_detail_view.dart';
 import 'package:mobile_ameroro_app/apps/splash/views/splash_view.dart';
+import 'package:mobile_ameroro_app/bindings/arr_binding.dart';
 import 'package:mobile_ameroro_app/bindings/awlr_binding.dart';
-import 'package:mobile_ameroro_app/bindings/awlrlist_binding.dart';
-
 import 'package:mobile_ameroro_app/bindings/cctv_binding.dart';
 import 'package:mobile_ameroro_app/bindings/ews_binding.dart';
 import 'package:mobile_ameroro_app/bindings/home_binding.dart';
@@ -59,6 +59,7 @@ class AppRoutes {
   static const MENU = '/menu';
   static const INTAKE = '/instrument/intake';
   static const AWLR = '/instrument/awlr';
+  static const ARR = '/instrument/arr';
   static const AWLR_DETAIL = '/instrument/awlr_detail';
   static const KLIMATOLOGI_MANUAL = '/instrument/klimatologi_manual';
   static const KLIMATOLOGI_AWS = '/instrument/klimatologi_aws';
@@ -142,6 +143,12 @@ class AppRoutes {
       name: AWLR,
       page: () => AwlrView(),
       binding: AwlrBinding(),
+    ),
+    GetPage(
+      transition: Transition.downToUp,
+      name: ARR,
+      page: () => ArrView(),
+      binding: ArrBinding(),
     ),
     GetPage(
       transition: Transition.downToUp,

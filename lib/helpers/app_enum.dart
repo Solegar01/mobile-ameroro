@@ -61,3 +61,55 @@ enum StatusLevel {
     }
   }
 }
+
+enum WarningStatus {
+  normal,
+  awas,
+  waspada,
+  siaga;
+
+  String get name {
+    switch (this) {
+      case WarningStatus.normal:
+        return 'Normal';
+      case WarningStatus.awas:
+        return 'Awas';
+      case WarningStatus.waspada:
+        return 'Waspada';
+      case WarningStatus.siaga:
+        return 'Siaga';
+      default:
+        return '';
+    }
+  }
+
+  Color get color {
+    switch (this) {
+      case WarningStatus.normal:
+        return GFColors.SUCCESS;
+      case WarningStatus.awas:
+        return GFColors.DANGER;
+      case WarningStatus.waspada:
+        return Colors.orange;
+      case WarningStatus.siaga:
+        return GFColors.WARNING;
+      default:
+        return GFColors.LIGHT;
+    }
+  }
+
+  IconData get icon {
+    switch (this) {
+      case WarningStatus.normal:
+        return Icons.check_circle_outline_rounded;
+      case WarningStatus.awas:
+        return Icons.warning_amber_rounded;
+      case WarningStatus.waspada:
+        return Icons.warning_amber_rounded;
+      case WarningStatus.siaga:
+        return Icons.warning_amber_rounded;
+      default:
+        return Icons.circle_outlined;
+    }
+  }
+}

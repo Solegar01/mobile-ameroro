@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:mobile_ameroro_app/apps/config/app_config.dart';
 import 'package:mobile_ameroro_app/apps/instruments/inklinometer/controllers/inklinometer_controller.dart';
 import 'package:mobile_ameroro_app/apps/instruments/inklinometer/models/inklinometer_model.dart';
 import 'package:mobile_ameroro_app/helpers/app_constant.dart';
@@ -34,11 +35,7 @@ class InklinometerView extends StatelessWidget {
             ),
             body: controller.obx(
               (state) => _detail(context, controller),
-              onLoading: const Center(
-                child: GFLoader(
-                  type: GFLoaderType.circle,
-                ),
-              ),
+              onLoading: _loader(context, controller),
               onEmpty: const Text('Empty Data'),
               onError: (error) => Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -97,6 +94,92 @@ class InklinometerView extends StatelessWidget {
           SizedBox(
             height: 600.r,
             child: _graphTableTab(context, controller),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _loader(BuildContext context, InklinometerController controller) {
+    return SizedBox(
+      child: ListView(
+        children: [
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                GFShimmer(
+                  mainColor: Colors.grey[300]!,
+                  secondaryColor: Colors.grey[100]!,
+                  child: Container(
+                    height: 55,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius:
+                          BorderRadius.circular(8), // Optional rounded corners
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Column(
+            children: [
+              TabBar(
+                controller: controller.tabController,
+                tabs: const [
+                  Tab(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [Text('GRAFIK')],
+                    ),
+                  ),
+                  Tab(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [Text('TABEL')],
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 600.r,
+                child: TabBarView(
+                  controller: controller.tabController,
+                  children: [
+                    SingleChildScrollView(
+                      child: GFShimmer(
+                        mainColor: Colors.grey[300]!,
+                        secondaryColor: Colors.grey[100]!,
+                        child: Container(
+                          margin: EdgeInsets.all(10.r),
+                          height: 300.r,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: GFColors.WHITE,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SingleChildScrollView(
+                      child: GFShimmer(
+                        mainColor: Colors.grey[300]!,
+                        secondaryColor: Colors.grey[100]!,
+                        child: Container(
+                          margin: EdgeInsets.all(10.r),
+                          height: 300.r,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: GFColors.WHITE,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -175,19 +258,15 @@ class InklinometerView extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SingleChildScrollView(
-            child: GFCard(
-              margin: EdgeInsets.all(10.r),
-              color: GFColors.WHITE,
-              padding: EdgeInsets.zero,
-              content: GFShimmer(
-                mainColor: Colors.grey[300]!,
-                secondaryColor: Colors.grey[100]!,
-                child: Container(
-                  height: 300.r,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.r),
-                    color: GFColors.WHITE,
-                  ),
+            child: GFShimmer(
+              mainColor: Colors.grey[300]!,
+              secondaryColor: Colors.grey[100]!,
+              child: Container(
+                margin: EdgeInsets.all(10.r),
+                height: 300.r,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: GFColors.WHITE,
                 ),
               ),
             ),
@@ -407,19 +486,15 @@ class InklinometerView extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SingleChildScrollView(
-            child: GFCard(
-              margin: EdgeInsets.all(10.r),
-              color: GFColors.WHITE,
-              padding: EdgeInsets.zero,
-              content: GFShimmer(
-                mainColor: Colors.grey[300]!,
-                secondaryColor: Colors.grey[100]!,
-                child: Container(
-                  height: 300.r,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.r),
-                    color: GFColors.WHITE,
-                  ),
+            child: GFShimmer(
+              mainColor: Colors.grey[300]!,
+              secondaryColor: Colors.grey[100]!,
+              child: Container(
+                margin: EdgeInsets.all(10.r),
+                height: 300.r,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: GFColors.WHITE,
                 ),
               ),
             ),

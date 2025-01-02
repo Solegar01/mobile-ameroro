@@ -4,35 +4,17 @@ import 'package:get/get.dart';
 import 'package:getwidget/colors/gf_color.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:mobile_ameroro_app/apps/instruments/awlr/models/awlr_model.dart';
-import 'package:mobile_ameroro_app/apps/instruments/awlr/models/awlrlist_model.dart';
-import 'package:mobile_ameroro_app/apps/instruments/awlr/models/station_model.dart';
 import 'package:mobile_ameroro_app/apps/instruments/awlr/repository/awlr_repository.dart';
-import 'dart:developer';
 import 'package:mobile_ameroro_app/apps/widgets/custom_toast.dart';
 import 'package:mobile_ameroro_app/helpers/app_constant.dart';
-import 'package:mobile_ameroro_app/helpers/date_convertion.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class AwlrController extends GetxController
     with StateMixin, GetSingleTickerProviderStateMixin {
   final AwlrRepository repository;
   AwlrController(this.repository);
-  late TabController tabController;
 
   RxList<AwlrModel> listAwlr = RxList.empty(growable: true);
-  RxList<AwlrListModel> sensorList = RxList.empty(growable: true);
-  var currentIndex = 0.obs;
-  String lastStatus = "";
-  Rxn<DateTimeRange> selectedDateRange = Rxn<DateTimeRange>(
-      DateTimeRange(start: DateTime.now(), end: DateTime.now()));
-  TextEditingController dateRangeController = TextEditingController();
-
-  RxString lastReading =
-      DateFormatter.formatDateTimeToLocal(DateTime.now()).obs;
-  RxString unit = 'm'.obs;
-  RxDouble tma = 0.0.obs;
-  Rx<Station> station = Station().obs;
-  Rx<AwlrListModel> selectedSensor = AwlrListModel().obs;
 
   final int rowsPerPage = 10; // Rows per page
   RxList<AwlrModel> displayedData = <AwlrModel>[].obs; // Paginated data
@@ -41,18 +23,12 @@ class AwlrController extends GetxController
 
   @override
   void onInit() async {
-    tabController = TabController(length: 2, vsync: this);
     await formInit();
     super.onInit();
   }
 
   formInit() async {
-    dateRangeController.text =
-        '${AppConstants().dateFormatID.format(selectedDateRange.value!.start)} - ${AppConstants().dateFormatID.format(selectedDateRange.value!.end)}';
-    await getAwlrList();
     await getData();
-    await getDataStation();
-    update();
   }
 
   Future<TableDataSource> getTableDataSource() async {
@@ -63,32 +39,6 @@ class AwlrController extends GetxController
   Future<List<AwlrModel>> getChartData() async {
     await Future.delayed(const Duration(milliseconds: 1500));
     return listAwlr;
-  }
-
-  getAwlrList() async {
-    change(null, status: RxStatus.loading());
-    try {
-      sensorList.clear();
-      await repository.getAwlrList().then((values) {
-        if (values.isNotEmpty) {
-          for (var val in values) {
-            sensorList.add(val);
-          }
-          sensorList.sort((a, b) => a.name!.compareTo(b.name!));
-          selectedSensor.value = sensorList.first;
-        }
-      });
-      change(null, status: RxStatus.success());
-    } catch (e) {
-      change(null, status: RxStatus.error());
-      msgToast(e.toString());
-    }
-  }
-
-  void changeTab(int index) {
-    currentIndex.value = index;
-    log(currentIndex.value.toString());
-    update();
   }
 
   bool checkPeriode(DateTime startDatex, DateTime endDatex) {
@@ -103,36 +53,19 @@ class AwlrController extends GetxController
     return result;
   }
 
-  getDataStation() async {
-    try {
-      await repository
-          .getStation(selectedSensor.value.deviceId ?? '')
-          .then((data) {
-        if (data != null) {
-          station.value = data;
-        }
-      });
-    } catch (e) {
-      msgToast(e.toString());
-    }
-  }
-
   Future<void> getData() async {
     change(null, status: RxStatus.loading());
     listAwlr.clear();
     try {
-      var listResponse = await repository.getData(
-          selectedSensor.value.deviceId ?? '',
-          selectedDateRange.value!.start,
-          selectedDateRange.value!.end);
+      var listResponse = await repository.getData();
       if (listResponse.isNotEmpty) {
-        listResponse.sort((a, b) => b.readingAt.compareTo(a.readingAt));
+        listResponse.sort((a, b) => b.readingAt!.compareTo(a.readingAt!));
         for (var item in listResponse) {
           listAwlr.add(item);
         }
       }
-      tableDataSource = TableDataSource();
-      updateDisplayedData();
+      // tableDataSource = TableDataSource();
+      // updateDisplayedData();
       change(null, status: RxStatus.success());
     } catch (e) {
       change(null, status: RxStatus.error(e.toString()));
@@ -267,11 +200,11 @@ class TableDataSource extends DataGridSource {
       return DataGridRow(cells: [
         DataGridCell<String>(
           columnName: 'readingAt',
-          value: AppConstants().dateFormatID.format(row.readingAt),
+          value: AppConstants().dateFormatID.format(row.readingAt!),
         ),
         DataGridCell<String>(
           columnName: 'hourMinuteFormat',
-          value: AppConstants().hourMinuteFormat.format(row.readingAt),
+          value: AppConstants().hourMinuteFormat.format(row.readingAt!),
         ),
         DataGridCell<double>(
           columnName: 'waterLevel',

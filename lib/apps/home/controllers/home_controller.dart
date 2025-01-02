@@ -126,14 +126,14 @@ class HomeController extends GetxController with StateMixin {
   formInit() async {
     change(null, status: RxStatus.loading());
     try {
-      await registMqttTopics();
+      // await registMqttTopics();
       graphicModel = GraphicModel(
         listIntake: List.empty(growable: true),
         listRainFall: List.empty(growable: true),
         listVnotch: List.empty(growable: true),
         listAwlr: List.empty(growable: true),
       );
-      await getAwlrList();
+      // await getAwlrList();
       change(null, status: RxStatus.success());
     } catch (e) {
       change(null, status: RxStatus.error(e.toString()));
@@ -143,7 +143,7 @@ class HomeController extends GetxController with StateMixin {
   Future<GraphicModel?> getGraphic() async {
     GraphicModel? result;
     try {
-      result = await repository.getGraphics();
+      // result = await repository.getGraphics();
     } catch (e) {
       msgToast(e.toString());
     }
@@ -183,13 +183,13 @@ class HomeController extends GetxController with StateMixin {
     change(null, status: RxStatus.loading());
     try {
       listAwlr.clear();
-      await repository.getAwlrList().then((values) {
-        if (values.isNotEmpty) {
-          for (var val in values) {
-            listAwlr.add(val);
-          }
-        }
-      });
+      // await repository.getAwlrList().then((values) {
+      //   if (values.isNotEmpty) {
+      //     for (var val in values) {
+      //       listAwlr.add(val);
+      //     }
+      //   }
+      // });
       change(null, status: RxStatus.success());
     } catch (e) {
       change(null, status: RxStatus.error());

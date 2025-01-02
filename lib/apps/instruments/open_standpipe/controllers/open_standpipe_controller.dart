@@ -38,11 +38,13 @@ class OpenStandpipeController extends GetxController
   }
 
   formInit() async {
+    change(null, status: RxStatus.loading());
     dateRangeController.text =
         '${AppConstants().dateFormatID.format(selectedDateRange.value!.start)} - ${AppConstants().dateFormatID.format(selectedDateRange.value!.end)}';
     await getStations();
     await getElevations();
     await getData();
+    change(null, status: RxStatus.success());
   }
 
   Future<TableDataSource> getTableDataSource() async {

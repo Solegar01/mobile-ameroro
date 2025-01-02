@@ -5,12 +5,15 @@ import 'package:mobile_ameroro_app/apps/splash/controllers/splash_controller.dar
 import 'package:mobile_ameroro_app/services/api/api_service.dart';
 import 'package:mobile_ameroro_app/services/connectivity/connectivity_service.dart';
 import 'package:mobile_ameroro_app/services/connectivity/global_connectivity_observer.dart';
+import 'package:mobile_ameroro_app/services/local/preference_utils.dart';
 import 'package:mobile_ameroro_app/services/mqtt/mqtt_service.dart';
 
 class InitialBindings extends Bindings {
   @override
   void dependencies() async {
     await Get.putAsync(() => ConnectivityService().initialize());
+    await Get.putAsync(() async => await PreferenceUtils.init(),
+        permanent: true);
     await Get.putAsync<MqttService>(
       () => MqttService().initialize(),
     );

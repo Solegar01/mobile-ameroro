@@ -1,5 +1,8 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile_ameroro_app/apps/login/controllers/login_controller.dart';
+import 'package:mobile_ameroro_app/apps/login/models/login_response_model.dart';
+import 'package:mobile_ameroro_app/apps/widgets/custom_toast.dart';
 import 'package:mobile_ameroro_app/routes/app_routes.dart';
 import 'package:mobile_ameroro_app/apps/profile/repository/profile_repository.dart';
 import 'package:mobile_ameroro_app/apps/profile/models/profile_model.dart';
@@ -8,6 +11,7 @@ import 'package:mobile_ameroro_app/services/local/session_service.dart';
 class ProfileController extends GetxController with StateMixin {
   final ProfileRepository repository;
   final SessionService session = SessionService();
+  final loginController = Get.find<LoginController>();
   ProfileController(this.repository);
 
   var user = ProfileModel.empty().obs;
@@ -27,6 +31,7 @@ class ProfileController extends GetxController with StateMixin {
     super.onInit();
     _loadUserData();
     _setupFormListener();
+    change(null, status: RxStatus.success());
   }
 
   void _setupFormListener() {
@@ -40,26 +45,22 @@ class ProfileController extends GetxController with StateMixin {
   }
 
   Future<void> _loadUserData() async {
-    String? userId = await session.getSession('id');
-    if (userId != null) {
-      await getUserById(userId);
-    } else {
-      print("No user ID found in session. Redirecting to login.");
-      Get.offAllNamed(AppRoutes.LOGIN);
-    }
-  }
-
-  Future getUserById(String id) async {
     try {
-      isLoading.value = true;
-      final userData = await repository.fetchDataById(id);
-      user.value = userData;
-      _setTextControllers(userData);
-      print('User data after setting: ${user.value.toJson()}');
+      await loginController.repository.getLogin().then((model) {
+        var tempProf = ProfileModel(
+          id: model.id,
+          username: model.username,
+          name: model.name,
+          phone: model.phone,
+          email: model.email,
+        );
+        user.value = tempProf;
+        _setTextControllers(tempProf);
+      });
     } catch (e) {
-      print('Error in getUserById: $e');
-    } finally {
-      isLoading.value = false;
+      msgToast(e.toString());
+      await Future.delayed(const Duration(milliseconds: 1500));
+      Get.offAllNamed(AppRoutes.LOGIN);
     }
   }
 
@@ -193,7 +194,7 @@ class ProfileController extends GetxController with StateMixin {
     await session.removeSession('username');
     await session.removeSession('phone');
     await session.removeSession('email');
-    await session.removeSession('isLogin');
+    await session.removeSession('remeeberMe');
 
     Get.offAllNamed(AppRoutes.LOGIN);
   }

@@ -11,7 +11,7 @@ import 'package:mobile_ameroro_app/helpers/date_convertion.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class IntakeController extends GetxController
-    with StateMixin, GetSingleTickerProviderStateMixin {
+    with StateMixin, GetTickerProviderStateMixin {
   final IntakeRepository repository;
   IntakeController(this.repository);
   late TabController tabController;

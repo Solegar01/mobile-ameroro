@@ -23,7 +23,7 @@ class CctvController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    fetchAllCctv();
+    // fetchAllCctv();
   }
 
   Future<void> fetchAllCctv() async {

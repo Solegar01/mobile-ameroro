@@ -18,7 +18,7 @@ class MapController extends GetxController with StateMixin<List<MapModel>> {
 
   @override
   void onInit() {
-    getData();
+    // getData();
     super.onInit();
   }
 

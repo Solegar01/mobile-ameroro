@@ -42,11 +42,7 @@ class VibratingWireView extends StatelessWidget {
             ),
             body: controller.obx(
               (state) => _detail(context, controller),
-              onLoading: const Center(
-                child: GFLoader(
-                  type: GFLoaderType.circle,
-                ),
-              ),
+              onLoading: _loader(context, controller),
               onEmpty: const Text('Empty Data'),
               onError: (error) => Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -55,6 +51,159 @@ class VibratingWireView extends StatelessWidget {
             ),
           ),
         ));
+  }
+
+  _loader(BuildContext context, VibratingWireController controller) {
+    return ListView(
+      children: [
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              GFShimmer(
+                mainColor: Colors.grey[300]!,
+                secondaryColor: Colors.grey[100]!,
+                child: Container(
+                  height: 55,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius:
+                        BorderRadius.circular(8), // Optional rounded corners
+                  ),
+                ),
+              ),
+              SizedBox(height: 10.r),
+              GFShimmer(
+                mainColor: Colors.grey[300]!,
+                secondaryColor: Colors.grey[100]!,
+                child: Container(
+                  height: 55,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius:
+                        BorderRadius.circular(8), // Optional rounded corners
+                  ),
+                ),
+              ),
+              SizedBox(height: 10.r),
+              GFShimmer(
+                mainColor: Colors.grey[300]!,
+                secondaryColor: Colors.grey[100]!,
+                child: Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius:
+                        BorderRadius.circular(8), // Optional rounded corners
+                  ),
+                ),
+              ),
+              SizedBox(height: 10.r),
+              GFShimmer(
+                mainColor: Colors.grey[300]!,
+                secondaryColor: Colors.grey[100]!,
+                child: Container(
+                  height: 45,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius:
+                        BorderRadius.circular(30.r), // Optional rounded corners
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Column(
+          children: [
+            TabBar(
+              controller: controller.tabController,
+              tabs: [
+                Tab(
+                  child: Text(
+                    'GAMBAR PONDASI',
+                    selectionColor: context.iconColor,
+                  ),
+                ),
+                Tab(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'GRAFIK',
+                        selectionColor: context.iconColor,
+                      )
+                    ],
+                  ),
+                ),
+                Tab(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'TABEL',
+                        selectionColor: context.iconColor,
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 680.r,
+              child: TabBarView(
+                controller: controller.tabController,
+                children: [
+                  SingleChildScrollView(
+                    child: GFShimmer(
+                      mainColor: Colors.grey[300]!,
+                      secondaryColor: Colors.grey[100]!,
+                      child: Container(
+                        margin: EdgeInsets.all(10.r),
+                        height: 305.r,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: GFColors.WHITE,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SingleChildScrollView(
+                    child: GFShimmer(
+                      mainColor: Colors.grey[300]!,
+                      secondaryColor: Colors.grey[100]!,
+                      child: Container(
+                        margin: EdgeInsets.all(10.r),
+                        height: 300.r,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: GFColors.WHITE,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SingleChildScrollView(
+                    child: GFShimmer(
+                      mainColor: Colors.grey[300]!,
+                      secondaryColor: Colors.grey[100]!,
+                      child: Container(
+                        margin: EdgeInsets.all(10.r),
+                        height: 300.r,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: GFColors.WHITE,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
   }
 
   _detail(BuildContext context, VibratingWireController controller) {
@@ -372,19 +521,15 @@ class VibratingWireView extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SingleChildScrollView(
-            child: GFCard(
-              margin: EdgeInsets.all(10.r),
-              color: GFColors.WHITE,
-              padding: EdgeInsets.zero,
-              content: GFShimmer(
-                mainColor: Colors.grey[300]!,
-                secondaryColor: Colors.grey[100]!,
-                child: Container(
-                  height: 300.r,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.r),
-                    color: GFColors.WHITE,
-                  ),
+            child: GFShimmer(
+              mainColor: Colors.grey[300]!,
+              secondaryColor: Colors.grey[100]!,
+              child: Container(
+                margin: EdgeInsets.all(10.r),
+                height: 300.r,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: GFColors.WHITE,
                 ),
               ),
             ),
@@ -851,19 +996,15 @@ class VibratingWireView extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SingleChildScrollView(
-            child: GFCard(
-              margin: EdgeInsets.all(10.r),
-              color: GFColors.WHITE,
-              padding: EdgeInsets.zero,
-              content: GFShimmer(
-                mainColor: Colors.grey[300]!,
-                secondaryColor: Colors.grey[100]!,
-                child: Container(
-                  height: 300.r,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.r),
-                    color: GFColors.WHITE,
-                  ),
+            child: GFShimmer(
+              mainColor: Colors.grey[300]!,
+              secondaryColor: Colors.grey[100]!,
+              child: Container(
+                margin: EdgeInsets.all(10.r),
+                height: 300.r,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: GFColors.WHITE,
                 ),
               ),
             ),

@@ -28,7 +28,8 @@ class AppConstants {
   //Url API
   static String bmkgUrl =
       'https://api.bmkg.go.id/publik/prakiraan-cuaca?adm4=36.04.28.2012';
-  static String awlrUrl = 'instrument/awlrs';
+  static String awlrUrl = 'awlr';
+  static String arrUrl = 'arr';
   static String awlrDetailUrl = 'instrument/awlr/detail';
   static String stationDeviceUrl = 'station/device';
   static String inklinometerUrl = 'inklinometer';
@@ -44,4 +45,8 @@ class AppConstants {
   static String vibratingWireUrl = 'vibrating-wire';
   static String vwSensorUrl = 'vibrating-wire/sensors';
   static String vnotchUrl = 'vnotch';
+
+  // Storage Key (name + Key)
+  static const String tokenKey = 'token';
+  static const String loginKey = 'login';
 }

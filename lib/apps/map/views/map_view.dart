@@ -14,45 +14,48 @@ class PetaView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GetBuilder<MapController>(
-        builder: (controller) {
-          if (controller.isLoading) {
-            return Center(child: CircularProgressIndicator());
-          }
-          return Stack(
-            children: [
-              GoogleMap(
-                zoomGesturesEnabled: true,
-                tiltGesturesEnabled: false,
-                mapType: controller.currentMapType,
-                initialCameraPosition: CameraPosition(
-                  target: controller.maps.isNotEmpty
-                      ? LatLng(controller.maps[0].latitude ?? -6.1799714,
-                          (controller.maps[0].longitude ?? 106.1119974) - 0.0)
-                      : LatLng(-6.1799714, 106.1119974 - 0.0),
-                  zoom: 17,
-                ),
-                markers: controller.markers,
-                onMapCreated: controller.onMapCreated,
-              ),
-              Positioned(
-                top: 480,
-                right: 8,
-                child: Column(
-                  children: [
-                    FloatingActionButton(
-                      onPressed: controller.toggleMapType,
-                      mini: true,
-                      child: Icon(Icons.layers),
-                      tooltip: 'Toggle Map Type',
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          );
-        },
+      body: Center(
+        child: Text('PETA'),
       ),
+      // GetBuilder<MapController>(
+      //   builder: (controller) {
+      //     if (controller.isLoading) {
+      //       return Center(child: CircularProgressIndicator());
+      //     }
+      //     return Stack(
+      //       children: [
+      //         GoogleMap(
+      //           zoomGesturesEnabled: true,
+      //           tiltGesturesEnabled: false,
+      //           mapType: controller.currentMapType,
+      //           initialCameraPosition: CameraPosition(
+      //             target: controller.maps.isNotEmpty
+      //                 ? LatLng(controller.maps[0].latitude ?? -6.1799714,
+      //                     (controller.maps[0].longitude ?? 106.1119974) - 0.0)
+      //                 : LatLng(-6.1799714, 106.1119974 - 0.0),
+      //             zoom: 17,
+      //           ),
+      //           markers: controller.markers,
+      //           onMapCreated: controller.onMapCreated,
+      //         ),
+      //         Positioned(
+      //           top: 480,
+      //           right: 8,
+      //           child: Column(
+      //             children: [
+      //               FloatingActionButton(
+      //                 onPressed: controller.toggleMapType,
+      //                 mini: true,
+      //                 child: Icon(Icons.layers),
+      //                 tooltip: 'Toggle Map Type',
+      //               ),
+      //             ],
+      //           ),
+      //         ),
+      //       ],
+      //     );
+      //   },
+      // ),
     );
   }
 }

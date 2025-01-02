@@ -49,11 +49,7 @@ class HomeView extends StatelessWidget {
       ),
       body: controller.obx(
         (state) => _detail(context, controller),
-        onLoading: const Center(
-          child: GFLoader(
-            type: GFLoaderType.circle,
-          ),
-        ),
+        onLoading: _loader(context, controller),
         onEmpty: const Text('Empty Data'),
         onError: (error) => Padding(
           padding: const EdgeInsets.all(8.0),
@@ -63,10 +59,313 @@ class HomeView extends StatelessWidget {
     );
   }
 
+  _loader(BuildContext context, HomeController controller) {
+    return ListView(
+      children: [
+        SizedBox(
+          width: double.infinity,
+          height: 320.r,
+          child: Stack(
+            children: [
+              Column(
+                children: [
+                  Container(
+                    color: AppConfig.bgLogin, // Top color
+                    height: 150.r, // Half of the total height
+                  ),
+                  Container(
+                    color: GFColors.WHITE, // Bottom color
+                    height: 150.r, // Half of the total height
+                  ),
+                ],
+              ),
+              Positioned(
+                top: 10.r,
+                left: 10.r,
+                child: Text(
+                  'EARLY WARNING SYSTEM',
+                  style: TextStyle(
+                    color: GFColors.WHITE,
+                    fontSize: 12.r,
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 30.r,
+                left: 0,
+                right: 0,
+                child: SingleChildScrollView(
+                  child: Container(
+                    width: double.infinity,
+                    margin: EdgeInsets.all(8.r),
+                    decoration: BoxDecoration(
+                      color: GFColors.LIGHT,
+                      borderRadius: BorderRadius.circular(8.r),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          blurRadius: 5.r,
+                          spreadRadius: 2.r,
+                        ),
+                      ],
+                    ),
+                    child: GFShimmer(
+                      mainColor: GFColors.LIGHT,
+                      secondaryColor: Colors.grey,
+                      child: Padding(
+                        padding: EdgeInsets.all(10.r),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Column(
+                                  children: [
+                                    Container(
+                                      height: 40.r,
+                                      width: 100.r,
+                                      padding: EdgeInsets.all(10.r),
+                                      decoration: BoxDecoration(
+                                        color: GFColors.LIGHT,
+                                        borderRadius:
+                                            BorderRadius.circular(8.r),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.all(8.r),
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Container(
+                                                height: 20.r,
+                                                width: 100.r,
+                                                padding: EdgeInsets.all(10.r),
+                                                decoration: BoxDecoration(
+                                                  color: GFColors.LIGHT,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.r),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            Divider(
+                              height: 1.r,
+                              color: Colors.white,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.all(8.r),
+                                  child: Container(
+                                    height: 20.r,
+                                    width: 60.r,
+                                    padding: EdgeInsets.all(10.r),
+                                    decoration: BoxDecoration(
+                                      color: GFColors.LIGHT,
+                                      borderRadius: BorderRadius.circular(8.r),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(8.r),
+                                  child: Container(
+                                    height: 20.r,
+                                    width: 60.r,
+                                    padding: EdgeInsets.all(10.r),
+                                    decoration: BoxDecoration(
+                                      color: GFColors.LIGHT,
+                                      borderRadius: BorderRadius.circular(8.r),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Divider(
+                              height: 1.r,
+                              color: Colors.white,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.all(8.r),
+                                  child: Container(
+                                    height: 20.r,
+                                    width: 60.r,
+                                    padding: EdgeInsets.all(10.r),
+                                    decoration: BoxDecoration(
+                                      color: GFColors.LIGHT,
+                                      borderRadius: BorderRadius.circular(8.r),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(8.r),
+                                  child: Container(
+                                    height: 20.r,
+                                    width: 60.r,
+                                    padding: EdgeInsets.all(10.r),
+                                    decoration: BoxDecoration(
+                                      color: GFColors.LIGHT,
+                                      borderRadius: BorderRadius.circular(8.r),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Divider(
+                              height: 1.r,
+                              color: Colors.white,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.all(8.r),
+                                  child: Container(
+                                    height: 20.r,
+                                    width: 60.r,
+                                    padding: EdgeInsets.all(10.r),
+                                    decoration: BoxDecoration(
+                                      color: GFColors.LIGHT,
+                                      borderRadius: BorderRadius.circular(8.r),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(8.r),
+                                  child: Container(
+                                    height: 20.r,
+                                    width: 60.r,
+                                    padding: EdgeInsets.all(10.r),
+                                    decoration: BoxDecoration(
+                                      color: GFColors.LIGHT,
+                                      borderRadius: BorderRadius.circular(8.r),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Divider(
+                              height: 1.r,
+                              color: Colors.white,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.all(8.r),
+                                  child: Container(
+                                    height: 20.r,
+                                    width: 60.r,
+                                    padding: EdgeInsets.all(10.r),
+                                    decoration: BoxDecoration(
+                                      color: GFColors.LIGHT,
+                                      borderRadius: BorderRadius.circular(8.r),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(8.r),
+                                  child: Container(
+                                    height: 20.r,
+                                    width: 60.r,
+                                    padding: EdgeInsets.all(10.r),
+                                    decoration: BoxDecoration(
+                                      color: GFColors.LIGHT,
+                                      borderRadius: BorderRadius.circular(8.r),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        GFShimmer(
+          mainColor: GFColors.LIGHT,
+          secondaryColor: Colors.grey,
+          child: Column(
+            children: [
+              ExpansionTile(
+                  title: Container(
+                height: 20.r,
+                width: 100.r,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(5.r),
+                ),
+                // color: Colors.grey[200],
+              )),
+              ExpansionTile(
+                  title: Container(
+                height: 20.r,
+                width: 100.r,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(5.r),
+                ),
+                // color: Colors.grey[200],
+              )),
+              ExpansionTile(
+                  title: Container(
+                height: 20.r,
+                width: 100.r,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(5.r),
+                ),
+                // color: Colors.grey[200],
+              )),
+              ExpansionTile(
+                  title: Container(
+                height: 20.r,
+                width: 100.r,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(5.r),
+                ),
+                // color: Colors.grey[200],
+              )),
+              ExpansionTile(
+                  title: Container(
+                height: 20.r,
+                width: 100.r,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(5.r),
+                ),
+                // color: Colors.grey[200],
+              )),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
   _detail(BuildContext context, HomeController controller) {
     return RefreshIndicator(
       backgroundColor: GFColors.LIGHT,
-      onRefresh: () => controller.formInit(),
+      onRefresh: () async => await controller.formInit(),
       child: ListView(
         children: [
           _ewsCard(context, controller),

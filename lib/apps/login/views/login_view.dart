@@ -92,6 +92,36 @@ class LoginView extends StatelessWidget {
                       controller.username, controller.password);
                 })),
             SizedBox(height: AppConfig.verticalSpace),
+            Obx(
+              () => Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Checkbox(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.r),
+                    ),
+                    value: controller.rememberMe.value,
+                    activeColor: AppConfig.focusTextField,
+                    checkColor: AppConfig.primaryColor,
+                    side: BorderSide(color: AppConfig.focusTextField),
+                    onChanged: (value) {
+                      controller.rememberMe.value = value ?? false;
+                      controller.isButtonActive(
+                          controller.username, controller.password);
+                    },
+                  ),
+                  Text(
+                    'Ingatkan Saya',
+                    style: TextStyle(
+                      fontSize: AppConfig.fontMedion,
+                      color: controller.rememberMe.value
+                          ? AppConfig.focusTextField
+                          : GFColors.WHITE.withOpacity(0.65),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             SizedBox(height: AppConfig.verticalSpace),
             GetBuilder<LoginController>(
               builder: (controller) {
@@ -113,6 +143,7 @@ class LoginView extends StatelessWidget {
                           LoginRequestModel model = LoginRequestModel(
                             username: controller.username.text,
                             password: controller.password.text,
+                            rememberme: controller.rememberMe.value,
                           );
                           await controller.signIn(context, model);
                         }
