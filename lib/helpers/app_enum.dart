@@ -1,7 +1,9 @@
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/colors/gf_color.dart';
+import 'package:mobile_ameroro_app/helpers/app_constant.dart';
 
 enum StatusLevel {
   normal,
@@ -94,7 +96,7 @@ enum WarningStatus {
       case WarningStatus.siaga:
         return GFColors.WARNING;
       default:
-        return GFColors.LIGHT;
+        return Colors.grey;
     }
   }
 
@@ -109,7 +111,39 @@ enum WarningStatus {
       case WarningStatus.siaga:
         return Icons.warning_amber_rounded;
       default:
-        return Icons.circle_outlined;
+        return CupertinoIcons.question_circle;
+    }
+  }
+}
+
+enum DataFilterType {
+  fiveMinutely,
+  hourly,
+  daily;
+
+  String get name {
+    switch (this) {
+      case DataFilterType.fiveMinutely:
+        return 'Per 5 Menit';
+      case DataFilterType.hourly:
+        return 'Per Jam';
+      case DataFilterType.daily:
+        return 'Per Hari';
+      default:
+        return '-';
+    }
+  }
+
+  String get url {
+    switch (this) {
+      case DataFilterType.fiveMinutely:
+        return AppConstants.awlrMinuteUrl;
+      case DataFilterType.hourly:
+        return AppConstants.awlrHourUrl;
+      case DataFilterType.daily:
+        return AppConstants.awlrDayUrl;
+      default:
+        return '';
     }
   }
 }

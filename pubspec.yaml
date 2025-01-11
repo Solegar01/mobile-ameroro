@@ -31,6 +31,7 @@ dependencies:
   connectivity_plus: ^6.1.0
   cupertino_icons: ^1.0.6
   dropdown_search: ^6.0.1
+  fluentui_system_icons: ^1.1.270
   flutter:
     sdk: flutter
   flutter_localization: ^0.2.2
@@ -39,7 +40,6 @@ dependencies:
   flutter_speed_dial: ^7.0.0
   flutter_svg: ^2.0.10+1
   fluttertoast: ^8.2.8
-  font_awesome_flutter: ^10.7.0
   get: ^4.6.6
   get_storage: ^2.1.1
   getwidget: ^4.0.0
@@ -72,6 +72,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/icons/
+    - assets/images/arr/
     - assets/images/gambar-pondasi.svg
     - assets/images/OSP-11-12.svg
     - assets/images/OSP-31-32.svg

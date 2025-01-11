@@ -1,7 +1,7 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
@@ -45,7 +45,11 @@ class HomeView extends StatelessWidget {
             ],
           ),
         ),
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.settings))],
+        actions: [
+          IconButton(
+              onPressed: () {},
+              icon: const Icon(FluentIcons.settings_16_filled))
+        ],
       ),
       body: controller.obx(
         (state) => _detail(context, controller),
@@ -465,7 +469,8 @@ class HomeView extends StatelessWidget {
                                               color: GFColors.WHITE),
                                         ),
                                         const IconButton(
-                                          icon: Icon(Icons.volume_off_rounded,
+                                          icon: Icon(
+                                              FluentIcons.speaker_off_16_filled,
                                               color: GFColors.WHITE),
                                           onPressed: null,
                                         ),
@@ -1006,14 +1011,14 @@ class HomeView extends StatelessWidget {
                                                                   .value ==
                                                               0)
                                                           ? const Icon(
-                                                              Icons
-                                                                  .volume_up_rounded,
+                                                              FluentIcons
+                                                                  .speaker_2_16_filled,
                                                               color: GFColors
                                                                   .WHITE,
                                                             )
                                                           : const Icon(
-                                                              Icons
-                                                                  .volume_off_rounded,
+                                                              FluentIcons
+                                                                  .speaker_off_16_filled,
                                                               color: GFColors
                                                                   .DARK),
                                                       onPressed: () async {
@@ -1418,7 +1423,7 @@ class HomeView extends StatelessWidget {
             _buildWeatherInfoItem(
                 Icons.water_drop_outlined, '${cuaca.hu} %', 'Kelembaban'),
             _buildWeatherInfoItem(
-                FontAwesomeIcons.compass,
+                FluentIcons.compass_northwest_28_regular,
                 '${cuaca.wdDeg} \u00B0C (${cuaca.wd} → ${cuaca.wdTo})',
                 'Arah mata angin'),
           ],
@@ -1435,8 +1440,8 @@ class HomeView extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            _buildWeatherInfoItem(
-                FontAwesomeIcons.wind, '${cuaca.ws} m/s', 'Kec. angin'),
+            _buildWeatherInfoItem(FluentIcons.weather_squalls_48_filled,
+                '${cuaca.ws} m/s', 'Kec. angin'),
             _buildWeatherInfoItem(
                 Icons.cloud, '${cuaca.tcc} %', 'Tutupan awan'),
             _buildWeatherInfoItem(

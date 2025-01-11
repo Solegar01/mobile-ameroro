@@ -1,10 +1,11 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:mobile_ameroro_app/apps/config/app_config.dart';
 import 'package:mobile_ameroro_app/apps/instruments/awlr/controllers/awlr_controller.dart';
-import 'package:mobile_ameroro_app/apps/widgets/custom_toast.dart';
 import 'package:mobile_ameroro_app/helpers/app_constant.dart';
 import 'package:mobile_ameroro_app/helpers/app_enum.dart';
 
@@ -69,7 +70,7 @@ class AwlrView extends StatelessWidget {
       itemCount: controller.listAwlr.length,
       itemBuilder: (context, index) {
         final data = controller.listAwlr[index];
-        var warningStatus = WarningStatus.normal;
+        WarningStatus? warningStatus;
         switch (data.warningStatus?.toLowerCase()) {
           case 'normal':
             warningStatus = WarningStatus.normal;
@@ -92,7 +93,8 @@ class AwlrView extends StatelessWidget {
               color: GFColors.WHITE,
               borderRadius: BorderRadius.circular(10.r), // Rounded corners
               border: Border.all(
-                color: warningStatus.color,
+                color:
+                    warningStatus != null ? warningStatus.color : Colors.grey,
                 width: 2.r,
               ),
               boxShadow: [
@@ -118,7 +120,7 @@ class AwlrView extends StatelessWidget {
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       _buildInfoBadge(GFColors.INFO, data.brandName ?? '-'),
                       SizedBox(width: 8.r),
@@ -152,7 +154,7 @@ class AwlrView extends StatelessWidget {
                                         .withOpacity(0.2),
                                     borderRadius: BorderRadius.circular(10.r),
                                   ),
-                                  child: Icon(FontAwesomeIcons.clock,
+                                  child: Icon(FluentIcons.clock_48_regular,
                                       size: 30.r,
                                       color: const Color(0xFF444b9b)),
                                 ),
@@ -210,8 +212,7 @@ class AwlrView extends StatelessWidget {
                                         .withOpacity(0.2),
                                     borderRadius: BorderRadius.circular(10.r),
                                   ),
-                                  child: Icon(
-                                      FontAwesomeIcons.arrowUpFromGroundWater,
+                                  child: Icon(FluentIcons.water_48_regular,
                                       size: 30.r,
                                       color: const Color(0xFF2ac3af)),
                                 ),
@@ -276,7 +277,7 @@ class AwlrView extends StatelessWidget {
                                       const Color(0xFF2ac3af).withOpacity(0.2),
                                   borderRadius: BorderRadius.circular(10.r),
                                 ),
-                                child: Icon(FontAwesomeIcons.droplet,
+                                child: Icon(CupertinoIcons.drop,
                                     size: 30.r, color: const Color(0xFF2ac3af)),
                               ),
                               SizedBox(width: 8.r),
@@ -329,12 +330,65 @@ class AwlrView extends StatelessWidget {
                               Container(
                                 padding: EdgeInsets.all(10.r),
                                 decoration: BoxDecoration(
-                                  color:
-                                      const Color(0xFF65d697).withOpacity(0.2),
+                                  color: (data.battery ?? 0) > 10
+                                      ? GFColors.SUCCESS.withOpacity(0.2)
+                                      : (data.battery ?? 0) > 8 &&
+                                              (data.battery ?? 0) <= 10
+                                          ? GFColors.SUCCESS.withOpacity(0.2)
+                                          : (data.battery ?? 0) > 6 &&
+                                                  (data.battery ?? 0) <= 8
+                                              ? GFColors.WARNING
+                                                  .withOpacity(0.2)
+                                              : (data.battery ?? 0) > 4 &&
+                                                      (data.battery ?? 0) <= 6
+                                                  ? GFColors.WARNING
+                                                      .withOpacity(0.2)
+                                                  : (data.battery ?? 0) > 2 &&
+                                                          (data.battery ?? 0) <=
+                                                              4
+                                                      ? GFColors.DANGER
+                                                          .withOpacity(0.2)
+                                                      : GFColors.DANGER
+                                                          .withOpacity(0.2),
                                   borderRadius: BorderRadius.circular(10.r),
                                 ),
-                                child: Icon(FontAwesomeIcons.batteryFull,
-                                    size: 30.r, color: const Color(0xFF65d697)),
+                                child: Icon(
+                                  (data.battery ?? 0) > 10
+                                      ? Icons.battery_full
+                                      : (data.battery ?? 0) > 8 &&
+                                              (data.battery ?? 0) <= 10
+                                          ? Icons.battery_4_bar_rounded
+                                          : (data.battery ?? 0) > 6 &&
+                                                  (data.battery ?? 0) <= 8
+                                              ? Icons.battery_3_bar_rounded
+                                              : (data.battery ?? 0) > 4 &&
+                                                      (data.battery ?? 0) <= 6
+                                                  ? Icons.battery_2_bar_rounded
+                                                  : (data.battery ?? 0) > 2 &&
+                                                          (data.battery ?? 0) <=
+                                                              4
+                                                      ? Icons
+                                                          .battery_1_bar_rounded
+                                                      : Icons
+                                                          .battery_0_bar_rounded,
+                                  size: 30.r,
+                                  color: (data.battery ?? 0) > 10
+                                      ? GFColors.SUCCESS
+                                      : (data.battery ?? 0) > 8 &&
+                                              (data.battery ?? 0) <= 10
+                                          ? GFColors.SUCCESS
+                                          : (data.battery ?? 0) > 6 &&
+                                                  (data.battery ?? 0) <= 8
+                                              ? GFColors.WARNING
+                                              : (data.battery ?? 0) > 4 &&
+                                                      (data.battery ?? 0) <= 6
+                                                  ? GFColors.WARNING
+                                                  : (data.battery ?? 0) > 2 &&
+                                                          (data.battery ?? 0) <=
+                                                              4
+                                                      ? GFColors.DANGER
+                                                      : GFColors.DANGER,
+                                ),
                               ),
                               SizedBox(width: 8.r),
                               Column(
@@ -389,32 +443,82 @@ class AwlrView extends StatelessWidget {
                           Text(
                             data.readingAt == null
                                 ? '-'
-                                : AppConstants()
-                                    .dateFormatID
-                                    .format(data.readingAt!),
+                                : AppConstants().dateFormatID.format(
+                                      data.readingAt!,
+                                    ),
+                            style: const TextStyle(
+                                color: GFColors.DARK,
+                                fontWeight: FontWeight.w500),
                           ),
                           SizedBox(height: 8.r),
-                          Icon(warningStatus.icon,
-                              size: 50.r, color: warningStatus.color),
-                          Text(
-                            data.warningStatus == null
-                                ? '-'
-                                : data.warningStatus!.toUpperCase(),
-                            style: TextStyle(
-                                color: warningStatus.color,
-                                fontSize: 12.r,
-                                fontWeight: FontWeight.bold),
-                          ),
+                          (data.warningStatus ?? '').toLowerCase() == 'normal'
+                              ? Column(
+                                  children: [
+                                    Icon(
+                                        warningStatus != null
+                                            ? warningStatus.icon
+                                            : CupertinoIcons.question_circle,
+                                        size: 50.r,
+                                        color: warningStatus != null
+                                            ? warningStatus.color
+                                            : Colors.grey),
+                                    Text(
+                                      data.warningStatus == null
+                                          ? '-'
+                                          : data.warningStatus!.toUpperCase(),
+                                      style: TextStyle(
+                                          color: warningStatus != null
+                                              ? warningStatus.color
+                                              : Colors.grey,
+                                          fontSize: 12.r,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                )
+                              : FadeTransition(
+                                  opacity: controller.animation,
+                                  child: Column(
+                                    children: [
+                                      Icon(
+                                          warningStatus != null
+                                              ? warningStatus.icon
+                                              : CupertinoIcons.question_circle,
+                                          size: 50.r,
+                                          color: warningStatus != null
+                                              ? warningStatus.color
+                                              : Colors.grey),
+                                      Text(
+                                        data.warningStatus == null
+                                            ? '-'
+                                            : data.warningStatus!.toUpperCase(),
+                                        style: TextStyle(
+                                            color: warningStatus != null
+                                                ? warningStatus.color
+                                                : Colors.grey,
+                                            fontSize: 12.r,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                         ],
                       ),
+                      SizedBox(
+                        width: 8.r,
+                      ),
+                      Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        size: 30.r,
+                        color: AppConfig.primaryColor,
+                      )
                     ],
                   ),
                 ),
               ],
             ),
           ),
-          onTap: () {
-            msgToast('TEST');
+          onTap: () async {
+            await controller.toDetail(data);
           },
         );
       },

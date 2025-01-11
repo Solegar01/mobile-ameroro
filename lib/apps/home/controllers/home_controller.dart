@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:mobile_ameroro_app/apps/home/models/graphic_model.dart';
 import 'package:mobile_ameroro_app/apps/home/models/weather_model.dart';
 import 'package:mobile_ameroro_app/apps/home/repository/home_repository.dart';
-import 'package:mobile_ameroro_app/apps/instruments/awlr/models/awlrlist_model.dart';
+import 'package:mobile_ameroro_app/apps/instruments/awlr/models/awlr_model.dart';
 import 'package:mobile_ameroro_app/apps/widgets/custom_toast.dart';
 import 'package:mobile_ameroro_app/helpers/app_constant.dart';
 import 'package:mobile_ameroro_app/services/connectivity/connectivity_service.dart';
@@ -40,7 +40,7 @@ class HomeController extends GetxController with StateMixin {
     AppConstants.muteTopic,
   ];
 
-  List<AwlrListModel> listAwlr = List.empty(growable: true);
+  List<AwlrModel> listAwlr = List.empty(growable: true);
   late GraphicModel graphicModel;
 
   @override
@@ -183,13 +183,13 @@ class HomeController extends GetxController with StateMixin {
     change(null, status: RxStatus.loading());
     try {
       listAwlr.clear();
-      // await repository.getAwlrList().then((values) {
-      //   if (values.isNotEmpty) {
-      //     for (var val in values) {
-      //       listAwlr.add(val);
-      //     }
-      //   }
-      // });
+      await repository.getAwlrList().then((values) {
+        if (values.isNotEmpty) {
+          for (var val in values) {
+            listAwlr.add(val);
+          }
+        }
+      });
       change(null, status: RxStatus.success());
     } catch (e) {
       change(null, status: RxStatus.error());

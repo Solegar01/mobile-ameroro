@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:mobile_ameroro_app/apps/home/models/graphic_model.dart';
 import 'package:mobile_ameroro_app/apps/home/models/weather_model.dart';
-import 'package:mobile_ameroro_app/apps/instruments/awlr/models/awlrlist_model.dart';
-import 'package:mobile_ameroro_app/apps/widgets/custom_toast.dart';
+import 'package:mobile_ameroro_app/apps/instruments/awlr/models/awlr_model.dart';
+import 'package:mobile_ameroro_app/helpers/app_constant.dart';
 import 'package:mobile_ameroro_app/services/api/api_service.dart';
 import 'package:mobile_ameroro_app/services/connectivity/connectivity_service.dart';
 
@@ -99,16 +99,16 @@ class HomeRepository {
     }
   }
 
-  Future<List<AwlrListModel>> getAwlrList() async {
-    List<AwlrListModel> datas = List.empty(growable: true);
+  Future<List<AwlrModel>> getAwlrList() async {
+    List<AwlrModel> datas = List.empty(growable: true);
     try {
       if (await connectivityService.checkInternetConnection()) {
-        final response = await apiService.get('instrument/awlrs');
+        final response = await apiService.get(AppConstants.awlrUrl);
         final jsonResponse = json.decode(response.body);
 
         if (response.statusCode == 200) {
           for (var data in jsonResponse['data'] as List) {
-            datas.add(AwlrListModel.fromJson(data));
+            datas.add(AwlrModel.fromJson(data));
           }
         } else {
           throw Exception(jsonResponse['message']);

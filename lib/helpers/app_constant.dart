@@ -29,7 +29,13 @@ class AppConstants {
   static String bmkgUrl =
       'https://api.bmkg.go.id/publik/prakiraan-cuaca?adm4=36.04.28.2012';
   static String awlrUrl = 'awlr';
+  static String awlrMinuteUrl = 'awlr/minute';
+  static String awlrHourUrl = 'awlr/hour';
+  static String awlrDayUrl = 'awlr/day';
   static String arrUrl = 'arr';
+  static String arrMinuteUrl = 'arr/minute';
+  static String arrHourUrl = 'arr/hour';
+  static String arrDayUrl = 'arr/day';
   static String awlrDetailUrl = 'instrument/awlr/detail';
   static String stationDeviceUrl = 'station/device';
   static String inklinometerUrl = 'inklinometer';
@@ -49,4 +55,6 @@ class AppConstants {
   // Storage Key (name + Key)
   static const String tokenKey = 'token';
   static const String loginKey = 'login';
+  static const String selectedAwlr = 'selected-awlr';
+  static const String selectedArr = 'selected-arr';
 }

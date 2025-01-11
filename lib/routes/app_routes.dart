@@ -5,7 +5,9 @@ import 'package:mobile_ameroro_app/apps/cctv/views/cctv_view.dart';
 import 'package:mobile_ameroro_app/apps/cctv/views/cctv_detail_view.dart';
 import 'package:mobile_ameroro_app/apps/home/views/home_view.dart';
 import 'package:mobile_ameroro_app/apps/instrument/views/instrument_view.dart';
+import 'package:mobile_ameroro_app/apps/instruments/arr/views/arr_detail_view.dart';
 import 'package:mobile_ameroro_app/apps/instruments/arr/views/arr_view.dart';
+import 'package:mobile_ameroro_app/apps/instruments/awlr/views/awlr_detail_view.dart';
 import 'package:mobile_ameroro_app/apps/instruments/awlr/views/awlr_view.dart';
 import 'package:mobile_ameroro_app/apps/instruments/ews/views/ews_view.dart';
 import 'package:mobile_ameroro_app/apps/instruments/inklinometer/views/inklinometer_view.dart';
@@ -25,7 +27,9 @@ import 'package:mobile_ameroro_app/apps/profile/views/profile_view.dart';
 import 'package:mobile_ameroro_app/apps/profile/views/profile_detail_view.dart';
 import 'package:mobile_ameroro_app/apps/splash/views/splash_view.dart';
 import 'package:mobile_ameroro_app/bindings/arr_binding.dart';
+import 'package:mobile_ameroro_app/bindings/arr_detail_binding.dart';
 import 'package:mobile_ameroro_app/bindings/awlr_binding.dart';
+import 'package:mobile_ameroro_app/bindings/awlr_detail_binding.dart';
 import 'package:mobile_ameroro_app/bindings/cctv_binding.dart';
 import 'package:mobile_ameroro_app/bindings/ews_binding.dart';
 import 'package:mobile_ameroro_app/bindings/home_binding.dart';
@@ -61,6 +65,7 @@ class AppRoutes {
   static const AWLR = '/instrument/awlr';
   static const ARR = '/instrument/arr';
   static const AWLR_DETAIL = '/instrument/awlr_detail';
+  static const ARR_DETAIL = '/instrument/arr_detail';
   static const KLIMATOLOGI_MANUAL = '/instrument/klimatologi_manual';
   static const KLIMATOLOGI_AWS = '/instrument/klimatologi_aws';
   static const VNOTCH = '/instrument/vnotch';
@@ -146,15 +151,21 @@ class AppRoutes {
     ),
     GetPage(
       transition: Transition.downToUp,
+      name: AWLR_DETAIL,
+      page: () => AwlrDetailView(),
+      binding: AwlrDetailBinding(),
+    ),
+    GetPage(
+      transition: Transition.downToUp,
       name: ARR,
       page: () => ArrView(),
       binding: ArrBinding(),
     ),
     GetPage(
       transition: Transition.downToUp,
-      name: AWLR_DETAIL,
-      page: () => AwlrView(),
-      binding: AwlrBinding(),
+      name: ARR_DETAIL,
+      page: () => ArrDetailView(),
+      binding: ArrDetailBinding(),
     ),
     GetPage(
       transition: Transition.downToUp,

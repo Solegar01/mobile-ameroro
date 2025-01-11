@@ -1,3 +1,4 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile_ameroro_app/apps/app_controller.dart';
@@ -62,7 +63,7 @@ class MyApp extends StatelessWidget {
               type: BottomNavigationBarType.fixed,
               items: const [
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
+                  icon: Icon(FluentIcons.home_16_filled),
                   label: "Home",
                 ),
                 BottomNavigationBarItem(
@@ -75,11 +76,11 @@ class MyApp extends StatelessWidget {
                   label: "",
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.video_call),
+                  icon: Icon(FluentIcons.video_16_filled),
                   label: "CCTV",
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.person),
+                  icon: Icon(FluentIcons.person_16_filled),
                   label: "Profile",
                 ),
               ],

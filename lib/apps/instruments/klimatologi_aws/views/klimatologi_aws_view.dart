@@ -1,7 +1,7 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
@@ -537,7 +537,7 @@ class KlimatologiAwsView extends StatelessWidget {
             _buildWeatherInfoItem(
                 Icons.water_drop_outlined, '${cuaca.hu} %', 'Kelembaban'),
             _buildWeatherInfoItem(
-                FontAwesomeIcons.compass,
+                FluentIcons.compass_northwest_28_regular,
                 '${cuaca.wdDeg} \u00B0C (${cuaca.wd} → ${cuaca.wdTo})',
                 'Arah mata angin'),
           ],
@@ -555,7 +555,7 @@ class KlimatologiAwsView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             _buildWeatherInfoItem(
-                FontAwesomeIcons.wind, '${cuaca.ws} m/s', 'Kec. angin'),
+                FluentIcons.dust_20_filled, '${cuaca.ws} m/s', 'Kec. angin'),
             _buildWeatherInfoItem(
                 Icons.cloud, '${cuaca.tcc} %', 'Tutupan awan'),
             _buildWeatherInfoItem(
