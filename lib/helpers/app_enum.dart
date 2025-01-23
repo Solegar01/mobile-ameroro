@@ -133,17 +133,31 @@ enum DataFilterType {
         return '-';
     }
   }
+}
 
-  String get url {
+enum DeviceStatus {
+  online,
+  offline;
+
+  Color get color {
     switch (this) {
-      case DataFilterType.fiveMinutely:
-        return AppConstants.awlrMinuteUrl;
-      case DataFilterType.hourly:
-        return AppConstants.awlrHourUrl;
-      case DataFilterType.daily:
-        return AppConstants.awlrDayUrl;
+      case DeviceStatus.online:
+        return GFColors.SUCCESS;
+      case DeviceStatus.offline:
+        return GFColors.DANGER;
       default:
-        return '';
+        return Colors.grey;
+    }
+  }
+
+  String get name {
+    switch (this) {
+      case DeviceStatus.online:
+        return 'Online';
+      case DeviceStatus.offline:
+        return 'Offline';
+      default:
+        return '-';
     }
   }
 }

@@ -69,7 +69,7 @@ class ArrRepository {
         String formattedStart = DateFormat('yyyy-MM-dd').format(startDate!);
         String formattedEnd = DateFormat('yyyy-MM-dd').format(endDate!);
         final response = await apiService.get(
-            '${AppConstants.arrHourUrl}/$deviceId/$formattedStart/$formattedEnd');
+            '${AppConstants.arrReadingUrl}?device_id=$deviceId&selected_time=hour&StartDate=$formattedStart&EndDate=$formattedEnd');
         final jsonResponse = json.decode(response.body);
 
         if (response.statusCode == 200) {
@@ -95,7 +95,7 @@ class ArrRepository {
         String formattedStart = DateFormat('yyyy-MM-dd').format(startDate!);
         String formattedEnd = DateFormat('yyyy-MM-dd').format(endDate!);
         final response = await apiService.get(
-            '${AppConstants.arrDayUrl}/$deviceId/$formattedStart/$formattedEnd');
+            '${AppConstants.arrReadingUrl}?device_id=$deviceId&selected_time=day&StartDate=$formattedStart&EndDate=$formattedEnd');
         final jsonResponse = json.decode(response.body);
 
         if (response.statusCode == 200) {
@@ -121,7 +121,7 @@ class ArrRepository {
         String formattedStart = DateFormat('yyyy-MM-dd').format(startDate!);
         String formattedEnd = DateFormat('yyyy-MM-dd').format(endDate!);
         final response = await apiService.get(
-            '${AppConstants.arrMinuteUrl}/$deviceId/$formattedStart/$formattedEnd');
+            '${AppConstants.arrReadingUrl}?device_id=$deviceId&selected_time=minute&StartDate=$formattedStart&EndDate=$formattedEnd');
         final jsonResponse = json.decode(response.body);
 
         if (response.statusCode == 200) {

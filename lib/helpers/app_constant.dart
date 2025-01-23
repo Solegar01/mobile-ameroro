@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 
 class AppConstants {
   //Time
+  final dateTimeFullFormatID = DateFormat('dd MMM yyyy HH:mm', 'id_ID');
   final dateTimeFormatID = DateFormat('yyyy MMM dd HH:mm', 'id_ID');
   final dateFormatID = DateFormat('d MMMM yyyy', 'id_ID');
   final dateFullDayFormatID = DateFormat('EEEE, MMM d, yyyy', 'id_ID');
@@ -29,13 +30,9 @@ class AppConstants {
   static String bmkgUrl =
       'https://api.bmkg.go.id/publik/prakiraan-cuaca?adm4=36.04.28.2012';
   static String awlrUrl = 'awlr';
-  static String awlrMinuteUrl = 'awlr/minute';
-  static String awlrHourUrl = 'awlr/hour';
-  static String awlrDayUrl = 'awlr/day';
+  static String awlrReadingUrl = 'awlr/reading';
   static String arrUrl = 'arr';
-  static String arrMinuteUrl = 'arr/minute';
-  static String arrHourUrl = 'arr/hour';
-  static String arrDayUrl = 'arr/day';
+  static String arrReadingUrl = 'arr/reading';
   static String awlrDetailUrl = 'instrument/awlr/detail';
   static String stationDeviceUrl = 'station/device';
   static String inklinometerUrl = 'inklinometer';

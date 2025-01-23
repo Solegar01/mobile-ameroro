@@ -15,16 +15,16 @@ class ArrDetailMinuteModel {
   String? deviceId;
   DateTime? readingAt;
   double? rainfall;
-  double? battery;
-  String? instrumentName;
+  double? batteryVoltage;
+  int? batteryCapacity;
 
   ArrDetailMinuteModel({
     this.id,
     this.deviceId,
     this.readingAt,
     this.rainfall,
-    this.battery,
-    this.instrumentName,
+    this.batteryVoltage,
+    this.batteryCapacity,
   });
 
   factory ArrDetailMinuteModel.fromJson(Map<String, dynamic> json) =>
@@ -33,8 +33,8 @@ class ArrDetailMinuteModel {
         deviceId: json["device_id"],
         readingAt: DateTime.parse(json["reading_at"]),
         rainfall: json["rainfall"]?.toDouble(),
-        battery: json["battery"]?.toDouble(),
-        instrumentName: json["instrument_name"],
+        batteryVoltage: json["battery_voltage"]?.toDouble(),
+        batteryCapacity: json["battery_capacity"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -42,7 +42,7 @@ class ArrDetailMinuteModel {
         "device_id": deviceId,
         "reading_at": readingAt?.toIso8601String(),
         "rainfall": rainfall,
-        "battery": battery,
-        "instrument_name": instrumentName,
+        "battery_voltage": batteryVoltage,
+        "battery_capacity": batteryCapacity,
       };
 }

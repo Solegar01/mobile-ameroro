@@ -29,7 +29,7 @@ class AwlrDetailView extends StatelessWidget {
                 foregroundColor: GFColors.WHITE,
                 title: Padding(
                   padding: EdgeInsets.all(10.r),
-                  child: Text(controller.model?.name ?? '-'),
+                  child: Text(controller.model?.stationName ?? '-'),
                 ),
               ),
               body: controller.obx(
@@ -89,9 +89,21 @@ class AwlrDetailView extends StatelessWidget {
                   child: Text(item.name),
                 );
               }).toList(),
-              onChanged: (DataFilterType? newValue) {
+              onChanged: (DataFilterType? newValue) async {
                 if (newValue != null) {
                   controller.filterType.value = newValue;
+                  if (_formKey.currentState?.validate() ?? false) {
+                    if (controller.filterType.value ==
+                        DataFilterType.fiveMinutely) {
+                      await controller.getDataMinute();
+                    }
+                    if (controller.filterType.value == DataFilterType.hourly) {
+                      await controller.getDataHour();
+                    }
+                    if (controller.filterType.value == DataFilterType.daily) {
+                      await controller.getDataDay();
+                    }
+                  }
                 }
               },
             ),
@@ -382,7 +394,7 @@ class AwlrDetailView extends StatelessWidget {
                             ),
                             primaryYAxis: const NumericAxis(
                               labelFormat: '{value}',
-                              title: AxisTitle(text: 'TMA (m)'),
+                              title: AxisTitle(text: 'TMA (mdpl)'),
                             ),
                             title: ChartTitle(
                               textStyle: TextStyle(
@@ -448,7 +460,7 @@ class AwlrDetailView extends StatelessWidget {
                                                 width: 5.r,
                                               ),
                                               Text(
-                                                '${series.name.toString()} : ${AppConstants().numFormat.format(point?.y)} (m)',
+                                                '${series.name.toString()} : ${AppConstants().numFormat.format(point?.y)} (mdpl)',
                                                 style: const TextStyle(
                                                     color: Colors.white),
                                               ),
@@ -512,7 +524,7 @@ class AwlrDetailView extends StatelessWidget {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                "TMA : ${AppConstants().numFormat.format(trackballDetails.point?.y)} (m)",
+                                                "TMA : ${AppConstants().numFormat.format(trackballDetails.point?.y)} (mdpl)",
                                                 style: const TextStyle(
                                                     color: Colors.white),
                                               ),
@@ -968,7 +980,7 @@ class AwlrDetailView extends StatelessWidget {
                           ),
                           primaryYAxis: const NumericAxis(
                             labelFormat: '{value}',
-                            title: AxisTitle(text: 'Baterai (Volt)'),
+                            title: AxisTitle(text: 'Baterai (%)'),
                           ),
                           title: ChartTitle(
                             textStyle: TextStyle(
@@ -1033,7 +1045,7 @@ class AwlrDetailView extends StatelessWidget {
                                               width: 5.r,
                                             ),
                                             Text(
-                                              '${series.name.toString()} : ${AppConstants().numFormat.format(point?.y)} (volt)',
+                                              '${series.name.toString()} : ${AppConstants().numFormat.format(point?.y)} (%)',
                                               style: const TextStyle(
                                                   color: Colors.white),
                                             ),
@@ -1089,7 +1101,7 @@ class AwlrDetailView extends StatelessWidget {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              "Baterai : ${AppConstants().numFormat.format(trackballDetails.point?.y)} (volt)",
+                                              "Baterai : ${AppConstants().numFormat.format(trackballDetails.point?.y)} (%)",
                                               style: const TextStyle(
                                                   color: Colors.white),
                                             ),
@@ -1243,7 +1255,7 @@ class AwlrDetailView extends StatelessWidget {
                             ),
                             primaryYAxis: const NumericAxis(
                               labelFormat: '{value}',
-                              title: AxisTitle(text: 'TMA (m)'),
+                              title: AxisTitle(text: 'TMA (mdpl)'),
                             ),
                             title: ChartTitle(
                               textStyle: TextStyle(
@@ -1309,7 +1321,7 @@ class AwlrDetailView extends StatelessWidget {
                                                 width: 5.r,
                                               ),
                                               Text(
-                                                '${series.name.toString()} : ${AppConstants().numFormat.format(point?.y)} (m)',
+                                                '${series.name.toString()} : ${AppConstants().numFormat.format(point?.y)} (mdpl)',
                                                 style: const TextStyle(
                                                     color: Colors.white),
                                               ),
@@ -1373,7 +1385,7 @@ class AwlrDetailView extends StatelessWidget {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                "TMA : ${AppConstants().numFormat.format(trackballDetails.point?.y)} (m)",
+                                                "TMA : ${AppConstants().numFormat.format(trackballDetails.point?.y)} (mdpl)",
                                                 style: const TextStyle(
                                                     color: Colors.white),
                                               ),
@@ -1829,7 +1841,7 @@ class AwlrDetailView extends StatelessWidget {
                           ),
                           primaryYAxis: const NumericAxis(
                             labelFormat: '{value}',
-                            title: AxisTitle(text: 'Baterai (Volt)'),
+                            title: AxisTitle(text: 'Baterai (%)'),
                           ),
                           title: ChartTitle(
                             textStyle: TextStyle(
@@ -1894,7 +1906,7 @@ class AwlrDetailView extends StatelessWidget {
                                               width: 5.r,
                                             ),
                                             Text(
-                                              '${series.name.toString()} : ${AppConstants().numFormat.format(point?.y)} (volt)',
+                                              '${series.name.toString()} : ${AppConstants().numFormat.format(point?.y)} (%)',
                                               style: const TextStyle(
                                                   color: Colors.white),
                                             ),
@@ -1950,7 +1962,7 @@ class AwlrDetailView extends StatelessWidget {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              "Baterai : ${AppConstants().numFormat.format(trackballDetails.point?.y)} (volt)",
+                                              "Baterai : ${AppConstants().numFormat.format(trackballDetails.point?.y)} (%)",
                                               style: const TextStyle(
                                                   color: Colors.white),
                                             ),
@@ -1984,7 +1996,7 @@ class AwlrDetailView extends StatelessWidget {
                               xValueMapper: (AwlrDetailMinuteModel data, _) =>
                                   data.readingAt,
                               yValueMapper: (AwlrDetailMinuteModel data, _) =>
-                                  data.battery ?? 0,
+                                  data.batteryCapacity ?? 0,
                               name: 'Baterai',
                             ),
                           ],
@@ -2106,7 +2118,7 @@ class AwlrDetailView extends StatelessWidget {
                           ),
                           primaryYAxis: const NumericAxis(
                             labelFormat: '{value}',
-                            title: AxisTitle(text: 'TMA (m)'),
+                            title: AxisTitle(text: 'TMA (mdpl)'),
                           ),
                           title: ChartTitle(
                             textStyle: TextStyle(
@@ -2157,12 +2169,12 @@ class AwlrDetailView extends StatelessWidget {
                                               MainAxisAlignment.start,
                                           children: [
                                             Text(
-                                              'Rentang TMA : ${AppConstants().numFormat.format(data?.waterLevelMin ?? 0)} - ${AppConstants().numFormat.format(data?.waterLevelMax ?? 0)} (m)',
+                                              'Rentang TMA : ${AppConstants().numFormat.format(data?.waterLevelMin ?? 0)} - ${AppConstants().numFormat.format(data?.waterLevelMax ?? 0)} (mdpl)',
                                               style: const TextStyle(
                                                   color: Colors.white),
                                             ),
                                             Text(
-                                              'Rerata TMA : ${AppConstants().numFormat.format(data?.waterLevelAvg ?? 0)} (m)',
+                                              'Rerata TMA : ${AppConstants().numFormat.format(data?.waterLevelAvg ?? 0)} (mdpl)',
                                               style: const TextStyle(
                                                   color: Colors.white),
                                             ),
@@ -2199,9 +2211,9 @@ class AwlrDetailView extends StatelessWidget {
                                   .dateTimeFormatID
                                   .format(listCharts.first.x as DateTime);
                               String sMin =
-                                  '${listCharts[0].low == null ? 'N/A' : listCharts[0].low!.toStringAsFixed(2)} (m)';
+                                  '${listCharts[0].low == null ? 'N/A' : listCharts[0].low!.toStringAsFixed(2)} (mdpl)';
                               String sMax =
-                                  '${listCharts[0].high == null ? 'N/A' : listCharts[0].high!.toStringAsFixed(2)} (m)';
+                                  '${listCharts[0].high == null ? 'N/A' : listCharts[0].high!.toStringAsFixed(2)} (mdpl)';
                               String sAvg = 'N/A';
                               if (listCharts.length > 1) {
                                 sAvg =
@@ -2477,7 +2489,7 @@ class AwlrDetailView extends StatelessWidget {
                                                           FontWeight.bold,
                                                       color: Colors.black)),
                                               TextSpan(
-                                                  text: '(m)',
+                                                  text: '(mdpl)',
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
@@ -2744,7 +2756,7 @@ class AwlrDetailView extends StatelessWidget {
                                                           FontWeight.bold,
                                                       color: Colors.black)),
                                               TextSpan(
-                                                  text: '(m)',
+                                                  text: '(mdpl)',
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
@@ -2846,7 +2858,7 @@ class AwlrDetailView extends StatelessWidget {
                                                           FontWeight.bold,
                                                       color: Colors.black)),
                                               TextSpan(
-                                                  text: '(volt)',
+                                                  text: '(%)',
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
@@ -3088,7 +3100,7 @@ class AwlrDetailView extends StatelessWidget {
                                                               FontWeight.bold,
                                                           color: Colors.black)),
                                                   TextSpan(
-                                                    text: '(m)',
+                                                    text: '(mdpl)',
                                                     style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,

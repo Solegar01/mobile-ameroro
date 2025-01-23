@@ -93,33 +93,40 @@ class LoginView extends StatelessWidget {
                 })),
             SizedBox(height: AppConfig.verticalSpace),
             Obx(
-              () => Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Checkbox(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5.r),
+              () => GestureDetector(
+                onTap: () {
+                  controller.rememberMe.toggle();
+                  controller.isButtonActive(
+                      controller.username, controller.password);
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Checkbox(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.r),
+                      ),
+                      value: controller.rememberMe.value,
+                      activeColor: AppConfig.focusTextField,
+                      checkColor: AppConfig.primaryColor,
+                      side: BorderSide(color: AppConfig.focusTextField),
+                      onChanged: (value) {
+                        controller.rememberMe.toggle();
+                        controller.isButtonActive(
+                            controller.username, controller.password);
+                      },
                     ),
-                    value: controller.rememberMe.value,
-                    activeColor: AppConfig.focusTextField,
-                    checkColor: AppConfig.primaryColor,
-                    side: BorderSide(color: AppConfig.focusTextField),
-                    onChanged: (value) {
-                      controller.rememberMe.value = value ?? false;
-                      controller.isButtonActive(
-                          controller.username, controller.password);
-                    },
-                  ),
-                  Text(
-                    'Ingatkan Saya',
-                    style: TextStyle(
-                      fontSize: AppConfig.fontMedion,
-                      color: controller.rememberMe.value
-                          ? AppConfig.focusTextField
-                          : GFColors.WHITE.withOpacity(0.65),
+                    Text(
+                      'Ingatkan Saya',
+                      style: TextStyle(
+                        fontSize: AppConfig.fontMedion,
+                        color: controller.rememberMe.value
+                            ? AppConfig.focusTextField
+                            : GFColors.WHITE.withOpacity(0.65),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             SizedBox(height: AppConfig.verticalSpace),

@@ -13,7 +13,6 @@ class AwlrDetailDayModel {
   double? waterLevelMin;
   double? waterLevelMax;
   double? waterLevelAvg;
-  String? instrumentName;
 
   AwlrDetailDayModel({
     this.id,
@@ -22,7 +21,6 @@ class AwlrDetailDayModel {
     this.waterLevelMin,
     this.waterLevelMax,
     this.waterLevelAvg,
-    this.instrumentName,
   });
 
   factory AwlrDetailDayModel.fromJson(Map<String, dynamic> json) =>
@@ -33,7 +31,6 @@ class AwlrDetailDayModel {
         waterLevelMin: json["water_level_min"]?.toDouble(),
         waterLevelMax: json["water_level_max"]?.toDouble(),
         waterLevelAvg: json["water_level_avg"]?.toDouble(),
-        instrumentName: json["instrument_name"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -43,6 +40,5 @@ class AwlrDetailDayModel {
         "water_level_min": waterLevelMin,
         "water_level_max": waterLevelMax,
         "water_level_avg": waterLevelAvg,
-        "instrument_name": instrumentName,
       };
 }

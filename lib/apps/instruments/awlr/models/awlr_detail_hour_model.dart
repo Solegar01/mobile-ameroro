@@ -14,8 +14,6 @@ class AwlrDetailHourModel {
   double? debit;
   String? warningStatus;
   double? battery;
-  String? instrumentName;
-  String? statusTma;
 
   AwlrDetailHourModel({
     this.id,
@@ -25,8 +23,6 @@ class AwlrDetailHourModel {
     this.debit,
     this.warningStatus,
     this.battery,
-    this.instrumentName,
-    this.statusTma,
   });
 
   factory AwlrDetailHourModel.fromJson(Map<String, dynamic> json) =>
@@ -35,11 +31,9 @@ class AwlrDetailHourModel {
         deviceId: json["device_id"],
         readingHour: DateTime.parse(json["reading_hour"]),
         waterLevel: json["water_level"]?.toDouble(),
-        debit: json["debit"]?.toDouble,
+        debit: json["debit"]?.toDouble(),
         warningStatus: json["warning_status"],
         battery: json["battery"]?.toDouble(),
-        instrumentName: json["instrument_name"],
-        statusTma: json["status_tma"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -50,7 +44,5 @@ class AwlrDetailHourModel {
         "debit": debit,
         "warning_status": warningStatus,
         "battery": battery,
-        "instrument_name": instrumentName,
-        "status_tma": statusTma,
       };
 }

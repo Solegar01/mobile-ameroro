@@ -12,9 +12,9 @@ class AppConfig {
   static double verticalSpace = 20.r;
   static double defaultPadding = 20.r;
 
-  static Color bgLogin = const Color(0xFF07175E);
+  static Color bgLogin = const Color(0XFF3A57E8);
   static Color focusTextField = const Color(0xFFFFC828);
-  static const Color primaryColor = Color(0xFF07175E);
+  static const Color primaryColor = Color(0XFF3A57E8);
 
   static ThemeData themeData = ThemeData(
     primaryColor: primaryColor,

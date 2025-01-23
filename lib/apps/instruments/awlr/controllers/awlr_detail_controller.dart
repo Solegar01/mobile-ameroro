@@ -142,6 +142,7 @@ class AwlrDetailController extends GetxController
           .getDataDetailHour(model!.deviceId ?? '',
               selectedDateRange.value!.start, selectedDateRange.value!.end)
           .then((response) {
+        response.sort((a, b) => b.readingHour!.compareTo(a.readingHour!));
         detailHourModel = response;
       });
       tableDataSourceHour = TableDataSourceHour();
@@ -161,6 +162,7 @@ class AwlrDetailController extends GetxController
           .getDataDetailDay(model!.deviceId ?? '',
               selectedDateRange.value!.start, selectedDateRange.value!.end)
           .then((response) {
+        response.sort((a, b) => b.readingDate!.compareTo(a.readingDate!));
         detailDayModel = response;
       });
       tableDataSourceDay = TableDataSourceDay();
@@ -180,6 +182,7 @@ class AwlrDetailController extends GetxController
           .getDataDetailMinute(model!.deviceId ?? '',
               selectedDateRange.value!.start, selectedDateRange.value!.end)
           .then((response) {
+        response.sort((a, b) => b.readingAt!.compareTo(a.readingAt!));
         detailMinuteModel = response;
       });
       tableDataSourceMinute = TableDataSourceMinute();
@@ -492,11 +495,9 @@ class TableDataSourceMinute extends DataGridSource {
         ),
         DataGridCell<String>(
             columnName: 'warningStatus', value: row.warningStatus),
-        DataGridCell<double>(
-          columnName: 'battery',
-          value: row.battery != null
-              ? double.parse(row.battery!.toStringAsFixed(2))
-              : row.battery,
+        DataGridCell<int>(
+          columnName: 'batteryCapacity',
+          value: row.batteryCapacity,
         ),
       ]);
     }).toList(growable: false);

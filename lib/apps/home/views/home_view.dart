@@ -2292,7 +2292,7 @@ class HomeView extends StatelessWidget {
   _awlrGraph(BuildContext context, List<Awlr> listAwlrDetail) {
     List<Widget> listGraph = List.empty(growable: true);
     for (var i = 0; i < controller.listAwlr.length; i++) {
-      var name = controller.listAwlr[i].name ?? '';
+      var name = controller.listAwlr[i].stationName ?? '';
       var listTemp = listAwlrDetail.where((x) => x.name == name).toList();
       var graph = listTemp.isEmpty
           ? const Center(

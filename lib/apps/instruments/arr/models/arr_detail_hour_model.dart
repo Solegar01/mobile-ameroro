@@ -16,7 +16,6 @@ class ArrDetailHourModel {
   DateTime? readingHour;
   double? rainfall;
   String? intensity;
-  String? instrumentName;
 
   ArrDetailHourModel({
     this.id,
@@ -24,7 +23,6 @@ class ArrDetailHourModel {
     this.readingHour,
     this.rainfall,
     this.intensity,
-    this.instrumentName,
   });
 
   factory ArrDetailHourModel.fromJson(Map<String, dynamic> json) =>
@@ -34,7 +32,6 @@ class ArrDetailHourModel {
         readingHour: DateTime.parse(json["reading_hour"]),
         rainfall: json["rainfall"]?.toDouble(),
         intensity: json["intensity"],
-        instrumentName: json["instrument_name"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -43,6 +40,5 @@ class ArrDetailHourModel {
         "reading_hour": readingHour?.toIso8601String(),
         "rainfall": rainfall,
         "intensity": intensity,
-        "instrument_name": instrumentName,
       };
 }

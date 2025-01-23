@@ -15,9 +15,8 @@ class AwlrDetailMinuteModel {
   double? changeValue;
   String? changeStatus;
   String? warningStatus;
-  double? battery;
-  String? instrumentName;
-  String? statusTma;
+  double? batteryVoltage;
+  int? batteryCapacity;
 
   AwlrDetailMinuteModel({
     this.id,
@@ -28,9 +27,8 @@ class AwlrDetailMinuteModel {
     this.changeValue,
     this.changeStatus,
     this.warningStatus,
-    this.battery,
-    this.instrumentName,
-    this.statusTma,
+    this.batteryVoltage,
+    this.batteryCapacity,
   });
 
   factory AwlrDetailMinuteModel.fromJson(Map<String, dynamic> json) =>
@@ -43,9 +41,8 @@ class AwlrDetailMinuteModel {
         changeValue: json["change_value"]?.toDouble(),
         changeStatus: json["change_status"],
         warningStatus: json["warning_status"],
-        battery: json["battery"]?.toDouble(),
-        instrumentName: json["instrument_name"],
-        statusTma: json["status_tma"],
+        batteryVoltage: json["battery_voltage"]?.toDouble(),
+        batteryCapacity: json["battery_capacity"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -57,8 +54,7 @@ class AwlrDetailMinuteModel {
         "change_value": changeValue,
         "change_status": changeStatus,
         "warning_status": warningStatus,
-        "battery": battery,
-        "instrument_name": instrumentName,
-        "status_tma": statusTma,
+        "battery_voltage": batteryVoltage,
+        "battery_capacity": batteryCapacity,
       };
 }

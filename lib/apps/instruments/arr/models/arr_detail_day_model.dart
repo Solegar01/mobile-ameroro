@@ -34,7 +34,7 @@ class ArrDetailDayModel {
         id: json["id"],
         deviceId: json["device_id"],
         readingDate: DateTime.parse(json["reading_date"]),
-        rainfall: json["rainfall"],
+        rainfall: json["rainfall"]?.toDouble(),
         intensity: json["intensity"],
         rainfallMax: json["rainfall_max"],
         instrumentName: json["instrument_name"],

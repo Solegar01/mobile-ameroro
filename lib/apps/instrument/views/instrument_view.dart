@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/colors/gf_color.dart';
+import 'package:mobile_ameroro_app/apps/config/app_config.dart';
 import 'package:mobile_ameroro_app/apps/instrument/controllers/instrument_controller.dart';
 
 class InstrumentView extends StatelessWidget {
@@ -83,7 +84,7 @@ class InstrumentView extends StatelessWidget {
               right: 0,
               left: 0,
               child: Container(
-                color: const Color.fromARGB(255, 7, 23, 94),
+                color: AppConfig.primaryColor,
                 width: double.infinity,
                 child: Column(
                   children: [

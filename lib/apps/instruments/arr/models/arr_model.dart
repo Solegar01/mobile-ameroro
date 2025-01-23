@@ -10,14 +10,15 @@ String arrModelToJson(ArrModel data) => json.encode(data.toJson());
 
 class ArrModel {
   double? rainfall;
-  int? rainfallLastHour;
+  double? rainfallLastHour;
   String? intensityLastHour;
   int? id;
   String? name;
   String? deviceId;
   String? brandName;
   DateTime? readingAt;
-  double? battery;
+  double? batteryVoltage;
+  int? batteryCapacity;
   String? status;
 
   ArrModel({
@@ -29,20 +30,22 @@ class ArrModel {
     this.deviceId,
     this.brandName,
     this.readingAt,
-    this.battery,
+    this.batteryVoltage,
+    this.batteryCapacity,
     this.status,
   });
 
   factory ArrModel.fromJson(Map<String, dynamic> json) => ArrModel(
         rainfall: json["rainfall"]?.toDouble(),
-        rainfallLastHour: json["rainfall_last_hour"]?.toInt(),
+        rainfallLastHour: json["rainfall_last_hour"]?.toDouble(),
         intensityLastHour: json["intensity_last_hour"],
         id: json["id"],
         name: json["name"],
         deviceId: json["device_id"],
         brandName: json["brand_name"],
         readingAt: DateTime.parse(json["reading_at"]),
-        battery: json["battery"]?.toDouble(),
+        batteryVoltage: json["battery_voltage"]?.toDouble(),
+        batteryCapacity: json["battery_capacity"],
         status: json["status"],
       );
 
@@ -55,7 +58,8 @@ class ArrModel {
         "device_id": deviceId,
         "brand_name": brandName,
         "reading_at": readingAt?.toIso8601String(),
-        "battery": battery,
+        "battery_voltage": batteryVoltage,
+        "battery_capacity": batteryCapacity,
         "status": status,
       };
 }

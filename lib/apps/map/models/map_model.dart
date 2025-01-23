@@ -1,70 +1,67 @@
 class MapModel {
-  String? id;
   String? deviceId;
+  String? instrumentType;
   String? name;
-  String? type;
-  dynamic latitude;
-  dynamic longitude;
-  dynamic location;
+  double? latitude;
+  double? longitude;
   String? url;
-  dynamic note;
-  dynamic lastData;
+  String? note;
+  String? lastData;
+  String? unitDisplay;
   String? warningStatus;
   String? deviceStatus;
-  DateTime? last_reading;
-
+  DateTime? lastReading;
 
   MapModel({
-    this.id,
     this.deviceId,
+    this.instrumentType,
     this.name,
-    this.type,
     this.latitude,
     this.longitude,
-    this.location,
     this.url,
     this.note,
     this.lastData,
+    this.unitDisplay,
     this.warningStatus,
     this.deviceStatus,
-    this.last_reading,
+    this.lastReading,
   });
 
   // Factory method to create an instance of MapModel from JSON
   factory MapModel.fromJson(Map<String, dynamic> json) {
     return MapModel(
-      id: json['id'],
-      deviceId: json['device_id'],
-      name: json['name'],
-      type: json['type'],
-      latitude: json['latitude'],
-      longitude: json['longitude'],
-      location: json['location'],
-      url: json['url'],
-      note: json['note'],
-      lastData: json['last_data'],
-      warningStatus: json['warning_status'],
-      deviceStatus: json['device_status'],
-      last_reading: json["last_reading"] != null ? DateTime.parse(json["last_reading"]) : null,
+      deviceId: json["device_id"],
+      instrumentType: json["instrument_type"],
+      name: json["name"],
+      latitude: json["latitude"]?.toDouble(),
+      longitude: json["longitude"]?.toDouble(),
+      url: json["url"],
+      note: json["note"],
+      lastData: json["last_data"],
+      unitDisplay: json["unit_display"],
+      warningStatus: json["warning_status"],
+      deviceStatus: json["device_status"],
+      lastReading: json["last_reading"] == null
+          ? null
+          : DateTime.parse(json["last_reading"]),
     );
   }
 
   // Method to convert an instance of MapModel to JSON
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
-      'device_id': deviceId,
-      'name': name,
-      'type': type,
-      'latitude': latitude,
-      'longitude': longitude,
-      'location': location,
-      'url': url,
-      'note': note,
-      'last_data': lastData,
-      'warning_status': warningStatus,
-      'device_status': deviceStatus,
-      'last_reading': last_reading,
+      "device_id": deviceId,
+      "instrument_type": instrumentType,
+      "name": name,
+      "latitude": latitude,
+      "longitude": longitude,
+      "url": url,
+      "note": note,
+      "last_data": lastData,
+      "unit_display": unitDisplay,
+      "warning_status": warningStatus,
+      "device_status": deviceStatus,
+      "last_reading": lastReading?.toIso8601String(),
     };
   }
 }

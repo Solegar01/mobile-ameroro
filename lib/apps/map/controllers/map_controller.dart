@@ -3,6 +3,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mobile_ameroro_app/apps/map/models/map_model.dart';
 import 'package:mobile_ameroro_app/apps/map/repository/map_repository.dart';
 import 'package:mobile_ameroro_app/apps/map/views/map_view.dart';
+import 'package:uuid/uuid.dart';
 
 class MapController extends GetxController with StateMixin<List<MapModel>> {
   final MapRepository repository;
@@ -18,7 +19,7 @@ class MapController extends GetxController with StateMixin<List<MapModel>> {
 
   @override
   void onInit() {
-    // getData();
+    getData();
     super.onInit();
   }
 
@@ -29,7 +30,7 @@ class MapController extends GetxController with StateMixin<List<MapModel>> {
       final data = await repository.fetchData();
       maps.value = data;
       await _createMarkers();
-      // update();
+      update();
     } catch (e) {
       print('Error fetching data: $e');
     } finally {
@@ -40,9 +41,10 @@ class MapController extends GetxController with StateMixin<List<MapModel>> {
 
   Future<void> _createMarkers() async {
     markers.clear();
-    for (var map in maps) {
-      if (map.latitude != null && map.longitude != null) {
-        final marker = await MarkerManager.createMarker(map);
+    var uid = const Uuid();
+    for (int i = 0; i < maps.length; i++) {
+      if (maps[i].latitude != null && maps[i].longitude != null) {
+        final marker = await MarkerManager.createMarker(maps[i], uid.v4());
         markers.add(marker);
       }
     }
