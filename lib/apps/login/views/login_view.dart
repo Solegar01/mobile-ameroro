@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:mobile_ameroro_app/apps/config/app_config.dart';
@@ -22,20 +21,20 @@ class LoginView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(
-              height: 80.r,
+            const SizedBox(
+              height: 80,
             ),
             Image.asset(
               'assets/images/logo-pu.png',
               scale: 1,
             ),
-            SizedBox(
-              height: 20.r,
+            const SizedBox(
+              height: 20,
             ),
-            Text(
+            const Text(
               'Aplikasi Monitoring',
               style: TextStyle(
-                fontSize: 20.r,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: GFColors.LIGHT,
               ),
@@ -61,7 +60,7 @@ class LoginView extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 40.r),
+            const SizedBox(height: 40),
             TextInputCustom(
               controller: controller.username,
               label: 'Username',
@@ -104,7 +103,7 @@ class LoginView extends StatelessWidget {
                   children: [
                     Checkbox(
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5.r),
+                        borderRadius: BorderRadius.circular(5),
                       ),
                       value: controller.rememberMe.value,
                       activeColor: AppConfig.focusTextField,
@@ -139,9 +138,9 @@ class LoginView extends StatelessWidget {
                           loaderColorOne: GFColors.LIGHT,
                         )
                       : null,
-                  size: 45.r,
+                  size: 45,
                   textStyle: TextStyle(
-                      fontSize: 18.r,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: AppConfig.bgLogin),
                   onPressed: (controller.isLoginButtonEnabled.value ||

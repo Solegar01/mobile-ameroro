@@ -1,4 +1,3 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
 class AppConstants {
@@ -7,6 +6,7 @@ class AppConstants {
   final dateTimeFormatID = DateFormat('yyyy MMM dd HH:mm', 'id_ID');
   final dateFormatID = DateFormat('d MMMM yyyy', 'id_ID');
   final dateFullDayFormatID = DateFormat('EEEE, MMM d, yyyy', 'id_ID');
+  final dateTimeFullDayFormatID = DateFormat('EEEE, d MMMM, yyyy', 'id_ID');
   final hourMinuteFormat = DateFormat('HH:mm', 'id_ID');
   final numFormat = NumberFormat('#,###.###');
 
@@ -23,12 +23,13 @@ class AppConstants {
   static String intakeStatusTopic = 'ews/EWS001/devices/HGT685/statusLevel';
 
   //Pagination table
-  static double dataPagerHeight = 60.h;
-  static double dataRowHeight = 40.h;
+  static double dataPagerHeight = 60;
+  static double dataRowHeight = 40;
 
   //Url API
   static String bmkgUrl =
       'https://api.bmkg.go.id/publik/prakiraan-cuaca?adm4=36.04.28.2012';
+  static String cctvUrl = 'cctv';
   static String awlrUrl = 'awlr';
   static String awlrReadingUrl = 'awlr/reading';
   static String arrUrl = 'arr';
@@ -37,6 +38,7 @@ class AppConstants {
   static String stationDeviceUrl = 'station/device';
   static String inklinometerUrl = 'inklinometer';
   static String intakeUrl = 'intake';
+  static String awsLastReadingUrl = 'aws/last';
   static String awsUrl = 'klimatologi/aws';
   static String klimatologiManualUrl = 'klimatologi/manual';
   static String owsSensorUrl = 'observationwell/sensors';

@@ -15,11 +15,11 @@ class InstrumentController extends GetxController {
     //   'image': 'klimatologi-manual-icon.png',
     //   'route': AppRoutes.KLIMATOLOGI_MANUAL
     // },
-    // {
-    //   'sensor': 'AWS',
-    //   'image': 'aws-icon.png',
-    //   'route': AppRoutes.KLIMATOLOGI_AWS
-    // },
+    {
+      'sensor': 'AWS',
+      'image': 'aws-icon.png',
+      'route': AppRoutes.KLIMATOLOGI_AWS
+    },
     // {
     //   'sensor': 'V-Notch',
     //   'image': 'vnotch-icon.png',

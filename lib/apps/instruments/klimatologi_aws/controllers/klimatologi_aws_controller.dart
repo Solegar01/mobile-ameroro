@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mobile_ameroro_app/apps/instruments/klimatologi_aws/models/klimatologi_aws_model.dart';
+import 'package:mobile_ameroro_app/apps/instruments/klimatologi_aws/models/last_reading_model.dart';
 import 'package:mobile_ameroro_app/apps/instruments/klimatologi_aws/repository/klimatologi_aws_repository.dart';
 import 'package:mobile_ameroro_app/apps/instruments/klimatologi_manual/models/weather_model.dart';
 import 'package:mobile_ameroro_app/apps/widgets/custom_toast.dart';
@@ -27,6 +27,7 @@ class KlimatologiAwsController extends GetxController
 
   var selectedSensorIndex = 0.obs;
   var selectedTabIndex = 0.obs;
+  LastReadingModel? lastReadingModel;
   RxList<KlimatologiAwsModel> listModel = RxList.empty(growable: true);
   var selectedDateRange = Rxn<DateTimeRange>(
       DateTimeRange(start: DateTime.now(), end: DateTime.now()));
@@ -50,7 +51,7 @@ class KlimatologiAwsController extends GetxController
   formInit() async {
     dateRangeController.text =
         '${AppConstants().dateFormatID.format(selectedDateRange.value!.start)} - ${AppConstants().dateFormatID.format(selectedDateRange.value!.end)}';
-    await getData();
+    change(null, status: RxStatus.success());
   }
 
   Future<TableDataSource> getTableDataSource() async {
@@ -63,24 +64,14 @@ class KlimatologiAwsController extends GetxController
     return listModel;
   }
 
-  Future<List<Cuaca>> getCuacaList() async {
-    List<Cuaca> resultList = List.empty(growable: true);
+  Future<LastReadingModel?> getLastReading() async {
+    LastReadingModel? model;
     try {
-      var response = await repository.getWeather();
-      if (response != null) {
-        if (response.data.isNotEmpty) {
-          var tempList = response.data[0].cuaca;
-          if (tempList.isNotEmpty) {
-            for (var item in tempList) {
-              resultList.addAll(item);
-            }
-          }
-        }
-      }
+      model = await repository.getLastReading();
     } catch (e) {
       msgToast(e.toString());
     }
-    return resultList;
+    return model;
   }
 
   Future<void> getData() async {
@@ -106,15 +97,6 @@ class KlimatologiAwsController extends GetxController
     } catch (e) {
       change(null, status: RxStatus.error(e.toString()));
       msgToast(e.toString());
-    }
-  }
-
-  Future<String> getSvgPic(String svgUrl) async {
-    try {
-      final res = await repository.fetchSvgData(svgUrl);
-      return res;
-    } catch (e) {
-      return '';
     }
   }
 
@@ -163,7 +145,7 @@ class TableDataSource extends DataGridSource {
         cells: row.getCells().map<Widget>((e) {
       return Container(
         alignment: Alignment.center,
-        padding: EdgeInsets.all(10.r),
+        padding: EdgeInsets.all(10),
         child: Text(e.value != null ? e.value.toString() : ' - '),
       );
     }).toList());

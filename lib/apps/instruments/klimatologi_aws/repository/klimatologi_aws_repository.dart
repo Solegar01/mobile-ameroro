@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile_ameroro_app/apps/instruments/klimatologi_aws/models/klimatologi_aws_model.dart';
+import 'package:mobile_ameroro_app/apps/instruments/klimatologi_aws/models/last_reading_model.dart';
 import 'package:mobile_ameroro_app/apps/instruments/klimatologi_manual/models/weather_model.dart';
 import 'package:mobile_ameroro_app/helpers/app_constant.dart';
 import 'package:mobile_ameroro_app/services/api/api_service.dart';
@@ -11,6 +12,26 @@ class KlimatologiAwsRepository {
   final ApiService apiService;
   KlimatologiAwsRepository(this.apiService);
   final connectivityService = Get.find<ConnectivityService>();
+
+  Future<LastReadingModel?> getLastReading() async {
+    LastReadingModel? model;
+    try {
+      if (await connectivityService.checkInternetConnection()) {
+        final response = await apiService.get(AppConstants.awsLastReadingUrl);
+        final jsonResponse = json.decode(response.body);
+
+        if (response.statusCode == 200) {
+          model = (LastReadingModel.fromJson(jsonResponse['data']));
+        } else {
+          throw Exception("An error occured during load last data");
+        }
+      }
+    } catch (e) {
+      rethrow;
+    }
+
+    return model;
+  }
 
   Future<WeatherModel?> getWeather() async {
     WeatherModel? model;

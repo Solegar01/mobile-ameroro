@@ -1,6 +1,5 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
@@ -29,10 +28,10 @@ class ObservationWellView extends StatelessWidget {
             appBar: AppBar(
               foregroundColor: GFColors.WHITE,
               title: GetBuilder<ObservationWellController>(
-                builder: (controller) => Text(
+                builder: (controller) => const Text(
                   'OBSERVATION WELL',
                   style: TextStyle(
-                    fontSize: 20.r,
+                    fontSize: 20,
                   ),
                 ),
               ),
@@ -60,7 +59,7 @@ class ObservationWellView extends StatelessWidget {
       child: ListView(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: Form(
               key: _formKey,
               child: Column(
@@ -101,8 +100,8 @@ class ObservationWellView extends StatelessWidget {
                       constraints: BoxConstraints(),
                     ),
                   ),
-                  SizedBox(
-                    height: 10.r,
+                  const SizedBox(
+                    height: 10,
                   ),
                   TextFormField(
                     onTap: () async {
@@ -117,7 +116,7 @@ class ObservationWellView extends StatelessWidget {
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius:
-                            BorderRadius.circular(5.r), // Rounded corners
+                            BorderRadius.circular(5), // Rounded corners
                         borderSide: const BorderSide(
                             color: GFColors.DARK), // Border color
                       ),
@@ -139,8 +138,8 @@ class ObservationWellView extends StatelessWidget {
                     controller: controller.dateRangeController,
                     readOnly: true,
                   ),
-                  SizedBox(
-                    height: 10.r,
+                  const SizedBox(
+                    height: 10,
                   ),
                   ElevatedButton(
                     onPressed: () async {
@@ -156,18 +155,18 @@ class ObservationWellView extends StatelessWidget {
                           color: AppConfig.primaryColor,
                         ),
                         borderRadius:
-                            BorderRadius.circular(30.r), // Rounded corners
+                            BorderRadius.circular(30), // Rounded corners
                       ),
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 10.r, vertical: 10.r),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 10),
                     ),
-                    child: SizedBox(
+                    child: const SizedBox(
                       width: double.infinity,
                       child: Center(
                         child: Text(
                           'Tampilkan',
                           style: TextStyle(
-                            fontSize: 16.r,
+                            fontSize: 16,
                             color: AppConfig.primaryColor,
                           ),
                         ),
@@ -189,7 +188,7 @@ class ObservationWellView extends StatelessWidget {
       child: ListView(
         children: [
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -205,7 +204,7 @@ class ObservationWellView extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 15.r),
+                const SizedBox(height: 15),
                 GFShimmer(
                   mainColor: Colors.grey[300]!,
                   secondaryColor: Colors.grey[100]!,
@@ -218,7 +217,7 @@ class ObservationWellView extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 10.r),
+                const SizedBox(height: 10),
                 GFShimmer(
                   mainColor: Colors.grey[300]!,
                   secondaryColor: Colors.grey[100]!,
@@ -226,8 +225,8 @@ class ObservationWellView extends StatelessWidget {
                     height: 45,
                     decoration: BoxDecoration(
                       color: Colors.grey[300],
-                      borderRadius: BorderRadius.circular(
-                          30.r), // Optional rounded corners
+                      borderRadius:
+                          BorderRadius.circular(30), // Optional rounded corners
                     ),
                   ),
                 ),
@@ -254,7 +253,7 @@ class ObservationWellView extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: 600.r,
+                height: 600,
                 child: TabBarView(
                   controller: controller.tabController,
                   children: [
@@ -263,8 +262,8 @@ class ObservationWellView extends StatelessWidget {
                         mainColor: Colors.grey[300]!,
                         secondaryColor: Colors.grey[100]!,
                         child: Container(
-                          margin: EdgeInsets.all(10.r),
-                          height: 300.r,
+                          margin: const EdgeInsets.all(10),
+                          height: 300,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
                             color: GFColors.WHITE,
@@ -277,8 +276,8 @@ class ObservationWellView extends StatelessWidget {
                         mainColor: Colors.grey[300]!,
                         secondaryColor: Colors.grey[100]!,
                         child: Container(
-                          margin: EdgeInsets.all(10.r),
-                          height: 300.r,
+                          margin: const EdgeInsets.all(10),
+                          height: 300,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
                             color: GFColors.WHITE,
@@ -317,7 +316,7 @@ class ObservationWellView extends StatelessWidget {
           ],
         ),
         SizedBox(
-          height: 600.r,
+          height: 600,
           child: TabBarView(
             controller: controller.tabController,
             children: [
@@ -362,16 +361,16 @@ class ObservationWellView extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SingleChildScrollView(
             child: GFCard(
-              margin: EdgeInsets.all(10.r),
+              margin: const EdgeInsets.all(10),
               color: GFColors.WHITE,
               padding: EdgeInsets.zero,
               content: GFShimmer(
                 mainColor: Colors.grey[300]!,
                 secondaryColor: Colors.grey[100]!,
                 child: Container(
-                  height: 300.r,
+                  height: 300,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.r),
+                    borderRadius: BorderRadius.circular(10),
                     color: GFColors.WHITE,
                   ),
                 ),
@@ -382,14 +381,14 @@ class ObservationWellView extends StatelessWidget {
           if (snapshot.hasError) {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: const EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -410,11 +409,11 @@ class ObservationWellView extends StatelessWidget {
                 builder: (controller) {
                   return SingleChildScrollView(
                     child: GFCard(
-                      margin: EdgeInsets.all(10.r),
+                      margin: const EdgeInsets.all(10),
                       color: GFColors.WHITE,
                       padding: EdgeInsets.zero,
                       content: SizedBox(
-                        height: 300.r,
+                        height: 300,
                         child: SfCartesianChart(
                           legend: const Legend(
                               isVisible: true, position: LegendPosition.bottom),
@@ -430,20 +429,20 @@ class ObservationWellView extends StatelessWidget {
                             labelFormat: '{value}',
                             title: AxisTitle(text: 'TMA (mdpl)'),
                           ),
-                          axes: [
+                          axes: const [
                             NumericAxis(
-                              title: const AxisTitle(text: 'Curah Hujan (mm)'),
+                              title: AxisTitle(text: 'Curah Hujan (mm)'),
                               labelFormat: '{value}',
                               name: 'InvertedAxis',
                               opposedPosition: true,
                               isInversed: true,
-                              majorGridLines: MajorGridLines(width: 0.r),
+                              majorGridLines: MajorGridLines(width: 0),
                             )
                           ],
-                          title: ChartTitle(
+                          title: const ChartTitle(
                             textStyle: TextStyle(
-                                height: 2.r,
-                                fontSize: 14.r,
+                                height: 2,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold),
                             alignment: ChartAlignment.center,
                             text: 'Grafik Tinggi Muka Air &  Curah Hujan',
@@ -479,7 +478,7 @@ class ObservationWellView extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: const EdgeInsets.all(8),
                                         child: Text(
                                           formattedDate,
                                           style: const TextStyle(
@@ -493,7 +492,7 @@ class ObservationWellView extends StatelessWidget {
                                                 top: BorderSide(
                                           color: Colors.blue,
                                         ))),
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: const EdgeInsets.all(8),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -568,7 +567,7 @@ class ObservationWellView extends StatelessWidget {
                                   data.waterLevel ?? 0,
                               yAxisName: 'primaryYAxis',
                               name: 'TMA',
-                              borderWidth: 2.r,
+                              borderWidth: 2,
                               color: const Color(0xFF2CAFFE),
                               gradient: LinearGradient(
                                 colors: [
@@ -593,8 +592,8 @@ class ObservationWellView extends StatelessWidget {
                                   data.curahHujan ?? 0,
                               yAxisName: 'InvertedAxis',
                               name: 'Curah Hujan',
-                              borderRadius: BorderRadius.circular(5.r),
-                              width: 0.5.r,
+                              borderRadius: BorderRadius.circular(5),
+                              width: 0.5,
                             ),
                             LineSeries<ObservationWell, DateTime>(
                               markerSettings: const MarkerSettings(
@@ -725,14 +724,14 @@ class ObservationWellView extends StatelessWidget {
           } else {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: const EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -746,14 +745,14 @@ class ObservationWellView extends StatelessWidget {
         }
         return SingleChildScrollView(
           child: GFCard(
-            margin: EdgeInsets.all(10.r),
+            margin: const EdgeInsets.all(10),
             color: GFColors.WHITE,
             padding: EdgeInsets.zero,
             content: SizedBox(
-              height: 300.r,
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
@@ -774,16 +773,16 @@ class ObservationWellView extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SingleChildScrollView(
             child: GFCard(
-              margin: EdgeInsets.all(10.r),
+              margin: const EdgeInsets.all(10),
               color: GFColors.WHITE,
               padding: EdgeInsets.zero,
               content: GFShimmer(
                 mainColor: Colors.grey[300]!,
                 secondaryColor: Colors.grey[100]!,
                 child: Container(
-                  height: 300.r,
+                  height: 300,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.r),
+                    borderRadius: BorderRadius.circular(10),
                     color: GFColors.WHITE,
                   ),
                 ),
@@ -794,14 +793,14 @@ class ObservationWellView extends StatelessWidget {
           if (snapshot.hasError) {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: const EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -818,7 +817,7 @@ class ObservationWellView extends StatelessWidget {
                 builder: (controller) {
                   return SingleChildScrollView(
                     child: GFCard(
-                      margin: EdgeInsets.all(10.r),
+                      margin: const EdgeInsets.all(10),
                       color: GFColors.WHITE,
                       padding: EdgeInsets.zero,
                       content: Column(
@@ -826,33 +825,33 @@ class ObservationWellView extends StatelessWidget {
                           SizedBox(
                             height: (AppConstants.dataRowHeight *
                                     controller.rowsPerPage) +
-                                80.r,
+                                80,
                             child: SfDataGridTheme(
                               data: const SfDataGridThemeData(
                                   headerColor: GFColors.LIGHT,
                                   gridLineColor: GFColors.LIGHT),
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10.r),
+                                borderRadius: BorderRadius.circular(10),
                                 child: SfDataGrid(
-                                  headerRowHeight: 40.r,
+                                  headerRowHeight: 40,
                                   rowHeight: AppConstants.dataRowHeight,
                                   source: ds,
                                   columnWidthMode: ColumnWidthMode.fill,
                                   columns: <GridColumn>[
                                     GridColumn(
-                                      minimumWidth: 140.r,
+                                      minimumWidth: 140,
                                       columnName: 'readingDate',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: const EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
                                           border: Border.all(
                                             color: Colors
                                                 .grey.shade400, // Border color
-                                            width: 1.r, // Border width
+                                            width: 1, // Border width
                                           ),
-                                          borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(10.r),
+                                          borderRadius: const BorderRadius.only(
+                                            topLeft: Radius.circular(10),
                                           ),
                                         ),
                                         child: const Text(
@@ -865,33 +864,33 @@ class ObservationWellView extends StatelessWidget {
                                     ),
                                     //OW1
                                     GridColumn(
-                                      minimumWidth: 120.r,
+                                      minimumWidth: 120,
                                       columnName: 'sensorOw1Pengukuran',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: const EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
                                           border: Border.all(
                                             color: Colors
                                                 .grey.shade400, // Border color
-                                            width: 1.r, // Border width
+                                            width: 1, // Border width
                                           ),
                                         ),
                                         child: RichText(
                                           textAlign: TextAlign.center,
-                                          text: TextSpan(
+                                          text: const TextSpan(
                                             children: [
                                               TextSpan(
                                                   text: 'Pengukuran',
                                                   style: TextStyle(
-                                                      fontSize: 10.r,
+                                                      fontSize: 10,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.black)),
                                               TextSpan(
                                                   text: ' (M)',
                                                   style: TextStyle(
-                                                      fontSize: 12.r,
+                                                      fontSize: 12,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.grey))
@@ -901,33 +900,33 @@ class ObservationWellView extends StatelessWidget {
                                       ),
                                     ),
                                     GridColumn(
-                                      minimumWidth: 120.r,
+                                      minimumWidth: 120,
                                       columnName: 'sensorOw1Elevasi',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: const EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
                                           border: Border.all(
                                             color: Colors
                                                 .grey.shade400, // Border color
-                                            width: 1.r, // Border width
+                                            width: 1, // Border width
                                           ),
                                         ),
                                         child: RichText(
                                           textAlign: TextAlign.center,
-                                          text: TextSpan(
+                                          text: const TextSpan(
                                             children: [
                                               TextSpan(
                                                   text: 'Elevasi',
                                                   style: TextStyle(
-                                                      fontSize: 10.r,
+                                                      fontSize: 10,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.black)),
                                               TextSpan(
                                                   text: ' MAT',
                                                   style: TextStyle(
-                                                      fontSize: 12.r,
+                                                      fontSize: 12,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.grey))
@@ -937,16 +936,16 @@ class ObservationWellView extends StatelessWidget {
                                       ),
                                     ),
                                     GridColumn(
-                                      minimumWidth: 120.r,
+                                      minimumWidth: 120,
                                       columnName: 'sensorOw1Keterangan',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: const EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
                                           border: Border.all(
                                             color: Colors
                                                 .grey.shade400, // Border color
-                                            width: 1.r, // Border width
+                                            width: 1, // Border width
                                           ),
                                         ),
                                         child: const Text(
@@ -960,33 +959,33 @@ class ObservationWellView extends StatelessWidget {
                                     ),
                                     //OW2
                                     GridColumn(
-                                      minimumWidth: 120.r,
+                                      minimumWidth: 120,
                                       columnName: 'sensorOw2Pengukuran',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: const EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
                                           border: Border.all(
                                             color: Colors
                                                 .grey.shade400, // Border color
-                                            width: 1.r, // Border width
+                                            width: 1, // Border width
                                           ),
                                         ),
                                         child: RichText(
                                           textAlign: TextAlign.center,
-                                          text: TextSpan(
+                                          text: const TextSpan(
                                             children: [
                                               TextSpan(
                                                   text: 'Pengukuran',
                                                   style: TextStyle(
-                                                      fontSize: 10.r,
+                                                      fontSize: 10,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.black)),
                                               TextSpan(
                                                   text: ' (M)',
                                                   style: TextStyle(
-                                                      fontSize: 12.r,
+                                                      fontSize: 12,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.grey))
@@ -996,33 +995,33 @@ class ObservationWellView extends StatelessWidget {
                                       ),
                                     ),
                                     GridColumn(
-                                      minimumWidth: 120.r,
+                                      minimumWidth: 120,
                                       columnName: 'sensorOw2Elevasi',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: const EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
                                           border: Border.all(
                                             color: Colors
                                                 .grey.shade400, // Border color
-                                            width: 1.r, // Border width
+                                            width: 1, // Border width
                                           ),
                                         ),
                                         child: RichText(
                                           textAlign: TextAlign.center,
-                                          text: TextSpan(
+                                          text: const TextSpan(
                                             children: [
                                               TextSpan(
                                                   text: 'Elevasi',
                                                   style: TextStyle(
-                                                      fontSize: 10.r,
+                                                      fontSize: 10,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.black)),
                                               TextSpan(
                                                   text: ' MAT',
                                                   style: TextStyle(
-                                                      fontSize: 12.r,
+                                                      fontSize: 12,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.grey))
@@ -1032,16 +1031,16 @@ class ObservationWellView extends StatelessWidget {
                                       ),
                                     ),
                                     GridColumn(
-                                      minimumWidth: 120.r,
+                                      minimumWidth: 120,
                                       columnName: 'sensorOw2Keterangan',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: const EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
                                           border: Border.all(
                                             color: Colors
                                                 .grey.shade400, // Border color
-                                            width: 1.r, // Border width
+                                            width: 1, // Border width
                                           ),
                                         ),
                                         child: const Text(
@@ -1055,33 +1054,33 @@ class ObservationWellView extends StatelessWidget {
                                     ),
                                     //OW3
                                     GridColumn(
-                                      minimumWidth: 120.r,
+                                      minimumWidth: 120,
                                       columnName: 'sensorOw3Pengukuran',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: const EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
                                           border: Border.all(
                                             color: Colors
                                                 .grey.shade400, // Border color
-                                            width: 1.r, // Border width
+                                            width: 1, // Border width
                                           ),
                                         ),
                                         child: RichText(
                                           textAlign: TextAlign.center,
-                                          text: TextSpan(
+                                          text: const TextSpan(
                                             children: [
                                               TextSpan(
                                                   text: 'Pengukuran',
                                                   style: TextStyle(
-                                                      fontSize: 10.r,
+                                                      fontSize: 10,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.black)),
                                               TextSpan(
                                                   text: ' (M)',
                                                   style: TextStyle(
-                                                      fontSize: 12.r,
+                                                      fontSize: 12,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.grey))
@@ -1091,33 +1090,33 @@ class ObservationWellView extends StatelessWidget {
                                       ),
                                     ),
                                     GridColumn(
-                                      minimumWidth: 120.r,
+                                      minimumWidth: 120,
                                       columnName: 'sensorOw3Elevasi',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: const EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
                                           border: Border.all(
                                             color: Colors
                                                 .grey.shade400, // Border color
-                                            width: 1.r, // Border width
+                                            width: 1, // Border width
                                           ),
                                         ),
                                         child: RichText(
                                           textAlign: TextAlign.center,
-                                          text: TextSpan(
+                                          text: const TextSpan(
                                             children: [
                                               TextSpan(
                                                   text: 'Elevasi',
                                                   style: TextStyle(
-                                                      fontSize: 10.r,
+                                                      fontSize: 10,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.black)),
                                               TextSpan(
                                                   text: ' MAT',
                                                   style: TextStyle(
-                                                      fontSize: 12.r,
+                                                      fontSize: 12,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.grey))
@@ -1127,16 +1126,16 @@ class ObservationWellView extends StatelessWidget {
                                       ),
                                     ),
                                     GridColumn(
-                                      minimumWidth: 120.r,
+                                      minimumWidth: 120,
                                       columnName: 'sensorOw3Keterangan',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: const EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
                                           border: Border.all(
                                             color: Colors
                                                 .grey.shade400, // Border color
-                                            width: 1.r, // Border width
+                                            width: 1, // Border width
                                           ),
                                         ),
                                         child: const Text(
@@ -1150,33 +1149,33 @@ class ObservationWellView extends StatelessWidget {
                                     ),
                                     //OW4
                                     GridColumn(
-                                      minimumWidth: 120.r,
+                                      minimumWidth: 120,
                                       columnName: 'sensorOw4Pengukuran',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: const EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
                                           border: Border.all(
                                             color: Colors
                                                 .grey.shade400, // Border color
-                                            width: 1.r, // Border width
+                                            width: 1, // Border width
                                           ),
                                         ),
                                         child: RichText(
                                           textAlign: TextAlign.center,
-                                          text: TextSpan(
+                                          text: const TextSpan(
                                             children: [
                                               TextSpan(
                                                   text: 'Pengukuran',
                                                   style: TextStyle(
-                                                      fontSize: 10.r,
+                                                      fontSize: 10,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.black)),
                                               TextSpan(
                                                   text: ' (M)',
                                                   style: TextStyle(
-                                                      fontSize: 12.r,
+                                                      fontSize: 12,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.grey))
@@ -1186,33 +1185,33 @@ class ObservationWellView extends StatelessWidget {
                                       ),
                                     ),
                                     GridColumn(
-                                      minimumWidth: 120.r,
+                                      minimumWidth: 120,
                                       columnName: 'sensorOw4Elevasi',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: const EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
                                           border: Border.all(
                                             color: Colors
                                                 .grey.shade400, // Border color
-                                            width: 1.r, // Border width
+                                            width: 1, // Border width
                                           ),
                                         ),
                                         child: RichText(
                                           textAlign: TextAlign.center,
-                                          text: TextSpan(
+                                          text: const TextSpan(
                                             children: [
                                               TextSpan(
                                                   text: 'Elevasi',
                                                   style: TextStyle(
-                                                      fontSize: 10.r,
+                                                      fontSize: 10,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.black)),
                                               TextSpan(
                                                   text: ' MAT',
                                                   style: TextStyle(
-                                                      fontSize: 12.r,
+                                                      fontSize: 12,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.grey))
@@ -1222,16 +1221,16 @@ class ObservationWellView extends StatelessWidget {
                                       ),
                                     ),
                                     GridColumn(
-                                      minimumWidth: 120.r,
+                                      minimumWidth: 120,
                                       columnName: 'sensorOw4Keterangan',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: const EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
                                           border: Border.all(
                                             color: Colors
                                                 .grey.shade400, // Border color
-                                            width: 1.r, // Border width
+                                            width: 1, // Border width
                                           ),
                                         ),
                                         child: const Text(
@@ -1245,33 +1244,33 @@ class ObservationWellView extends StatelessWidget {
                                     ),
                                     //OW5
                                     GridColumn(
-                                      minimumWidth: 120.r,
+                                      minimumWidth: 120,
                                       columnName: 'sensorOw5Pengukuran',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: const EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
                                           border: Border.all(
                                             color: Colors
                                                 .grey.shade400, // Border color
-                                            width: 1.r, // Border width
+                                            width: 1, // Border width
                                           ),
                                         ),
                                         child: RichText(
                                           textAlign: TextAlign.center,
-                                          text: TextSpan(
+                                          text: const TextSpan(
                                             children: [
                                               TextSpan(
                                                   text: 'Pengukuran',
                                                   style: TextStyle(
-                                                      fontSize: 10.r,
+                                                      fontSize: 10,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.black)),
                                               TextSpan(
                                                   text: ' (M)',
                                                   style: TextStyle(
-                                                      fontSize: 12.r,
+                                                      fontSize: 12,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.grey))
@@ -1281,33 +1280,33 @@ class ObservationWellView extends StatelessWidget {
                                       ),
                                     ),
                                     GridColumn(
-                                      minimumWidth: 120.r,
+                                      minimumWidth: 120,
                                       columnName: 'sensorOw5Elevasi',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: const EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
                                           border: Border.all(
                                             color: Colors
                                                 .grey.shade400, // Border color
-                                            width: 1.r, // Border width
+                                            width: 1, // Border width
                                           ),
                                         ),
                                         child: RichText(
                                           textAlign: TextAlign.center,
-                                          text: TextSpan(
+                                          text: const TextSpan(
                                             children: [
                                               TextSpan(
                                                   text: 'Elevasi',
                                                   style: TextStyle(
-                                                      fontSize: 10.r,
+                                                      fontSize: 10,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.black)),
                                               TextSpan(
                                                   text: ' MAT',
                                                   style: TextStyle(
-                                                      fontSize: 12.r,
+                                                      fontSize: 12,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.grey))
@@ -1317,16 +1316,16 @@ class ObservationWellView extends StatelessWidget {
                                       ),
                                     ),
                                     GridColumn(
-                                      minimumWidth: 120.r,
+                                      minimumWidth: 120,
                                       columnName: 'sensorOw5Keterangan',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: const EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
                                           border: Border.all(
                                             color: Colors
                                                 .grey.shade400, // Border color
-                                            width: 1.r, // Border width
+                                            width: 1, // Border width
                                           ),
                                         ),
                                         child: const Text(
@@ -1340,33 +1339,33 @@ class ObservationWellView extends StatelessWidget {
                                     ),
                                     //OW6
                                     GridColumn(
-                                      minimumWidth: 120.r,
+                                      minimumWidth: 120,
                                       columnName: 'sensorOw6Pengukuran',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: const EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
                                           border: Border.all(
                                             color: Colors
                                                 .grey.shade400, // Border color
-                                            width: 1.r, // Border width
+                                            width: 1, // Border width
                                           ),
                                         ),
                                         child: RichText(
                                           textAlign: TextAlign.center,
-                                          text: TextSpan(
+                                          text: const TextSpan(
                                             children: [
                                               TextSpan(
                                                   text: 'Pengukuran',
                                                   style: TextStyle(
-                                                      fontSize: 10.r,
+                                                      fontSize: 10,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.black)),
                                               TextSpan(
                                                   text: ' (M)',
                                                   style: TextStyle(
-                                                      fontSize: 12.r,
+                                                      fontSize: 12,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.grey))
@@ -1376,33 +1375,33 @@ class ObservationWellView extends StatelessWidget {
                                       ),
                                     ),
                                     GridColumn(
-                                      minimumWidth: 120.r,
+                                      minimumWidth: 120,
                                       columnName: 'sensorOw6Elevasi',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: const EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
                                           border: Border.all(
                                             color: Colors
                                                 .grey.shade400, // Border color
-                                            width: 1.r, // Border width
+                                            width: 1, // Border width
                                           ),
                                         ),
                                         child: RichText(
                                           textAlign: TextAlign.center,
-                                          text: TextSpan(
+                                          text: const TextSpan(
                                             children: [
                                               TextSpan(
                                                   text: 'Elevasi',
                                                   style: TextStyle(
-                                                      fontSize: 10.r,
+                                                      fontSize: 10,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.black)),
                                               TextSpan(
                                                   text: ' MAT',
                                                   style: TextStyle(
-                                                      fontSize: 12.r,
+                                                      fontSize: 12,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.grey))
@@ -1412,16 +1411,16 @@ class ObservationWellView extends StatelessWidget {
                                       ),
                                     ),
                                     GridColumn(
-                                      minimumWidth: 120.r,
+                                      minimumWidth: 120,
                                       columnName: 'sensorOw6Keterangan',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: const EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
                                           border: Border.all(
                                             color: Colors
                                                 .grey.shade400, // Border color
-                                            width: 1.r, // Border width
+                                            width: 1, // Border width
                                           ),
                                         ),
                                         child: const Text(
@@ -1435,33 +1434,33 @@ class ObservationWellView extends StatelessWidget {
                                     ),
                                     //OW7
                                     GridColumn(
-                                      minimumWidth: 120.r,
+                                      minimumWidth: 120,
                                       columnName: 'sensorOw7Pengukuran',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: const EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
                                           border: Border.all(
                                             color: Colors
                                                 .grey.shade400, // Border color
-                                            width: 1.r, // Border width
+                                            width: 1, // Border width
                                           ),
                                         ),
                                         child: RichText(
                                           textAlign: TextAlign.center,
-                                          text: TextSpan(
+                                          text: const TextSpan(
                                             children: [
                                               TextSpan(
                                                   text: 'Pengukuran',
                                                   style: TextStyle(
-                                                      fontSize: 10.r,
+                                                      fontSize: 10,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.black)),
                                               TextSpan(
                                                   text: ' (M)',
                                                   style: TextStyle(
-                                                      fontSize: 12.r,
+                                                      fontSize: 12,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.grey))
@@ -1471,33 +1470,33 @@ class ObservationWellView extends StatelessWidget {
                                       ),
                                     ),
                                     GridColumn(
-                                      minimumWidth: 120.r,
+                                      minimumWidth: 120,
                                       columnName: 'sensorOw7Elevasi',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: const EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
                                           border: Border.all(
                                             color: Colors
                                                 .grey.shade400, // Border color
-                                            width: 1.r, // Border width
+                                            width: 1, // Border width
                                           ),
                                         ),
                                         child: RichText(
                                           textAlign: TextAlign.center,
-                                          text: TextSpan(
+                                          text: const TextSpan(
                                             children: [
                                               TextSpan(
                                                   text: 'Elevasi',
                                                   style: TextStyle(
-                                                      fontSize: 10.r,
+                                                      fontSize: 10,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.black)),
                                               TextSpan(
                                                   text: ' MAT',
                                                   style: TextStyle(
-                                                      fontSize: 12.r,
+                                                      fontSize: 12,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.grey))
@@ -1507,16 +1506,16 @@ class ObservationWellView extends StatelessWidget {
                                       ),
                                     ),
                                     GridColumn(
-                                      minimumWidth: 120.r,
+                                      minimumWidth: 120,
                                       columnName: 'sensorOw7Keterangan',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: const EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
                                           border: Border.all(
                                             color: Colors
                                                 .grey.shade400, // Border color
-                                            width: 1.r, // Border width
+                                            width: 1, // Border width
                                           ),
                                         ),
                                         child: const Text(
@@ -1530,33 +1529,33 @@ class ObservationWellView extends StatelessWidget {
                                     ),
                                     //OW8
                                     GridColumn(
-                                      minimumWidth: 120.r,
+                                      minimumWidth: 120,
                                       columnName: 'sensorOw8Pengukuran',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: const EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
                                           border: Border.all(
                                             color: Colors
                                                 .grey.shade400, // Border color
-                                            width: 1.r, // Border width
+                                            width: 1, // Border width
                                           ),
                                         ),
                                         child: RichText(
                                           textAlign: TextAlign.center,
-                                          text: TextSpan(
+                                          text: const TextSpan(
                                             children: [
                                               TextSpan(
                                                   text: 'Pengukuran',
                                                   style: TextStyle(
-                                                      fontSize: 10.r,
+                                                      fontSize: 10,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.black)),
                                               TextSpan(
                                                   text: ' (M)',
                                                   style: TextStyle(
-                                                      fontSize: 12.r,
+                                                      fontSize: 12,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.grey))
@@ -1566,33 +1565,33 @@ class ObservationWellView extends StatelessWidget {
                                       ),
                                     ),
                                     GridColumn(
-                                      minimumWidth: 120.r,
+                                      minimumWidth: 120,
                                       columnName: 'sensorOw8Elevasi',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: const EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
                                           border: Border.all(
                                             color: Colors
                                                 .grey.shade400, // Border color
-                                            width: 1.r, // Border width
+                                            width: 1, // Border width
                                           ),
                                         ),
                                         child: RichText(
                                           textAlign: TextAlign.center,
-                                          text: TextSpan(
+                                          text: const TextSpan(
                                             children: [
                                               TextSpan(
                                                   text: 'Elevasi',
                                                   style: TextStyle(
-                                                      fontSize: 10.r,
+                                                      fontSize: 10,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.black)),
                                               TextSpan(
                                                   text: ' MAT',
                                                   style: TextStyle(
-                                                      fontSize: 12.r,
+                                                      fontSize: 12,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.grey))
@@ -1602,16 +1601,16 @@ class ObservationWellView extends StatelessWidget {
                                       ),
                                     ),
                                     GridColumn(
-                                      minimumWidth: 120.r,
+                                      minimumWidth: 120,
                                       columnName: 'sensorOw8Keterangan',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: const EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
                                           border: Border.all(
                                             color: Colors
                                                 .grey.shade400, // Border color
-                                            width: 1.r, // Border width
+                                            width: 1, // Border width
                                           ),
                                         ),
                                         child: const Text(
@@ -1637,7 +1636,7 @@ class ObservationWellView extends StatelessWidget {
                                               border: Border.all(
                                                 color: Colors.grey
                                                     .shade400, // Border color
-                                                width: 1.r, // Border width
+                                                width: 1, // Border width
                                               ),
                                             ),
                                             child: const Center(
@@ -1658,7 +1657,7 @@ class ObservationWellView extends StatelessWidget {
                                               border: Border.all(
                                                 color: Colors.grey
                                                     .shade400, // Border color
-                                                width: 1.r, // Border width
+                                                width: 1, // Border width
                                               ),
                                             ),
                                             child: const Center(
@@ -1679,7 +1678,7 @@ class ObservationWellView extends StatelessWidget {
                                               border: Border.all(
                                                 color: Colors.grey
                                                     .shade400, // Border color
-                                                width: 1.r, // Border width
+                                                width: 1, // Border width
                                               ),
                                             ),
                                             child: const Center(
@@ -1700,7 +1699,7 @@ class ObservationWellView extends StatelessWidget {
                                               border: Border.all(
                                                 color: Colors.grey
                                                     .shade400, // Border color
-                                                width: 1.r, // Border width
+                                                width: 1, // Border width
                                               ),
                                             ),
                                             child: const Center(
@@ -1721,7 +1720,7 @@ class ObservationWellView extends StatelessWidget {
                                               border: Border.all(
                                                 color: Colors.grey
                                                     .shade400, // Border color
-                                                width: 1.r, // Border width
+                                                width: 1, // Border width
                                               ),
                                             ),
                                             child: const Center(
@@ -1742,7 +1741,7 @@ class ObservationWellView extends StatelessWidget {
                                               border: Border.all(
                                                 color: Colors.grey
                                                     .shade400, // Border color
-                                                width: 1.r, // Border width
+                                                width: 1, // Border width
                                               ),
                                             ),
                                             child: const Center(
@@ -1763,7 +1762,7 @@ class ObservationWellView extends StatelessWidget {
                                               border: Border.all(
                                                 color: Colors.grey
                                                     .shade400, // Border color
-                                                width: 1.r, // Border width
+                                                width: 1, // Border width
                                               ),
                                             ),
                                             child: const Center(
@@ -1784,10 +1783,11 @@ class ObservationWellView extends StatelessWidget {
                                               border: Border.all(
                                                 color: Colors.grey
                                                     .shade400, // Border color
-                                                width: 1.r, // Border width
+                                                width: 1, // Border width
                                               ),
-                                              borderRadius: BorderRadius.only(
-                                                topRight: Radius.circular(10.r),
+                                              borderRadius:
+                                                  const BorderRadius.only(
+                                                topRight: Radius.circular(10),
                                               ),
                                             ),
                                             child: const Center(
@@ -1803,8 +1803,8 @@ class ObservationWellView extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(
-                            height: 10.r,
+                          const SizedBox(
+                            height: 10,
                           ),
                           SfDataPager(
                             delegate: ds,
@@ -1822,14 +1822,14 @@ class ObservationWellView extends StatelessWidget {
           } else {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: const EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -1843,14 +1843,14 @@ class ObservationWellView extends StatelessWidget {
         }
         return SingleChildScrollView(
           child: GFCard(
-            margin: EdgeInsets.all(10.r),
+            margin: const EdgeInsets.all(10),
             color: GFColors.WHITE,
             padding: EdgeInsets.zero,
             content: SizedBox(
-              height: 300.r,
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(

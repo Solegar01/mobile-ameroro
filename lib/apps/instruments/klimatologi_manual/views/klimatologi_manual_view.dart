@@ -1,6 +1,5 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
@@ -29,7 +28,7 @@ class KlimatologiManualView extends StatelessWidget {
                 title: Text(
                   'KLIMATOLOGI MANUAL',
                   style: TextStyle(
-                    fontSize: 20.r,
+                    fontSize: 20,
                   ),
                 ),
                 actions: const [],
@@ -39,7 +38,7 @@ class KlimatologiManualView extends StatelessWidget {
                 onLoading: _loader(context, controller),
                 onEmpty: const Text('Empty Data'),
                 onError: (error) => Padding(
-                  padding: EdgeInsets.all(8.r),
+                  padding: EdgeInsets.all(8),
                   child: Center(child: Text(error!)),
                 ),
               ),
@@ -58,7 +57,7 @@ class KlimatologiManualView extends StatelessWidget {
         children: [
           _weatherSlider(context, controller),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: TextFormField(
               onTap: () async {
                 await _selectDate(context, controller);
@@ -71,7 +70,7 @@ class KlimatologiManualView extends StatelessWidget {
               },
               decoration: InputDecoration(
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5.r), // Rounded corners
+                  borderRadius: BorderRadius.circular(5), // Rounded corners
                   borderSide:
                       const BorderSide(color: GFColors.DARK), // Border color
                 ),
@@ -88,7 +87,7 @@ class KlimatologiManualView extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 650.r,
+            height: 650,
             child: _graphTableTab(context, controller),
           ),
         ],
@@ -107,10 +106,10 @@ class KlimatologiManualView extends StatelessWidget {
                 mainColor: Colors.grey[100]!,
                 secondaryColor: Colors.grey[300]!,
                 child: Container(
-                  margin: EdgeInsets.all(8.r),
+                  margin: EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(8.r),
+                    borderRadius: BorderRadius.circular(8),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.5),
@@ -129,10 +128,10 @@ class KlimatologiManualView extends StatelessWidget {
             activeIndicator: Colors.blue,
             autoPlayInterval: const Duration(seconds: 5), // Adjust as needed
             autoPlayAnimationDuration: const Duration(milliseconds: 800),
-            height: 180.r,
+            height: 180,
           ),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -171,7 +170,7 @@ class KlimatologiManualView extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: 650.r,
+                height: 650,
                 child: TabBarView(
                   controller: controller.tabController,
                   children: [
@@ -180,8 +179,8 @@ class KlimatologiManualView extends StatelessWidget {
                         mainColor: Colors.grey[300]!,
                         secondaryColor: Colors.grey[100]!,
                         child: Container(
-                          margin: EdgeInsets.all(10.r),
-                          height: 355.r,
+                          margin: const EdgeInsets.all(10),
+                          height: 355,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
                             color: GFColors.WHITE,
@@ -194,8 +193,8 @@ class KlimatologiManualView extends StatelessWidget {
                         mainColor: Colors.grey[300]!,
                         secondaryColor: Colors.grey[100]!,
                         child: Container(
-                          margin: EdgeInsets.all(10.r),
-                          height: 355.r,
+                          margin: const EdgeInsets.all(10),
+                          height: 355,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
                             color: GFColors.WHITE,
@@ -280,11 +279,11 @@ class KlimatologiManualView extends StatelessWidget {
       children: [
         TabBar(
           tabAlignment: TabAlignment.start,
-          padding: EdgeInsets.only(top: 10.r),
+          padding: EdgeInsets.only(top: 10),
           indicatorColor: Colors.transparent,
           isScrollable: true,
           controller: controller.sensorTabController,
-          dividerHeight: 0.r,
+          dividerHeight: 0,
           onTap: (index) {
             controller.selectedSensorIndex.value = index;
           },
@@ -293,14 +292,14 @@ class KlimatologiManualView extends StatelessWidget {
               Tab(
                 child: Obx(
                   () => Container(
-                    padding: EdgeInsets.all(8.r),
+                    padding: EdgeInsets.all(8),
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: controller.selectedSensorIndex.value == i
                             ? AppConfig.primaryColor
                             : GFColors.LIGHT,
                       ),
-                      borderRadius: BorderRadius.circular(20.r),
+                      borderRadius: BorderRadius.circular(20),
                     ),
                     child: Text(
                       sensors[i],
@@ -359,10 +358,10 @@ class KlimatologiManualView extends StatelessWidget {
                 mainColor: Colors.grey[100]!,
                 secondaryColor: Colors.grey[300]!,
                 child: Container(
-                  margin: EdgeInsets.all(8.r),
+                  margin: EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(8.r),
+                    borderRadius: BorderRadius.circular(8),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.5),
@@ -381,7 +380,7 @@ class KlimatologiManualView extends StatelessWidget {
             activeIndicator: Colors.blue,
             autoPlayInterval: const Duration(seconds: 5), // Adjust as needed
             autoPlayAnimationDuration: const Duration(milliseconds: 800),
-            height: 180.r,
+            height: 180,
           );
         } else if (snapshot.hasError) {
           return _errorWeather(context);
@@ -390,38 +389,38 @@ class KlimatologiManualView extends StatelessWidget {
             return GFCarousel(
               items: snapshot.data!.map((cuaca) {
                 return GFCard(
-                  margin: EdgeInsets.all(8.r),
+                  margin: EdgeInsets.all(8),
                   padding: EdgeInsets.zero,
                   boxFit: BoxFit.cover,
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(8.r),
-                  elevation: 5.r,
+                  borderRadius: BorderRadius.circular(8),
+                  elevation: 5,
                   content: Column(
                     children: [
                       SingleChildScrollView(
                         child: Container(
-                          padding: EdgeInsets.only(right: 10.r, left: 10.r),
+                          padding: EdgeInsets.only(right: 10, left: 10),
                           decoration: BoxDecoration(
                             color: Colors.grey[100],
-                            borderRadius: BorderRadius.circular(8.r),
+                            borderRadius: BorderRadius.circular(8),
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Padding(
-                                padding: EdgeInsets.all(8.r),
+                                padding: EdgeInsets.all(8),
                                 child: Column(
                                   children: [
                                     _getSvgPic(cuaca.image),
                                     Text(
                                       cuaca.weatherDesc,
-                                      style: TextStyle(fontSize: 12.r),
+                                      style: TextStyle(fontSize: 12),
                                     ),
                                   ],
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.all(8.r),
+                                padding: EdgeInsets.all(8),
                                 child: Column(
                                   children: [
                                     Text(
@@ -430,11 +429,11 @@ class KlimatologiManualView extends StatelessWidget {
                                           .format(cuaca.localDatetime),
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 12.r),
+                                          fontSize: 12),
                                     ),
                                     Text(
                                       '${AppConstants().hourMinuteFormat.format(cuaca.localDatetime)} WIB',
-                                      style: TextStyle(fontSize: 12.r),
+                                      style: TextStyle(fontSize: 12),
                                     ),
                                   ],
                                 ),
@@ -448,7 +447,7 @@ class KlimatologiManualView extends StatelessWidget {
                         children: [
                           _buildWeatherInfoRow(cuaca),
                           Divider(
-                            height: 1.r,
+                            height: 1,
                             color: Colors.grey[400],
                           ),
                           _buildAdditionalInfoRow(cuaca),
@@ -465,7 +464,7 @@ class KlimatologiManualView extends StatelessWidget {
               activeIndicator: Colors.blue,
               autoPlayInterval: const Duration(seconds: 5), // Adjust as needed
               autoPlayAnimationDuration: const Duration(milliseconds: 800),
-              height: 180.r,
+              height: 180,
             );
           } else {
             return _errorWeather(context);
@@ -486,14 +485,14 @@ class KlimatologiManualView extends StatelessWidget {
     return GFCarousel(
       items: errorStr.map((error) {
         return GFCard(
-          margin: EdgeInsets.all(8.r),
+          margin: EdgeInsets.all(8),
           padding: EdgeInsets.zero,
           boxFit: BoxFit.cover,
           color: Colors.white,
-          borderRadius: BorderRadius.circular(8.r),
-          elevation: 5.r,
+          borderRadius: BorderRadius.circular(8),
+          elevation: 5,
           content: SizedBox(
-            height: 150.r,
+            height: 150,
             width: double.infinity,
             child: Center(
               child: Text(
@@ -510,7 +509,7 @@ class KlimatologiManualView extends StatelessWidget {
       activeIndicator: Colors.blue,
       autoPlayInterval: const Duration(seconds: 5), // Adjust as needed
       autoPlayAnimationDuration: const Duration(milliseconds: 800),
-      height: 180.r,
+      height: 180,
     );
   }
 
@@ -518,7 +517,7 @@ class KlimatologiManualView extends StatelessWidget {
     return SingleChildScrollView(
       child: Container(
         width: double.infinity,
-        padding: EdgeInsets.all(8.r),
+        padding: EdgeInsets.all(8),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -540,7 +539,7 @@ class KlimatologiManualView extends StatelessWidget {
     return SingleChildScrollView(
       child: Container(
         width: double.infinity,
-        padding: EdgeInsets.all(8.r),
+        padding: EdgeInsets.all(8),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -560,8 +559,8 @@ class KlimatologiManualView extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(icon, size: 20.r),
-        SizedBox(width: 5.r),
+        Icon(icon, size: 20),
+        SizedBox(width: 5),
         Column(
           children: [
             RichText(
@@ -570,7 +569,7 @@ class KlimatologiManualView extends StatelessWidget {
                   TextSpan(
                     text: data,
                     style: TextStyle(
-                        fontSize: 10.r,
+                        fontSize: 10,
                         fontWeight: FontWeight.bold,
                         color: Colors.black),
                   ),
@@ -579,7 +578,7 @@ class KlimatologiManualView extends StatelessWidget {
             ),
             Text(
               label,
-              style: TextStyle(fontSize: 10.r),
+              style: TextStyle(fontSize: 10),
             ),
           ],
         ),
@@ -594,36 +593,36 @@ class KlimatologiManualView extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
             child: SizedBox(
-              height: 20.r,
-              width: 20.r,
+              height: 20,
+              width: 20,
               child: const CircularProgressIndicator(),
             ),
           );
         } else if (snapshot.hasError) {
           return SizedBox(
-            width: 30.r,
-            height: 30.r,
+            width: 30,
+            height: 30,
             child: Icon(
               Icons.image_not_supported_rounded,
-              size: 30.r,
+              size: 30,
               color: Colors.grey,
             ),
           );
         } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
           return SvgPicture.string(
             snapshot.data!,
-            width: 30.r,
-            height: 30.r,
+            width: 30,
+            height: 30,
             fit: BoxFit.contain,
           );
         } else {
           // Optional fallback if no data is returned but no error
           return SizedBox(
-            width: 30.r,
-            height: 30.r,
+            width: 30,
+            height: 30,
             child: Icon(
               Icons.image,
-              size: 30.r,
+              size: 30,
               color: Colors.grey,
             ),
           );
@@ -642,8 +641,8 @@ class KlimatologiManualView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: const EdgeInsets.all(10),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: GFColors.WHITE,
@@ -655,14 +654,14 @@ class KlimatologiManualView extends StatelessWidget {
           if (snapshot.hasError) {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: const EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -682,11 +681,11 @@ class KlimatologiManualView extends StatelessWidget {
                 builder: (controller) {
                   return SingleChildScrollView(
                     child: GFCard(
-                      margin: EdgeInsets.all(10.r),
+                      margin: const EdgeInsets.all(10),
                       color: GFColors.WHITE,
                       padding: EdgeInsets.zero,
                       content: SizedBox(
-                        height: 300.r,
+                        height: 300,
                         child: SfCartesianChart(
                           legend: const Legend(
                               isVisible: true, position: LegendPosition.bottom),
@@ -704,8 +703,8 @@ class KlimatologiManualView extends StatelessWidget {
                           ),
                           title: ChartTitle(
                             textStyle: TextStyle(
-                                height: 2.r,
-                                fontSize: 14.r,
+                                height: 2,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold),
                             alignment: ChartAlignment.center,
                             text: 'Grafik Thermometer',
@@ -725,12 +724,12 @@ class KlimatologiManualView extends StatelessWidget {
                                 child: Container(
                                   decoration: BoxDecoration(
                                     color: Colors.black.withOpacity(0.75),
-                                    borderRadius: BorderRadius.circular(6.r),
+                                    borderRadius: BorderRadius.circular(6),
                                   ),
                                   child: Column(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Text(
                                           formattedDate,
                                           style: const TextStyle(
@@ -744,7 +743,7 @@ class KlimatologiManualView extends StatelessWidget {
                                                 top: BorderSide(
                                           color: cColor,
                                         ))),
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -810,7 +809,7 @@ class KlimatologiManualView extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Text(
                                           dateTime,
                                           style: const TextStyle(
@@ -824,7 +823,7 @@ class KlimatologiManualView extends StatelessWidget {
                                                 top: BorderSide(
                                           color: Colors.blue,
                                         ))),
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -868,7 +867,7 @@ class KlimatologiManualView extends StatelessWidget {
                                   (KlimatologiManualModel data, _) =>
                                       data.thermometerMin ?? 0,
                               borderColor: const Color(0xFF2CAFFE),
-                              borderWidth: 2.r,
+                              borderWidth: 2,
                               color: const Color(0xFF2CAFFE),
                               name: 'Rentang Thermometer',
                             ),
@@ -895,14 +894,14 @@ class KlimatologiManualView extends StatelessWidget {
           } else {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: const EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -916,14 +915,14 @@ class KlimatologiManualView extends StatelessWidget {
         }
         return SingleChildScrollView(
           child: GFCard(
-            margin: EdgeInsets.all(10.r),
+            margin: const EdgeInsets.all(10),
             color: GFColors.WHITE,
             padding: EdgeInsets.zero,
             content: SizedBox(
-              height: 300.r,
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
@@ -947,8 +946,8 @@ class KlimatologiManualView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: const EdgeInsets.all(10),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: GFColors.WHITE,
@@ -960,14 +959,14 @@ class KlimatologiManualView extends StatelessWidget {
           if (snapshot.hasError) {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: const EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -987,11 +986,11 @@ class KlimatologiManualView extends StatelessWidget {
                 builder: (controller) {
                   return SingleChildScrollView(
                     child: GFCard(
-                      margin: EdgeInsets.all(10.r),
+                      margin: const EdgeInsets.all(10),
                       color: GFColors.WHITE,
                       padding: EdgeInsets.zero,
                       content: SizedBox(
-                        height: 300.r,
+                        height: 300,
                         child: SfCartesianChart(
                           legend: const Legend(
                               isVisible: true, position: LegendPosition.bottom),
@@ -1009,8 +1008,8 @@ class KlimatologiManualView extends StatelessWidget {
                           ),
                           title: ChartTitle(
                             textStyle: TextStyle(
-                                height: 2.r,
-                                fontSize: 14.r,
+                                height: 2,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold),
                             alignment: ChartAlignment.center,
                             text: 'Grafik Psychrometer Standar',
@@ -1030,12 +1029,12 @@ class KlimatologiManualView extends StatelessWidget {
                                 child: Container(
                                   decoration: BoxDecoration(
                                     color: Colors.black.withOpacity(0.75),
-                                    borderRadius: BorderRadius.circular(6.r),
+                                    borderRadius: BorderRadius.circular(6),
                                   ),
                                   child: Column(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Text(
                                           formattedDate,
                                           style: const TextStyle(
@@ -1049,7 +1048,7 @@ class KlimatologiManualView extends StatelessWidget {
                                                 top: BorderSide(
                                           color: cColor,
                                         ))),
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Column(
                                           // crossAxisAlignment: CrossAxisAlignment.start,
                                           mainAxisAlignment:
@@ -1134,7 +1133,7 @@ class KlimatologiManualView extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Text(
                                           dateTime,
                                           style: const TextStyle(
@@ -1148,7 +1147,7 @@ class KlimatologiManualView extends StatelessWidget {
                                                 top: BorderSide(
                                           color: Colors.blue,
                                         ))),
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -1256,14 +1255,14 @@ class KlimatologiManualView extends StatelessWidget {
           } else {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: const EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -1277,14 +1276,14 @@ class KlimatologiManualView extends StatelessWidget {
         }
         return SingleChildScrollView(
           child: GFCard(
-            margin: EdgeInsets.all(10.r),
+            margin: const EdgeInsets.all(10),
             color: GFColors.WHITE,
             padding: EdgeInsets.zero,
             content: SizedBox(
-              height: 300.r,
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
@@ -1309,8 +1308,8 @@ class KlimatologiManualView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: const EdgeInsets.all(10),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: GFColors.WHITE,
@@ -1322,14 +1321,14 @@ class KlimatologiManualView extends StatelessWidget {
           if (snapshot.hasError) {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: const EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -1349,11 +1348,11 @@ class KlimatologiManualView extends StatelessWidget {
                 builder: (controller) {
                   return SingleChildScrollView(
                     child: GFCard(
-                      margin: EdgeInsets.all(10.r),
+                      margin: const EdgeInsets.all(10),
                       color: GFColors.WHITE,
                       padding: EdgeInsets.zero,
                       content: SizedBox(
-                        height: 300.r,
+                        height: 300,
                         child: SfCartesianChart(
                           legend: const Legend(
                               isVisible: true, position: LegendPosition.bottom),
@@ -1371,8 +1370,8 @@ class KlimatologiManualView extends StatelessWidget {
                           ),
                           title: ChartTitle(
                             textStyle: TextStyle(
-                                height: 2.r,
-                                fontSize: 14.r,
+                                height: 2,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold),
                             alignment: ChartAlignment.center,
                             text: 'Grafik Thermometer Apung',
@@ -1392,12 +1391,12 @@ class KlimatologiManualView extends StatelessWidget {
                                 child: Container(
                                   decoration: BoxDecoration(
                                     color: Colors.black.withOpacity(0.75),
-                                    borderRadius: BorderRadius.circular(6.r),
+                                    borderRadius: BorderRadius.circular(6),
                                   ),
                                   child: Column(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Text(
                                           formattedDate,
                                           style: const TextStyle(
@@ -1411,7 +1410,7 @@ class KlimatologiManualView extends StatelessWidget {
                                                 top: BorderSide(
                                           color: cColor,
                                         ))),
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Column(
                                           // crossAxisAlignment: CrossAxisAlignment.start,
                                           mainAxisAlignment:
@@ -1478,7 +1477,7 @@ class KlimatologiManualView extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Text(
                                           dateTime,
                                           style: const TextStyle(
@@ -1492,7 +1491,7 @@ class KlimatologiManualView extends StatelessWidget {
                                                 top: BorderSide(
                                           color: Colors.blue,
                                         ))),
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -1536,7 +1535,7 @@ class KlimatologiManualView extends StatelessWidget {
                                   (KlimatologiManualModel data, _) =>
                                       data.thermometerApungMin ?? 0,
                               borderColor: const Color(0xFF2CAFFE),
-                              borderWidth: 2.r,
+                              borderWidth: 2,
                               color: const Color(0xFF2CAFFE),
                               name: 'Rentang Thermometer Apung',
                             ),
@@ -1563,14 +1562,14 @@ class KlimatologiManualView extends StatelessWidget {
           } else {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: const EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -1584,14 +1583,14 @@ class KlimatologiManualView extends StatelessWidget {
         }
         return SingleChildScrollView(
           child: GFCard(
-            margin: EdgeInsets.all(10.r),
+            margin: const EdgeInsets.all(10),
             color: GFColors.WHITE,
             padding: EdgeInsets.zero,
             content: SizedBox(
-              height: 300.r,
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
@@ -1615,8 +1614,8 @@ class KlimatologiManualView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: const EdgeInsets.all(10),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: GFColors.WHITE,
@@ -1628,14 +1627,14 @@ class KlimatologiManualView extends StatelessWidget {
           if (snapshot.hasError) {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: const EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -1655,11 +1654,11 @@ class KlimatologiManualView extends StatelessWidget {
                 builder: (controller) {
                   return SingleChildScrollView(
                     child: GFCard(
-                      margin: EdgeInsets.all(10.r),
+                      margin: const EdgeInsets.all(10),
                       color: GFColors.WHITE,
                       padding: EdgeInsets.zero,
                       content: SizedBox(
-                        height: 300.r,
+                        height: 300,
                         child: SfCartesianChart(
                           legend: const Legend(
                               isVisible: true, position: LegendPosition.bottom),
@@ -1677,8 +1676,8 @@ class KlimatologiManualView extends StatelessWidget {
                           ),
                           title: ChartTitle(
                             textStyle: TextStyle(
-                                height: 2.r,
-                                fontSize: 14.r,
+                                height: 2,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold),
                             alignment: ChartAlignment.center,
                             text: 'Grafik Penguapan',
@@ -1698,12 +1697,12 @@ class KlimatologiManualView extends StatelessWidget {
                                 child: Container(
                                   decoration: BoxDecoration(
                                     color: Colors.black.withOpacity(0.75),
-                                    borderRadius: BorderRadius.circular(6.r),
+                                    borderRadius: BorderRadius.circular(6),
                                   ),
                                   child: Column(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Text(
                                           formattedDate,
                                           style: const TextStyle(
@@ -1717,7 +1716,7 @@ class KlimatologiManualView extends StatelessWidget {
                                                 top: BorderSide(
                                           color: cColor,
                                         ))),
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Column(
                                           // crossAxisAlignment: CrossAxisAlignment.start,
                                           mainAxisAlignment:
@@ -1792,7 +1791,7 @@ class KlimatologiManualView extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Text(
                                           dateTime,
                                           style: const TextStyle(
@@ -1806,7 +1805,7 @@ class KlimatologiManualView extends StatelessWidget {
                                                 top: BorderSide(
                                           color: Colors.blue,
                                         ))),
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -1895,14 +1894,14 @@ class KlimatologiManualView extends StatelessWidget {
           } else {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: const EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -1916,14 +1915,14 @@ class KlimatologiManualView extends StatelessWidget {
         }
         return SingleChildScrollView(
           child: GFCard(
-            margin: EdgeInsets.all(10.r),
+            margin: const EdgeInsets.all(10),
             color: GFColors.WHITE,
             padding: EdgeInsets.zero,
             content: SizedBox(
-              height: 300.r,
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
@@ -1947,8 +1946,8 @@ class KlimatologiManualView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: const EdgeInsets.all(10),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: GFColors.WHITE,
@@ -1960,14 +1959,14 @@ class KlimatologiManualView extends StatelessWidget {
           if (snapshot.hasError) {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: const EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -1987,11 +1986,11 @@ class KlimatologiManualView extends StatelessWidget {
                 builder: (controller) {
                   return SingleChildScrollView(
                     child: GFCard(
-                      margin: EdgeInsets.all(10.r),
+                      margin: const EdgeInsets.all(10),
                       color: GFColors.WHITE,
                       padding: EdgeInsets.zero,
                       content: SizedBox(
-                        height: 300.r,
+                        height: 300,
                         child: SfCartesianChart(
                           legend: const Legend(
                               isVisible: true, position: LegendPosition.bottom),
@@ -2009,8 +2008,8 @@ class KlimatologiManualView extends StatelessWidget {
                           ),
                           title: ChartTitle(
                             textStyle: TextStyle(
-                                height: 2.r,
-                                fontSize: 14.r,
+                                height: 2,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold),
                             alignment: ChartAlignment.center,
                             text: 'Grafik Anemometer',
@@ -2030,12 +2029,12 @@ class KlimatologiManualView extends StatelessWidget {
                                 child: Container(
                                   decoration: BoxDecoration(
                                     color: Colors.black.withOpacity(0.75),
-                                    borderRadius: BorderRadius.circular(6.r),
+                                    borderRadius: BorderRadius.circular(6),
                                   ),
                                   child: Column(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Text(
                                           formattedDate,
                                           style: const TextStyle(
@@ -2049,7 +2048,7 @@ class KlimatologiManualView extends StatelessWidget {
                                                 top: BorderSide(
                                           color: cColor,
                                         ))),
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Column(
                                           // crossAxisAlignment: CrossAxisAlignment.start,
                                           mainAxisAlignment:
@@ -2114,7 +2113,7 @@ class KlimatologiManualView extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Text(
                                           dateTime,
                                           style: const TextStyle(
@@ -2128,7 +2127,7 @@ class KlimatologiManualView extends StatelessWidget {
                                                 top: BorderSide(
                                           color: Colors.blue,
                                         ))),
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -2198,14 +2197,14 @@ class KlimatologiManualView extends StatelessWidget {
           } else {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: const EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -2219,14 +2218,14 @@ class KlimatologiManualView extends StatelessWidget {
         }
         return SingleChildScrollView(
           child: GFCard(
-            margin: EdgeInsets.all(10.r),
+            margin: const EdgeInsets.all(10),
             color: GFColors.WHITE,
             padding: EdgeInsets.zero,
             content: SizedBox(
-              height: 300.r,
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
@@ -2250,8 +2249,8 @@ class KlimatologiManualView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: const EdgeInsets.all(10),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: GFColors.WHITE,
@@ -2263,14 +2262,14 @@ class KlimatologiManualView extends StatelessWidget {
           if (snapshot.hasError) {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: const EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -2290,11 +2289,11 @@ class KlimatologiManualView extends StatelessWidget {
                 builder: (controller) {
                   return SingleChildScrollView(
                     child: GFCard(
-                      margin: EdgeInsets.all(10.r),
+                      margin: const EdgeInsets.all(10),
                       color: GFColors.WHITE,
                       padding: EdgeInsets.zero,
                       content: SizedBox(
-                        height: 300.r,
+                        height: 300,
                         child: SfCartesianChart(
                           legend: const Legend(
                               isVisible: true, position: LegendPosition.bottom),
@@ -2312,8 +2311,8 @@ class KlimatologiManualView extends StatelessWidget {
                           ),
                           title: ChartTitle(
                             textStyle: TextStyle(
-                                height: 2.r,
-                                fontSize: 14.r,
+                                height: 2,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold),
                             alignment: ChartAlignment.center,
                             text: 'Grafik Curah Hujan',
@@ -2333,12 +2332,12 @@ class KlimatologiManualView extends StatelessWidget {
                                 child: Container(
                                   decoration: BoxDecoration(
                                     color: Colors.black.withOpacity(0.75),
-                                    borderRadius: BorderRadius.circular(6.r),
+                                    borderRadius: BorderRadius.circular(6),
                                   ),
                                   child: Column(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Text(
                                           formattedDate,
                                           style: const TextStyle(
@@ -2352,7 +2351,7 @@ class KlimatologiManualView extends StatelessWidget {
                                                 top: BorderSide(
                                           color: cColor,
                                         ))),
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Column(
                                           // crossAxisAlignment: CrossAxisAlignment.start,
                                           mainAxisAlignment:
@@ -2417,7 +2416,7 @@ class KlimatologiManualView extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Text(
                                           dateTime,
                                           style: const TextStyle(
@@ -2431,7 +2430,7 @@ class KlimatologiManualView extends StatelessWidget {
                                                 top: BorderSide(
                                           color: Colors.blue,
                                         ))),
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -2501,14 +2500,14 @@ class KlimatologiManualView extends StatelessWidget {
           } else {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: const EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -2522,14 +2521,14 @@ class KlimatologiManualView extends StatelessWidget {
         }
         return SingleChildScrollView(
           child: GFCard(
-            margin: EdgeInsets.all(10.r),
+            margin: const EdgeInsets.all(10),
             color: GFColors.WHITE,
             padding: EdgeInsets.zero,
             content: SizedBox(
-              height: 300.r,
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
@@ -2554,8 +2553,8 @@ class KlimatologiManualView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: const EdgeInsets.all(10),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: GFColors.WHITE,
@@ -2567,14 +2566,14 @@ class KlimatologiManualView extends StatelessWidget {
           if (snapshot.hasError) {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: const EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -2585,13 +2584,13 @@ class KlimatologiManualView extends StatelessWidget {
               ),
             );
           } else if (snapshot.hasData) {
-            TableDataSource ds = snapshot.data as TableDataSource;
+            // TableDataSource ds = snapshot.data as TableDataSource;
             return GetBuilder<KlimatologiManualController>(
               id: 'table',
               builder: (controller) {
                 return SingleChildScrollView(
                   child: GFCard(
-                    margin: EdgeInsets.all(10.r),
+                    margin: const EdgeInsets.all(10),
                     color: GFColors.WHITE,
                     padding: EdgeInsets.zero,
                     content: Column(
@@ -2599,33 +2598,33 @@ class KlimatologiManualView extends StatelessWidget {
                         SizedBox(
                           height: (AppConstants.dataRowHeight *
                                   controller.rowsPerPage) +
-                              80.r,
+                              80,
                           child: SfDataGridTheme(
                             data: const SfDataGridThemeData(
                                 headerColor: GFColors.LIGHT,
                                 gridLineColor: GFColors.LIGHT),
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10.r),
+                              borderRadius: BorderRadius.circular(10),
                               child: SfDataGrid(
-                                headerRowHeight: 40.r,
+                                headerRowHeight: 40,
                                 rowHeight: AppConstants.dataRowHeight,
                                 source: controller.tableDataSource,
                                 columnWidthMode: ColumnWidthMode.fill,
                                 columns: <GridColumn>[
                                   GridColumn(
-                                      minimumWidth: 140.r,
+                                      minimumWidth: 140,
                                       columnName: 'readingDate',
                                       label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: const EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                             borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(10.r),
+                                              topLeft: Radius.circular(10),
                                             ),
                                           ),
                                           child: const Text('Tanggal',
@@ -2633,16 +2632,16 @@ class KlimatologiManualView extends StatelessWidget {
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black)))),
                                   GridColumn(
-                                      minimumWidth: 80.r,
+                                      minimumWidth: 80,
                                       columnName: 'thermometerMin',
                                       label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: const EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Text('Min',
@@ -2651,16 +2650,16 @@ class KlimatologiManualView extends StatelessWidget {
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black)))),
                                   GridColumn(
-                                      minimumWidth: 80.r,
+                                      minimumWidth: 80,
                                       columnName: 'thermometerMax',
                                       label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: const EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Text('Max',
@@ -2669,16 +2668,16 @@ class KlimatologiManualView extends StatelessWidget {
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black)))),
                                   GridColumn(
-                                      minimumWidth: 80.r,
+                                      minimumWidth: 80,
                                       columnName: 'thermometerAvg',
                                       label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: const EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Text('Avg',
@@ -2687,16 +2686,16 @@ class KlimatologiManualView extends StatelessWidget {
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black)))),
                                   GridColumn(
-                                      minimumWidth: 100.r,
+                                      minimumWidth: 100,
                                       columnName: 'psychrometerDryBall',
                                       label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: const EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Text('Bola Kering',
@@ -2705,16 +2704,16 @@ class KlimatologiManualView extends StatelessWidget {
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black)))),
                                   GridColumn(
-                                      minimumWidth: 100.r,
+                                      minimumWidth: 100,
                                       columnName: 'psychrometerWetBall',
                                       label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: const EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Text('Bola Basah',
@@ -2723,16 +2722,16 @@ class KlimatologiManualView extends StatelessWidget {
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black)))),
                                   GridColumn(
-                                      minimumWidth: 80.r,
+                                      minimumWidth: 80,
                                       columnName: 'psycrometerDepresi',
                                       label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: const EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Text('Depresi',
@@ -2741,16 +2740,16 @@ class KlimatologiManualView extends StatelessWidget {
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black)))),
                                   GridColumn(
-                                      minimumWidth: 80.r,
+                                      minimumWidth: 80,
                                       columnName: 'pychrometerRh',
                                       label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: const EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Text('RH',
@@ -2759,16 +2758,16 @@ class KlimatologiManualView extends StatelessWidget {
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black)))),
                                   GridColumn(
-                                      minimumWidth: 80.r,
+                                      minimumWidth: 80,
                                       columnName: 'thermometerApungMin',
                                       label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: const EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Text('Min',
@@ -2777,16 +2776,16 @@ class KlimatologiManualView extends StatelessWidget {
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black)))),
                                   GridColumn(
-                                      minimumWidth: 80.r,
+                                      minimumWidth: 80,
                                       columnName: 'thermometerApungMax',
                                       label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: const EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Text('Max',
@@ -2795,16 +2794,16 @@ class KlimatologiManualView extends StatelessWidget {
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black)))),
                                   GridColumn(
-                                      minimumWidth: 80.r,
+                                      minimumWidth: 80,
                                       columnName: 'thermometerApungAvg',
                                       label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: const EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Text('Avg',
@@ -2813,16 +2812,16 @@ class KlimatologiManualView extends StatelessWidget {
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black)))),
                                   GridColumn(
-                                      minimumWidth: 100.r,
+                                      minimumWidth: 100,
                                       columnName: 'evaporationWaterAdded',
                                       label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: const EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Text('Air Ditambah',
@@ -2831,16 +2830,16 @@ class KlimatologiManualView extends StatelessWidget {
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black)))),
                                   GridColumn(
-                                      minimumWidth: 100.r,
+                                      minimumWidth: 100,
                                       columnName: 'evaporationWaterRemoved',
                                       label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: const EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Text('Air Dibuang',
@@ -2849,16 +2848,16 @@ class KlimatologiManualView extends StatelessWidget {
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black)))),
                                   GridColumn(
-                                      minimumWidth: 100.r,
+                                      minimumWidth: 100,
                                       columnName: 'evaporationWaterSum',
                                       label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: const EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Text('Jumlah',
@@ -2867,16 +2866,16 @@ class KlimatologiManualView extends StatelessWidget {
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black)))),
                                   GridColumn(
-                                      minimumWidth: 80.r,
+                                      minimumWidth: 80,
                                       columnName: 'anemometerWind',
                                       label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: const EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Text('Angin',
@@ -2885,16 +2884,16 @@ class KlimatologiManualView extends StatelessWidget {
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black)))),
                                   GridColumn(
-                                      minimumWidth: 80.r,
+                                      minimumWidth: 80,
                                       columnName: 'anemometerSpeed',
                                       label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: const EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Text('Km/Jam',
@@ -2903,16 +2902,16 @@ class KlimatologiManualView extends StatelessWidget {
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black)))),
                                   GridColumn(
-                                      minimumWidth: 80.r,
+                                      minimumWidth: 80,
                                       columnName: 'rainfallManual',
                                       label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: const EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Text('Manual',
@@ -2921,16 +2920,16 @@ class KlimatologiManualView extends StatelessWidget {
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black)))),
                                   GridColumn(
-                                      minimumWidth: 80.r,
+                                      minimumWidth: 80,
                                       columnName: 'rainfalAutomatic',
                                       label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: const EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Text('Otomatis',
@@ -2939,19 +2938,19 @@ class KlimatologiManualView extends StatelessWidget {
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black)))),
                                   GridColumn(
-                                      minimumWidth: 120.r,
+                                      minimumWidth: 120,
                                       columnName: 'note',
                                       label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: const EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                             borderRadius: BorderRadius.only(
-                                              topRight: Radius.circular(10.r),
+                                              topRight: Radius.circular(10),
                                             ),
                                           ),
                                           child: const Text('Keterangan',
@@ -2973,7 +2972,7 @@ class KlimatologiManualView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -2995,7 +2994,7 @@ class KlimatologiManualView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -3018,7 +3017,7 @@ class KlimatologiManualView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -3039,7 +3038,7 @@ class KlimatologiManualView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -3059,7 +3058,7 @@ class KlimatologiManualView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -3079,7 +3078,7 @@ class KlimatologiManualView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -3096,7 +3095,7 @@ class KlimatologiManualView extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: 10.r,
+                          height: 10,
                         ),
                         SfDataPager(
                           delegate: controller.tableDataSource,
@@ -3115,14 +3114,14 @@ class KlimatologiManualView extends StatelessWidget {
           } else {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: const EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -3136,14 +3135,14 @@ class KlimatologiManualView extends StatelessWidget {
         }
         return SingleChildScrollView(
           child: GFCard(
-            margin: EdgeInsets.all(10.r),
+            margin: const EdgeInsets.all(10),
             color: GFColors.WHITE,
             padding: EdgeInsets.zero,
             content: SizedBox(
-              height: 300.r,
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(

@@ -1,6 +1,5 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
@@ -25,10 +24,10 @@ class RoboticTotalStationView extends StatelessWidget {
             appBar: AppBar(
               foregroundColor: GFColors.WHITE,
               title: GetBuilder<RoboticTotalStationController>(
-                builder: (controller) => Text(
+                builder: (controller) => const Text(
                   'ROBOTIC TOTAL STATION (RTS)',
                   style: TextStyle(
-                    fontSize: 20.r,
+                    fontSize: 20,
                   ),
                 ),
               ),
@@ -56,7 +55,7 @@ class RoboticTotalStationView extends StatelessWidget {
       child: ListView(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: TextFormField(
               onTap: () async {
                 await _selectDate(context, controller);
@@ -69,7 +68,7 @@ class RoboticTotalStationView extends StatelessWidget {
               },
               decoration: InputDecoration(
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5.r), // Rounded corners
+                  borderRadius: BorderRadius.circular(5), // Rounded corners
                   borderSide:
                       const BorderSide(color: GFColors.DARK), // Border color
                 ),
@@ -93,7 +92,7 @@ class RoboticTotalStationView extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 650.r,
+            height: 650,
             child: _graphTableTab(context, controller),
           ),
         ],
@@ -106,7 +105,7 @@ class RoboticTotalStationView extends StatelessWidget {
       child: ListView(
         children: [
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -145,7 +144,7 @@ class RoboticTotalStationView extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: 650.r,
+                height: 650,
                 child: TabBarView(
                   controller: controller.tabController,
                   children: [
@@ -154,8 +153,8 @@ class RoboticTotalStationView extends StatelessWidget {
                         mainColor: Colors.grey[300]!,
                         secondaryColor: Colors.grey[100]!,
                         child: Container(
-                          height: 405.r,
-                          margin: EdgeInsets.all(10.r),
+                          height: 405,
+                          margin: EdgeInsets.all(10),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
                             color: GFColors.WHITE,
@@ -168,8 +167,8 @@ class RoboticTotalStationView extends StatelessWidget {
                         mainColor: Colors.grey[300]!,
                         secondaryColor: Colors.grey[100]!,
                         child: Container(
-                          height: 405.r,
-                          margin: EdgeInsets.all(10.r),
+                          height: 405,
+                          margin: EdgeInsets.all(10),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
                             color: GFColors.WHITE,
@@ -245,11 +244,11 @@ class RoboticTotalStationView extends StatelessWidget {
       children: [
         TabBar(
           tabAlignment: TabAlignment.start,
-          padding: EdgeInsets.only(top: 10.r),
+          padding: EdgeInsets.only(top: 10),
           indicatorColor: Colors.transparent,
           isScrollable: true,
           controller: controller.sensorTabController,
-          dividerHeight: 0.r,
+          dividerHeight: 0,
           onTap: (index) {
             controller.selectedSensorIndex.value = index;
           },
@@ -258,14 +257,14 @@ class RoboticTotalStationView extends StatelessWidget {
               Tab(
                 child: Obx(
                   () => Container(
-                    padding: EdgeInsets.all(8.r),
+                    padding: EdgeInsets.all(8),
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: controller.selectedSensorIndex.value == i
                             ? AppConfig.primaryColor
                             : GFColors.LIGHT,
                       ),
-                      borderRadius: BorderRadius.circular(20.r),
+                      borderRadius: BorderRadius.circular(20),
                     ),
                     child: Text(
                       sensors[i],
@@ -315,8 +314,8 @@ class RoboticTotalStationView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                height: 350.r,
-                margin: EdgeInsets.all(10.r),
+                height: 350,
+                margin: EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: GFColors.WHITE,
@@ -328,14 +327,14 @@ class RoboticTotalStationView extends StatelessWidget {
           if (snapshot.hasError) {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -356,11 +355,11 @@ class RoboticTotalStationView extends StatelessWidget {
                 builder: (controller) {
                   return SingleChildScrollView(
                     child: GFCard(
-                      margin: EdgeInsets.all(10.r),
+                      margin: EdgeInsets.all(10),
                       color: GFColors.WHITE,
                       padding: EdgeInsets.zero,
                       content: SizedBox(
-                        height: 300.r,
+                        height: 300,
                         child: SfCartesianChart(
                           legend: const Legend(
                             isVisible: true,
@@ -368,8 +367,8 @@ class RoboticTotalStationView extends StatelessWidget {
                           ),
                           title: ChartTitle(
                             textStyle: TextStyle(
-                                height: 2.r,
-                                fontSize: 14.r,
+                                height: 2,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold),
                             alignment: ChartAlignment.center,
                             text:
@@ -419,10 +418,10 @@ class RoboticTotalStationView extends StatelessWidget {
                                   AppConstants().dateTimeFormatID.format(date);
                               return SingleChildScrollView(
                                 child: Container(
-                                  width: 150.r,
-                                  padding: EdgeInsets.all(5.r),
+                                  width: 150,
+                                  padding: EdgeInsets.all(5),
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10.r),
+                                      borderRadius: BorderRadius.circular(10),
                                       color: GFColors.DARK),
                                   child: Column(
                                     mainAxisAlignment:
@@ -433,8 +432,8 @@ class RoboticTotalStationView extends StatelessWidget {
                                             MainAxisAlignment.center,
                                         children: [
                                           Container(
-                                            width: 10.r,
-                                            height: 10.r,
+                                            width: 10,
+                                            height: 10,
                                             decoration: BoxDecoration(
                                               color: cColor, // Fill color
                                               shape: BoxShape
@@ -442,7 +441,7 @@ class RoboticTotalStationView extends StatelessWidget {
                                             ),
                                           ),
                                           SizedBox(
-                                            width: 5.r,
+                                            width: 5,
                                           ),
                                           Text(
                                             series.name.toString(),
@@ -452,7 +451,7 @@ class RoboticTotalStationView extends StatelessWidget {
                                         ],
                                       ),
                                       Divider(
-                                        height: 1.r,
+                                        height: 1,
                                         color: GFColors.WHITE,
                                       ),
                                       Text(
@@ -461,14 +460,14 @@ class RoboticTotalStationView extends StatelessWidget {
                                             color: GFColors.WHITE),
                                       ),
                                       Divider(
-                                        height: 1.r,
+                                        height: 1,
                                         color: GFColors.WHITE,
                                       ),
                                       SizedBox(
-                                        width: 5.r,
+                                        width: 5,
                                       ),
                                       Container(
-                                        padding: EdgeInsets.all(5.r),
+                                        padding: EdgeInsets.all(5),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -479,7 +478,7 @@ class RoboticTotalStationView extends StatelessWidget {
                                                   color: GFColors.WHITE),
                                             ),
                                             SizedBox(
-                                              width: 5.r,
+                                              width: 5,
                                             ),
                                             Text(
                                               'dy : ${AppConstants().numFormat.format(point?.y ?? 0)}',
@@ -524,12 +523,12 @@ class RoboticTotalStationView extends StatelessWidget {
                                 child: Container(
                                   decoration: BoxDecoration(
                                     color: Colors.black.withOpacity(0.75),
-                                    borderRadius: BorderRadius.circular(6.r),
+                                    borderRadius: BorderRadius.circular(6),
                                   ),
                                   child: Column(
                                     children: [
                                       Container(
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         decoration: BoxDecoration(
                                             border: Border(
                                                 bottom: BorderSide(
@@ -553,7 +552,7 @@ class RoboticTotalStationView extends StatelessWidget {
                                         ),
                                       ),
                                       Container(
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -595,7 +594,7 @@ class RoboticTotalStationView extends StatelessWidget {
                                 'UTARA',
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 12.r,
+                                    fontSize: 12,
                                     fontWeight: FontWeight.bold),
                               ),
                               coordinateUnit: CoordinateUnit
@@ -610,7 +609,7 @@ class RoboticTotalStationView extends StatelessWidget {
                                 'SELATAN',
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 12.r,
+                                    fontSize: 12,
                                     fontWeight: FontWeight.bold),
                               ),
                               coordinateUnit: CoordinateUnit.point,
@@ -623,7 +622,7 @@ class RoboticTotalStationView extends StatelessWidget {
                                 'TIMUR',
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 12.r,
+                                    fontSize: 12,
                                     fontWeight: FontWeight.bold),
                               ),
                               coordinateUnit: CoordinateUnit.point,
@@ -636,7 +635,7 @@ class RoboticTotalStationView extends StatelessWidget {
                                 'BARAT',
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 12.r,
+                                    fontSize: 12,
                                     fontWeight: FontWeight.bold),
                               ),
                               coordinateUnit: CoordinateUnit.point,
@@ -653,14 +652,14 @@ class RoboticTotalStationView extends StatelessWidget {
           } else {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -674,14 +673,14 @@ class RoboticTotalStationView extends StatelessWidget {
         }
         return SingleChildScrollView(
           child: GFCard(
-            margin: EdgeInsets.all(10.r),
+            margin: EdgeInsets.all(10),
             color: GFColors.WHITE,
             padding: EdgeInsets.zero,
             content: SizedBox(
-              height: 300.r,
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
@@ -706,8 +705,8 @@ class RoboticTotalStationView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                height: 350.r,
-                margin: EdgeInsets.all(10.r),
+                height: 350,
+                margin: EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: GFColors.WHITE,
@@ -719,14 +718,14 @@ class RoboticTotalStationView extends StatelessWidget {
           if (snapshot.hasError) {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -747,11 +746,11 @@ class RoboticTotalStationView extends StatelessWidget {
                 builder: (controller) {
                   return SingleChildScrollView(
                     child: GFCard(
-                      margin: EdgeInsets.all(10.r),
+                      margin: EdgeInsets.all(10),
                       color: GFColors.WHITE,
                       padding: EdgeInsets.zero,
                       content: SizedBox(
-                        height: 300.r,
+                        height: 300,
                         child: SfCartesianChart(
                           legend: const Legend(
                               isVisible: true, position: LegendPosition.bottom),
@@ -769,8 +768,8 @@ class RoboticTotalStationView extends StatelessWidget {
                           ),
                           title: ChartTitle(
                             textStyle: TextStyle(
-                                height: 2.r,
-                                fontSize: 14.r,
+                                height: 2,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold),
                             alignment: ChartAlignment.center,
                             text:
@@ -789,12 +788,11 @@ class RoboticTotalStationView extends StatelessWidget {
                                     .dateTimeFormatID
                                     .format(date);
                                 return Container(
-                                    height: 60.r,
-                                    width: 150.r,
-                                    padding: EdgeInsets.all(5.r),
+                                    height: 60,
+                                    width: 150,
+                                    padding: EdgeInsets.all(5),
                                     decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(10.r),
+                                        borderRadius: BorderRadius.circular(10),
                                         color: GFColors.DARK),
                                     child: Column(
                                       mainAxisAlignment:
@@ -806,7 +804,7 @@ class RoboticTotalStationView extends StatelessWidget {
                                               color: GFColors.WHITE),
                                         ),
                                         Divider(
-                                          height: 1.r,
+                                          height: 1,
                                           color: GFColors.WHITE,
                                         ),
                                         Row(
@@ -814,8 +812,8 @@ class RoboticTotalStationView extends StatelessWidget {
                                               MainAxisAlignment.center,
                                           children: [
                                             Container(
-                                              width: 10.r,
-                                              height: 10.r,
+                                              width: 10,
+                                              height: 10,
                                               decoration: BoxDecoration(
                                                 color: cColor, // Fill color
                                                 shape: BoxShape
@@ -823,7 +821,7 @@ class RoboticTotalStationView extends StatelessWidget {
                                               ),
                                             ),
                                             SizedBox(
-                                              width: 5.r,
+                                              width: 5,
                                             ),
                                             Text(
                                               '${series.name.toString()} : ${AppConstants().numFormat.format(point?.y)}',
@@ -858,12 +856,12 @@ class RoboticTotalStationView extends StatelessWidget {
                                 child: Container(
                                   decoration: BoxDecoration(
                                     color: Colors.black.withOpacity(0.75),
-                                    borderRadius: BorderRadius.circular(6.r),
+                                    borderRadius: BorderRadius.circular(6),
                                   ),
                                   child: Column(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Text(
                                           formattedDate,
                                           style: const TextStyle(
@@ -877,7 +875,7 @@ class RoboticTotalStationView extends StatelessWidget {
                                                 top: BorderSide(
                                           color: Colors.blue,
                                         ))),
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -913,14 +911,14 @@ class RoboticTotalStationView extends StatelessWidget {
           } else {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -934,14 +932,14 @@ class RoboticTotalStationView extends StatelessWidget {
         }
         return SingleChildScrollView(
           child: GFCard(
-            margin: EdgeInsets.all(10.r),
+            margin: EdgeInsets.all(10),
             color: GFColors.WHITE,
             padding: EdgeInsets.zero,
             content: SizedBox(
-              height: 300.r,
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
@@ -1350,16 +1348,16 @@ class RoboticTotalStationView extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SingleChildScrollView(
             child: GFCard(
-              margin: EdgeInsets.all(10.r),
+              margin: EdgeInsets.all(10),
               color: GFColors.WHITE,
               padding: EdgeInsets.zero,
               content: GFShimmer(
                 mainColor: Colors.grey[300]!,
                 secondaryColor: Colors.grey[100]!,
                 child: Container(
-                  height: 300.r,
+                  height: 300,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.r),
+                    borderRadius: BorderRadius.circular(10),
                     color: GFColors.WHITE,
                   ),
                 ),
@@ -1370,14 +1368,14 @@ class RoboticTotalStationView extends StatelessWidget {
           if (snapshot.hasError) {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -1394,7 +1392,7 @@ class RoboticTotalStationView extends StatelessWidget {
               builder: (controller) {
                 return SingleChildScrollView(
                   child: GFCard(
-                    margin: EdgeInsets.all(10.r),
+                    margin: EdgeInsets.all(10),
                     color: GFColors.WHITE,
                     padding: EdgeInsets.zero,
                     content: Column(
@@ -1402,24 +1400,24 @@ class RoboticTotalStationView extends StatelessWidget {
                         SizedBox(
                           height: (AppConstants.dataRowHeight *
                                   controller.rowsPerPage) +
-                              50.r,
+                              50,
                           child: SfDataGridTheme(
                             data: const SfDataGridThemeData(
                                 headerColor: GFColors.LIGHT,
                                 gridLineColor: GFColors.LIGHT),
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10.r),
+                              borderRadius: BorderRadius.circular(10),
                               child: SfDataGrid(
-                                headerRowHeight: 50.r,
+                                headerRowHeight: 50,
                                 rowHeight: AppConstants.dataRowHeight,
                                 source: ds,
                                 columnWidthMode: ColumnWidthMode.fill,
                                 columns: <GridColumn>[
                                   GridColumn(
-                                    minimumWidth: 140.r,
+                                    minimumWidth: 140,
                                     columnName: 'readingAt',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       child: const Text(
                                         'Waktu',
@@ -1430,10 +1428,10 @@ class RoboticTotalStationView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'point',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       child: const Text(
                                         'Point',
@@ -1444,10 +1442,10 @@ class RoboticTotalStationView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'baseE',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       child: const Text(
                                         'Base E',
@@ -1458,10 +1456,10 @@ class RoboticTotalStationView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'baseN',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       child: const Text(
                                         'Base N',
@@ -1472,10 +1470,10 @@ class RoboticTotalStationView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'baseRl',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       child: const Text(
                                         'Base RL',
@@ -1486,10 +1484,10 @@ class RoboticTotalStationView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'easting',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       child: const Text(
                                         'Easting',
@@ -1500,10 +1498,10 @@ class RoboticTotalStationView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'northing',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       child: const Text(
                                         'Northing',
@@ -1514,10 +1512,10 @@ class RoboticTotalStationView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'reduceLevel',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       child: const Text(
                                         'Reduce Level',
@@ -1528,10 +1526,10 @@ class RoboticTotalStationView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'de',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       child: const Text(
                                         'dE',
@@ -1542,10 +1540,10 @@ class RoboticTotalStationView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'dn',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       child: const Text(
                                         'dN',
@@ -1556,10 +1554,10 @@ class RoboticTotalStationView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'drl',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       child: const Text(
                                         'dRL',
@@ -1570,10 +1568,10 @@ class RoboticTotalStationView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'dx',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       child: const Text(
                                         'dX',
@@ -1584,10 +1582,10 @@ class RoboticTotalStationView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'dy',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       child: const Text(
                                         'dY',
@@ -1598,10 +1596,10 @@ class RoboticTotalStationView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'dz',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       child: const Text(
                                         'dZ',
@@ -1617,7 +1615,7 @@ class RoboticTotalStationView extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: 10.r,
+                          height: 10,
                         ),
                         SfDataPager(
                           delegate: ds,
@@ -1636,14 +1634,14 @@ class RoboticTotalStationView extends StatelessWidget {
           } else {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -1657,14 +1655,14 @@ class RoboticTotalStationView extends StatelessWidget {
         }
         return SingleChildScrollView(
           child: GFCard(
-            margin: EdgeInsets.all(10.r),
+            margin: EdgeInsets.all(10),
             color: GFColors.WHITE,
             padding: EdgeInsets.zero,
             content: SizedBox(
-              height: 300.r,
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(

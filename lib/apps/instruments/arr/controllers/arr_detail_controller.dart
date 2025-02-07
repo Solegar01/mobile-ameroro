@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:getwidget/colors/gf_color.dart';
 import 'package:mobile_ameroro_app/apps/instruments/arr/models/arr_detail_day_model.dart';
 import 'package:mobile_ameroro_app/apps/instruments/arr/models/arr_detail_hour_model.dart';
 import 'package:mobile_ameroro_app/apps/instruments/arr/models/arr_detail_minute_model.dart';
@@ -242,7 +240,7 @@ class TableDataSourceHour extends DataGridSource {
         cells: row.getCells().map<Widget>((e) {
       return Container(
         alignment: Alignment.center,
-        padding: EdgeInsets.all(10.r),
+        padding: EdgeInsets.all(10),
         child: Text(e.value != null ? e.value.toString() : ' - '),
       );
     }).toList());
@@ -322,7 +320,7 @@ class TableDataSourceMinute extends DataGridSource {
         cells: row.getCells().map<Widget>((e) {
       return Container(
         alignment: Alignment.center,
-        padding: EdgeInsets.all(10.r),
+        padding: EdgeInsets.all(10),
         child: Text(e.value != null ? e.value.toString() : ' - '),
       );
     }).toList());
@@ -401,7 +399,7 @@ class TableDataSourceDay extends DataGridSource {
         cells: row.getCells().map<Widget>((e) {
       return Container(
         alignment: Alignment.center,
-        padding: EdgeInsets.all(10.r),
+        padding: EdgeInsets.all(10),
         child: Text(e.value != null ? e.value.toString() : ' - '),
       );
     }).toList());

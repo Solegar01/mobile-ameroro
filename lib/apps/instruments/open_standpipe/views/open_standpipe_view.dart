@@ -1,6 +1,5 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
@@ -31,14 +30,14 @@ class OpenStandpipeView extends StatelessWidget {
             appBar: AppBar(
               foregroundColor: GFColors.WHITE,
               title: GetBuilder<OpenStandpipeController>(
-                builder: (controller) => Text(
+                builder: (controller) => const Text(
                   'OPEN STANDPIPE',
                   style: TextStyle(
-                    fontSize: 20.r,
+                    fontSize: 20,
                   ),
                 ),
               ),
-              actions: [],
+              actions: const [],
             ),
             body: controller.obx(
               (state) => _detail(context, controller),
@@ -62,7 +61,7 @@ class OpenStandpipeView extends StatelessWidget {
       child: ListView(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: Form(
               key: _formKey,
               child: Column(
@@ -112,8 +111,8 @@ class OpenStandpipeView extends StatelessWidget {
                       constraints: BoxConstraints(),
                     ),
                   ),
-                  SizedBox(
-                    height: 10.r,
+                  const SizedBox(
+                    height: 10,
                   ),
                   DropdownSearch<Map<String, dynamic>>(
                     key: elevationKey,
@@ -160,8 +159,8 @@ class OpenStandpipeView extends StatelessWidget {
                       constraints: BoxConstraints(),
                     ),
                   ),
-                  SizedBox(
-                    height: 10.r,
+                  const SizedBox(
+                    height: 10,
                   ),
                   TextFormField(
                     onTap: () async {
@@ -176,7 +175,7 @@ class OpenStandpipeView extends StatelessWidget {
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius:
-                            BorderRadius.circular(5.r), // Rounded corners
+                            BorderRadius.circular(5), // Rounded corners
                         borderSide: const BorderSide(
                             color: GFColors.DARK), // Border color
                       ),
@@ -198,8 +197,8 @@ class OpenStandpipeView extends StatelessWidget {
                     controller: controller.dateRangeController,
                     readOnly: true,
                   ),
-                  SizedBox(
-                    height: 10.r,
+                  const SizedBox(
+                    height: 10,
                   ),
                   ElevatedButton(
                     onPressed: () async {
@@ -215,18 +214,18 @@ class OpenStandpipeView extends StatelessWidget {
                           color: AppConfig.primaryColor,
                         ),
                         borderRadius:
-                            BorderRadius.circular(30.r), // Rounded corners
+                            BorderRadius.circular(30), // Rounded corners
                       ),
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 10.r, vertical: 10.r),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 10),
                     ),
-                    child: SizedBox(
+                    child: const SizedBox(
                       width: double.infinity,
                       child: Center(
                         child: Text(
                           'Tampilkan',
                           style: TextStyle(
-                            fontSize: 16.r,
+                            fontSize: 16,
                             color: AppConfig.primaryColor,
                           ),
                         ),
@@ -280,7 +279,7 @@ class OpenStandpipeView extends StatelessWidget {
           ],
         ),
         SizedBox(
-          height: 680.r,
+          height: 680,
           child: TabBarView(
             controller: controller.tabController,
             children: [
@@ -298,7 +297,7 @@ class OpenStandpipeView extends StatelessWidget {
     return ListView(
       children: [
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -314,7 +313,7 @@ class OpenStandpipeView extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 10.r),
+              const SizedBox(height: 10),
               GFShimmer(
                 mainColor: Colors.grey[300]!,
                 secondaryColor: Colors.grey[100]!,
@@ -327,7 +326,7 @@ class OpenStandpipeView extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 10.r),
+              const SizedBox(height: 10),
               GFShimmer(
                 mainColor: Colors.grey[300]!,
                 secondaryColor: Colors.grey[100]!,
@@ -340,7 +339,7 @@ class OpenStandpipeView extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 10.r),
+              const SizedBox(height: 10),
               GFShimmer(
                 mainColor: Colors.grey[300]!,
                 secondaryColor: Colors.grey[100]!,
@@ -349,7 +348,7 @@ class OpenStandpipeView extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.grey[300],
                     borderRadius:
-                        BorderRadius.circular(30.r), // Optional rounded corners
+                        BorderRadius.circular(30), // Optional rounded corners
                   ),
                 ),
               ),
@@ -392,7 +391,7 @@ class OpenStandpipeView extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: 680.r,
+              height: 680,
               child: TabBarView(
                 controller: controller.tabController,
                 children: [
@@ -403,8 +402,8 @@ class OpenStandpipeView extends StatelessWidget {
                           mainColor: Colors.grey[300]!,
                           secondaryColor: Colors.grey[100]!,
                           child: Container(
-                            margin: EdgeInsets.all(10.r),
-                            height: 305.r,
+                            margin: const EdgeInsets.all(10),
+                            height: 305,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
                               color: GFColors.WHITE,
@@ -415,8 +414,8 @@ class OpenStandpipeView extends StatelessWidget {
                           mainColor: Colors.grey[300]!,
                           secondaryColor: Colors.grey[100]!,
                           child: Container(
-                            margin: EdgeInsets.all(10.r),
-                            height: 305.r,
+                            margin: const EdgeInsets.all(10),
+                            height: 305,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
                               color: GFColors.WHITE,
@@ -427,8 +426,8 @@ class OpenStandpipeView extends StatelessWidget {
                           mainColor: Colors.grey[300]!,
                           secondaryColor: Colors.grey[100]!,
                           child: Container(
-                            margin: EdgeInsets.all(10.r),
-                            height: 305.r,
+                            margin: const EdgeInsets.all(10),
+                            height: 305,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
                               color: GFColors.WHITE,
@@ -443,8 +442,8 @@ class OpenStandpipeView extends StatelessWidget {
                       mainColor: Colors.grey[300]!,
                       secondaryColor: Colors.grey[100]!,
                       child: Container(
-                        margin: EdgeInsets.all(10.r),
-                        height: 300.r,
+                        margin: const EdgeInsets.all(10),
+                        height: 300,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
                           color: GFColors.WHITE,
@@ -457,8 +456,8 @@ class OpenStandpipeView extends StatelessWidget {
                       mainColor: Colors.grey[300]!,
                       secondaryColor: Colors.grey[100]!,
                       child: Container(
-                        margin: EdgeInsets.all(10.r),
-                        height: 300.r,
+                        margin: const EdgeInsets.all(10),
+                        height: 300,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
                           color: GFColors.WHITE,
@@ -501,17 +500,17 @@ class OpenStandpipeView extends StatelessWidget {
         child: Column(
       children: listSvg.map((svg) {
         return GFCard(
-          margin: EdgeInsets.all(10.r),
-          padding: EdgeInsets.all(5.r),
+          margin: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(5),
           boxFit: BoxFit.cover,
           color: GFColors.WHITE,
           title: GFListTile(
             title: Text(
               svg['title'] ?? 'No Title',
-              style: TextStyle(
+              style: const TextStyle(
                 color: GFColors.DARK,
                 fontWeight: FontWeight.bold,
-                fontSize: 12.r,
+                fontSize: 12,
               ),
               textAlign: TextAlign.left,
             ),
@@ -519,7 +518,7 @@ class OpenStandpipeView extends StatelessWidget {
           content: SvgPicture.asset(
             svg['path'] ?? '',
             width: double.infinity,
-            height: 300.r,
+            height: 300,
             fit: BoxFit.contain,
             placeholderBuilder: (context) => const GFLoader(
               type: GFLoaderType.circle,
@@ -530,39 +529,39 @@ class OpenStandpipeView extends StatelessWidget {
     ));
   }
 
-  bool _isWithinTargetArea(Offset position) {
-    // Define the specific target coordinates and dimensions
-    const double targetX = 100; // X position of target area
-    const double targetY = 100; // Y position of target area
-    const double targetWidth = 50; // Width of target area
-    const double targetHeight = 50; // Height of target area
+  // bool _isWithinTargetArea(Offset position) {
+  //   // Define the specific target coordinates and dimensions
+  //   const double targetX = 100; // X position of target area
+  //   const double targetY = 100; // Y position of target area
+  //   const double targetWidth = 50; // Width of target area
+  //   const double targetHeight = 50; // Height of target area
 
-    return position.dx >= targetX &&
-        position.dx <= targetX + targetWidth &&
-        position.dy >= targetY &&
-        position.dy <= targetY + targetHeight;
-  }
+  //   return position.dx >= targetX &&
+  //       position.dx <= targetX + targetWidth &&
+  //       position.dy >= targetY &&
+  //       position.dy <= targetY + targetHeight;
+  // }
 
-  void _showCoordinateDialog(BuildContext context, Offset position) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text("Coordinates"),
-          content: Text(
-              "X: ${position.dx.toStringAsFixed(2)}, Y: ${position.dy.toStringAsFixed(2)}"),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text("OK"),
-            ),
-          ],
-        );
-      },
-    );
-  }
+  // void _showCoordinateDialog(BuildContext context, Offset position) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (context) {
+  //       return AlertDialog(
+  //         title: Text("Coordinates"),
+  //         content: Text(
+  //             "X: ${position.dx.toStringAsFixed(2)}, Y: ${position.dy.toStringAsFixed(2)}"),
+  //         actions: [
+  //           TextButton(
+  //             onPressed: () {
+  //               Navigator.of(context).pop();
+  //             },
+  //             child: Text("OK"),
+  //           ),
+  //         ],
+  //       );
+  //     },
+  //   );
+  // }
 
   Widget _chartTab(BuildContext context, OpenStandpipeController controller) {
     return FutureBuilder(
@@ -574,8 +573,8 @@ class OpenStandpipeView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: const EdgeInsets.all(10),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: GFColors.WHITE,
@@ -587,14 +586,14 @@ class OpenStandpipeView extends StatelessWidget {
           if (snapshot.hasError) {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: const EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -615,11 +614,11 @@ class OpenStandpipeView extends StatelessWidget {
                 builder: (controller) {
                   return SingleChildScrollView(
                     child: GFCard(
-                      margin: EdgeInsets.all(10.r),
+                      margin: const EdgeInsets.all(10),
                       color: GFColors.WHITE,
                       padding: EdgeInsets.zero,
                       content: SizedBox(
-                        height: 300.r,
+                        height: 300,
                         child: SfCartesianChart(
                           legend: const Legend(
                               isVisible: true, position: LegendPosition.bottom),
@@ -635,20 +634,20 @@ class OpenStandpipeView extends StatelessWidget {
                             labelFormat: '{value}',
                             title: AxisTitle(text: 'Muka Air (m)'),
                           ),
-                          axes: [
+                          axes: const [
                             NumericAxis(
-                              title: const AxisTitle(text: 'TMA INTAKE (mdpl)'),
+                              title: AxisTitle(text: 'TMA INTAKE (mdpl)'),
                               labelFormat: '{value}',
                               name: 'InvertedAxis',
                               opposedPosition: true,
                               isInversed: true,
-                              majorGridLines: MajorGridLines(width: 0.r),
+                              majorGridLines: MajorGridLines(width: 0),
                             )
                           ],
-                          title: ChartTitle(
+                          title: const ChartTitle(
                             textStyle: TextStyle(
-                                height: 2.r,
-                                fontSize: 14.r,
+                                height: 2,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold),
                             alignment: ChartAlignment.center,
                             text: 'Grafik Tinggi Muka Air',
@@ -684,7 +683,7 @@ class OpenStandpipeView extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: const EdgeInsets.all(8),
                                         child: Text(
                                           formattedDate,
                                           style: const TextStyle(
@@ -698,7 +697,7 @@ class OpenStandpipeView extends StatelessWidget {
                                                 top: BorderSide(
                                           color: Colors.blue,
                                         ))),
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: const EdgeInsets.all(8),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -970,14 +969,14 @@ class OpenStandpipeView extends StatelessWidget {
           } else {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: const EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -991,14 +990,14 @@ class OpenStandpipeView extends StatelessWidget {
         }
         return SingleChildScrollView(
           child: GFCard(
-            margin: EdgeInsets.all(10.r),
+            margin: const EdgeInsets.all(10),
             color: GFColors.WHITE,
             padding: EdgeInsets.zero,
             content: SizedBox(
-              height: 300.r,
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
@@ -1022,8 +1021,8 @@ class OpenStandpipeView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: const EdgeInsets.all(10),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: GFColors.WHITE,
@@ -1035,14 +1034,14 @@ class OpenStandpipeView extends StatelessWidget {
           if (snapshot.hasError) {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: const EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -1059,7 +1058,7 @@ class OpenStandpipeView extends StatelessWidget {
               builder: (controller) {
                 return SingleChildScrollView(
                   child: GFCard(
-                    margin: EdgeInsets.all(10.r),
+                    margin: const EdgeInsets.all(10),
                     color: GFColors.WHITE,
                     padding: EdgeInsets.zero,
                     content: Column(
@@ -1067,33 +1066,33 @@ class OpenStandpipeView extends StatelessWidget {
                         SizedBox(
                           height: (AppConstants.dataRowHeight *
                                   controller.rowsPerPage) +
-                              160.r,
+                              160,
                           child: SfDataGridTheme(
                             data: const SfDataGridThemeData(
                                 headerColor: GFColors.LIGHT,
                                 gridLineColor: GFColors.LIGHT),
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10.r),
+                              borderRadius: BorderRadius.circular(10),
                               child: SfDataGrid(
-                                headerRowHeight: 50.r,
+                                headerRowHeight: 50,
                                 rowHeight: AppConstants.dataRowHeight,
                                 source: ds,
                                 columnWidthMode: ColumnWidthMode.fill,
                                 columns: <GridColumn>[
                                   GridColumn(
-                                    minimumWidth: 140.r,
+                                    minimumWidth: 140,
                                     columnName: 'readingDate',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(10.r),
+                                        borderRadius: const BorderRadius.only(
+                                          topLeft: Radius.circular(10),
                                         ),
                                       ),
                                       child: const Text(
@@ -1106,32 +1105,32 @@ class OpenStandpipeView extends StatelessWidget {
                                   ),
                                   //OSP11
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp11WaterLevel',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Muka Air',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (m)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1140,32 +1139,32 @@ class OpenStandpipeView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp11ElvWaterLevel',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Elv. Muka Air',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Mdpl)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1174,32 +1173,32 @@ class OpenStandpipeView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp11TekananPori',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Tekanan Pori',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (MH₂O)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1210,32 +1209,32 @@ class OpenStandpipeView extends StatelessWidget {
 
                                   //OSP12
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp12WaterLevel',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Muka Air',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (m)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1244,32 +1243,32 @@ class OpenStandpipeView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp12ElvWaterLevel',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Elv. Muka Air',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Mdpl)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1278,32 +1277,32 @@ class OpenStandpipeView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp12TekananPori',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Tekanan Pori',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (MH₂O)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1314,32 +1313,32 @@ class OpenStandpipeView extends StatelessWidget {
 
                                   //OSP21
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp21WaterLevel',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Muka Air',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (m)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1348,32 +1347,32 @@ class OpenStandpipeView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp21ElvWaterLevel',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Elv. Muka Air',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Mdpl)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1382,32 +1381,32 @@ class OpenStandpipeView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp21TekananPori',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Tekanan Pori',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (MH₂O)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1418,32 +1417,32 @@ class OpenStandpipeView extends StatelessWidget {
 
                                   //OSP22
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp22WaterLevel',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Muka Air',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (m)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1452,32 +1451,32 @@ class OpenStandpipeView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp22ElvWaterLevel',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Elv. Muka Air',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Mdpl)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1486,32 +1485,32 @@ class OpenStandpipeView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp22TekananPori',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Tekanan Pori',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (MH₂O)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1522,32 +1521,32 @@ class OpenStandpipeView extends StatelessWidget {
 
                                   //OSP31
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp31WaterLevel',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Muka Air',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (m)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1556,32 +1555,32 @@ class OpenStandpipeView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp31ElvWaterLevel',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Elv. Muka Air',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Mdpl)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1590,32 +1589,32 @@ class OpenStandpipeView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp31TekananPori',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Tekanan Pori',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (MH₂O)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1626,32 +1625,32 @@ class OpenStandpipeView extends StatelessWidget {
 
                                   //OSP32
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp32WaterLevel',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Muka Air',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (m)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1660,32 +1659,32 @@ class OpenStandpipeView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp32ElvWaterLevel',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Elv. Muka Air',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Mdpl)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1694,32 +1693,32 @@ class OpenStandpipeView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp32TekananPori',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Tekanan Pori',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (MH₂O)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1730,32 +1729,32 @@ class OpenStandpipeView extends StatelessWidget {
 
                                   //OSP41
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp41WaterLevel',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Muka Air',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (m)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1764,32 +1763,32 @@ class OpenStandpipeView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp41ElvWaterLevel',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Elv. Muka Air',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Mdpl)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1798,32 +1797,32 @@ class OpenStandpipeView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp41TekananPori',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Tekanan Pori',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (MH₂O)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1834,32 +1833,32 @@ class OpenStandpipeView extends StatelessWidget {
 
                                   //OSP42
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp42WaterLevel',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Muka Air',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (m)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1868,32 +1867,32 @@ class OpenStandpipeView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp42ElvWaterLevel',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Elv. Muka Air',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Mdpl)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1902,32 +1901,32 @@ class OpenStandpipeView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp42TekananPori',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Tekanan Pori',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (MH₂O)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1938,32 +1937,32 @@ class OpenStandpipeView extends StatelessWidget {
 
                                   //OSP51
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp51WaterLevel',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Muka Air',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (m)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1972,32 +1971,32 @@ class OpenStandpipeView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp51ElvWaterLevel',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Elv. Muka Air',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Mdpl)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -2006,32 +2005,32 @@ class OpenStandpipeView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp51TekananPori',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Tekanan Pori',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (MH₂O)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -2042,32 +2041,32 @@ class OpenStandpipeView extends StatelessWidget {
 
                                   //OSP52
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp52WaterLevel',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Muka Air',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (m)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -2076,32 +2075,32 @@ class OpenStandpipeView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp52ElvWaterLevel',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Elv. Muka Air',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Mdpl)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -2110,32 +2109,32 @@ class OpenStandpipeView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp52TekananPori',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Tekanan Pori',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (MH₂O)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -2146,32 +2145,32 @@ class OpenStandpipeView extends StatelessWidget {
 
                                   //OSP61
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp61WaterLevel',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Muka Air',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (m)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -2180,32 +2179,32 @@ class OpenStandpipeView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp61ElvWaterLevel',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Elv. Muka Air',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Mdpl)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -2214,32 +2213,32 @@ class OpenStandpipeView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp61TekananPori',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Tekanan Pori',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (MH₂O)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -2250,32 +2249,32 @@ class OpenStandpipeView extends StatelessWidget {
 
                                   //OSP62
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp62WaterLevel',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Muka Air',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (m)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -2284,32 +2283,32 @@ class OpenStandpipeView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp62ElvWaterLevel',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Elv. Muka Air',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Mdpl)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -2318,32 +2317,32 @@ class OpenStandpipeView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'sensorOsp62TekananPori',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Tekanan Pori',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (MH₂O)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -2365,7 +2364,7 @@ class OpenStandpipeView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -2386,7 +2385,7 @@ class OpenStandpipeView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -2407,7 +2406,7 @@ class OpenStandpipeView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -2428,7 +2427,7 @@ class OpenStandpipeView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -2449,7 +2448,7 @@ class OpenStandpipeView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -2470,7 +2469,7 @@ class OpenStandpipeView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -2491,7 +2490,7 @@ class OpenStandpipeView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -2512,7 +2511,7 @@ class OpenStandpipeView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -2533,7 +2532,7 @@ class OpenStandpipeView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -2554,7 +2553,7 @@ class OpenStandpipeView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -2575,7 +2574,7 @@ class OpenStandpipeView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -2596,7 +2595,7 @@ class OpenStandpipeView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -2612,8 +2611,8 @@ class OpenStandpipeView extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: 10.r,
+                        const SizedBox(
+                          height: 10,
                         ),
                         SfDataPager(
                           delegate: ds,
@@ -2632,14 +2631,14 @@ class OpenStandpipeView extends StatelessWidget {
           } else {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: const EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -2653,14 +2652,14 @@ class OpenStandpipeView extends StatelessWidget {
         }
         return SingleChildScrollView(
           child: GFCard(
-            margin: EdgeInsets.all(10.r),
+            margin: const EdgeInsets.all(10),
             color: GFColors.WHITE,
             padding: EdgeInsets.zero,
             content: SizedBox(
-              height: 300.r,
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:getwidget/colors/gf_color.dart';
 import 'package:mobile_ameroro_app/apps/config/app_config.dart';
 
@@ -35,7 +34,7 @@ class TextInputCustom extends StatelessWidget {
         color: GFColors.LIGHT,
       ),
       decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(vertical: 0.r),
+          contentPadding: const EdgeInsets.symmetric(vertical: 0),
           labelText: label,
           labelStyle: TextStyle(
             fontSize: AppConfig.fontSize,

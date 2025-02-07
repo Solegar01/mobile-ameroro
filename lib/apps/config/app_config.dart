@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:getwidget/colors/gf_color.dart';
 
 class AppConfig {
-  static double fontSizeLarge = 20.r;
-  static double fontSizeXL = 24.r;
-  static double fontSize = 16.r;
-  static double fontMedion = 14.r;
-  static double fontSizeSmall = 12.r;
+  static double fontSizeLarge = 20;
+  static double fontSizeXL = 24;
+  static double fontSize = 16;
+  static double fontMedion = 14;
+  static double fontSizeSmall = 12;
 
-  static double verticalSpace = 20.r;
-  static double defaultPadding = 20.r;
+  static double verticalSpace = 20;
+  static double defaultPadding = 20;
 
   static Color bgLogin = const Color(0XFF3A57E8);
   static Color focusTextField = const Color(0xFFFFC828);
@@ -18,7 +17,7 @@ class AppConfig {
 
   static ThemeData themeData = ThemeData(
     primaryColor: primaryColor,
-    scaffoldBackgroundColor: GFColors.WHITE,
+    scaffoldBackgroundColor: Colors.blueGrey[50],
     colorScheme: const ColorScheme(
       primary: primaryColor,
       secondary: GFColors.SECONDARY,

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:mobile_ameroro_app/apps/cctv/models/cctv_model.dart';
+import 'package:mobile_ameroro_app/helpers/app_constant.dart';
 import 'package:mobile_ameroro_app/services/api/api_service.dart';
 
 class CctvRepository {
@@ -8,7 +9,7 @@ class CctvRepository {
   CctvRepository(this.apiService);
 
   Future<List<CctvModel>> getAllCctvs() async {
-    final response = await apiService.get('cctvs');
+    final response = await apiService.get(AppConstants.cctvUrl);
     final jsonResponse = json.decode(response.body);
 
     if (response.statusCode == 200) {
@@ -53,6 +54,8 @@ class CctvRepository {
           latitude: cctvData['latitude']?.toDouble() ?? update.latitude,
           longitude: cctvData['longitude']?.toDouble() ?? update.longitude,
           note: cctvData['note'] ?? update.note,
+          createdAt: cctvData['created_at'],
+          updatedAt: cctvData['updated_at'],
         );
       } else {
         throw Exception('Failed to update CCTV');

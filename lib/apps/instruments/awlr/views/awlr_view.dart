@@ -1,7 +1,5 @@
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:mobile_ameroro_app/apps/config/app_config.dart';
@@ -22,7 +20,7 @@ class AwlrView extends StatelessWidget {
               appBar: AppBar(
                 foregroundColor: GFColors.WHITE,
                 title: Padding(
-                  padding: EdgeInsets.all(10.r),
+                  padding: EdgeInsets.all(10),
                   child: Text('AWLR'),
                 ),
                 actions: [
@@ -42,7 +40,7 @@ class AwlrView extends StatelessWidget {
                 ),
                 onEmpty: const Text('Empty Data'),
                 onError: (error) => Padding(
-                  padding: EdgeInsets.all(8.r),
+                  padding: EdgeInsets.all(8),
                   child: Center(child: Text(error!)),
                 ),
               ),
@@ -64,9 +62,9 @@ class AwlrView extends StatelessWidget {
   _listCard(BuildContext context, AwlrController controller) {
     return ListView.separated(
       separatorBuilder: (BuildContext context, int index) {
-        return Container(color: GFColors.LIGHT, height: 2.r);
+        return Divider(color: Colors.grey[400], height: 2);
       },
-      padding: EdgeInsets.all(8.r),
+      padding: EdgeInsets.all(10),
       itemCount: controller.listAwlr.length,
       itemBuilder: (context, index) {
         final data = controller.listAwlr[index];
@@ -90,7 +88,7 @@ class AwlrView extends StatelessWidget {
           title: Text(
             data.stationName ?? '-',
             style: TextStyle(
-                fontSize: 16.r,
+                fontSize: 16,
                 fontWeight: FontWeight.bold,
                 color: AppConfig.primaryColor),
           ),
@@ -103,9 +101,9 @@ class AwlrView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     _buildInfoBadge(GFColors.INFO, data.brandName ?? '-'),
-                    SizedBox(width: 8.r),
+                    SizedBox(width: 8),
                     _buildInfoBadge(GFColors.DARK, data.deviceId ?? '-'),
-                    SizedBox(width: 8.r),
+                    SizedBox(width: 8),
                     _buildInfoBadge(
                       (data.status ?? '').toLowerCase() == 'offline'
                           ? GFColors.DANGER
@@ -115,7 +113,7 @@ class AwlrView extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 8.r),
+              SizedBox(height: 8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -126,31 +124,31 @@ class AwlrView extends StatelessWidget {
                       Text(
                         'Waktu : ${AppConstants().dateTimeFullFormatID.format(data.readingAt!)} WITA',
                         style: TextStyle(
-                          fontSize: 12.r,
+                          fontSize: 12,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 8.r),
+                      SizedBox(height: 8),
                       Text(
                         'Debit : ${AppConstants().numFormat.format(data.debit ?? 0)} L/s',
                         style: TextStyle(
-                          fontSize: 12.r,
+                          fontSize: 12,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 8.r),
+                      SizedBox(height: 8),
                       Text(
                         'Tegangan Baterai : ${AppConstants().numFormat.format(data.batteryVoltage ?? 0)} v',
                         style: TextStyle(
-                          fontSize: 12.r,
+                          fontSize: 12,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 8.r),
+                      SizedBox(height: 8),
                       Text(
                         'Kapasitas Baterai : ${(data.batteryCapacity ?? 0)} %',
                         style: TextStyle(
-                          fontSize: 12.r,
+                          fontSize: 12,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -166,20 +164,20 @@ class AwlrView extends StatelessWidget {
                                 Text(
                                   '${AppConstants().numFormat.format(data.waterLevel ?? 0)} mdpl',
                                   style: TextStyle(
-                                    fontSize: 14.r,
+                                    fontSize: 14,
                                     fontWeight: FontWeight.bold,
                                     color: AppConfig.primaryColor,
                                   ),
                                 ),
-                                SizedBox(height: 8.r),
+                                SizedBox(height: 8),
                                 Container(
                                   decoration: BoxDecoration(
                                     color: warningStatus != null
                                         ? warningStatus.color.withOpacity(0.2)
                                         : Colors.grey.withOpacity(0.2),
-                                    borderRadius: BorderRadius.circular(5.r),
+                                    borderRadius: BorderRadius.circular(5),
                                   ),
-                                  padding: EdgeInsets.all(4.r),
+                                  padding: EdgeInsets.all(4),
                                   child: Text(
                                     data.warningStatus == null
                                         ? 'Tanpa Status'
@@ -188,7 +186,7 @@ class AwlrView extends StatelessWidget {
                                         color: warningStatus != null
                                             ? warningStatus.color
                                             : Colors.grey,
-                                        fontSize: 12.r,
+                                        fontSize: 12,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
@@ -201,20 +199,20 @@ class AwlrView extends StatelessWidget {
                                   Text(
                                     '${AppConstants().numFormat.format(data.waterLevel ?? 0)} mdpl',
                                     style: TextStyle(
-                                      fontSize: 14.r,
+                                      fontSize: 14,
                                       fontWeight: FontWeight.bold,
                                       color: AppConfig.primaryColor,
                                     ),
                                   ),
-                                  SizedBox(height: 8.r),
+                                  SizedBox(height: 8),
                                   Container(
                                     decoration: BoxDecoration(
                                       color: warningStatus != null
                                           ? warningStatus.color.withOpacity(0.2)
                                           : Colors.grey.withOpacity(0.2),
-                                      borderRadius: BorderRadius.circular(5.r),
+                                      borderRadius: BorderRadius.circular(5),
                                     ),
-                                    padding: EdgeInsets.all(4.r),
+                                    padding: EdgeInsets.all(4),
                                     child: Text(
                                       data.warningStatus == null
                                           ? 'Tanpa Status'
@@ -223,7 +221,7 @@ class AwlrView extends StatelessWidget {
                                           color: warningStatus != null
                                               ? warningStatus.color
                                               : Colors.grey,
-                                          fontSize: 12.r,
+                                          fontSize: 12,
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ),
@@ -232,7 +230,7 @@ class AwlrView extends StatelessWidget {
                             ),
                     ],
                   ),
-                  SizedBox(height: 8.r),
+                  SizedBox(height: 8),
                 ],
               ),
             ],
@@ -249,15 +247,15 @@ class AwlrView extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: color.withOpacity(0.2),
-        borderRadius: BorderRadius.circular(5.r),
+        borderRadius: BorderRadius.circular(5),
       ),
-      padding: EdgeInsets.all(4.r),
+      padding: EdgeInsets.all(4),
       child: Text(
         text,
         style: TextStyle(
           color: color,
           fontWeight: FontWeight.bold,
-          fontSize: 12.r,
+          fontSize: 12,
         ),
       ),
     );

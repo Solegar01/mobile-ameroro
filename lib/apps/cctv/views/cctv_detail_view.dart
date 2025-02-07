@@ -1,152 +1,140 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getwidget/colors/gf_color.dart';
 import 'package:mobile_ameroro_app/apps/cctv/controllers/cctv_controller.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:mobile_ameroro_app/apps/cctv/models/cctv_model.dart';
+import 'package:mobile_ameroro_app/apps/config/app_config.dart';
+import 'package:photo_view/photo_view.dart';
 
 class CctvDetailView extends StatelessWidget {
-  final CctvController _controller = Get.find<CctvController>();
-  final String id = Get.arguments ?? "";
-
-  CctvDetailView({super.key});
+  final CctvController controller = Get.find<CctvController>();
+  final CctvModel model = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Detail CCTV",
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
+    return DefaultTabController(
+      length: 2, // Jumlah tab
+      child: Scaffold(
+        appBar: AppBar(
+          foregroundColor: GFColors.WHITE,
+          title: Text(
+            model.name,
+            style: const TextStyle(
+              fontSize: 20,
+            ),
           ),
-        ),
-        backgroundColor: const Color.fromARGB(255, 7, 23, 94),
-        iconTheme: const IconThemeData(
-          color: Colors.white,
-        ),
-        // actions: [
-        //   IconButton(
-        //     icon: const Icon(Icons.delete_forever_outlined, color: Colors.white),
-        //     onPressed: () {
-        //       Get.defaultDialog(
-        //         title: 'Hapus CCTV',
-        //         middleText: 'Apakah Anda yakin ingin menghapus CCTV ini?',
-        //         textConfirm: 'Ya',
-        //         textCancel: 'Batal',
-        //         onConfirm: () {
-        //           // _controller.deleteCctv(context, id);
-        //           Get.back();
-        //         },
-        //       );
-        //     },
-        //   ),
-        // ],
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Nama Lokasi *',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 8),
-            _buildTextField(
-              controller: _controller.name,
-              hintText: 'Masukkan Nama Lokasi',
-            ),
-            const SizedBox(height: 16),
-            const Text(
-              'URL Gambar *',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 8),
-            _buildTextField(
-              controller: _controller.url,
-              hintText: 'Masukkan URL Gambar',
-            ),
-            const SizedBox(height: 16),
-            const Text(
-              'Latitude *',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 8),
-            _buildTextField(
-              controller: _controller.latitude,
-              hintText: 'Masukkan Latitude',
-              keyboardType: TextInputType.number,
-            ),
-            const SizedBox(height: 16),
-            const Text(
-              'Longitude *',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 8),
-            _buildTextField(
-              controller: _controller.longitude,
-              hintText: 'Masukkan Longitude',
-              keyboardType: TextInputType.number,
-            ),
-            const SizedBox(height: 16),
-            const Text(
-              'Catatan',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 8),
-            _buildTextField(
-              controller: _controller.note,
-              hintText: 'Masukkan Catatan',
-              maxLines: 3,
-            ),
-            const SizedBox(height: 24),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  _controller.updateCctv(id);
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 7, 23, 94),
-                  padding: const EdgeInsets.symmetric(vertical: 12),
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(48.0), // Tinggi TabBar
+            child: Container(
+              color: Colors.blueGrey[50],
+              child: const TabBar(
+                indicator: UnderlineTabIndicator(
+                  borderSide: BorderSide(
+                    width: 4.0,
+                    color: AppConfig.primaryColor,
+                  ),
                 ),
-                child: const Text(
-                  'Simpan Perubahan',
-                  style: TextStyle(fontSize: 16, color: Colors.white),
-                ),
+                tabs: [
+                  Tab(text: "CCTV"),
+                  Tab(text: "LOKASI"),
+                ],
               ),
             ),
+          ),
+        ),
+        body: TabBarView(
+          children: [
+            PhotoViewScreen(imageUrl: model.url),
+            GoogleMapView(data: model),
           ],
         ),
       ),
     );
   }
+}
 
-  // Membuat TextField yang lebih proporsional
-  Widget _buildTextField({
-    required TextEditingController controller,
-    required String hintText,
-    TextInputType keyboardType = TextInputType.text,
-    int maxLines = 1,
-  }) {
-    return TextField(
-      controller: controller,
-      keyboardType: keyboardType,
-      maxLines: maxLines,
-      decoration: InputDecoration(
-        hintText: hintText,
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(
-            color: Colors.blue,
-            width: 1.5,
+// Widget Google Maps
+class GoogleMapView extends StatelessWidget {
+  final CctvModel data;
+  final controller = Get.find<CctvController>();
+
+  GoogleMapView({super.key, required this.data});
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<CctvController>(builder: (controller) {
+      return Stack(
+        children: [
+          GoogleMap(
+            indoorViewEnabled: true,
+            zoomGesturesEnabled: true,
+            tiltGesturesEnabled: false,
+            mapType: controller.currentMapType,
+            initialCameraPosition: CameraPosition(
+              target: LatLng((data.latitude ?? -3.908082826074294),
+                  (data.longitude ?? (122.01056599652172 - 0.0))),
+              zoom: 12,
+            ),
+            markers: {
+              Marker(
+                markerId: const MarkerId("1"),
+                position: LatLng((data.latitude ?? -3.908082826074294),
+                    (data.longitude ?? (122.01056599652172 - 0.0))),
+                infoWindow: InfoWindow(title: data.name),
+              ),
+            },
           ),
-        ),
+          Positioned(
+            top: 480,
+            right: 8,
+            child: Column(
+              children: [
+                FloatingActionButton(
+                  onPressed: controller.toggleMapType,
+                  mini: true,
+                  tooltip: 'Toggle Map Type',
+                  child: const Icon(Icons.layers),
+                ),
+              ],
+            ),
+          ),
+        ],
+      );
+    });
+  }
+}
+
+// Widget Foto yang Bisa Diperbesar
+class PhotoViewScreen extends StatelessWidget {
+  final String imageUrl;
+
+  const PhotoViewScreen({required this.imageUrl});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.blueGrey[50],
+      child: Center(
+        child: imageUrl.isEmpty
+            ? const Text('Tidak ada gambar yang ditampilkan')
+            : PhotoView(
+                basePosition: Alignment.topCenter,
+                imageProvider: NetworkImage(imageUrl),
+                minScale: PhotoViewComputedScale.contained,
+                maxScale: PhotoViewComputedScale.covered * 2,
+                backgroundDecoration: BoxDecoration(color: Colors.blueGrey[50]),
+                loadingBuilder: (context, event) {
+                  if (event == null) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  final double progress = event.cumulativeBytesLoaded /
+                      (event.expectedTotalBytes ?? 1);
+                  return Center(
+                    child: CircularProgressIndicator(value: progress),
+                  );
+                },
+              ),
       ),
     );
   }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:mobile_ameroro_app/apps/config/app_config.dart';
@@ -20,7 +19,7 @@ class ArrView extends StatelessWidget {
               appBar: AppBar(
                 foregroundColor: GFColors.WHITE,
                 title: Padding(
-                  padding: EdgeInsets.all(10.r),
+                  padding: EdgeInsets.all(10),
                   child: const Text('ARR'),
                 ),
                 actions: [
@@ -40,7 +39,7 @@ class ArrView extends StatelessWidget {
                 ),
                 onEmpty: const Text('Empty Data'),
                 onError: (error) => Padding(
-                  padding: EdgeInsets.all(8.r),
+                  padding: EdgeInsets.all(8),
                   child: Center(child: Text(error!)),
                 ),
               ),
@@ -62,9 +61,9 @@ class ArrView extends StatelessWidget {
   _listCard(BuildContext context, ArrController controller) {
     return ListView.separated(
       separatorBuilder: (BuildContext context, int index) {
-        return Container(color: GFColors.LIGHT, height: 2.r);
+        return Container(color: GFColors.LIGHT, height: 2);
       },
-      padding: EdgeInsets.all(8.r),
+      padding: EdgeInsets.all(8),
       itemCount: controller.listArr.length,
       itemBuilder: (context, index) {
         final data = controller.listArr[index];
@@ -73,7 +72,7 @@ class ArrView extends StatelessWidget {
           title: Text(
             data.name ?? '-',
             style: TextStyle(
-                fontSize: 16.r,
+                fontSize: 16,
                 fontWeight: FontWeight.bold,
                 color: AppConfig.primaryColor),
           ),
@@ -86,9 +85,9 @@ class ArrView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     _buildInfoBadge(GFColors.INFO, data.brandName ?? '-'),
-                    SizedBox(width: 8.r),
+                    SizedBox(width: 8),
                     _buildInfoBadge(GFColors.DARK, data.deviceId ?? '-'),
-                    SizedBox(width: 8.r),
+                    SizedBox(width: 8),
                     _buildInfoBadge(
                       (data.status ?? '').toLowerCase() == 'offline'
                           ? GFColors.DANGER
@@ -98,59 +97,65 @@ class ArrView extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 8.r),
+              SizedBox(height: 8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Waktu : ${AppConstants().dateTimeFullFormatID.format(data.readingAt!)} WITA',
-                        style: TextStyle(
-                          fontSize: 12.r,
-                          fontWeight: FontWeight.bold,
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.4,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Waktu : ${AppConstants().dateTimeFullFormatID.format(data.readingAt!)} WITA',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 8.r),
-                      Text(
-                        'Curah Hujan : ${AppConstants().numFormat.format(data.rainfallLastHour ?? 0)} mm',
-                        style: TextStyle(
-                          fontSize: 12.r,
-                          fontWeight: FontWeight.bold,
+                        SizedBox(height: 8),
+                        Text(
+                          'Curah Hujan : ${AppConstants().numFormat.format(data.rainfallLastHour ?? 0)} mm',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 8.r),
-                      Text(
-                        'Kapasitas Baterai : ${AppConstants().numFormat.format(data.batteryCapacity ?? 0)} %',
-                        style: TextStyle(
-                          fontSize: 12.r,
-                          fontWeight: FontWeight.bold,
+                        SizedBox(height: 8),
+                        Text(
+                          'Kapasitas Baterai : ${AppConstants().numFormat.format(data.batteryCapacity ?? 0)} %',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ((data.intensityLastHour ?? '').toLowerCase() ==
-                              'tidak ada hujan')
-                          ? _getImage(data)
-                          : FadeTransition(
-                              opacity: controller.animation,
-                              child: _getImage(data),
-                            ),
-                      Text(
-                        data.intensityLastHour ?? '',
-                        style: const TextStyle(
-                          color: GFColors.DARK,
-                          fontWeight: FontWeight.w500,
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.4,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ((data.intensityLastHour ?? '').toLowerCase() ==
+                                'tidak ada hujan')
+                            ? _getImage(data)
+                            : FadeTransition(
+                                opacity: controller.animation,
+                                child: _getImage(data),
+                              ),
+                        Text(
+                          data.intensityLastHour ?? '',
+                          style: const TextStyle(
+                            color: GFColors.DARK,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                  SizedBox(height: 8.r),
+                  SizedBox(height: 8),
                 ],
               ),
             ],
@@ -199,8 +204,8 @@ class ArrView extends StatelessWidget {
     }
     return Image.asset(
       path,
-      width: 50.r,
-      height: 50.r,
+      width: 50,
+      height: 50,
     );
   }
 
@@ -208,15 +213,15 @@ class ArrView extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: color.withOpacity(0.2),
-        borderRadius: BorderRadius.circular(5.r),
+        borderRadius: BorderRadius.circular(5),
       ),
-      padding: EdgeInsets.all(4.r),
+      padding: EdgeInsets.all(4),
       child: Text(
         text,
         style: TextStyle(
           color: color,
           fontWeight: FontWeight.bold,
-          fontSize: 12.r,
+          fontSize: 12,
         ),
       ),
     );
@@ -232,15 +237,15 @@ class ArrView extends StatelessWidget {
     return Row(
       children: [
         Container(
-          padding: EdgeInsets.all(10.r),
+          padding: EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: iconColor.withOpacity(0.2),
-            borderRadius: BorderRadius.circular(5.r),
+            borderRadius: BorderRadius.circular(5),
           ),
-          child: Icon(icon, size: 30.r, color: iconColor),
+          child: Icon(icon, size: 30, color: iconColor),
         ),
         SizedBox(
-          width: 5.r,
+          width: 5,
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -252,7 +257,7 @@ class ArrView extends StatelessWidget {
                   TextSpan(
                     text: title,
                     style: TextStyle(
-                      fontSize: 14.r,
+                      fontSize: 14,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
@@ -263,7 +268,7 @@ class ArrView extends StatelessWidget {
                       child: Text(
                         ' $unit',
                         style: TextStyle(
-                            fontSize: 8.r,
+                            fontSize: 8,
                             fontWeight: FontWeight.bold,
                             color: Colors.grey), // Smaller font size
                       ),
@@ -273,13 +278,13 @@ class ArrView extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 5.r,
+              height: 5,
             ),
             Text(
               subtitle,
               style: TextStyle(
                 color: Colors.grey,
-                fontSize: 12.r,
+                fontSize: 12,
                 fontWeight: FontWeight.bold,
               ),
             ),

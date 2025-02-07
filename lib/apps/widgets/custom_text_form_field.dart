@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:getwidget/colors/gf_color.dart';
 import 'package:mobile_ameroro_app/apps/config/app_config.dart';
 
@@ -80,20 +79,20 @@ Widget customTextFormField({
       filled: filled,
       alignLabelWithHint: true,
       focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: AppConfig.primaryColor, width: 2.r),
-          borderRadius: BorderRadius.circular(12.r)),
+          borderSide: const BorderSide(color: AppConfig.primaryColor, width: 2),
+          borderRadius: BorderRadius.circular(12)),
       enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey, width: 2.r),
-          borderRadius: BorderRadius.circular(12.r)),
+          borderSide: const BorderSide(color: Colors.grey, width: 2),
+          borderRadius: BorderRadius.circular(12)),
       disabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.grey),
-          borderRadius: BorderRadius.circular(12.r)),
+          borderRadius: BorderRadius.circular(12)),
       errorBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: GFColors.DANGER, width: 2.r),
+          borderSide: const BorderSide(color: GFColors.DANGER, width: 2),
           borderRadius: BorderRadius.circular(12)),
       focusedErrorBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: GFColors.DANGER, width: 2.r),
-          borderRadius: BorderRadius.circular(12.r)),
+          borderSide: const BorderSide(color: GFColors.DANGER, width: 2),
+          borderRadius: BorderRadius.circular(12)),
       suffixIcon: suffixIcon,
       prefixIcon: prefixIcon,
     ),

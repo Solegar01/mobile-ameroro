@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:mobile_ameroro_app/apps/instruments/settlement_meter/controllers/settlement_meter_controller.dart';
@@ -10,23 +9,21 @@ class SettlementMeterView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-        onWillPop: () async {
-          return true; // Mengizinkan dialog untuk ditutup
-        },
+    return PopScope(
+        canPop: true,
         child: SafeArea(
           child: Scaffold(
             appBar: AppBar(
               foregroundColor: GFColors.WHITE,
               title: GetBuilder<SettlementMeterController>(
-                builder: (controller) => Text(
+                builder: (controller) => const Text(
                   'SETTLEMENT METER',
                   style: TextStyle(
-                    fontSize: 20.r,
+                    fontSize: 20,
                   ),
                 ),
               ),
-              actions: [],
+              actions: const [],
             ),
             body: controller.obx(
               (state) => _detail(context, controller),
@@ -43,7 +40,7 @@ class SettlementMeterView extends StatelessWidget {
 
   _detail(BuildContext context, SettlementMeterController controller) {
     return GetBuilder<SettlementMeterController>(
-      builder: (controller) => Expanded(
+      builder: (controller) => const Expanded(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

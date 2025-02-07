@@ -1,6 +1,5 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
@@ -26,19 +25,19 @@ class HomeView extends StatelessWidget {
             children: [
               Image.asset(
                 'assets/images/logo-pu.png',
-                width: 20.r,
-                height: 20.r,
+                width: 20,
+                height: 20,
               ),
-              SizedBox(width: 5.r),
+              SizedBox(width: 5),
               RichText(
                 text: TextSpan(
                   children: [
                     TextSpan(
-                        text: 'BENDUNGAN ', style: TextStyle(fontSize: 12.r)),
+                        text: 'BENDUNGAN ', style: TextStyle(fontSize: 12)),
                     TextSpan(
                         text: 'AMERORO',
                         style: TextStyle(
-                            color: AppConfig.focusTextField, fontSize: 12.r)),
+                            color: AppConfig.focusTextField, fontSize: 12)),
                   ],
                 ),
               ),
@@ -54,7 +53,12 @@ class HomeView extends StatelessWidget {
       body: controller.obx(
         (state) => _detail(context, controller),
         onLoading: _loader(context, controller),
-        onEmpty: const Text('Empty Data'),
+        onEmpty: Center(
+          child: Padding(
+            padding: EdgeInsets.all(5),
+            child: const Text('Empty Data'),
+          ),
+        ),
         onError: (error) => Padding(
           padding: const EdgeInsets.all(8.0),
           child: Center(child: Text(error!)),
@@ -68,48 +72,48 @@ class HomeView extends StatelessWidget {
       children: [
         SizedBox(
           width: double.infinity,
-          height: 320.r,
+          height: 320,
           child: Stack(
             children: [
               Column(
                 children: [
                   Container(
                     color: AppConfig.bgLogin, // Top color
-                    height: 150.r, // Half of the total height
+                    height: 150, // Half of the total height
                   ),
                   Container(
                     color: GFColors.WHITE, // Bottom color
-                    height: 150.r, // Half of the total height
+                    height: 150, // Half of the total height
                   ),
                 ],
               ),
               Positioned(
-                top: 10.r,
-                left: 10.r,
+                top: 10,
+                left: 10,
                 child: Text(
                   'EARLY WARNING SYSTEM',
                   style: TextStyle(
                     color: GFColors.WHITE,
-                    fontSize: 12.r,
+                    fontSize: 12,
                   ),
                 ),
               ),
               Positioned(
-                top: 30.r,
+                top: 30,
                 left: 0,
                 right: 0,
                 child: SingleChildScrollView(
                   child: Container(
                     width: double.infinity,
-                    margin: EdgeInsets.all(8.r),
+                    margin: EdgeInsets.all(8),
                     decoration: BoxDecoration(
                       color: GFColors.LIGHT,
-                      borderRadius: BorderRadius.circular(8.r),
+                      borderRadius: BorderRadius.circular(8),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.5),
-                          blurRadius: 5.r,
-                          spreadRadius: 2.r,
+                          blurRadius: 5,
+                          spreadRadius: 2,
                         ),
                       ],
                     ),
@@ -117,7 +121,7 @@ class HomeView extends StatelessWidget {
                       mainColor: GFColors.LIGHT,
                       secondaryColor: Colors.grey,
                       child: Padding(
-                        padding: EdgeInsets.all(10.r),
+                        padding: EdgeInsets.all(10),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -127,30 +131,28 @@ class HomeView extends StatelessWidget {
                                 Column(
                                   children: [
                                     Container(
-                                      height: 40.r,
-                                      width: 100.r,
-                                      padding: EdgeInsets.all(10.r),
+                                      height: 40,
+                                      width: 100,
+                                      padding: EdgeInsets.all(10),
                                       decoration: BoxDecoration(
                                         color: GFColors.LIGHT,
-                                        borderRadius:
-                                            BorderRadius.circular(8.r),
+                                        borderRadius: BorderRadius.circular(8),
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsets.all(8.r),
+                                      padding: EdgeInsets.all(8),
                                       child: Column(
                                         children: [
                                           Row(
                                             children: [
                                               Container(
-                                                height: 20.r,
-                                                width: 100.r,
-                                                padding: EdgeInsets.all(10.r),
+                                                height: 20,
+                                                width: 100,
+                                                padding: EdgeInsets.all(10),
                                                 decoration: BoxDecoration(
                                                   color: GFColors.LIGHT,
                                                   borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.r),
+                                                      BorderRadius.circular(8),
                                                 ),
                                               ),
                                             ],
@@ -163,132 +165,132 @@ class HomeView extends StatelessWidget {
                               ],
                             ),
                             Divider(
-                              height: 1.r,
+                              height: 1,
                               color: Colors.white,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.all(8.r),
+                                  padding: EdgeInsets.all(8),
                                   child: Container(
-                                    height: 20.r,
-                                    width: 60.r,
-                                    padding: EdgeInsets.all(10.r),
+                                    height: 20,
+                                    width: 60,
+                                    padding: EdgeInsets.all(10),
                                     decoration: BoxDecoration(
                                       color: GFColors.LIGHT,
-                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderRadius: BorderRadius.circular(8),
                                     ),
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.all(8.r),
+                                  padding: EdgeInsets.all(8),
                                   child: Container(
-                                    height: 20.r,
-                                    width: 60.r,
-                                    padding: EdgeInsets.all(10.r),
+                                    height: 20,
+                                    width: 60,
+                                    padding: EdgeInsets.all(10),
                                     decoration: BoxDecoration(
                                       color: GFColors.LIGHT,
-                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderRadius: BorderRadius.circular(8),
                                     ),
                                   ),
                                 ),
                               ],
                             ),
                             Divider(
-                              height: 1.r,
+                              height: 1,
                               color: Colors.white,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.all(8.r),
+                                  padding: EdgeInsets.all(8),
                                   child: Container(
-                                    height: 20.r,
-                                    width: 60.r,
-                                    padding: EdgeInsets.all(10.r),
+                                    height: 20,
+                                    width: 60,
+                                    padding: EdgeInsets.all(10),
                                     decoration: BoxDecoration(
                                       color: GFColors.LIGHT,
-                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderRadius: BorderRadius.circular(8),
                                     ),
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.all(8.r),
+                                  padding: EdgeInsets.all(8),
                                   child: Container(
-                                    height: 20.r,
-                                    width: 60.r,
-                                    padding: EdgeInsets.all(10.r),
+                                    height: 20,
+                                    width: 60,
+                                    padding: EdgeInsets.all(10),
                                     decoration: BoxDecoration(
                                       color: GFColors.LIGHT,
-                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderRadius: BorderRadius.circular(8),
                                     ),
                                   ),
                                 ),
                               ],
                             ),
                             Divider(
-                              height: 1.r,
+                              height: 1,
                               color: Colors.white,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.all(8.r),
+                                  padding: EdgeInsets.all(8),
                                   child: Container(
-                                    height: 20.r,
-                                    width: 60.r,
-                                    padding: EdgeInsets.all(10.r),
+                                    height: 20,
+                                    width: 60,
+                                    padding: EdgeInsets.all(10),
                                     decoration: BoxDecoration(
                                       color: GFColors.LIGHT,
-                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderRadius: BorderRadius.circular(8),
                                     ),
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.all(8.r),
+                                  padding: EdgeInsets.all(8),
                                   child: Container(
-                                    height: 20.r,
-                                    width: 60.r,
-                                    padding: EdgeInsets.all(10.r),
+                                    height: 20,
+                                    width: 60,
+                                    padding: EdgeInsets.all(10),
                                     decoration: BoxDecoration(
                                       color: GFColors.LIGHT,
-                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderRadius: BorderRadius.circular(8),
                                     ),
                                   ),
                                 ),
                               ],
                             ),
                             Divider(
-                              height: 1.r,
+                              height: 1,
                               color: Colors.white,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.all(8.r),
+                                  padding: EdgeInsets.all(8),
                                   child: Container(
-                                    height: 20.r,
-                                    width: 60.r,
-                                    padding: EdgeInsets.all(10.r),
+                                    height: 20,
+                                    width: 60,
+                                    padding: EdgeInsets.all(10),
                                     decoration: BoxDecoration(
                                       color: GFColors.LIGHT,
-                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderRadius: BorderRadius.circular(8),
                                     ),
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.all(8.r),
+                                  padding: EdgeInsets.all(8),
                                   child: Container(
-                                    height: 20.r,
-                                    width: 60.r,
-                                    padding: EdgeInsets.all(10.r),
+                                    height: 20,
+                                    width: 60,
+                                    padding: EdgeInsets.all(10),
                                     decoration: BoxDecoration(
                                       color: GFColors.LIGHT,
-                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderRadius: BorderRadius.circular(8),
                                     ),
                                   ),
                                 ),
@@ -311,51 +313,51 @@ class HomeView extends StatelessWidget {
             children: [
               ExpansionTile(
                   title: Container(
-                height: 20.r,
-                width: 100.r,
+                height: 20,
+                width: 100,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(5.r),
+                  borderRadius: BorderRadius.circular(5),
                 ),
                 // color: Colors.grey[200],
               )),
               ExpansionTile(
                   title: Container(
-                height: 20.r,
-                width: 100.r,
+                height: 20,
+                width: 100,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(5.r),
+                  borderRadius: BorderRadius.circular(5),
                 ),
                 // color: Colors.grey[200],
               )),
               ExpansionTile(
                   title: Container(
-                height: 20.r,
-                width: 100.r,
+                height: 20,
+                width: 100,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(5.r),
+                  borderRadius: BorderRadius.circular(5),
                 ),
                 // color: Colors.grey[200],
               )),
               ExpansionTile(
                   title: Container(
-                height: 20.r,
-                width: 100.r,
+                height: 20,
+                width: 100,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(5.r),
+                  borderRadius: BorderRadius.circular(5),
                 ),
                 // color: Colors.grey[200],
               )),
               ExpansionTile(
                   title: Container(
-                height: 20.r,
-                width: 100.r,
+                height: 20,
+                width: 100,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(5.r),
+                  borderRadius: BorderRadius.circular(5),
                 ),
                 // color: Colors.grey[200],
               )),
@@ -383,53 +385,53 @@ class HomeView extends StatelessWidget {
   _errorEws(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 320.r,
+      height: 320,
       child: Stack(
         children: [
           Column(
             children: [
               Container(
                 color: AppConfig.bgLogin, // Top color
-                height: 150.r, // Half of the total height
+                height: 150, // Half of the total height
               ),
               Container(
-                color: GFColors.WHITE, // Bottom color
-                height: 150.r, // Half of the total height
+                color: Colors.grey[50], // Bottom color
+                height: 150, // Half of the total height
               ),
             ],
           ),
           Positioned(
-            top: 10.r,
-            left: 10.r,
+            top: 10,
+            left: 10,
             child: Text(
               'EARLY WARNING SYSTEM',
               style: TextStyle(
                 color: GFColors.WHITE,
-                fontSize: 12.r,
+                fontSize: 12,
               ),
             ),
           ),
           Positioned(
-            top: 30.r,
+            top: 30,
             left: 0,
             right: 0,
             child: SingleChildScrollView(
               child: Container(
                 width: double.infinity,
-                margin: EdgeInsets.all(8.r),
+                margin: EdgeInsets.all(8),
                 decoration: BoxDecoration(
                   color: AppConfig.bgLogin.withOpacity(0.5),
-                  borderRadius: BorderRadius.circular(8.r),
+                  borderRadius: BorderRadius.circular(8),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.5),
-                      blurRadius: 5.r,
-                      spreadRadius: 2.r,
+                      blurRadius: 5,
+                      spreadRadius: 2,
                     ),
                   ],
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(10.r),
+                  padding: EdgeInsets.all(10),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -439,24 +441,24 @@ class HomeView extends StatelessWidget {
                           Column(
                             children: [
                               Container(
-                                height: 40.r,
-                                width: 100.r,
-                                padding: EdgeInsets.all(10.r),
+                                height: 40,
+                                width: 100,
+                                padding: EdgeInsets.all(10),
                                 decoration: BoxDecoration(
                                     color: GFColors.INFO.withOpacity(0.5),
-                                    borderRadius: BorderRadius.circular(8.r)),
+                                    borderRadius: BorderRadius.circular(8)),
                                 child: Center(
                                   child: Text(
                                     ' - ',
                                     style: TextStyle(
-                                        fontSize: 14.r,
+                                        fontSize: 14,
                                         fontWeight: FontWeight.bold,
                                         color: GFColors.WHITE),
                                   ),
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.all(8.r),
+                                padding: EdgeInsets.all(8),
                                 child: Column(
                                   children: [
                                     Row(
@@ -464,7 +466,7 @@ class HomeView extends StatelessWidget {
                                         Text(
                                           'Status Speaker: - ',
                                           style: TextStyle(
-                                              fontSize: 14.r,
+                                              fontSize: 14,
                                               fontWeight: FontWeight.bold,
                                               color: GFColors.WHITE),
                                         ),
@@ -484,31 +486,31 @@ class HomeView extends StatelessWidget {
                         ],
                       ),
                       Divider(
-                        height: 1.r,
+                        height: 1,
                         color: Colors.white,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
-                            padding: EdgeInsets.all(8.r),
+                            padding: EdgeInsets.all(8),
                             child: Center(
                               child: Text(
                                 'BSH 01',
                                 style: TextStyle(
-                                    fontSize: 14.r,
+                                    fontSize: 14,
                                     fontWeight: FontWeight.bold,
                                     color: GFColors.WHITE),
                               ),
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.all(8.r),
+                            padding: EdgeInsets.all(8),
                             child: Center(
                               child: Text(
                                 ' - m ( - )',
                                 style: TextStyle(
-                                    fontSize: 14.r,
+                                    fontSize: 14,
                                     fontWeight: FontWeight.bold,
                                     color: GFColors.WHITE),
                               ),
@@ -517,31 +519,31 @@ class HomeView extends StatelessWidget {
                         ],
                       ),
                       Divider(
-                        height: 1.r,
+                        height: 1,
                         color: Colors.white,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
-                            padding: EdgeInsets.all(8.r),
+                            padding: EdgeInsets.all(8),
                             child: Center(
                               child: Text(
                                 'BSH 02',
                                 style: TextStyle(
-                                    fontSize: 14.r,
+                                    fontSize: 14,
                                     fontWeight: FontWeight.bold,
                                     color: GFColors.WHITE),
                               ),
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.all(8.r),
+                            padding: EdgeInsets.all(8),
                             child: Center(
                               child: Text(
                                 ' - m ( - )',
                                 style: TextStyle(
-                                    fontSize: 14.r,
+                                    fontSize: 14,
                                     fontWeight: FontWeight.bold,
                                     color: GFColors.WHITE),
                               ),
@@ -550,31 +552,31 @@ class HomeView extends StatelessWidget {
                         ],
                       ),
                       Divider(
-                        height: 1.r,
+                        height: 1,
                         color: Colors.white,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
-                            padding: EdgeInsets.all(8.r),
+                            padding: EdgeInsets.all(8),
                             child: Center(
                               child: Text(
                                 'BSH 03',
                                 style: TextStyle(
-                                    fontSize: 14.r,
+                                    fontSize: 14,
                                     fontWeight: FontWeight.bold,
                                     color: GFColors.WHITE),
                               ),
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.all(8.r),
+                            padding: EdgeInsets.all(8),
                             child: Center(
                               child: Text(
                                 ' - m ( - )',
                                 style: TextStyle(
-                                    fontSize: 14.r,
+                                    fontSize: 14,
                                     fontWeight: FontWeight.bold,
                                     color: GFColors.WHITE),
                               ),
@@ -583,31 +585,31 @@ class HomeView extends StatelessWidget {
                         ],
                       ),
                       Divider(
-                        height: 1.r,
+                        height: 1,
                         color: Colors.white,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
-                            padding: EdgeInsets.all(8.r),
+                            padding: EdgeInsets.all(8),
                             child: Center(
                               child: Text(
                                 'BSH-INTAKE',
                                 style: TextStyle(
-                                    fontSize: 14.r,
+                                    fontSize: 14,
                                     fontWeight: FontWeight.bold,
                                     color: GFColors.WHITE),
                               ),
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.all(8.r),
+                            padding: EdgeInsets.all(8),
                             child: Center(
                               child: Text(
                                 ' - m ( - )',
                                 style: TextStyle(
-                                    fontSize: 14.r,
+                                    fontSize: 14,
                                     fontWeight: FontWeight.bold,
                                     color: GFColors.WHITE),
                               ),
@@ -633,48 +635,48 @@ class HomeView extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return SizedBox(
               width: double.infinity,
-              height: 320.r,
+              height: 320,
               child: Stack(
                 children: [
                   Column(
                     children: [
                       Container(
                         color: AppConfig.bgLogin, // Top color
-                        height: 150.r, // Half of the total height
+                        height: 150, // Half of the total height
                       ),
                       Container(
-                        color: GFColors.WHITE, // Bottom color
-                        height: 150.r, // Half of the total height
+                        color: Colors.grey[50], // Bottom color
+                        height: 150, // Half of the total height
                       ),
                     ],
                   ),
                   Positioned(
-                    top: 10.r,
-                    left: 10.r,
+                    top: 10,
+                    left: 10,
                     child: Text(
                       'EARLY WARNING SYSTEM',
                       style: TextStyle(
                         color: GFColors.WHITE,
-                        fontSize: 12.r,
+                        fontSize: 12,
                       ),
                     ),
                   ),
                   Positioned(
-                    top: 30.r,
+                    top: 30,
                     left: 0,
                     right: 0,
                     child: SingleChildScrollView(
                       child: Container(
                         width: double.infinity,
-                        margin: EdgeInsets.all(8.r),
+                        margin: EdgeInsets.all(8),
                         decoration: BoxDecoration(
                           color: GFColors.LIGHT,
-                          borderRadius: BorderRadius.circular(8.r),
+                          borderRadius: BorderRadius.circular(8),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.grey.withOpacity(0.5),
-                              blurRadius: 5.r,
-                              spreadRadius: 2.r,
+                              blurRadius: 5,
+                              spreadRadius: 2,
                             ),
                           ],
                         ),
@@ -682,7 +684,7 @@ class HomeView extends StatelessWidget {
                           mainColor: GFColors.LIGHT,
                           secondaryColor: Colors.grey,
                           child: Padding(
-                            padding: EdgeInsets.all(10.r),
+                            padding: EdgeInsets.all(10),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -692,31 +694,30 @@ class HomeView extends StatelessWidget {
                                     Column(
                                       children: [
                                         Container(
-                                          height: 40.r,
-                                          width: 100.r,
-                                          padding: EdgeInsets.all(10.r),
+                                          height: 40,
+                                          width: 100,
+                                          padding: EdgeInsets.all(10),
                                           decoration: BoxDecoration(
                                             color: GFColors.LIGHT,
                                             borderRadius:
-                                                BorderRadius.circular(8.r),
+                                                BorderRadius.circular(8),
                                           ),
                                         ),
                                         Padding(
-                                          padding: EdgeInsets.all(8.r),
+                                          padding: EdgeInsets.all(8),
                                           child: Column(
                                             children: [
                                               Row(
                                                 children: [
                                                   Container(
-                                                    height: 20.r,
-                                                    width: 100.r,
-                                                    padding:
-                                                        EdgeInsets.all(10.r),
+                                                    height: 20,
+                                                    width: 100,
+                                                    padding: EdgeInsets.all(10),
                                                     decoration: BoxDecoration(
                                                       color: GFColors.LIGHT,
                                                       borderRadius:
                                                           BorderRadius.circular(
-                                                              8.r),
+                                                              8),
                                                     ),
                                                   ),
                                                 ],
@@ -729,7 +730,7 @@ class HomeView extends StatelessWidget {
                                   ],
                                 ),
                                 Divider(
-                                  height: 1.r,
+                                  height: 1,
                                   color: Colors.white,
                                 ),
                                 Row(
@@ -737,35 +738,35 @@ class HomeView extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsets.all(8.r),
+                                      padding: EdgeInsets.all(8),
                                       child: Container(
-                                        height: 20.r,
-                                        width: 60.r,
-                                        padding: EdgeInsets.all(10.r),
+                                        height: 20,
+                                        width: 60,
+                                        padding: EdgeInsets.all(10),
                                         decoration: BoxDecoration(
                                           color: GFColors.LIGHT,
                                           borderRadius:
-                                              BorderRadius.circular(8.r),
+                                              BorderRadius.circular(8),
                                         ),
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsets.all(8.r),
+                                      padding: EdgeInsets.all(8),
                                       child: Container(
-                                        height: 20.r,
-                                        width: 60.r,
-                                        padding: EdgeInsets.all(10.r),
+                                        height: 20,
+                                        width: 60,
+                                        padding: EdgeInsets.all(10),
                                         decoration: BoxDecoration(
                                           color: GFColors.LIGHT,
                                           borderRadius:
-                                              BorderRadius.circular(8.r),
+                                              BorderRadius.circular(8),
                                         ),
                                       ),
                                     ),
                                   ],
                                 ),
                                 Divider(
-                                  height: 1.r,
+                                  height: 1,
                                   color: Colors.white,
                                 ),
                                 Row(
@@ -773,35 +774,35 @@ class HomeView extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsets.all(8.r),
+                                      padding: EdgeInsets.all(8),
                                       child: Container(
-                                        height: 20.r,
-                                        width: 60.r,
-                                        padding: EdgeInsets.all(10.r),
+                                        height: 20,
+                                        width: 60,
+                                        padding: EdgeInsets.all(10),
                                         decoration: BoxDecoration(
                                           color: GFColors.LIGHT,
                                           borderRadius:
-                                              BorderRadius.circular(8.r),
+                                              BorderRadius.circular(8),
                                         ),
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsets.all(8.r),
+                                      padding: EdgeInsets.all(8),
                                       child: Container(
-                                        height: 20.r,
-                                        width: 60.r,
-                                        padding: EdgeInsets.all(10.r),
+                                        height: 20,
+                                        width: 60,
+                                        padding: EdgeInsets.all(10),
                                         decoration: BoxDecoration(
                                           color: GFColors.LIGHT,
                                           borderRadius:
-                                              BorderRadius.circular(8.r),
+                                              BorderRadius.circular(8),
                                         ),
                                       ),
                                     ),
                                   ],
                                 ),
                                 Divider(
-                                  height: 1.r,
+                                  height: 1,
                                   color: Colors.white,
                                 ),
                                 Row(
@@ -809,35 +810,35 @@ class HomeView extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsets.all(8.r),
+                                      padding: EdgeInsets.all(8),
                                       child: Container(
-                                        height: 20.r,
-                                        width: 60.r,
-                                        padding: EdgeInsets.all(10.r),
+                                        height: 20,
+                                        width: 60,
+                                        padding: EdgeInsets.all(10),
                                         decoration: BoxDecoration(
                                           color: GFColors.LIGHT,
                                           borderRadius:
-                                              BorderRadius.circular(8.r),
+                                              BorderRadius.circular(8),
                                         ),
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsets.all(8.r),
+                                      padding: EdgeInsets.all(8),
                                       child: Container(
-                                        height: 20.r,
-                                        width: 60.r,
-                                        padding: EdgeInsets.all(10.r),
+                                        height: 20,
+                                        width: 60,
+                                        padding: EdgeInsets.all(10),
                                         decoration: BoxDecoration(
                                           color: GFColors.LIGHT,
                                           borderRadius:
-                                              BorderRadius.circular(8.r),
+                                              BorderRadius.circular(8),
                                         ),
                                       ),
                                     ),
                                   ],
                                 ),
                                 Divider(
-                                  height: 1.r,
+                                  height: 1,
                                   color: Colors.white,
                                 ),
                                 Row(
@@ -845,28 +846,28 @@ class HomeView extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsets.all(8.r),
+                                      padding: EdgeInsets.all(8),
                                       child: Container(
-                                        height: 20.r,
-                                        width: 60.r,
-                                        padding: EdgeInsets.all(10.r),
+                                        height: 20,
+                                        width: 60,
+                                        padding: EdgeInsets.all(10),
                                         decoration: BoxDecoration(
                                           color: GFColors.LIGHT,
                                           borderRadius:
-                                              BorderRadius.circular(8.r),
+                                              BorderRadius.circular(8),
                                         ),
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsets.all(8.r),
+                                      padding: EdgeInsets.all(8),
                                       child: Container(
-                                        height: 20.r,
-                                        width: 60.r,
-                                        padding: EdgeInsets.all(10.r),
+                                        height: 20,
+                                        width: 60,
+                                        padding: EdgeInsets.all(10),
                                         decoration: BoxDecoration(
                                           color: GFColors.LIGHT,
                                           borderRadius:
-                                              BorderRadius.circular(8.r),
+                                              BorderRadius.circular(8),
                                         ),
                                       ),
                                     ),
@@ -888,41 +889,41 @@ class HomeView extends StatelessWidget {
             if (snapshot.data == true) {
               return SizedBox(
                 width: double.infinity,
-                height: 320.r,
+                height: 320,
                 child: Stack(
                   children: [
                     Column(
                       children: [
                         Container(
                           color: AppConfig.bgLogin, // Top color
-                          height: 150.r, // Half of the total height
+                          height: 150, // Half of the total height
                         ),
                         Container(
-                          color: GFColors.WHITE, // Bottom color
-                          height: 150.r, // Half of the total height
+                          color: Colors.grey[50], // Bottom color
+                          height: 150, // Half of the total height
                         ),
                       ],
                     ),
                     Positioned(
-                      top: 10.r,
-                      left: 10.r,
+                      top: 10,
+                      left: 10,
                       child: Text(
                         'EARLY WARNING SYSTEM',
                         style: TextStyle(
                           color: GFColors.WHITE,
-                          fontSize: 12.r,
+                          fontSize: 12,
                         ),
                       ),
                     ),
                     Positioned(
-                      top: 30.r,
+                      top: 30,
                       left: 0,
                       right: 0,
                       child: SingleChildScrollView(
                         child: Obx(
                           () => Container(
                             width: double.infinity,
-                            margin: EdgeInsets.all(8.r),
+                            margin: EdgeInsets.all(8),
                             decoration: BoxDecoration(
                               color: switch (controller.alarmVal.value) {
                                 0 => StatusLevel.normal.color.withOpacity(0.5),
@@ -932,17 +933,17 @@ class HomeView extends StatelessWidget {
                                 int() => AppConfig.bgLogin.withOpacity(0.5),
                                 null => AppConfig.bgLogin.withOpacity(0.5),
                               },
-                              borderRadius: BorderRadius.circular(8.r),
+                              borderRadius: BorderRadius.circular(8),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.grey.withOpacity(0.5),
-                                  blurRadius: 5.r,
-                                  spreadRadius: 2.r,
+                                  blurRadius: 5,
+                                  spreadRadius: 2,
                                 ),
                               ],
                             ),
                             child: Padding(
-                              padding: EdgeInsets.all(10.r),
+                              padding: EdgeInsets.all(10),
                               child: Column(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -953,8 +954,8 @@ class HomeView extends StatelessWidget {
                                       Column(
                                         children: [
                                           Container(
-                                            height: 40.r,
-                                            padding: EdgeInsets.all(10.r),
+                                            height: 40,
+                                            padding: EdgeInsets.all(10),
                                             decoration: BoxDecoration(
                                                 color: switch (
                                                     controller.alarmVal.value) {
@@ -968,7 +969,7 @@ class HomeView extends StatelessWidget {
                                                       .withOpacity(0.5),
                                                 },
                                                 borderRadius:
-                                                    BorderRadius.circular(8.r)),
+                                                    BorderRadius.circular(8)),
                                             child: Center(
                                               child: Text(
                                                 switch (
@@ -985,14 +986,14 @@ class HomeView extends StatelessWidget {
                                                   null => ' - ',
                                                 },
                                                 style: TextStyle(
-                                                    fontSize: 14.r,
+                                                    fontSize: 14,
                                                     fontWeight: FontWeight.bold,
                                                     color: GFColors.WHITE),
                                               ),
                                             ),
                                           ),
                                           Padding(
-                                            padding: EdgeInsets.all(8.r),
+                                            padding: EdgeInsets.all(8),
                                             child: Column(
                                               children: [
                                                 Row(
@@ -1000,7 +1001,7 @@ class HomeView extends StatelessWidget {
                                                     Text(
                                                       'Status Speaker : ${(controller.muteVal.value == 0) ? 'UNMUTE' : 'MUTE'}',
                                                       style: TextStyle(
-                                                          fontSize: 14.r,
+                                                          fontSize: 14,
                                                           fontWeight:
                                                               FontWeight.bold,
                                                           color:
@@ -1044,7 +1045,7 @@ class HomeView extends StatelessWidget {
                                     ],
                                   ),
                                   Divider(
-                                    height: 1.r,
+                                    height: 1,
                                     color: Colors.white,
                                   ),
                                   Row(
@@ -1052,19 +1053,19 @@ class HomeView extends StatelessWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Center(
                                           child: Text(
                                             'BSH 01',
                                             style: TextStyle(
-                                                fontSize: 14.r,
+                                                fontSize: 14,
                                                 fontWeight: FontWeight.bold,
                                                 color: GFColors.WHITE),
                                           ),
                                         ),
                                       ),
                                       Padding(
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Center(
                                           child: Text(
                                             '${controller.bsh1Data['water_level'] ?? ' - '} m (${switch (controller.bsh1Status.value) {
@@ -1076,7 +1077,7 @@ class HomeView extends StatelessWidget {
                                               null => ' - ',
                                             }})',
                                             style: TextStyle(
-                                                fontSize: 14.r,
+                                                fontSize: 14,
                                                 fontWeight: FontWeight.bold,
                                                 color: GFColors.WHITE),
                                           ),
@@ -1085,7 +1086,7 @@ class HomeView extends StatelessWidget {
                                     ],
                                   ),
                                   Divider(
-                                    height: 1.r,
+                                    height: 1,
                                     color: Colors.white,
                                   ),
                                   Row(
@@ -1093,19 +1094,19 @@ class HomeView extends StatelessWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Center(
                                           child: Text(
                                             'BSH 02',
                                             style: TextStyle(
-                                                fontSize: 14.r,
+                                                fontSize: 14,
                                                 fontWeight: FontWeight.bold,
                                                 color: GFColors.WHITE),
                                           ),
                                         ),
                                       ),
                                       Padding(
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Center(
                                           child: Text(
                                             '${controller.bsh2Data['water_level'] ?? ' - '} m (${switch (controller.bsh2Status.value) {
@@ -1117,7 +1118,7 @@ class HomeView extends StatelessWidget {
                                               null => ' - ',
                                             }})',
                                             style: TextStyle(
-                                                fontSize: 14.r,
+                                                fontSize: 14,
                                                 fontWeight: FontWeight.bold,
                                                 color: GFColors.WHITE),
                                           ),
@@ -1126,7 +1127,7 @@ class HomeView extends StatelessWidget {
                                     ],
                                   ),
                                   Divider(
-                                    height: 1.r,
+                                    height: 1,
                                     color: Colors.white,
                                   ),
                                   Row(
@@ -1134,19 +1135,19 @@ class HomeView extends StatelessWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Center(
                                           child: Text(
                                             'BSH 03',
                                             style: TextStyle(
-                                                fontSize: 14.r,
+                                                fontSize: 14,
                                                 fontWeight: FontWeight.bold,
                                                 color: GFColors.WHITE),
                                           ),
                                         ),
                                       ),
                                       Padding(
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Center(
                                           child: Text(
                                             '${controller.bsh3Data['water_level'] ?? ' - '} m (${switch (controller.bsh3Status.value) {
@@ -1158,7 +1159,7 @@ class HomeView extends StatelessWidget {
                                               null => ' - ',
                                             }})',
                                             style: TextStyle(
-                                                fontSize: 14.r,
+                                                fontSize: 14,
                                                 fontWeight: FontWeight.bold,
                                                 color: GFColors.WHITE),
                                           ),
@@ -1167,7 +1168,7 @@ class HomeView extends StatelessWidget {
                                     ],
                                   ),
                                   Divider(
-                                    height: 1.r,
+                                    height: 1,
                                     color: Colors.white,
                                   ),
                                   Row(
@@ -1175,19 +1176,19 @@ class HomeView extends StatelessWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Center(
                                           child: Text(
                                             'BSH-INTAKE',
                                             style: TextStyle(
-                                                fontSize: 14.r,
+                                                fontSize: 14,
                                                 fontWeight: FontWeight.bold,
                                                 color: GFColors.WHITE),
                                           ),
                                         ),
                                       ),
                                       Padding(
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Center(
                                           child: Text(
                                             '${controller.intakeData['water_level'] ?? ' - '} m (${switch (controller.intakeStatus.value) {
@@ -1199,7 +1200,7 @@ class HomeView extends StatelessWidget {
                                               null => ' - ',
                                             }})',
                                             style: TextStyle(
-                                                fontSize: 14.r,
+                                                fontSize: 14,
                                                 fontWeight: FontWeight.bold,
                                                 color: GFColors.WHITE),
                                           ),
@@ -1238,10 +1239,10 @@ class HomeView extends StatelessWidget {
                 mainColor: GFColors.LIGHT,
                 secondaryColor: Colors.grey,
                 child: Container(
-                  margin: EdgeInsets.all(8.r),
+                  margin: EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(8.r),
+                    borderRadius: BorderRadius.circular(8),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.5),
@@ -1260,7 +1261,7 @@ class HomeView extends StatelessWidget {
             activeIndicator: Colors.blue,
             autoPlayInterval: const Duration(seconds: 5), // Adjust as needed
             autoPlayAnimationDuration: const Duration(milliseconds: 800),
-            height: 180.r,
+            height: 180,
           );
         } else if (snapshot.hasError) {
           List<String> errorStr = [
@@ -1271,11 +1272,11 @@ class HomeView extends StatelessWidget {
           return GFCarousel(
             items: errorStr.map((error) {
               return GFCard(
-                margin: EdgeInsets.all(8.r),
+                margin: EdgeInsets.all(8),
                 padding: EdgeInsets.zero,
                 boxFit: BoxFit.cover,
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(8.r),
+                borderRadius: BorderRadius.circular(8),
                 elevation: 5,
                 content: Center(
                   child: Text(
@@ -1291,44 +1292,44 @@ class HomeView extends StatelessWidget {
             activeIndicator: Colors.blue,
             autoPlayInterval: const Duration(seconds: 5), // Adjust as needed
             autoPlayAnimationDuration: const Duration(milliseconds: 800),
-            height: 180.r,
+            height: 180,
           );
         } else if (snapshot.hasData) {
           return GFCarousel(
             items: snapshot.data!.map((cuaca) {
               return GFCard(
-                margin: EdgeInsets.all(8.r),
+                margin: EdgeInsets.all(8),
                 padding: EdgeInsets.zero,
                 boxFit: BoxFit.cover,
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(8.r),
-                elevation: 5.r,
+                borderRadius: BorderRadius.circular(8),
+                elevation: 5,
                 content: Column(
                   children: [
                     SingleChildScrollView(
                       child: Container(
-                        padding: EdgeInsets.only(right: 10.r, left: 10.r),
+                        padding: EdgeInsets.only(right: 10, left: 10),
                         decoration: BoxDecoration(
                           color: Colors.grey[100],
-                          borderRadius: BorderRadius.circular(8.r),
+                          borderRadius: BorderRadius.circular(8),
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
-                              padding: EdgeInsets.all(8.r),
+                              padding: EdgeInsets.all(8),
                               child: Column(
                                 children: [
                                   _getSvgPic(cuaca.image),
                                   Text(
                                     cuaca.weatherDesc,
-                                    style: TextStyle(fontSize: 12.r),
+                                    style: TextStyle(fontSize: 12),
                                   ),
                                 ],
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.all(8.r),
+                              padding: EdgeInsets.all(8),
                               child: Column(
                                 children: [
                                   Text(
@@ -1337,11 +1338,11 @@ class HomeView extends StatelessWidget {
                                         .format(cuaca.localDatetime),
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 12.r),
+                                        fontSize: 12),
                                   ),
                                   Text(
                                     '${AppConstants().hourMinuteFormat.format(cuaca.localDatetime)} WIB',
-                                    style: TextStyle(fontSize: 12.r),
+                                    style: TextStyle(fontSize: 12),
                                   ),
                                 ],
                               ),
@@ -1355,7 +1356,7 @@ class HomeView extends StatelessWidget {
                       children: [
                         _buildWeatherInfoRow(cuaca),
                         Divider(
-                          height: 1.r,
+                          height: 1,
                           color: Colors.grey[400],
                         ),
                         _buildAdditionalInfoRow(cuaca),
@@ -1372,7 +1373,7 @@ class HomeView extends StatelessWidget {
             activeIndicator: Colors.blue,
             autoPlayInterval: const Duration(seconds: 5), // Adjust as needed
             autoPlayAnimationDuration: const Duration(milliseconds: 800),
-            height: 180.r,
+            height: 180,
           );
         } else {
           List<String> errorStr = [
@@ -1383,12 +1384,12 @@ class HomeView extends StatelessWidget {
           return GFCarousel(
             items: errorStr.map((error) {
               return GFCard(
-                margin: EdgeInsets.all(8.r),
+                margin: EdgeInsets.all(8),
                 padding: EdgeInsets.zero,
                 boxFit: BoxFit.cover,
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(8.r),
-                elevation: 5.r,
+                borderRadius: BorderRadius.circular(8),
+                elevation: 5,
                 content: Center(
                   child: Text(
                     error,
@@ -1403,7 +1404,7 @@ class HomeView extends StatelessWidget {
             activeIndicator: Colors.blue,
             autoPlayInterval: const Duration(seconds: 5), // Adjust as needed
             autoPlayAnimationDuration: const Duration(milliseconds: 800),
-            height: 180.r,
+            height: 180,
           );
         }
       },
@@ -1414,7 +1415,7 @@ class HomeView extends StatelessWidget {
     return SingleChildScrollView(
       child: Container(
         width: double.infinity,
-        padding: EdgeInsets.all(8.r),
+        padding: EdgeInsets.all(8),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -1436,7 +1437,7 @@ class HomeView extends StatelessWidget {
     return SingleChildScrollView(
       child: Container(
         width: double.infinity,
-        padding: EdgeInsets.all(8.r),
+        padding: EdgeInsets.all(8),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -1456,8 +1457,8 @@ class HomeView extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(icon, size: 20.r),
-        SizedBox(width: 5.r),
+        Icon(icon, size: 20),
+        SizedBox(width: 5),
         Column(
           children: [
             RichText(
@@ -1466,7 +1467,7 @@ class HomeView extends StatelessWidget {
                   TextSpan(
                     text: data,
                     style: TextStyle(
-                        fontSize: 10.r,
+                        fontSize: 10,
                         fontWeight: FontWeight.bold,
                         color: Colors.black),
                   ),
@@ -1475,7 +1476,7 @@ class HomeView extends StatelessWidget {
             ),
             Text(
               label,
-              style: TextStyle(fontSize: 10.r),
+              style: TextStyle(fontSize: 10),
             ),
           ],
         ),
@@ -1490,36 +1491,36 @@ class HomeView extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
             child: SizedBox(
-              height: 20.r,
-              width: 20.r,
+              height: 20,
+              width: 20,
               child: const CircularProgressIndicator(),
             ),
           );
         } else if (snapshot.hasError) {
           return SizedBox(
-            width: 30.r,
-            height: 30.r,
+            width: 30,
+            height: 30,
             child: Icon(
               Icons.image_not_supported_rounded,
-              size: 30.r,
+              size: 30,
               color: Colors.grey,
             ),
           );
         } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
           return SvgPicture.string(
             snapshot.data!,
-            width: 30.r,
-            height: 30.r,
+            width: 30,
+            height: 30,
             fit: BoxFit.contain,
           );
         } else {
           // Optional fallback if no data is returned but no error
           return SizedBox(
-            width: 30.r,
-            height: 30.r,
+            width: 30,
+            height: 30,
             child: Icon(
               Icons.image_not_supported_rounded,
-              size: 30.r,
+              size: 30,
               color: Colors.grey,
             ),
           );
@@ -1538,170 +1539,280 @@ class HomeView extends StatelessWidget {
             secondaryColor: Colors.grey,
             child: Column(
               children: [
-                ExpansionTile(
-                    title: Container(
-                  height: 20.r,
-                  width: 100.r,
+                Container(
+                  margin: EdgeInsets.all(5),
+                  padding: EdgeInsets.zero,
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(5.r),
+                    color: GFColors.WHITE,
+                    borderRadius: BorderRadius.circular(5),
                   ),
-                  // color: Colors.grey[200],
-                )),
-                ExpansionTile(
-                    title: Container(
-                  height: 20.r,
-                  width: 100.r,
+                  child: ExpansionTile(
+                      shape: const Border(
+                        bottom: BorderSide(width: 0),
+                      ),
+                      title: Container(
+                        height: 20,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        // color: Colors.grey[200],
+                      )),
+                ),
+                Container(
+                  margin: EdgeInsets.all(5),
+                  padding: EdgeInsets.zero,
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(5.r),
+                    color: GFColors.WHITE,
+                    borderRadius: BorderRadius.circular(5),
                   ),
-                  // color: Colors.grey[200],
-                )),
-                ExpansionTile(
-                    title: Container(
-                  height: 20.r,
-                  width: 100.r,
+                  child: ExpansionTile(
+                      shape: const Border(
+                        bottom: BorderSide(width: 0),
+                      ),
+                      title: Container(
+                        height: 20,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        // color: Colors.grey[200],
+                      )),
+                ),
+                Container(
+                  margin: EdgeInsets.all(5),
+                  padding: EdgeInsets.zero,
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(5.r),
+                    color: GFColors.WHITE,
+                    borderRadius: BorderRadius.circular(5),
                   ),
-                  // color: Colors.grey[200],
-                )),
-                ExpansionTile(
-                    title: Container(
-                  height: 20.r,
-                  width: 100.r,
+                  child: ExpansionTile(
+                      shape: const Border(
+                        bottom: BorderSide(width: 0),
+                      ),
+                      title: Container(
+                        height: 20,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        // color: Colors.grey[200],
+                      )),
+                ),
+                Container(
+                  margin: EdgeInsets.all(5),
+                  padding: EdgeInsets.zero,
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(5.r),
+                    color: GFColors.WHITE,
+                    borderRadius: BorderRadius.circular(5),
                   ),
-                  // color: Colors.grey[200],
-                )),
-                ExpansionTile(
-                    title: Container(
-                  height: 20.r,
-                  width: 100.r,
+                  child: ExpansionTile(
+                      shape: const Border(
+                        bottom: BorderSide(width: 0),
+                      ),
+                      title: Container(
+                        height: 20,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        // color: Colors.grey[200],
+                      )),
+                ),
+                Container(
+                  margin: EdgeInsets.all(5),
+                  padding: EdgeInsets.zero,
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(5.r),
+                    color: GFColors.WHITE,
+                    borderRadius: BorderRadius.circular(5),
                   ),
-                  // color: Colors.grey[200],
-                )),
+                  child: ExpansionTile(
+                      shape: const Border(
+                        bottom: BorderSide(width: 0),
+                      ),
+                      title: Container(
+                        height: 20,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        // color: Colors.grey[200],
+                      )),
+                ),
               ],
             ),
           );
         } else if (snapshot.hasError) {
           return Column(
             children: [
-              ExpansionTile(
-                title: RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                          text: 'Prakiraan Cuaca ',
-                          style:
-                              TextStyle(fontSize: 12.r, color: GFColors.DARK)),
-                    ],
-                  ),
+              Container(
+                margin: EdgeInsets.all(5),
+                padding: EdgeInsets.zero,
+                decoration: BoxDecoration(
+                  color: GFColors.WHITE,
+                  borderRadius: BorderRadius.circular(5),
                 ),
-                children: const [
-                  Center(
-                    child: Text('Error while loading data'),
-                  )
-                ],
+                child: ExpansionTile(
+                  shape: const Border(
+                    bottom: BorderSide(width: 0),
+                  ),
+                  title: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                            text: 'Prakiraan Cuaca ',
+                            style:
+                                TextStyle(fontSize: 12, color: GFColors.DARK)),
+                      ],
+                    ),
+                  ),
+                  children: const [
+                    Center(
+                      child: Text('Error while loading data'),
+                    )
+                  ],
+                ),
               ),
-              ExpansionTile(
-                title: RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                          text: 'Grafik TMA Intake ',
-                          style:
-                              TextStyle(fontSize: 12.r, color: GFColors.DARK)),
-                      TextSpan(
-                          text: '(12 jam terakhir)',
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 12.r,
-                          )),
-                    ],
-                  ),
+              Container(
+                margin: EdgeInsets.all(5),
+                padding: EdgeInsets.zero,
+                decoration: BoxDecoration(
+                  color: GFColors.WHITE,
+                  borderRadius: BorderRadius.circular(5),
                 ),
-                children: const [
-                  Center(
-                    child: Text('Error while loading data'),
-                  )
-                ],
+                child: ExpansionTile(
+                  shape: const Border(
+                    bottom: BorderSide(width: 0),
+                  ),
+                  title: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                            text: 'Grafik TMA Intake ',
+                            style:
+                                TextStyle(fontSize: 12, color: GFColors.DARK)),
+                        TextSpan(
+                            text: '(12 jam terakhir)',
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 12,
+                            )),
+                      ],
+                    ),
+                  ),
+                  children: const [
+                    Center(
+                      child: Text('Error while loading data'),
+                    )
+                  ],
+                ),
               ),
-              ExpansionTile(
-                title: RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                          text: 'Grafik Debit V-Notch ',
-                          style:
-                              TextStyle(fontSize: 12.r, color: GFColors.DARK)),
-                      TextSpan(
-                          text: '(12 jam terakhir)',
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 12.r,
-                          )),
-                    ],
-                  ),
+              Container(
+                margin: EdgeInsets.all(5),
+                padding: EdgeInsets.zero,
+                decoration: BoxDecoration(
+                  color: GFColors.WHITE,
+                  borderRadius: BorderRadius.circular(5),
                 ),
-                children: const [
-                  Center(
-                    child: Text('Error while loading data'),
-                  )
-                ],
+                child: ExpansionTile(
+                  shape: const Border(
+                    bottom: BorderSide(width: 0),
+                  ),
+                  title: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                            text: 'Grafik Debit V-Notch ',
+                            style:
+                                TextStyle(fontSize: 12, color: GFColors.DARK)),
+                        TextSpan(
+                            text: '(12 jam terakhir)',
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 12,
+                            )),
+                      ],
+                    ),
+                  ),
+                  children: const [
+                    Center(
+                      child: Text('Error while loading data'),
+                    )
+                  ],
+                ),
               ),
-              ExpansionTile(
-                title: RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                          text: 'Grafik TMA AWLR ',
-                          style:
-                              TextStyle(fontSize: 12.r, color: GFColors.DARK)),
-                      TextSpan(
-                          text: '(12 jam terakhir)',
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 12.r,
-                          )),
-                    ],
-                  ),
+              Container(
+                margin: EdgeInsets.all(5),
+                padding: EdgeInsets.zero,
+                decoration: BoxDecoration(
+                  color: GFColors.WHITE,
+                  borderRadius: BorderRadius.circular(5),
                 ),
-                children: const [
-                  Center(
-                    child: Text('Error while loading data'),
-                  )
-                ],
+                child: ExpansionTile(
+                  shape: const Border(
+                    bottom: BorderSide(width: 0),
+                  ),
+                  title: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                            text: 'Grafik TMA AWLR ',
+                            style:
+                                TextStyle(fontSize: 12, color: GFColors.DARK)),
+                        TextSpan(
+                            text: '(12 jam terakhir)',
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 12,
+                            )),
+                      ],
+                    ),
+                  ),
+                  children: const [
+                    Center(
+                      child: Text('Error while loading data'),
+                    )
+                  ],
+                ),
               ),
-              ExpansionTile(
-                title: RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                          text: 'Grafik Curah Hujan ',
-                          style:
-                              TextStyle(fontSize: 12.r, color: GFColors.DARK)),
-                      TextSpan(
-                          text: '(12 jam terakhir)',
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 12.r,
-                          )),
-                    ],
-                  ),
+              Container(
+                margin: EdgeInsets.all(5),
+                padding: EdgeInsets.zero,
+                decoration: BoxDecoration(
+                  color: GFColors.WHITE,
+                  borderRadius: BorderRadius.circular(5),
                 ),
-                children: const [
-                  Center(
-                    child: Text('Error while loading data'),
-                  )
-                ],
+                child: ExpansionTile(
+                  shape: const Border(
+                    bottom: BorderSide(width: 0),
+                  ),
+                  title: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                            text: 'Grafik Curah Hujan ',
+                            style:
+                                TextStyle(fontSize: 12, color: GFColors.DARK)),
+                        TextSpan(
+                            text: '(12 jam terakhir)',
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 12,
+                            )),
+                      ],
+                    ),
+                  ),
+                  children: const [
+                    Center(
+                      child: Text('Error while loading data'),
+                    )
+                  ],
+                ),
               ),
             ],
           );
@@ -1726,18 +1837,29 @@ class HomeView extends StatelessWidget {
           return SingleChildScrollView(
             child: Column(
               children: [
-                ExpansionTile(
-                  title: RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                            text: 'Prakiraan Cuaca ',
-                            style: TextStyle(
-                                fontSize: 12.r, color: GFColors.DARK)),
-                      ],
-                    ),
+                Container(
+                  margin: EdgeInsets.all(5),
+                  padding: EdgeInsets.zero,
+                  decoration: BoxDecoration(
+                    color: GFColors.WHITE,
+                    borderRadius: BorderRadius.circular(5),
                   ),
-                  children: [_weatherSlider(context, controller)],
+                  child: ExpansionTile(
+                    shape: const Border(
+                      bottom: BorderSide(width: 0),
+                    ),
+                    title: RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                              text: 'Prakiraan Cuaca ',
+                              style: TextStyle(
+                                  fontSize: 12, color: GFColors.DARK)),
+                        ],
+                      ),
+                    ),
+                    children: [_weatherSlider(context, controller)],
+                  ),
                 ),
                 _intakeGraph(context, listIntake),
                 _vnotchGraph(context, listVnotch),
@@ -1749,114 +1871,184 @@ class HomeView extends StatelessWidget {
         } else {
           return Column(
             children: [
-              ExpansionTile(
-                title: RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                          text: 'Prakiraan Cuaca ',
-                          style:
-                              TextStyle(fontSize: 12.r, color: GFColors.DARK)),
-                    ],
-                  ),
+              Container(
+                margin: EdgeInsets.all(5),
+                padding: EdgeInsets.zero,
+                decoration: BoxDecoration(
+                  color: GFColors.WHITE,
+                  borderRadius: BorderRadius.circular(5),
                 ),
-                children: const [
-                  Center(
-                    child: Text('Empty Data'),
-                  )
-                ],
+                child: ExpansionTile(
+                  shape: const Border(
+                    bottom: BorderSide(width: 0),
+                  ),
+                  title: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                            text: 'Prakiraan Cuaca ',
+                            style:
+                                TextStyle(fontSize: 12, color: GFColors.DARK)),
+                      ],
+                    ),
+                  ),
+                  children: [
+                    Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(5),
+                        child: const Text('Empty Data'),
+                      ),
+                    )
+                  ],
+                ),
               ),
-              ExpansionTile(
-                title: RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                          text: 'Grafik TMA Intake ',
-                          style:
-                              TextStyle(fontSize: 12.r, color: GFColors.DARK)),
-                      TextSpan(
-                          text: '(12 jam terakhir)',
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 12.r,
-                          )),
-                    ],
-                  ),
+              Container(
+                margin: EdgeInsets.all(5),
+                padding: EdgeInsets.zero,
+                decoration: BoxDecoration(
+                  color: GFColors.WHITE,
+                  borderRadius: BorderRadius.circular(5),
                 ),
-                children: const [
-                  Center(
-                    child: Text('Empty Data'),
-                  )
-                ],
+                child: ExpansionTile(
+                  shape: const Border(
+                    bottom: BorderSide(width: 0),
+                  ),
+                  title: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                            text: 'Grafik TMA Intake ',
+                            style:
+                                TextStyle(fontSize: 12, color: GFColors.DARK)),
+                        TextSpan(
+                            text: '(12 jam terakhir)',
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 12,
+                            )),
+                      ],
+                    ),
+                  ),
+                  children: [
+                    Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(5),
+                        child: const Text('Empty Data'),
+                      ),
+                    )
+                  ],
+                ),
               ),
-              ExpansionTile(
-                title: RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                          text: 'Grafik Debit V-Notch ',
-                          style:
-                              TextStyle(fontSize: 12.r, color: GFColors.DARK)),
-                      TextSpan(
-                          text: '(12 jam terakhir)',
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 12.r,
-                          )),
-                    ],
-                  ),
+              Container(
+                margin: EdgeInsets.all(5),
+                padding: EdgeInsets.zero,
+                decoration: BoxDecoration(
+                  color: GFColors.WHITE,
+                  borderRadius: BorderRadius.circular(5),
                 ),
-                children: const [
-                  Center(
-                    child: Text('Empty Data'),
-                  )
-                ],
+                child: ExpansionTile(
+                  shape: const Border(
+                    bottom: BorderSide(width: 0),
+                  ),
+                  title: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                            text: 'Grafik Debit V-Notch ',
+                            style:
+                                TextStyle(fontSize: 12, color: GFColors.DARK)),
+                        TextSpan(
+                            text: '(12 jam terakhir)',
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 12,
+                            )),
+                      ],
+                    ),
+                  ),
+                  children: [
+                    Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(5),
+                        child: const Text('Empty Data'),
+                      ),
+                    )
+                  ],
+                ),
               ),
-              ExpansionTile(
-                title: RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                          text: 'Grafik TMA AWLR ',
-                          style:
-                              TextStyle(fontSize: 12.r, color: GFColors.DARK)),
-                      TextSpan(
-                          text: '(12 jam terakhir)',
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 12.r,
-                          )),
-                    ],
-                  ),
+              Container(
+                margin: EdgeInsets.all(5),
+                padding: EdgeInsets.zero,
+                decoration: BoxDecoration(
+                  color: GFColors.WHITE,
+                  borderRadius: BorderRadius.circular(5),
                 ),
-                children: const [
-                  Center(
-                    child: Text('Empty Data'),
-                  )
-                ],
+                child: ExpansionTile(
+                  shape: const Border(
+                    bottom: BorderSide(width: 0),
+                  ),
+                  title: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                            text: 'Grafik TMA AWLR ',
+                            style:
+                                TextStyle(fontSize: 12, color: GFColors.DARK)),
+                        TextSpan(
+                            text: '(12 jam terakhir)',
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 12,
+                            )),
+                      ],
+                    ),
+                  ),
+                  children: [
+                    Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(5),
+                        child: const Text('Empty Data'),
+                      ),
+                    )
+                  ],
+                ),
               ),
-              ExpansionTile(
-                title: RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                          text: 'Grafik Curah Hujan ',
-                          style:
-                              TextStyle(fontSize: 12.r, color: GFColors.DARK)),
-                      TextSpan(
-                          text: '(12 jam terakhir)',
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 12.r,
-                          )),
-                    ],
-                  ),
+              Container(
+                margin: EdgeInsets.all(5),
+                padding: EdgeInsets.zero,
+                decoration: BoxDecoration(
+                  color: GFColors.WHITE,
+                  borderRadius: BorderRadius.circular(5),
                 ),
-                children: const [
-                  Center(
-                    child: Text('Empty Data'),
-                  )
-                ],
+                child: ExpansionTile(
+                  shape: const Border(
+                    bottom: BorderSide(width: 0),
+                  ),
+                  title: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                            text: 'Grafik Curah Hujan ',
+                            style:
+                                TextStyle(fontSize: 12, color: GFColors.DARK)),
+                        TextSpan(
+                            text: '(12 jam terakhir)',
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 12,
+                            )),
+                      ],
+                    ),
+                  ),
+                  children: [
+                    Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(5),
+                        child: const Text('Empty Data'),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ],
           );
@@ -1866,426 +2058,485 @@ class HomeView extends StatelessWidget {
   }
 
   _intakeGraph(BuildContext context, List<Intake> listIntake) {
-    return ExpansionTile(
-      title: RichText(
-        text: TextSpan(
-          children: [
-            TextSpan(
-                text: 'Grafik TMA Intake ',
-                style: TextStyle(fontSize: 12.r, color: GFColors.DARK)),
-            TextSpan(
-                text: '(12 jam terakhir)',
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 12.r,
-                )),
-          ],
-        ),
+    return Container(
+      margin: EdgeInsets.all(5),
+      padding: EdgeInsets.zero,
+      decoration: BoxDecoration(
+        color: GFColors.WHITE,
+        borderRadius: BorderRadius.circular(5),
       ),
-      children: [
-        (listIntake.isEmpty)
-            ? const Center(
-                child: Text('Empty Data'),
-              )
-            : SfCartesianChart(
-                primaryXAxis: DateTimeAxis(
-                  dateFormat: DateFormat.MMMd('id_ID'),
-                  autoScrollingDeltaType: DateTimeIntervalType.auto,
-                  labelFormat: '{value}',
-                  title: const AxisTitle(
-                      text: "Waktu", alignment: ChartAlignment.center),
-                ),
-                primaryYAxis: const NumericAxis(
-                  labelFormat: '{value}',
-                  title: AxisTitle(text: 'TMA (mdpl)'),
-                ),
-                title: ChartTitle(
-                  textStyle: TextStyle(
-                      height: 2.r, fontSize: 14.r, fontWeight: FontWeight.bold),
-                  alignment: ChartAlignment.center,
-                  text: 'Grafik Tinggi Muka Air BSH-INTAKE',
-                ),
-                tooltipBehavior: TooltipBehavior(enable: true),
-                trackballBehavior: TrackballBehavior(
-                  markerSettings: const TrackballMarkerSettings(
-                    markerVisibility:
-                        TrackballVisibilityMode.visible, // Show markers
-                    color: Colors.white, // Color of the trackball marker
+      child: ExpansionTile(
+        shape: const Border(
+          bottom: BorderSide(width: 0),
+        ),
+        title: RichText(
+          text: TextSpan(
+            children: [
+              TextSpan(
+                  text: 'Grafik TMA Intake ',
+                  style: TextStyle(fontSize: 12, color: GFColors.DARK)),
+              TextSpan(
+                  text: '(12 jam terakhir)',
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 12,
+                  )),
+            ],
+          ),
+        ),
+        children: [
+          (listIntake.isEmpty)
+              ? Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(5),
+                    child: const Text('Empty Data'),
                   ),
-                  tooltipSettings: const InteractiveTooltip(
-                    enable: true,
-                    color: Color(0xFF2CAFFE), // Tooltip background color
-                    textStyle:
-                        TextStyle(color: Colors.white), // Tooltip text color
+                )
+              : SfCartesianChart(
+                  primaryXAxis: DateTimeAxis(
+                    dateFormat: DateFormat.MMMd('id_ID'),
+                    autoScrollingDeltaType: DateTimeIntervalType.auto,
+                    labelFormat: '{value}',
+                    title: const AxisTitle(
+                        text: "Waktu", alignment: ChartAlignment.center),
                   ),
-                  activationMode: ActivationMode.singleTap,
-                  enable: true,
-                  builder: (BuildContext context,
-                      TrackballDetails trackballDetails) {
-                    final DateTime date = trackballDetails.point?.x;
-                    final String formattedDate =
-                        AppConstants().dateTimeFormatID.format(date);
-                    return SingleChildScrollView(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.75),
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.all(8.r),
-                              child: Text(
-                                formattedDate,
-                                style: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            Container(
-                              decoration: const BoxDecoration(
-                                  border: Border(
-                                      top: BorderSide(
-                                color: Colors.blue,
-                              ))),
-                              padding: EdgeInsets.all(8.r),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "TMA : ${AppConstants().numFormat.format(trackballDetails.point?.y)} (mdpl)",
-                                    style: const TextStyle(color: Colors.white),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
-                zoomPanBehavior: ZoomPanBehavior(
-                  enablePinching: true, // Enable pinch zoom
-                  enablePanning: true, // Enable panning
-                  zoomMode: ZoomMode
-                      .x, // Allow zooming only on the x-axis (can be both x, y or both)
-                  enableDoubleTapZooming: true, // Enable double-tap zoom
-                ),
-                series: <CartesianSeries<Intake, DateTime>>[
-                    AreaSeries<Intake, DateTime>(
-                      borderColor: const Color(0xFF2CAFFE),
-                      borderDrawMode: BorderDrawMode.top,
-                      markerSettings: const MarkerSettings(
-                          color: Colors.white,
-                          // isVisible: true,
-                          // Marker shape is set to diamond
-                          shape: DataMarkerType.circle),
-                      dataSource: listIntake,
-                      xValueMapper: (Intake data, _) => data.readingAt,
-                      yValueMapper: (Intake data, _) => data.waterLevel,
-                      name: 'TMA',
-                      borderWidth: 2.r,
-                      color: const Color(0xFF2CAFFE),
-                      gradient: LinearGradient(
-                        colors: [
-                          const Color(0xFF2CAFFE).withOpacity(0.5),
-                          Colors.white,
-                        ],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                      ),
+                  primaryYAxis: const NumericAxis(
+                    labelFormat: '{value}',
+                    title: AxisTitle(text: 'TMA (mdpl)'),
+                  ),
+                  title: ChartTitle(
+                    textStyle: TextStyle(
+                        height: 2, fontSize: 14, fontWeight: FontWeight.bold),
+                    alignment: ChartAlignment.center,
+                    text: 'Grafik Tinggi Muka Air BSH-INTAKE',
+                  ),
+                  tooltipBehavior: TooltipBehavior(enable: true),
+                  trackballBehavior: TrackballBehavior(
+                    markerSettings: const TrackballMarkerSettings(
+                      markerVisibility:
+                          TrackballVisibilityMode.visible, // Show markers
+                      color: Colors.white, // Color of the trackball marker
                     ),
-                  ]),
-      ],
+                    tooltipSettings: const InteractiveTooltip(
+                      enable: true,
+                      color: Color(0xFF2CAFFE), // Tooltip background color
+                      textStyle:
+                          TextStyle(color: Colors.white), // Tooltip text color
+                    ),
+                    activationMode: ActivationMode.singleTap,
+                    enable: true,
+                    builder: (BuildContext context,
+                        TrackballDetails trackballDetails) {
+                      final DateTime date = trackballDetails.point?.x;
+                      final String formattedDate =
+                          AppConstants().dateTimeFormatID.format(date);
+                      return SingleChildScrollView(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.75),
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.all(8),
+                                child: Text(
+                                  formattedDate,
+                                  style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Container(
+                                decoration: const BoxDecoration(
+                                    border: Border(
+                                        top: BorderSide(
+                                  color: Colors.blue,
+                                ))),
+                                padding: EdgeInsets.all(8),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "TMA : ${AppConstants().numFormat.format(trackballDetails.point?.y)} (mdpl)",
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                  zoomPanBehavior: ZoomPanBehavior(
+                    enablePinching: true, // Enable pinch zoom
+                    enablePanning: true, // Enable panning
+                    zoomMode: ZoomMode
+                        .x, // Allow zooming only on the x-axis (can be both x, y or both)
+                    enableDoubleTapZooming: true, // Enable double-tap zoom
+                  ),
+                  series: <CartesianSeries<Intake, DateTime>>[
+                      AreaSeries<Intake, DateTime>(
+                        borderColor: const Color(0xFF2CAFFE),
+                        borderDrawMode: BorderDrawMode.top,
+                        markerSettings: const MarkerSettings(
+                            color: Colors.white,
+                            // isVisible: true,
+                            // Marker shape is set to diamond
+                            shape: DataMarkerType.circle),
+                        dataSource: listIntake,
+                        xValueMapper: (Intake data, _) => data.readingAt,
+                        yValueMapper: (Intake data, _) => data.waterLevel,
+                        name: 'TMA',
+                        borderWidth: 2,
+                        color: const Color(0xFF2CAFFE),
+                        gradient: LinearGradient(
+                          colors: [
+                            const Color(0xFF2CAFFE).withOpacity(0.5),
+                            Colors.white,
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        ),
+                      ),
+                    ]),
+        ],
+      ),
     );
   }
 
   _vnotchGraph(BuildContext context, List<Vnotch> listVnotch) {
-    return ExpansionTile(
-      title: RichText(
-        text: TextSpan(
-          children: [
-            TextSpan(
-                text: 'Grafik Debit V-Notch ',
-                style: TextStyle(fontSize: 12.r, color: GFColors.DARK)),
-            TextSpan(
-                text: '(12 jam terakhir)',
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 12.r,
-                )),
-          ],
-        ),
+    return Container(
+      margin: EdgeInsets.all(5),
+      padding: EdgeInsets.zero,
+      decoration: BoxDecoration(
+        color: GFColors.WHITE,
+        borderRadius: BorderRadius.circular(5),
       ),
-      children: [
-        (listVnotch.isEmpty)
-            ? const Center(
-                child: Text('Empty Data'),
-              )
-            : SfCartesianChart(
-                primaryXAxis: DateTimeAxis(
-                  dateFormat: DateFormat.MMMd('id_ID'),
-                  autoScrollingDeltaType: DateTimeIntervalType.auto,
-                  labelFormat: '{value}',
-                  title: const AxisTitle(
-                      text: "Waktu", alignment: ChartAlignment.center),
-                ),
-                primaryYAxis: const NumericAxis(
-                  labelFormat: '{value}',
-                  title: AxisTitle(text: 'Debit (lt/d)'),
-                ),
-                title: ChartTitle(
-                  textStyle: TextStyle(
-                      height: 2.r, fontSize: 14.r, fontWeight: FontWeight.bold),
-                  alignment: ChartAlignment.center,
-                  text: 'Grafik Debit',
-                ),
-                tooltipBehavior: TooltipBehavior(enable: true),
-                trackballBehavior: TrackballBehavior(
-                  markerSettings: const TrackballMarkerSettings(
-                    markerVisibility:
-                        TrackballVisibilityMode.visible, // Show markers
-                    color: Colors.white, // Color of the trackball marker
+      child: ExpansionTile(
+        shape: const Border(
+          bottom: BorderSide(width: 0),
+        ),
+        title: RichText(
+          text: TextSpan(
+            children: [
+              TextSpan(
+                  text: 'Grafik Debit V-Notch ',
+                  style: TextStyle(fontSize: 12, color: GFColors.DARK)),
+              TextSpan(
+                  text: '(12 jam terakhir)',
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 12,
+                  )),
+            ],
+          ),
+        ),
+        children: [
+          (listVnotch.isEmpty)
+              ? Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(5),
+                    child: const Text('Empty Data'),
                   ),
-                  tooltipSettings: const InteractiveTooltip(
-                    enable: true,
-                    color: Color(0xFF2CAFFE), // Tooltip background color
-                    textStyle:
-                        TextStyle(color: Colors.white), // Tooltip text color
+                )
+              : SfCartesianChart(
+                  primaryXAxis: DateTimeAxis(
+                    dateFormat: DateFormat.MMMd('id_ID'),
+                    autoScrollingDeltaType: DateTimeIntervalType.auto,
+                    labelFormat: '{value}',
+                    title: const AxisTitle(
+                        text: "Waktu", alignment: ChartAlignment.center),
                   ),
-                  activationMode: ActivationMode.singleTap,
-                  enable: true,
-                  builder: (BuildContext context,
-                      TrackballDetails trackballDetails) {
-                    final DateTime date = trackballDetails.point?.x;
-                    final String formattedDate =
-                        AppConstants().dateTimeFormatID.format(date);
-                    return SingleChildScrollView(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.75),
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.all(8.r),
-                              child: Text(
-                                formattedDate,
-                                style: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            Container(
-                              decoration: const BoxDecoration(
-                                  border: Border(
-                                      top: BorderSide(
-                                color: Colors.blue,
-                              ))),
-                              padding: EdgeInsets.all(8.r),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Debit : ${AppConstants().numFormat.format(trackballDetails.point?.y)} (lt/d)",
-                                    style: const TextStyle(color: Colors.white),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
-                zoomPanBehavior: ZoomPanBehavior(
-                  enablePinching: true, // Enable pinch zoom
-                  enablePanning: true, // Enable panning
-                  zoomMode: ZoomMode
-                      .x, // Allow zooming only on the x-axis (can be both x, y or both)
-                  enableDoubleTapZooming: true, // Enable double-tap zoom
-                ),
-                series: <CartesianSeries<Vnotch, DateTime>>[
-                    AreaSeries<Vnotch, DateTime>(
-                      borderDrawMode: BorderDrawMode.top,
-                      markerSettings: const MarkerSettings(
-                          color: Colors.white,
-                          // isVisible: true,
-                          // Marker shape is set to diamond
-                          shape: DataMarkerType.circle),
-                      dataSource: listVnotch,
-                      xValueMapper: (Vnotch data, _) => data.readingAt,
-                      yValueMapper: (Vnotch data, _) => data.debit,
-                      name: 'Debit',
-                      borderColor: const Color(0xFF2CAFFE),
-                      borderWidth: 2.r,
-                      color: const Color(0xFF2CAFFE),
-                      gradient: LinearGradient(
-                        colors: [
-                          const Color(0xFF2CAFFE).withOpacity(0.5),
-                          Colors.white,
-                        ],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                      ),
+                  primaryYAxis: const NumericAxis(
+                    labelFormat: '{value}',
+                    title: AxisTitle(text: 'Debit (lt/d)'),
+                  ),
+                  title: ChartTitle(
+                    textStyle: TextStyle(
+                        height: 2, fontSize: 14, fontWeight: FontWeight.bold),
+                    alignment: ChartAlignment.center,
+                    text: 'Grafik Debit',
+                  ),
+                  tooltipBehavior: TooltipBehavior(enable: true),
+                  trackballBehavior: TrackballBehavior(
+                    markerSettings: const TrackballMarkerSettings(
+                      markerVisibility:
+                          TrackballVisibilityMode.visible, // Show markers
+                      color: Colors.white, // Color of the trackball marker
                     ),
-                  ]),
-      ],
+                    tooltipSettings: const InteractiveTooltip(
+                      enable: true,
+                      color: Color(0xFF2CAFFE), // Tooltip background color
+                      textStyle:
+                          TextStyle(color: Colors.white), // Tooltip text color
+                    ),
+                    activationMode: ActivationMode.singleTap,
+                    enable: true,
+                    builder: (BuildContext context,
+                        TrackballDetails trackballDetails) {
+                      final DateTime date = trackballDetails.point?.x;
+                      final String formattedDate =
+                          AppConstants().dateTimeFormatID.format(date);
+                      return SingleChildScrollView(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.75),
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.all(8),
+                                child: Text(
+                                  formattedDate,
+                                  style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Container(
+                                decoration: const BoxDecoration(
+                                    border: Border(
+                                        top: BorderSide(
+                                  color: Colors.blue,
+                                ))),
+                                padding: EdgeInsets.all(8),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Debit : ${AppConstants().numFormat.format(trackballDetails.point?.y)} (lt/d)",
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                  zoomPanBehavior: ZoomPanBehavior(
+                    enablePinching: true, // Enable pinch zoom
+                    enablePanning: true, // Enable panning
+                    zoomMode: ZoomMode
+                        .x, // Allow zooming only on the x-axis (can be both x, y or both)
+                    enableDoubleTapZooming: true, // Enable double-tap zoom
+                  ),
+                  series: <CartesianSeries<Vnotch, DateTime>>[
+                      AreaSeries<Vnotch, DateTime>(
+                        borderDrawMode: BorderDrawMode.top,
+                        markerSettings: const MarkerSettings(
+                            color: Colors.white,
+                            // isVisible: true,
+                            // Marker shape is set to diamond
+                            shape: DataMarkerType.circle),
+                        dataSource: listVnotch,
+                        xValueMapper: (Vnotch data, _) => data.readingAt,
+                        yValueMapper: (Vnotch data, _) => data.debit,
+                        name: 'Debit',
+                        borderColor: const Color(0xFF2CAFFE),
+                        borderWidth: 2,
+                        color: const Color(0xFF2CAFFE),
+                        gradient: LinearGradient(
+                          colors: [
+                            const Color(0xFF2CAFFE).withOpacity(0.5),
+                            Colors.white,
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        ),
+                      ),
+                    ]),
+        ],
+      ),
     );
   }
 
   _rainFallGraph(BuildContext context, List<RainFall> listRainFall) {
-    return ExpansionTile(
-      title: RichText(
-        text: TextSpan(
-          children: [
-            TextSpan(
-                text: 'Grafik Curah Hujan ',
-                style: TextStyle(fontSize: 12.r, color: GFColors.DARK)),
-            TextSpan(
-                text: '(12 jam terakhir)',
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 12.r,
-                )),
-          ],
-        ),
+    return Container(
+      margin: EdgeInsets.all(5),
+      padding: EdgeInsets.zero,
+      decoration: BoxDecoration(
+        color: GFColors.WHITE,
+        borderRadius: BorderRadius.circular(5),
       ),
-      children: [
-        (listRainFall.isEmpty)
-            ? const Center(
-                child: Text('Empty Data'),
-              )
-            : SfCartesianChart(
-                primaryXAxis: DateTimeAxis(
-                  dateFormat: DateFormat.MMMd('id_ID'),
-                  autoScrollingDeltaType: DateTimeIntervalType.auto,
-                  labelFormat: '{value}',
-                  title: const AxisTitle(
-                      text: "Waktu", alignment: ChartAlignment.center),
-                ),
-                primaryYAxis: const NumericAxis(
-                  labelFormat: '{value}',
-                  title: AxisTitle(text: 'Curah Hujan (mm)'),
-                ),
-                title: ChartTitle(
-                  textStyle: TextStyle(
-                      height: 2.r, fontSize: 14.r, fontWeight: FontWeight.bold),
-                  alignment: ChartAlignment.center,
-                  text: 'Grafik Curah Hujan',
-                ),
-                tooltipBehavior: TooltipBehavior(enable: true),
-                trackballBehavior: TrackballBehavior(
-                  markerSettings: const TrackballMarkerSettings(
-                    markerVisibility:
-                        TrackballVisibilityMode.visible, // Show markers
-                    color: Colors.white, // Color of the trackball marker
+      child: ExpansionTile(
+        shape: const Border(
+          bottom: BorderSide(width: 0),
+        ),
+        title: RichText(
+          text: TextSpan(
+            children: [
+              TextSpan(
+                  text: 'Grafik Curah Hujan ',
+                  style: TextStyle(fontSize: 12, color: GFColors.DARK)),
+              TextSpan(
+                  text: '(12 jam terakhir)',
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 12,
+                  )),
+            ],
+          ),
+        ),
+        children: [
+          (listRainFall.isEmpty)
+              ? Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(5),
+                    child: const Text('Empty Data'),
                   ),
-                  tooltipSettings: const InteractiveTooltip(
-                    enable: true,
-                    color: Colors.green, // Tooltip background color
-                    textStyle:
-                        TextStyle(color: Colors.white), // Tooltip text color
+                )
+              : SfCartesianChart(
+                  primaryXAxis: DateTimeAxis(
+                    dateFormat: DateFormat.MMMd('id_ID'),
+                    autoScrollingDeltaType: DateTimeIntervalType.auto,
+                    labelFormat: '{value}',
+                    title: const AxisTitle(
+                        text: "Waktu", alignment: ChartAlignment.center),
                   ),
-                  activationMode: ActivationMode.singleTap,
-                  enable: true,
-                  builder: (BuildContext context,
-                      TrackballDetails trackballDetails) {
-                    final DateTime date = trackballDetails.point?.x;
-                    final String formattedDate =
-                        AppConstants().dateTimeFormatID.format(date);
-                    return SingleChildScrollView(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.75),
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.all(8.r),
-                              child: Text(
-                                formattedDate,
-                                style: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            Container(
-                              decoration: const BoxDecoration(
-                                  border: Border(
-                                      top: BorderSide(
-                                color: Colors.blue,
-                              ))),
-                              padding: EdgeInsets.all(8.r),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Curah Hujan : ${AppConstants().numFormat.format(trackballDetails.point?.y)} (mm)",
-                                    style: const TextStyle(color: Colors.white),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
-                zoomPanBehavior: ZoomPanBehavior(
-                  enablePinching: true, // Enable pinch zoom
-                  enablePanning: true, // Enable panning
-                  zoomMode: ZoomMode
-                      .x, // Allow zooming only on the x-axis (can be both x, y or both)
-                  enableDoubleTapZooming: true, // Enable double-tap zoom
-                ),
-                series: <CartesianSeries<RainFall, DateTime>>[
-                    ColumnSeries<RainFall, DateTime>(
-                      color: Colors.blue[500],
-                      markerSettings: MarkerSettings(
-                          color: Colors.blue[900]!,
-                          // isVisible: true,
-                          // Marker shape is set to diamond
-                          shape: DataMarkerType.circle),
-                      dataSource: listRainFall,
-                      xValueMapper: (RainFall data, _) => data.readingAt,
-                      yValueMapper: (RainFall data, _) => data.rainFall ?? 0,
-                      name: 'Curah Hujan',
-                      borderRadius: BorderRadius.circular(5),
-                      width: 0.9,
+                  primaryYAxis: const NumericAxis(
+                    labelFormat: '{value}',
+                    title: AxisTitle(text: 'Curah Hujan (mm)'),
+                  ),
+                  title: ChartTitle(
+                    textStyle: TextStyle(
+                        height: 2, fontSize: 14, fontWeight: FontWeight.bold),
+                    alignment: ChartAlignment.center,
+                    text: 'Grafik Curah Hujan',
+                  ),
+                  tooltipBehavior: TooltipBehavior(enable: true),
+                  trackballBehavior: TrackballBehavior(
+                    markerSettings: const TrackballMarkerSettings(
+                      markerVisibility:
+                          TrackballVisibilityMode.visible, // Show markers
+                      color: Colors.white, // Color of the trackball marker
                     ),
-                  ]),
-      ],
+                    tooltipSettings: const InteractiveTooltip(
+                      enable: true,
+                      color: Colors.green, // Tooltip background color
+                      textStyle:
+                          TextStyle(color: Colors.white), // Tooltip text color
+                    ),
+                    activationMode: ActivationMode.singleTap,
+                    enable: true,
+                    builder: (BuildContext context,
+                        TrackballDetails trackballDetails) {
+                      final DateTime date = trackballDetails.point?.x;
+                      final String formattedDate =
+                          AppConstants().dateTimeFormatID.format(date);
+                      return SingleChildScrollView(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.75),
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.all(8),
+                                child: Text(
+                                  formattedDate,
+                                  style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Container(
+                                decoration: const BoxDecoration(
+                                    border: Border(
+                                        top: BorderSide(
+                                  color: Colors.blue,
+                                ))),
+                                padding: EdgeInsets.all(8),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Curah Hujan : ${AppConstants().numFormat.format(trackballDetails.point?.y)} (mm)",
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                  zoomPanBehavior: ZoomPanBehavior(
+                    enablePinching: true, // Enable pinch zoom
+                    enablePanning: true, // Enable panning
+                    zoomMode: ZoomMode
+                        .x, // Allow zooming only on the x-axis (can be both x, y or both)
+                    enableDoubleTapZooming: true, // Enable double-tap zoom
+                  ),
+                  series: <CartesianSeries<RainFall, DateTime>>[
+                      ColumnSeries<RainFall, DateTime>(
+                        color: Colors.blue[500],
+                        markerSettings: MarkerSettings(
+                            color: Colors.blue[900]!,
+                            // isVisible: true,
+                            // Marker shape is set to diamond
+                            shape: DataMarkerType.circle),
+                        dataSource: listRainFall,
+                        xValueMapper: (RainFall data, _) => data.readingAt,
+                        yValueMapper: (RainFall data, _) => data.rainFall ?? 0,
+                        name: 'Curah Hujan',
+                        borderRadius: BorderRadius.circular(5),
+                        width: 0.9,
+                      ),
+                    ]),
+        ],
+      ),
     );
   }
 
   _awlrList(BuildContext context, List<Awlr> listAwlrDetail) {
-    return ExpansionTile(
-      title: RichText(
-        text: TextSpan(
-          children: [
-            TextSpan(
-                text: 'Grafik TMA AWLR ',
-                style: TextStyle(fontSize: 12.r, color: GFColors.DARK)),
-            TextSpan(
-                text: '(12 jam terakhir)',
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 12.r,
-                )),
-          ],
-        ),
+    return Container(
+      margin: EdgeInsets.all(5),
+      padding: EdgeInsets.zero,
+      decoration: BoxDecoration(
+        color: GFColors.WHITE,
+        borderRadius: BorderRadius.circular(5),
       ),
-      children: (listAwlrDetail.isEmpty)
-          ? const Center(
-              child: Text('Empty Data'),
-            )
-          : _awlrGraph(context, listAwlrDetail),
+      child: ExpansionTile(
+        shape: const Border(
+          bottom: BorderSide(width: 0),
+        ),
+        title: RichText(
+          text: TextSpan(
+            children: [
+              TextSpan(
+                  text: 'Grafik TMA AWLR ',
+                  style: TextStyle(fontSize: 12, color: GFColors.DARK)),
+              TextSpan(
+                  text: '(12 jam terakhir)',
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 12,
+                  )),
+            ],
+          ),
+        ),
+        children: (listAwlrDetail.isEmpty)
+            ? Center(
+                child: Padding(
+                  padding: EdgeInsets.all(5),
+                  child: const Text('Empty Data'),
+                ),
+              )
+            : _awlrGraph(context, listAwlrDetail),
+      ),
     );
   }
 
@@ -2295,8 +2546,11 @@ class HomeView extends StatelessWidget {
       var name = controller.listAwlr[i].stationName ?? '';
       var listTemp = listAwlrDetail.where((x) => x.name == name).toList();
       var graph = listTemp.isEmpty
-          ? const Center(
-              child: Text('Empty Data'),
+          ? Center(
+              child: Padding(
+                padding: EdgeInsets.all(5),
+                child: const Text('Empty Data'),
+              ),
             )
           : Padding(
               padding: const EdgeInsets.all(8.0),
@@ -2306,8 +2560,7 @@ class HomeView extends StatelessWidget {
                     children: [
                       TextSpan(
                           text: 'Grafik TMA $name ',
-                          style:
-                              TextStyle(fontSize: 12.r, color: GFColors.DARK)),
+                          style: TextStyle(fontSize: 12, color: GFColors.DARK)),
                     ],
                   ),
                 ),
@@ -2326,8 +2579,8 @@ class HomeView extends StatelessWidget {
                       ),
                       title: ChartTitle(
                         textStyle: TextStyle(
-                            height: 2.r,
-                            fontSize: 14.r,
+                            height: 2,
+                            fontSize: 14,
                             fontWeight: FontWeight.bold),
                         alignment: ChartAlignment.center,
                         text: 'Grafik TMA AWLR $name',
@@ -2361,7 +2614,7 @@ class HomeView extends StatelessWidget {
                               child: Column(
                                 children: [
                                   Padding(
-                                    padding: EdgeInsets.all(8.r),
+                                    padding: EdgeInsets.all(8),
                                     child: Text(
                                       formattedDate,
                                       style: const TextStyle(
@@ -2375,7 +2628,7 @@ class HomeView extends StatelessWidget {
                                             top: BorderSide(
                                       color: Colors.blue,
                                     ))),
-                                    padding: EdgeInsets.all(8.r),
+                                    padding: EdgeInsets.all(8),
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -2414,7 +2667,7 @@ class HomeView extends StatelessWidget {
                           xValueMapper: (Awlr data, _) => data.readingAt,
                           yValueMapper: (Awlr data, _) => data.waterLevel,
                           name: 'TMA',
-                          borderWidth: 2.r,
+                          borderWidth: 2,
                           color: const Color(0xFF2CAFFE),
                           gradient: LinearGradient(
                             colors: [

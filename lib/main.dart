@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:mobile_ameroro_app/apps/config/app_config.dart';
@@ -11,7 +10,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeDateFormatting();
-  await ScreenUtil.ensureScreenSize();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp, // Allow only portrait up
   ]).then((_) {
@@ -22,11 +20,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(
-          375, 812), // Ukuran desain yang diinginkan (misalnya iPhone X)
-      builder: (context, child) {
-        return GetMaterialApp(
+    return GetMaterialApp(
           title: 'Bendungan Ameroro',
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,
@@ -43,7 +37,5 @@ class MyApp extends StatelessWidget {
           getPages: AppRoutes.pages,
           debugShowCheckedModeBanner: false,
         );
-      },
-    );
   }
 }

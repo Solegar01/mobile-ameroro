@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
@@ -28,7 +27,7 @@ class AwlrDetailView extends StatelessWidget {
               appBar: AppBar(
                 foregroundColor: GFColors.WHITE,
                 title: Padding(
-                  padding: EdgeInsets.all(10.r),
+                  padding: const EdgeInsets.all(10),
                   child: Text(controller.model?.stationName ?? '-'),
                 ),
               ),
@@ -40,7 +39,7 @@ class AwlrDetailView extends StatelessWidget {
                 ),
                 onEmpty: const Text('Empty Data'),
                 onError: (error) => Padding(
-                  padding: EdgeInsets.all(8.r),
+                  padding: EdgeInsets.all(8),
                   child: Center(child: Text(error!)),
                 ),
               ),
@@ -50,26 +49,40 @@ class AwlrDetailView extends StatelessWidget {
   }
 
   _detail(BuildContext context, AwlrDetailController controller) {
-    return RefreshIndicator(
-      backgroundColor: GFColors.LIGHT,
-      onRefresh: () async {
-        await controller.formInit();
-      },
-      child: ListView(
-        children: [
-          _forms(context, controller),
-          SizedBox(
-            height: 650.r,
-            child: _graphTableTab(context, controller),
-          ),
-        ],
-      ),
+    return Column(
+      children: [
+        RefreshIndicator(
+            backgroundColor: GFColors.LIGHT,
+            onRefresh: () async {
+              await controller.formInit();
+            },
+            child: SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              child: _forms(context, controller),
+            )),
+        Expanded(
+          child: _graphTableTab(context, controller),
+        ),
+      ],
     );
   }
 
   _forms(BuildContext context, AwlrDetailController controller) {
     return Container(
-      padding: EdgeInsets.all(10.r),
+      margin: const EdgeInsets.all(5),
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: GFColors.WHITE,
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.shade600,
+            spreadRadius: 0,
+            blurRadius: 2,
+            offset: const Offset(-1, 1),
+          ),
+        ],
+      ),
       child: Form(
         key: _formKey,
         child: Column(
@@ -79,7 +92,7 @@ class AwlrDetailView extends StatelessWidget {
               decoration: InputDecoration(
                 labelText: "Interval",
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8.r),
+                  borderRadius: BorderRadius.circular(8),
                 ),
               ),
               value: controller.filterType.value,
@@ -107,7 +120,7 @@ class AwlrDetailView extends StatelessWidget {
                 }
               },
             ),
-            SizedBox(height: 10.r),
+            SizedBox(height: 10),
             TextFormField(
               onTap: () async {
                 await _selectDate(context, controller);
@@ -116,7 +129,7 @@ class AwlrDetailView extends StatelessWidget {
                   value == null || value.isEmpty ? 'Pilih periode' : null,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5.r),
+                    borderRadius: BorderRadius.circular(5),
                     borderSide: const BorderSide(color: GFColors.DARK)),
                 labelText: 'Periode',
                 suffixIcon: IconButton(
@@ -129,7 +142,7 @@ class AwlrDetailView extends StatelessWidget {
               controller: controller.dateRangeController,
               readOnly: true,
             ),
-            SizedBox(height: 10.r),
+            SizedBox(height: 10),
             ElevatedButton(
               onPressed: () async {
                 // Validate form and show a message if valid
@@ -152,9 +165,9 @@ class AwlrDetailView extends StatelessWidget {
                   side: const BorderSide(
                     color: AppConfig.primaryColor,
                   ),
-                  borderRadius: BorderRadius.circular(30.r), // Rounded corners
+                  borderRadius: BorderRadius.circular(30), // Rounded corners
                 ),
-                padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               ),
               child: SizedBox(
                 width: double.infinity,
@@ -162,7 +175,7 @@ class AwlrDetailView extends StatelessWidget {
                   child: Text(
                     'Tampilkan',
                     style: TextStyle(
-                      fontSize: 16.r,
+                      fontSize: 16,
                       color: AppConfig.primaryColor,
                     ),
                   ),
@@ -248,11 +261,11 @@ class AwlrDetailView extends StatelessWidget {
       children: [
         TabBar(
           tabAlignment: TabAlignment.start,
-          padding: EdgeInsets.only(top: 10.r),
+          padding: EdgeInsets.only(top: 10),
           indicatorColor: Colors.transparent,
           isScrollable: true,
           controller: controller.sensorTabController,
-          dividerHeight: 0.r,
+          dividerHeight: 0,
           onTap: (index) {
             controller.selectedSensorIndex.value = index;
           },
@@ -261,21 +274,32 @@ class AwlrDetailView extends StatelessWidget {
               Tab(
                 child: Obx(
                   () => Container(
-                    padding: EdgeInsets.all(8.r),
+                    padding: EdgeInsets.all(8),
                     decoration: BoxDecoration(
+                      color: GFColors.WHITE,
                       border: Border.all(
+                        width:
+                            controller.selectedSensorIndex.value == i ? 2 : 1,
                         color: controller.selectedSensorIndex.value == i
                             ? AppConfig.primaryColor
-                            : GFColors.LIGHT,
+                            : Colors.grey,
                       ),
-                      borderRadius: BorderRadius.circular(20.r),
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.shade600,
+                          spreadRadius: 0,
+                          blurRadius: 2,
+                          offset: const Offset(-1, 1),
+                        ),
+                      ],
                     ),
                     child: Text(
                       sensors[i],
                       style: TextStyle(
                         color: controller.selectedSensorIndex.value == i
                             ? AppConfig.primaryColor
-                            : GFColors.LIGHT,
+                            : Colors.grey,
                       ),
                     ),
                   ),
@@ -338,8 +362,8 @@ class AwlrDetailView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: const EdgeInsets.all(5),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: GFColors.WHITE,
@@ -350,15 +374,26 @@ class AwlrDetailView extends StatelessWidget {
         } else if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
             return SingleChildScrollView(
-              child: GFCard(
-                margin: EdgeInsets.all(10.r),
-                color: GFColors.WHITE,
-                padding: EdgeInsets.zero,
-                content: SizedBox(
-                  height: 300.r,
+              child: Container(
+                margin: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: GFColors.WHITE,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade600,
+                      spreadRadius: 0,
+                      blurRadius: 2,
+                      offset: const Offset(-1, 1),
+                    ),
+                  ],
+                ),
+                child: SizedBox(
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -377,216 +412,234 @@ class AwlrDetailView extends StatelessWidget {
                 id: 'grafik',
                 builder: (controller) {
                   return SingleChildScrollView(
-                    child: GFCard(
-                      margin: EdgeInsets.all(10.r),
-                      color: GFColors.WHITE,
-                      padding: EdgeInsets.zero,
-                      content: SizedBox(
-                        height: 300.r,
-                        child: SfCartesianChart(
-                            primaryXAxis: DateTimeAxis(
-                              dateFormat: DateFormat.MMMd('id_ID'),
-                              autoScrollingDeltaType: DateTimeIntervalType.auto,
-                              labelFormat: '{value}',
-                              title: const AxisTitle(
-                                  text: "Waktu",
-                                  alignment: ChartAlignment.center),
-                            ),
-                            primaryYAxis: const NumericAxis(
-                              labelFormat: '{value}',
-                              title: AxisTitle(text: 'TMA (mdpl)'),
-                            ),
-                            title: ChartTitle(
-                              textStyle: TextStyle(
-                                  height: 2.r,
-                                  fontSize: 14.r,
-                                  fontWeight: FontWeight.bold),
-                              alignment: ChartAlignment.center,
-                              text: 'Grafik Tinggi Muka Air',
-                            ),
-                            tooltipBehavior: TooltipBehavior(
-                              enable: true,
-                              builder: (dynamic data,
-                                  dynamic point,
-                                  dynamic series,
-                                  int pointIndex,
-                                  int seriesIndex) {
-                                final cColor = series.color;
-                                final DateTime date = point?.x;
-                                final String formattedDate = AppConstants()
-                                    .dateTimeFormatID
-                                    .format(date);
-                                return SingleChildScrollView(
-                                  child: Container(
-                                    width: 180.r,
-                                    decoration: BoxDecoration(
-                                      color: Colors.black.withOpacity(0.75),
-                                      borderRadius: BorderRadius.circular(6.r),
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.all(8.r),
-                                          child: Text(
-                                            formattedDate,
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              border: Border(
-                                                  top: BorderSide(
-                                            color: cColor,
-                                          ))),
-                                          padding: EdgeInsets.all(8.r),
-                                          child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Container(
-                                                width: 10.r,
-                                                height: 10.r,
-                                                decoration: BoxDecoration(
-                                                  color: cColor, // Fill color
-                                                  shape: BoxShape
-                                                      .circle, // Makes it a circle
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 5.r,
-                                              ),
-                                              Text(
-                                                '${series.name.toString()} : ${AppConstants().numFormat.format(point?.y)} (mdpl)',
-                                                style: const TextStyle(
-                                                    color: Colors.white),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                            trackballBehavior: TrackballBehavior(
-                              markerSettings: const TrackballMarkerSettings(
-                                markerVisibility: TrackballVisibilityMode
-                                    .visible, // Show markers
-                                color: Colors
-                                    .white, // Color of the trackball marker
-                              ),
-                              tooltipSettings: const InteractiveTooltip(
-                                enable: true,
-                                color: Color(
-                                    0xFF2CAFFE), // Tooltip background color
-                                textStyle: TextStyle(
-                                    color: Colors.white), // Tooltip text color
-                              ),
-                              activationMode: ActivationMode.singleTap,
-                              enable: true,
-                              builder: (BuildContext context,
-                                  TrackballDetails trackballDetails) {
-                                final DateTime date = trackballDetails.point?.x;
-                                final String formattedDate = AppConstants()
-                                    .dateTimeFormatID
-                                    .format(date);
-                                return SingleChildScrollView(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.black.withOpacity(0.75),
-                                      borderRadius: BorderRadius.circular(6.r),
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          decoration: const BoxDecoration(
-                                              border: Border(
-                                                  bottom: BorderSide(
-                                            color: Colors.blue,
-                                          ))),
-                                          padding: EdgeInsets.all(8.r),
-                                          child: Text(
-                                            formattedDate,
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        Container(
-                                          padding: EdgeInsets.all(8.r),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "TMA : ${AppConstants().numFormat.format(trackballDetails.point?.y)} (mdpl)",
-                                                style: const TextStyle(
-                                                    color: Colors.white),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                            zoomPanBehavior: ZoomPanBehavior(
-                              enablePinching: true, // Enable pinch zoom
-                              enablePanning: true, // Enable panning
-                              zoomMode: ZoomMode
-                                  .x, // Allow zooming only on the x-axis (can be both x, y or both)
-                              enableDoubleTapZooming:
-                                  true, // Enable double-tap zoom
-                            ),
-                            series: <CartesianSeries>[
-                              AreaSeries<AwlrDetailHourModel, DateTime>(
-                                borderDrawMode: BorderDrawMode.top,
-                                markerSettings: const MarkerSettings(
-                                    color: Colors.white,
-                                    // isVisible: true,
-                                    // Marker shape is set to diamond
-                                    shape: DataMarkerType.circle),
-                                dataSource: listData,
-                                xValueMapper: (AwlrDetailHourModel data, _) =>
-                                    data.readingHour,
-                                yValueMapper: (AwlrDetailHourModel data, _) =>
-                                    data.waterLevel ?? 0,
-                                name: 'TMA',
-                                borderColor: const Color(0xFF2CAFFE),
-                                borderWidth: 2.r,
-                                color: const Color(0xFF2CAFFE),
-                                gradient: LinearGradient(
-                                  colors: [
-                                    const Color(0xFF2CAFFE).withOpacity(0.5),
-                                    Colors.white,
-                                  ],
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                ),
-                              ),
-                            ]),
+                    child: Container(
+                      margin: const EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: GFColors.WHITE,
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.shade600,
+                            spreadRadius: 0,
+                            blurRadius: 2,
+                            offset: const Offset(-1, 1),
+                          ),
+                        ],
                       ),
+                      child: SfCartesianChart(
+                          primaryXAxis: DateTimeAxis(
+                            dateFormat: DateFormat.MMMd('id_ID'),
+                            autoScrollingDeltaType: DateTimeIntervalType.auto,
+                            labelFormat: '{value}',
+                            title: const AxisTitle(
+                                text: "Waktu",
+                                alignment: ChartAlignment.center),
+                          ),
+                          primaryYAxis: const NumericAxis(
+                            labelFormat: '{value}',
+                            title: AxisTitle(text: 'TMA (mdpl)'),
+                          ),
+                          title: ChartTitle(
+                            textStyle: TextStyle(
+                                height: 2,
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold),
+                            alignment: ChartAlignment.center,
+                            text: 'Grafik Tinggi Muka Air',
+                          ),
+                          tooltipBehavior: TooltipBehavior(
+                            enable: true,
+                            builder: (dynamic data,
+                                dynamic point,
+                                dynamic series,
+                                int pointIndex,
+                                int seriesIndex) {
+                              final cColor = series.color;
+                              final DateTime date = point?.x;
+                              final String formattedDate =
+                                  AppConstants().dateTimeFormatID.format(date);
+                              return SingleChildScrollView(
+                                child: Container(
+                                  width: 180,
+                                  decoration: BoxDecoration(
+                                    color: Colors.black.withOpacity(0.75),
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.all(8),
+                                        child: Text(
+                                          formattedDate,
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            border: Border(
+                                                top: BorderSide(
+                                          color: cColor,
+                                        ))),
+                                        padding: EdgeInsets.all(8),
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Container(
+                                              width: 10,
+                                              height: 10,
+                                              decoration: BoxDecoration(
+                                                color: cColor, // Fill color
+                                                shape: BoxShape
+                                                    .circle, // Makes it a circle
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                              '${series.name.toString()} : ${AppConstants().numFormat.format(point?.y)} (mdpl)',
+                                              style: const TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                          trackballBehavior: TrackballBehavior(
+                            shouldAlwaysShow: true,
+                            markerSettings: const TrackballMarkerSettings(
+                              markerVisibility: TrackballVisibilityMode
+                                  .visible, // Show markers
+                              color:
+                                  Colors.white, // Color of the trackball marker
+                            ),
+                            tooltipSettings: const InteractiveTooltip(
+                              enable: true,
+                              color:
+                                  Color(0xFF2CAFFE), // Tooltip background color
+                              textStyle: TextStyle(
+                                  color: Colors.white), // Tooltip text color
+                            ),
+                            activationMode: ActivationMode.singleTap,
+                            enable: true,
+                            builder: (BuildContext context,
+                                TrackballDetails trackballDetails) {
+                              final DateTime date = trackballDetails.point?.x;
+                              final String formattedDate =
+                                  AppConstants().dateTimeFormatID.format(date);
+                              return SingleChildScrollView(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.black.withOpacity(0.75),
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        decoration: const BoxDecoration(
+                                            border: Border(
+                                                bottom: BorderSide(
+                                          color: Colors.blue,
+                                        ))),
+                                        padding: EdgeInsets.all(8),
+                                        child: Text(
+                                          formattedDate,
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.all(8),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "TMA : ${AppConstants().numFormat.format(trackballDetails.point?.y)} (mdpl)",
+                                              style: const TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                          zoomPanBehavior: ZoomPanBehavior(
+                            enablePinching: true, // Enable pinch zoom
+                            enablePanning: true, // Enable panning
+                            zoomMode: ZoomMode
+                                .x, // Allow zooming only on the x-axis (can be both x, y or both)
+                            enableDoubleTapZooming:
+                                true, // Enable double-tap zoom
+                          ),
+                          series: <CartesianSeries>[
+                            AreaSeries<AwlrDetailHourModel, DateTime>(
+                              borderDrawMode: BorderDrawMode.top,
+                              markerSettings: const MarkerSettings(
+                                  color: Colors.white,
+                                  // isVisible: true,
+                                  // Marker shape is set to diamond
+                                  shape: DataMarkerType.circle),
+                              dataSource: listData,
+                              xValueMapper: (AwlrDetailHourModel data, _) =>
+                                  data.readingHour,
+                              yValueMapper: (AwlrDetailHourModel data, _) =>
+                                  data.waterLevel ?? 0,
+                              name: 'TMA',
+                              borderColor: const Color(0xFF2CAFFE),
+                              borderWidth: 2,
+                              color: const Color(0xFF2CAFFE),
+                              gradient: LinearGradient(
+                                colors: [
+                                  const Color(0xFF2CAFFE).withOpacity(0.5),
+                                  Colors.white,
+                                ],
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                              ),
+                            ),
+                          ]),
                     ),
                   );
                 });
           } else {
             return SingleChildScrollView(
-              child: GFCard(
-                margin: EdgeInsets.all(10.r),
-                color: GFColors.WHITE,
-                padding: EdgeInsets.zero,
-                content: SizedBox(
-                  height: 300.r,
+              child: Container(
+                margin: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: GFColors.WHITE,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade600,
+                      spreadRadius: 0,
+                      blurRadius: 2,
+                      offset: const Offset(-1, 1),
+                    ),
+                  ],
+                ),
+                child: SizedBox(
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -599,15 +652,26 @@ class AwlrDetailView extends StatelessWidget {
           }
         }
         return SingleChildScrollView(
-          child: GFCard(
-            margin: EdgeInsets.all(10.r),
-            color: GFColors.WHITE,
-            padding: EdgeInsets.zero,
-            content: SizedBox(
-              height: 300.r,
+          child: Container(
+            margin: const EdgeInsets.all(5),
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: GFColors.WHITE,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.shade600,
+                  spreadRadius: 0,
+                  blurRadius: 2,
+                  offset: const Offset(-1, 1),
+                ),
+              ],
+            ),
+            child: SizedBox(
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
@@ -631,8 +695,8 @@ class AwlrDetailView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: const EdgeInsets.all(5),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: GFColors.WHITE,
@@ -643,15 +707,26 @@ class AwlrDetailView extends StatelessWidget {
         } else if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
             return SingleChildScrollView(
-              child: GFCard(
-                margin: EdgeInsets.all(10.r),
-                color: GFColors.WHITE,
-                padding: EdgeInsets.zero,
-                content: SizedBox(
-                  height: 300.r,
+              child: Container(
+                margin: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: GFColors.WHITE,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade600,
+                      spreadRadius: 0,
+                      blurRadius: 2,
+                      offset: const Offset(-1, 1),
+                    ),
+                  ],
+                ),
+                child: SizedBox(
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -670,216 +745,234 @@ class AwlrDetailView extends StatelessWidget {
                 id: 'grafik',
                 builder: (controller) {
                   return SingleChildScrollView(
-                    child: GFCard(
-                      margin: EdgeInsets.all(10.r),
-                      color: GFColors.WHITE,
-                      padding: EdgeInsets.zero,
-                      content: SizedBox(
-                        height: 300.r,
-                        child: SfCartesianChart(
-                            primaryXAxis: DateTimeAxis(
-                              dateFormat: DateFormat.MMMd('id_ID'),
-                              autoScrollingDeltaType: DateTimeIntervalType.auto,
-                              labelFormat: '{value}',
-                              title: const AxisTitle(
-                                  text: "Waktu",
-                                  alignment: ChartAlignment.center),
-                            ),
-                            primaryYAxis: const NumericAxis(
-                              labelFormat: '{value}',
-                              title: AxisTitle(text: 'Debit (m3/s)'),
-                            ),
-                            title: ChartTitle(
-                              textStyle: TextStyle(
-                                  height: 2.r,
-                                  fontSize: 14.r,
-                                  fontWeight: FontWeight.bold),
-                              alignment: ChartAlignment.center,
-                              text: 'Grafik Debit',
-                            ),
-                            tooltipBehavior: TooltipBehavior(
-                              enable: true,
-                              builder: (dynamic data,
-                                  dynamic point,
-                                  dynamic series,
-                                  int pointIndex,
-                                  int seriesIndex) {
-                                final cColor = series.color;
-                                final DateTime date = point?.x;
-                                final String formattedDate = AppConstants()
-                                    .dateTimeFormatID
-                                    .format(date);
-                                return SingleChildScrollView(
-                                  child: Container(
-                                    width: 180.r,
-                                    decoration: BoxDecoration(
-                                      color: Colors.black.withOpacity(0.75),
-                                      borderRadius: BorderRadius.circular(6.r),
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.all(8.r),
-                                          child: Text(
-                                            formattedDate,
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              border: Border(
-                                                  top: BorderSide(
-                                            color: cColor,
-                                          ))),
-                                          padding: EdgeInsets.all(8.r),
-                                          child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Container(
-                                                width: 10.r,
-                                                height: 10.r,
-                                                decoration: BoxDecoration(
-                                                  color: cColor, // Fill color
-                                                  shape: BoxShape
-                                                      .circle, // Makes it a circle
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 5.r,
-                                              ),
-                                              Text(
-                                                '${series.name.toString()} : ${AppConstants().numFormat.format(point?.y)} (m3/s)',
-                                                style: const TextStyle(
-                                                    color: Colors.white),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                            trackballBehavior: TrackballBehavior(
-                              markerSettings: const TrackballMarkerSettings(
-                                markerVisibility: TrackballVisibilityMode
-                                    .visible, // Show markers
-                                color: Colors
-                                    .white, // Color of the trackball marker
-                              ),
-                              tooltipSettings: const InteractiveTooltip(
-                                enable: true,
-                                color: Color(
-                                    0xFF2CAFFE), // Tooltip background color
-                                textStyle: TextStyle(
-                                    color: Colors.white), // Tooltip text color
-                              ),
-                              activationMode: ActivationMode.singleTap,
-                              enable: true,
-                              builder: (BuildContext context,
-                                  TrackballDetails trackballDetails) {
-                                final DateTime date = trackballDetails.point?.x;
-                                final String formattedDate = AppConstants()
-                                    .dateTimeFormatID
-                                    .format(date);
-                                return SingleChildScrollView(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.black.withOpacity(0.75),
-                                      borderRadius: BorderRadius.circular(6.r),
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          decoration: const BoxDecoration(
-                                              border: Border(
-                                                  bottom: BorderSide(
-                                            color: Colors.blue,
-                                          ))),
-                                          padding: EdgeInsets.all(8.r),
-                                          child: Text(
-                                            formattedDate,
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        Container(
-                                          padding: EdgeInsets.all(8.r),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "Debit : ${AppConstants().numFormat.format(trackballDetails.point?.y)} (m3/s)",
-                                                style: const TextStyle(
-                                                    color: Colors.white),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                            zoomPanBehavior: ZoomPanBehavior(
-                              enablePinching: true, // Enable pinch zoom
-                              enablePanning: true, // Enable panning
-                              zoomMode: ZoomMode
-                                  .x, // Allow zooming only on the x-axis (can be both x, y or both)
-                              enableDoubleTapZooming:
-                                  true, // Enable double-tap zoom
-                            ),
-                            series: <CartesianSeries>[
-                              AreaSeries<AwlrDetailHourModel, DateTime>(
-                                borderDrawMode: BorderDrawMode.top,
-                                markerSettings: const MarkerSettings(
-                                    color: Colors.white,
-                                    // isVisible: true,
-                                    // Marker shape is set to diamond
-                                    shape: DataMarkerType.circle),
-                                dataSource: listData,
-                                xValueMapper: (AwlrDetailHourModel data, _) =>
-                                    data.readingHour,
-                                yValueMapper: (AwlrDetailHourModel data, _) =>
-                                    data.debit ?? 0,
-                                name: 'Debit',
-                                borderColor: const Color(0xFF2CAFFE),
-                                borderWidth: 2.r,
-                                color: const Color(0xFF2CAFFE),
-                                gradient: LinearGradient(
-                                  colors: [
-                                    const Color(0xFF2CAFFE).withOpacity(0.5),
-                                    Colors.white,
-                                  ],
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                ),
-                              ),
-                            ]),
+                    child: Container(
+                      margin: const EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: GFColors.WHITE,
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.shade600,
+                            spreadRadius: 0,
+                            blurRadius: 2,
+                            offset: const Offset(-1, 1),
+                          ),
+                        ],
                       ),
+                      child: SfCartesianChart(
+                          primaryXAxis: DateTimeAxis(
+                            dateFormat: DateFormat.MMMd('id_ID'),
+                            autoScrollingDeltaType: DateTimeIntervalType.auto,
+                            labelFormat: '{value}',
+                            title: const AxisTitle(
+                                text: "Waktu",
+                                alignment: ChartAlignment.center),
+                          ),
+                          primaryYAxis: const NumericAxis(
+                            labelFormat: '{value}',
+                            title: AxisTitle(text: 'Debit (m3/s)'),
+                          ),
+                          title: ChartTitle(
+                            textStyle: TextStyle(
+                                height: 2,
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold),
+                            alignment: ChartAlignment.center,
+                            text: 'Grafik Debit',
+                          ),
+                          tooltipBehavior: TooltipBehavior(
+                            enable: true,
+                            builder: (dynamic data,
+                                dynamic point,
+                                dynamic series,
+                                int pointIndex,
+                                int seriesIndex) {
+                              final cColor = series.color;
+                              final DateTime date = point?.x;
+                              final String formattedDate =
+                                  AppConstants().dateTimeFormatID.format(date);
+                              return SingleChildScrollView(
+                                child: Container(
+                                  width: 180,
+                                  decoration: BoxDecoration(
+                                    color: Colors.black.withOpacity(0.75),
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.all(8),
+                                        child: Text(
+                                          formattedDate,
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            border: Border(
+                                                top: BorderSide(
+                                          color: cColor,
+                                        ))),
+                                        padding: EdgeInsets.all(8),
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Container(
+                                              width: 10,
+                                              height: 10,
+                                              decoration: BoxDecoration(
+                                                color: cColor, // Fill color
+                                                shape: BoxShape
+                                                    .circle, // Makes it a circle
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                              '${series.name.toString()} : ${AppConstants().numFormat.format(point?.y)} (m3/s)',
+                                              style: const TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                          trackballBehavior: TrackballBehavior(
+                            shouldAlwaysShow: true,
+                            markerSettings: const TrackballMarkerSettings(
+                              markerVisibility: TrackballVisibilityMode
+                                  .visible, // Show markers
+                              color:
+                                  Colors.white, // Color of the trackball marker
+                            ),
+                            tooltipSettings: const InteractiveTooltip(
+                              enable: true,
+                              color:
+                                  Color(0xFF2CAFFE), // Tooltip background color
+                              textStyle: TextStyle(
+                                  color: Colors.white), // Tooltip text color
+                            ),
+                            activationMode: ActivationMode.singleTap,
+                            enable: true,
+                            builder: (BuildContext context,
+                                TrackballDetails trackballDetails) {
+                              final DateTime date = trackballDetails.point?.x;
+                              final String formattedDate =
+                                  AppConstants().dateTimeFormatID.format(date);
+                              return SingleChildScrollView(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.black.withOpacity(0.75),
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        decoration: const BoxDecoration(
+                                            border: Border(
+                                                bottom: BorderSide(
+                                          color: Colors.blue,
+                                        ))),
+                                        padding: EdgeInsets.all(8),
+                                        child: Text(
+                                          formattedDate,
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.all(8),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Debit : ${AppConstants().numFormat.format(trackballDetails.point?.y)} (m3/s)",
+                                              style: const TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                          zoomPanBehavior: ZoomPanBehavior(
+                            enablePinching: true, // Enable pinch zoom
+                            enablePanning: true, // Enable panning
+                            zoomMode: ZoomMode
+                                .x, // Allow zooming only on the x-axis (can be both x, y or both)
+                            enableDoubleTapZooming:
+                                true, // Enable double-tap zoom
+                          ),
+                          series: <CartesianSeries>[
+                            AreaSeries<AwlrDetailHourModel, DateTime>(
+                              borderDrawMode: BorderDrawMode.top,
+                              markerSettings: const MarkerSettings(
+                                  color: Colors.white,
+                                  // isVisible: true,
+                                  // Marker shape is set to diamond
+                                  shape: DataMarkerType.circle),
+                              dataSource: listData,
+                              xValueMapper: (AwlrDetailHourModel data, _) =>
+                                  data.readingHour,
+                              yValueMapper: (AwlrDetailHourModel data, _) =>
+                                  data.debit ?? 0,
+                              name: 'Debit',
+                              borderColor: const Color(0xFF2CAFFE),
+                              borderWidth: 2,
+                              color: const Color(0xFF2CAFFE),
+                              gradient: LinearGradient(
+                                colors: [
+                                  const Color(0xFF2CAFFE).withOpacity(0.5),
+                                  Colors.white,
+                                ],
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                              ),
+                            ),
+                          ]),
                     ),
                   );
                 });
           } else {
             return SingleChildScrollView(
-              child: GFCard(
-                margin: EdgeInsets.all(10.r),
-                color: GFColors.WHITE,
-                padding: EdgeInsets.zero,
-                content: SizedBox(
-                  height: 300.r,
+              child: Container(
+                margin: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: GFColors.WHITE,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade600,
+                      spreadRadius: 0,
+                      blurRadius: 2,
+                      offset: const Offset(-1, 1),
+                    ),
+                  ],
+                ),
+                child: SizedBox(
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -892,15 +985,26 @@ class AwlrDetailView extends StatelessWidget {
           }
         }
         return SingleChildScrollView(
-          child: GFCard(
-            margin: EdgeInsets.all(10.r),
-            color: GFColors.WHITE,
-            padding: EdgeInsets.zero,
-            content: SizedBox(
-              height: 300.r,
+          child: Container(
+            margin: const EdgeInsets.all(5),
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: GFColors.WHITE,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.shade600,
+                  spreadRadius: 0,
+                  blurRadius: 2,
+                  offset: const Offset(-1, 1),
+                ),
+              ],
+            ),
+            child: SizedBox(
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
@@ -924,8 +1028,8 @@ class AwlrDetailView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: const EdgeInsets.all(5),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: GFColors.WHITE,
@@ -936,15 +1040,26 @@ class AwlrDetailView extends StatelessWidget {
         } else if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
             return SingleChildScrollView(
-              child: GFCard(
-                margin: EdgeInsets.all(10.r),
-                color: GFColors.WHITE,
-                padding: EdgeInsets.zero,
-                content: SizedBox(
-                  height: 300.r,
+              child: Container(
+                margin: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: GFColors.WHITE,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade600,
+                      spreadRadius: 0,
+                      blurRadius: 2,
+                      offset: const Offset(-1, 1),
+                    ),
+                  ],
+                ),
+                child: SizedBox(
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -963,198 +1078,213 @@ class AwlrDetailView extends StatelessWidget {
                 id: 'grafik',
                 builder: (controller) {
                   return SingleChildScrollView(
-                    child: GFCard(
-                      margin: EdgeInsets.all(10.r),
-                      color: GFColors.WHITE,
-                      padding: EdgeInsets.zero,
-                      content: SizedBox(
-                        height: 300.r,
-                        child: SfCartesianChart(
-                          primaryXAxis: DateTimeAxis(
-                            dateFormat: DateFormat.MMMd('id_ID'),
-                            autoScrollingDeltaType: DateTimeIntervalType.auto,
-                            labelFormat: '{value}',
-                            title: const AxisTitle(
-                                text: "Waktu",
-                                alignment: ChartAlignment.center),
+                    child: Container(
+                      margin: const EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: GFColors.WHITE,
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.shade600,
+                            spreadRadius: 0,
+                            blurRadius: 2,
+                            offset: const Offset(-1, 1),
                           ),
-                          primaryYAxis: const NumericAxis(
-                            labelFormat: '{value}',
-                            title: AxisTitle(text: 'Baterai (%)'),
-                          ),
-                          title: ChartTitle(
-                            textStyle: TextStyle(
-                                height: 2.r,
-                                fontSize: 14.r,
-                                fontWeight: FontWeight.bold),
-                            alignment: ChartAlignment.center,
-                            text: 'Grafik Baterai',
-                          ),
-                          tooltipBehavior: TooltipBehavior(
-                            enable: true,
-                            builder: (dynamic data,
-                                dynamic point,
-                                dynamic series,
-                                int pointIndex,
-                                int seriesIndex) {
-                              final cColor = series.color;
-                              final DateTime date = point?.x;
-                              final String formattedDate =
-                                  AppConstants().dateTimeFormatID.format(date);
-                              return SingleChildScrollView(
-                                child: Container(
-                                  width: 180.r,
-                                  decoration: BoxDecoration(
-                                    color: Colors.black.withOpacity(0.75),
-                                    borderRadius: BorderRadius.circular(6.r),
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.all(8.r),
-                                        child: Text(
-                                          formattedDate,
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            border: Border(
-                                                top: BorderSide(
-                                          color: cColor,
-                                        ))),
-                                        padding: EdgeInsets.all(8.r),
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Container(
-                                              width: 10.r,
-                                              height: 10.r,
-                                              decoration: BoxDecoration(
-                                                color: cColor, // Fill color
-                                                shape: BoxShape
-                                                    .circle, // Makes it a circle
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: 5.r,
-                                            ),
-                                            Text(
-                                              '${series.name.toString()} : ${AppConstants().numFormat.format(point?.y)} (%)',
-                                              style: const TextStyle(
-                                                  color: Colors.white),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                          trackballBehavior: TrackballBehavior(
-                            markerSettings: const TrackballMarkerSettings(
-                              markerVisibility: TrackballVisibilityMode
-                                  .visible, // Show markers
-                              color:
-                                  Colors.white, // Color of the trackball marker
-                            ),
-                            activationMode: ActivationMode.singleTap,
-                            enable: true,
-                            builder: (BuildContext context,
-                                TrackballDetails trackballDetails) {
-                              final DateTime date = trackballDetails.point?.x;
-                              final String formattedDate =
-                                  AppConstants().dateTimeFormatID.format(date);
-                              return SingleChildScrollView(
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.black.withOpacity(0.75),
-                                    borderRadius: BorderRadius.circular(6),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.all(8.r),
-                                        child: Text(
-                                          formattedDate,
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      Container(
-                                        decoration: const BoxDecoration(
-                                            border: Border(
-                                                top: BorderSide(
-                                          color: Colors.blue,
-                                        ))),
-                                        padding: EdgeInsets.all(8.r),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Baterai : ${AppConstants().numFormat.format(trackballDetails.point?.y)} (%)",
-                                              style: const TextStyle(
-                                                  color: Colors.white),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                          zoomPanBehavior: ZoomPanBehavior(
-                            enablePinching: true, // Enable pinch zoom
-                            enablePanning: true, // Enable panning
-                            zoomMode: ZoomMode
-                                .x, // Allow zooming only on the x-axis (can be both x, y or both)
-                            enableDoubleTapZooming:
-                                true, // Enable double-tap zoom
-                          ),
-                          series: <CartesianSeries<AwlrDetailHourModel,
-                              DateTime>>[
-                            FastLineSeries<AwlrDetailHourModel, DateTime>(
-                              color: const Color(0xFFFF9800),
-                              markerSettings: MarkerSettings(
-                                  color: Colors.orange[900]!,
-                                  // isVisible: true,
-                                  // Marker shape is set to diamond
-                                  shape: DataMarkerType.circle),
-                              dataSource: listData,
-                              xValueMapper: (AwlrDetailHourModel data, _) =>
-                                  data.readingHour,
-                              yValueMapper: (AwlrDetailHourModel data, _) =>
-                                  data.battery ?? 0,
-                              name: 'Baterai',
-                            ),
-                          ],
+                        ],
+                      ),
+                      child: SfCartesianChart(
+                        primaryXAxis: DateTimeAxis(
+                          dateFormat: DateFormat.MMMd('id_ID'),
+                          autoScrollingDeltaType: DateTimeIntervalType.auto,
+                          labelFormat: '{value}',
+                          title: const AxisTitle(
+                              text: "Waktu", alignment: ChartAlignment.center),
                         ),
+                        primaryYAxis: const NumericAxis(
+                          labelFormat: '{value}',
+                          title: AxisTitle(text: 'Baterai (%)'),
+                        ),
+                        title: ChartTitle(
+                          textStyle: TextStyle(
+                              height: 2,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold),
+                          alignment: ChartAlignment.center,
+                          text: 'Grafik Baterai',
+                        ),
+                        tooltipBehavior: TooltipBehavior(
+                          enable: true,
+                          builder: (dynamic data, dynamic point, dynamic series,
+                              int pointIndex, int seriesIndex) {
+                            final cColor = series.color;
+                            final DateTime date = point?.x;
+                            final String formattedDate =
+                                AppConstants().dateTimeFormatID.format(date);
+                            return SingleChildScrollView(
+                              child: Container(
+                                width: 180,
+                                decoration: BoxDecoration(
+                                  color: Colors.black.withOpacity(0.75),
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.all(8),
+                                      child: Text(
+                                        formattedDate,
+                                        style: const TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          border: Border(
+                                              top: BorderSide(
+                                        color: cColor,
+                                      ))),
+                                      padding: EdgeInsets.all(8),
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            width: 10,
+                                            height: 10,
+                                            decoration: BoxDecoration(
+                                              color: cColor, // Fill color
+                                              shape: BoxShape
+                                                  .circle, // Makes it a circle
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(
+                                            '${series.name.toString()} : ${AppConstants().numFormat.format(point?.y)} (%)',
+                                            style: const TextStyle(
+                                                color: Colors.white),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                        trackballBehavior: TrackballBehavior(
+                          shouldAlwaysShow: true,
+                          markerSettings: const TrackballMarkerSettings(
+                            markerVisibility:
+                                TrackballVisibilityMode.visible, // Show markers
+                            color:
+                                Colors.white, // Color of the trackball marker
+                          ),
+                          activationMode: ActivationMode.singleTap,
+                          enable: true,
+                          builder: (BuildContext context,
+                              TrackballDetails trackballDetails) {
+                            final DateTime date = trackballDetails.point?.x;
+                            final String formattedDate =
+                                AppConstants().dateTimeFormatID.format(date);
+                            return SingleChildScrollView(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.black.withOpacity(0.75),
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.all(8),
+                                      child: Text(
+                                        formattedDate,
+                                        style: const TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    Container(
+                                      decoration: const BoxDecoration(
+                                          border: Border(
+                                              top: BorderSide(
+                                        color: Colors.blue,
+                                      ))),
+                                      padding: EdgeInsets.all(8),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "Baterai : ${AppConstants().numFormat.format(trackballDetails.point?.y)} (%)",
+                                            style: const TextStyle(
+                                                color: Colors.white),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                        zoomPanBehavior: ZoomPanBehavior(
+                          enablePinching: true, // Enable pinch zoom
+                          enablePanning: true, // Enable panning
+                          zoomMode: ZoomMode
+                              .x, // Allow zooming only on the x-axis (can be both x, y or both)
+                          enableDoubleTapZooming:
+                              true, // Enable double-tap zoom
+                        ),
+                        series: <CartesianSeries<AwlrDetailHourModel,
+                            DateTime>>[
+                          FastLineSeries<AwlrDetailHourModel, DateTime>(
+                            color: const Color(0xFFFF9800),
+                            markerSettings: MarkerSettings(
+                                color: Colors.orange[900]!,
+                                // isVisible: true,
+                                // Marker shape is set to diamond
+                                shape: DataMarkerType.circle),
+                            dataSource: listData,
+                            xValueMapper: (AwlrDetailHourModel data, _) =>
+                                data.readingHour,
+                            yValueMapper: (AwlrDetailHourModel data, _) =>
+                                data.battery ?? 0,
+                            name: 'Baterai',
+                          ),
+                        ],
                       ),
                     ),
                   );
                 });
           } else {
             return SingleChildScrollView(
-              child: GFCard(
-                margin: EdgeInsets.all(10.r),
-                color: GFColors.WHITE,
-                padding: EdgeInsets.zero,
-                content: SizedBox(
-                  height: 300.r,
+              child: Container(
+                margin: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: GFColors.WHITE,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade600,
+                      spreadRadius: 0,
+                      blurRadius: 2,
+                      offset: const Offset(-1, 1),
+                    ),
+                  ],
+                ),
+                child: SizedBox(
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -1167,15 +1297,26 @@ class AwlrDetailView extends StatelessWidget {
           }
         }
         return SingleChildScrollView(
-          child: GFCard(
-            margin: EdgeInsets.all(10.r),
-            color: GFColors.WHITE,
-            padding: EdgeInsets.zero,
-            content: SizedBox(
-              height: 300.r,
+          child: Container(
+            margin: const EdgeInsets.all(5),
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: GFColors.WHITE,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.shade600,
+                  spreadRadius: 0,
+                  blurRadius: 2,
+                  offset: const Offset(-1, 1),
+                ),
+              ],
+            ),
+            child: SizedBox(
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
@@ -1199,8 +1340,8 @@ class AwlrDetailView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: const EdgeInsets.all(5),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: GFColors.WHITE,
@@ -1211,15 +1352,26 @@ class AwlrDetailView extends StatelessWidget {
         } else if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
             return SingleChildScrollView(
-              child: GFCard(
-                margin: EdgeInsets.all(10.r),
-                color: GFColors.WHITE,
-                padding: EdgeInsets.zero,
-                content: SizedBox(
-                  height: 300.r,
+              child: Container(
+                margin: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: GFColors.WHITE,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade600,
+                      spreadRadius: 0,
+                      blurRadius: 2,
+                      offset: const Offset(-1, 1),
+                    ),
+                  ],
+                ),
+                child: SizedBox(
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -1238,216 +1390,233 @@ class AwlrDetailView extends StatelessWidget {
                 id: 'grafik',
                 builder: (controller) {
                   return SingleChildScrollView(
-                    child: GFCard(
-                      margin: EdgeInsets.all(10.r),
-                      color: GFColors.WHITE,
-                      padding: EdgeInsets.zero,
-                      content: SizedBox(
-                        height: 300.r,
-                        child: SfCartesianChart(
-                            primaryXAxis: DateTimeAxis(
-                              dateFormat: DateFormat.MMMd('id_ID'),
-                              autoScrollingDeltaType: DateTimeIntervalType.auto,
-                              labelFormat: '{value}',
-                              title: const AxisTitle(
-                                  text: "Waktu",
-                                  alignment: ChartAlignment.center),
-                            ),
-                            primaryYAxis: const NumericAxis(
-                              labelFormat: '{value}',
-                              title: AxisTitle(text: 'TMA (mdpl)'),
-                            ),
-                            title: ChartTitle(
-                              textStyle: TextStyle(
-                                  height: 2.r,
-                                  fontSize: 14.r,
-                                  fontWeight: FontWeight.bold),
-                              alignment: ChartAlignment.center,
-                              text: 'Grafik Tinggi Muka Air',
-                            ),
-                            tooltipBehavior: TooltipBehavior(
-                              enable: true,
-                              builder: (dynamic data,
-                                  dynamic point,
-                                  dynamic series,
-                                  int pointIndex,
-                                  int seriesIndex) {
-                                final cColor = series.color;
-                                final DateTime date = point?.x;
-                                final String formattedDate = AppConstants()
-                                    .dateTimeFormatID
-                                    .format(date);
-                                return SingleChildScrollView(
-                                  child: Container(
-                                    width: 180.r,
-                                    decoration: BoxDecoration(
-                                      color: Colors.black.withOpacity(0.75),
-                                      borderRadius: BorderRadius.circular(6.r),
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.all(8.r),
-                                          child: Text(
-                                            formattedDate,
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              border: Border(
-                                                  top: BorderSide(
-                                            color: cColor,
-                                          ))),
-                                          padding: EdgeInsets.all(8.r),
-                                          child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Container(
-                                                width: 10.r,
-                                                height: 10.r,
-                                                decoration: BoxDecoration(
-                                                  color: cColor, // Fill color
-                                                  shape: BoxShape
-                                                      .circle, // Makes it a circle
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 5.r,
-                                              ),
-                                              Text(
-                                                '${series.name.toString()} : ${AppConstants().numFormat.format(point?.y)} (mdpl)',
-                                                style: const TextStyle(
-                                                    color: Colors.white),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                            trackballBehavior: TrackballBehavior(
-                              markerSettings: const TrackballMarkerSettings(
-                                markerVisibility: TrackballVisibilityMode
-                                    .visible, // Show markers
-                                color: Colors
-                                    .white, // Color of the trackball marker
-                              ),
-                              tooltipSettings: const InteractiveTooltip(
-                                enable: true,
-                                color: Color(
-                                    0xFF2CAFFE), // Tooltip background color
-                                textStyle: TextStyle(
-                                    color: Colors.white), // Tooltip text color
-                              ),
-                              activationMode: ActivationMode.singleTap,
-                              enable: true,
-                              builder: (BuildContext context,
-                                  TrackballDetails trackballDetails) {
-                                final DateTime date = trackballDetails.point?.x;
-                                final String formattedDate = AppConstants()
-                                    .dateTimeFormatID
-                                    .format(date);
-                                return SingleChildScrollView(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.black.withOpacity(0.75),
-                                      borderRadius: BorderRadius.circular(6.r),
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          decoration: const BoxDecoration(
-                                              border: Border(
-                                                  bottom: BorderSide(
-                                            color: Colors.blue,
-                                          ))),
-                                          padding: EdgeInsets.all(8.r),
-                                          child: Text(
-                                            formattedDate,
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        Container(
-                                          padding: EdgeInsets.all(8.r),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "TMA : ${AppConstants().numFormat.format(trackballDetails.point?.y)} (mdpl)",
-                                                style: const TextStyle(
-                                                    color: Colors.white),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                            zoomPanBehavior: ZoomPanBehavior(
-                              enablePinching: true, // Enable pinch zoom
-                              enablePanning: true, // Enable panning
-                              zoomMode: ZoomMode
-                                  .x, // Allow zooming only on the x-axis (can be both x, y or both)
-                              enableDoubleTapZooming:
-                                  true, // Enable double-tap zoom
-                            ),
-                            series: <CartesianSeries>[
-                              AreaSeries<AwlrDetailMinuteModel, DateTime>(
-                                borderDrawMode: BorderDrawMode.top,
-                                markerSettings: const MarkerSettings(
-                                    color: Colors.white,
-                                    // isVisible: true,
-                                    // Marker shape is set to diamond
-                                    shape: DataMarkerType.circle),
-                                dataSource: listData,
-                                xValueMapper: (AwlrDetailMinuteModel data, _) =>
-                                    data.readingAt,
-                                yValueMapper: (AwlrDetailMinuteModel data, _) =>
-                                    data.waterLevel ?? 0,
-                                name: 'TMA',
-                                borderColor: const Color(0xFF2CAFFE),
-                                borderWidth: 2.r,
-                                color: const Color(0xFF2CAFFE),
-                                gradient: LinearGradient(
-                                  colors: [
-                                    const Color(0xFF2CAFFE).withOpacity(0.5),
-                                    Colors.white,
-                                  ],
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                ),
-                              ),
-                            ]),
+                    child: Container(
+                      margin: const EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: GFColors.WHITE,
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.shade600,
+                            spreadRadius: 0,
+                            blurRadius: 2,
+                            offset: const Offset(-1, 1),
+                          ),
+                        ],
                       ),
+                      child: SfCartesianChart(
+                          primaryXAxis: DateTimeAxis(
+                            dateFormat: DateFormat.MMMd('id_ID'),
+                            autoScrollingDeltaType: DateTimeIntervalType.auto,
+                            labelFormat: '{value}',
+                            title: const AxisTitle(
+                                text: "Waktu",
+                                alignment: ChartAlignment.center),
+                          ),
+                          primaryYAxis: const NumericAxis(
+                            labelFormat: '{value}',
+                            title: AxisTitle(text: 'TMA (mdpl)'),
+                          ),
+                          title: ChartTitle(
+                            textStyle: TextStyle(
+                                height: 2,
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold),
+                            alignment: ChartAlignment.center,
+                            text: 'Grafik Tinggi Muka Air',
+                          ),
+                          tooltipBehavior: TooltipBehavior(
+                            enable: true,
+                            builder: (dynamic data,
+                                dynamic point,
+                                dynamic series,
+                                int pointIndex,
+                                int seriesIndex) {
+                              final cColor = series.color;
+                              final DateTime date = point?.x;
+                              final String formattedDate =
+                                  AppConstants().dateTimeFormatID.format(date);
+                              return SingleChildScrollView(
+                                child: Container(
+                                  width: 180,
+                                  decoration: BoxDecoration(
+                                    color: Colors.black.withOpacity(0.75),
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.all(8),
+                                        child: Text(
+                                          formattedDate,
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            border: Border(
+                                                top: BorderSide(
+                                          color: cColor,
+                                        ))),
+                                        padding: EdgeInsets.all(8),
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Container(
+                                              width: 10,
+                                              height: 10,
+                                              decoration: BoxDecoration(
+                                                color: cColor, // Fill color
+                                                shape: BoxShape
+                                                    .circle, // Makes it a circle
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                              '${series.name.toString()} : ${AppConstants().numFormat.format(point?.y)} (mdpl)',
+                                              style: const TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                          trackballBehavior: TrackballBehavior(
+                            markerSettings: const TrackballMarkerSettings(
+                              markerVisibility: TrackballVisibilityMode
+                                  .visible, // Show markers
+                              color:
+                                  Colors.white, // Color of the trackball marker
+                            ),
+                            tooltipSettings: const InteractiveTooltip(
+                              enable: true,
+                              color:
+                                  Color(0xFF2CAFFE), // Tooltip background color
+                              textStyle: TextStyle(
+                                  color: Colors.white), // Tooltip text color
+                            ),
+                            activationMode: ActivationMode.singleTap,
+                            enable: true,
+                            builder: (BuildContext context,
+                                TrackballDetails trackballDetails) {
+                              final DateTime date = trackballDetails.point?.x;
+                              final String formattedDate =
+                                  AppConstants().dateTimeFormatID.format(date);
+                              return SingleChildScrollView(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.black.withOpacity(0.75),
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        decoration: const BoxDecoration(
+                                            border: Border(
+                                                bottom: BorderSide(
+                                          color: Colors.blue,
+                                        ))),
+                                        padding: EdgeInsets.all(8),
+                                        child: Text(
+                                          formattedDate,
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.all(8),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "TMA : ${AppConstants().numFormat.format(trackballDetails.point?.y)} (mdpl)",
+                                              style: const TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                          zoomPanBehavior: ZoomPanBehavior(
+                            enablePinching: true, // Enable pinch zoom
+                            enablePanning: true, // Enable panning
+                            zoomMode: ZoomMode
+                                .x, // Allow zooming only on the x-axis (can be both x, y or both)
+                            enableDoubleTapZooming:
+                                true, // Enable double-tap zoom
+                          ),
+                          series: <CartesianSeries>[
+                            AreaSeries<AwlrDetailMinuteModel, DateTime>(
+                              borderDrawMode: BorderDrawMode.top,
+                              markerSettings: const MarkerSettings(
+                                  color: Colors.white,
+                                  // isVisible: true,
+                                  // Marker shape is set to diamond
+                                  shape: DataMarkerType.circle),
+                              dataSource: listData,
+                              xValueMapper: (AwlrDetailMinuteModel data, _) =>
+                                  data.readingAt,
+                              yValueMapper: (AwlrDetailMinuteModel data, _) =>
+                                  data.waterLevel ?? 0,
+                              name: 'TMA',
+                              borderColor: const Color(0xFF2CAFFE),
+                              borderWidth: 2,
+                              color: const Color(0xFF2CAFFE),
+                              gradient: LinearGradient(
+                                colors: [
+                                  const Color(0xFF2CAFFE).withOpacity(0.5),
+                                  Colors.white,
+                                ],
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                              ),
+                            ),
+                          ]),
                     ),
                   );
                 });
           } else {
             return SingleChildScrollView(
-              child: GFCard(
-                margin: EdgeInsets.all(10.r),
-                color: GFColors.WHITE,
-                padding: EdgeInsets.zero,
-                content: SizedBox(
-                  height: 300.r,
+              child: Container(
+                margin: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: GFColors.WHITE,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade600,
+                      spreadRadius: 0,
+                      blurRadius: 2,
+                      offset: const Offset(-1, 1),
+                    ),
+                  ],
+                ),
+                child: SizedBox(
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -1460,15 +1629,26 @@ class AwlrDetailView extends StatelessWidget {
           }
         }
         return SingleChildScrollView(
-          child: GFCard(
-            margin: EdgeInsets.all(10.r),
-            color: GFColors.WHITE,
-            padding: EdgeInsets.zero,
-            content: SizedBox(
-              height: 300.r,
+          child: Container(
+            margin: const EdgeInsets.all(5),
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: GFColors.WHITE,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.shade600,
+                  spreadRadius: 0,
+                  blurRadius: 2,
+                  offset: const Offset(-1, 1),
+                ),
+              ],
+            ),
+            child: SizedBox(
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
@@ -1492,8 +1672,8 @@ class AwlrDetailView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: const EdgeInsets.all(5),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: GFColors.WHITE,
@@ -1504,15 +1684,26 @@ class AwlrDetailView extends StatelessWidget {
         } else if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
             return SingleChildScrollView(
-              child: GFCard(
-                margin: EdgeInsets.all(10.r),
-                color: GFColors.WHITE,
-                padding: EdgeInsets.zero,
-                content: SizedBox(
-                  height: 300.r,
+              child: Container(
+                margin: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: GFColors.WHITE,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade600,
+                      spreadRadius: 0,
+                      blurRadius: 2,
+                      offset: const Offset(-1, 1),
+                    ),
+                  ],
+                ),
+                child: SizedBox(
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -1531,216 +1722,234 @@ class AwlrDetailView extends StatelessWidget {
                 id: 'grafik',
                 builder: (controller) {
                   return SingleChildScrollView(
-                    child: GFCard(
-                      margin: EdgeInsets.all(10.r),
-                      color: GFColors.WHITE,
-                      padding: EdgeInsets.zero,
-                      content: SizedBox(
-                        height: 300.r,
-                        child: SfCartesianChart(
-                            primaryXAxis: DateTimeAxis(
-                              dateFormat: DateFormat.MMMd('id_ID'),
-                              autoScrollingDeltaType: DateTimeIntervalType.auto,
-                              labelFormat: '{value}',
-                              title: const AxisTitle(
-                                  text: "Waktu",
-                                  alignment: ChartAlignment.center),
-                            ),
-                            primaryYAxis: const NumericAxis(
-                              labelFormat: '{value}',
-                              title: AxisTitle(text: 'Debit (m3/s)'),
-                            ),
-                            title: ChartTitle(
-                              textStyle: TextStyle(
-                                  height: 2.r,
-                                  fontSize: 14.r,
-                                  fontWeight: FontWeight.bold),
-                              alignment: ChartAlignment.center,
-                              text: 'Grafik Debit',
-                            ),
-                            tooltipBehavior: TooltipBehavior(
-                              enable: true,
-                              builder: (dynamic data,
-                                  dynamic point,
-                                  dynamic series,
-                                  int pointIndex,
-                                  int seriesIndex) {
-                                final cColor = series.color;
-                                final DateTime date = point?.x;
-                                final String formattedDate = AppConstants()
-                                    .dateTimeFormatID
-                                    .format(date);
-                                return SingleChildScrollView(
-                                  child: Container(
-                                    width: 180.r,
-                                    decoration: BoxDecoration(
-                                      color: Colors.black.withOpacity(0.75),
-                                      borderRadius: BorderRadius.circular(6.r),
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.all(8.r),
-                                          child: Text(
-                                            formattedDate,
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              border: Border(
-                                                  top: BorderSide(
-                                            color: cColor,
-                                          ))),
-                                          padding: EdgeInsets.all(8.r),
-                                          child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Container(
-                                                width: 10.r,
-                                                height: 10.r,
-                                                decoration: BoxDecoration(
-                                                  color: cColor, // Fill color
-                                                  shape: BoxShape
-                                                      .circle, // Makes it a circle
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 5.r,
-                                              ),
-                                              Text(
-                                                '${series.name.toString()} : ${AppConstants().numFormat.format(point?.y)} (m3/s)',
-                                                style: const TextStyle(
-                                                    color: Colors.white),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                            trackballBehavior: TrackballBehavior(
-                              markerSettings: const TrackballMarkerSettings(
-                                markerVisibility: TrackballVisibilityMode
-                                    .visible, // Show markers
-                                color: Colors
-                                    .white, // Color of the trackball marker
-                              ),
-                              tooltipSettings: const InteractiveTooltip(
-                                enable: true,
-                                color: Color(
-                                    0xFF2CAFFE), // Tooltip background color
-                                textStyle: TextStyle(
-                                    color: Colors.white), // Tooltip text color
-                              ),
-                              activationMode: ActivationMode.singleTap,
-                              enable: true,
-                              builder: (BuildContext context,
-                                  TrackballDetails trackballDetails) {
-                                final DateTime date = trackballDetails.point?.x;
-                                final String formattedDate = AppConstants()
-                                    .dateTimeFormatID
-                                    .format(date);
-                                return SingleChildScrollView(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.black.withOpacity(0.75),
-                                      borderRadius: BorderRadius.circular(6.r),
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          decoration: const BoxDecoration(
-                                              border: Border(
-                                                  bottom: BorderSide(
-                                            color: Colors.blue,
-                                          ))),
-                                          padding: EdgeInsets.all(8.r),
-                                          child: Text(
-                                            formattedDate,
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        Container(
-                                          padding: EdgeInsets.all(8.r),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "Debit : ${AppConstants().numFormat.format(trackballDetails.point?.y)} (m3/s)",
-                                                style: const TextStyle(
-                                                    color: Colors.white),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                            zoomPanBehavior: ZoomPanBehavior(
-                              enablePinching: true, // Enable pinch zoom
-                              enablePanning: true, // Enable panning
-                              zoomMode: ZoomMode
-                                  .x, // Allow zooming only on the x-axis (can be both x, y or both)
-                              enableDoubleTapZooming:
-                                  true, // Enable double-tap zoom
-                            ),
-                            series: <CartesianSeries>[
-                              AreaSeries<AwlrDetailMinuteModel, DateTime>(
-                                borderDrawMode: BorderDrawMode.top,
-                                markerSettings: const MarkerSettings(
-                                    color: Colors.white,
-                                    // isVisible: true,
-                                    // Marker shape is set to diamond
-                                    shape: DataMarkerType.circle),
-                                dataSource: listData,
-                                xValueMapper: (AwlrDetailMinuteModel data, _) =>
-                                    data.readingAt,
-                                yValueMapper: (AwlrDetailMinuteModel data, _) =>
-                                    data.debit ?? 0,
-                                name: 'Debit',
-                                borderColor: const Color(0xFF2CAFFE),
-                                borderWidth: 2.r,
-                                color: const Color(0xFF2CAFFE),
-                                gradient: LinearGradient(
-                                  colors: [
-                                    const Color(0xFF2CAFFE).withOpacity(0.5),
-                                    Colors.white,
-                                  ],
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                ),
-                              ),
-                            ]),
+                    child: Container(
+                      margin: const EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: GFColors.WHITE,
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.shade600,
+                            spreadRadius: 0,
+                            blurRadius: 2,
+                            offset: const Offset(-1, 1),
+                          ),
+                        ],
                       ),
+                      child: SfCartesianChart(
+                          primaryXAxis: DateTimeAxis(
+                            dateFormat: DateFormat.MMMd('id_ID'),
+                            autoScrollingDeltaType: DateTimeIntervalType.auto,
+                            labelFormat: '{value}',
+                            title: const AxisTitle(
+                                text: "Waktu",
+                                alignment: ChartAlignment.center),
+                          ),
+                          primaryYAxis: const NumericAxis(
+                            labelFormat: '{value}',
+                            title: AxisTitle(text: 'Debit (m3/s)'),
+                          ),
+                          title: ChartTitle(
+                            textStyle: TextStyle(
+                                height: 2,
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold),
+                            alignment: ChartAlignment.center,
+                            text: 'Grafik Debit',
+                          ),
+                          tooltipBehavior: TooltipBehavior(
+                            enable: true,
+                            builder: (dynamic data,
+                                dynamic point,
+                                dynamic series,
+                                int pointIndex,
+                                int seriesIndex) {
+                              final cColor = series.color;
+                              final DateTime date = point?.x;
+                              final String formattedDate =
+                                  AppConstants().dateTimeFormatID.format(date);
+                              return SingleChildScrollView(
+                                child: Container(
+                                  width: 180,
+                                  decoration: BoxDecoration(
+                                    color: Colors.black.withOpacity(0.75),
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.all(8),
+                                        child: Text(
+                                          formattedDate,
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            border: Border(
+                                                top: BorderSide(
+                                          color: cColor,
+                                        ))),
+                                        padding: EdgeInsets.all(8),
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Container(
+                                              width: 10,
+                                              height: 10,
+                                              decoration: BoxDecoration(
+                                                color: cColor, // Fill color
+                                                shape: BoxShape
+                                                    .circle, // Makes it a circle
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                              '${series.name.toString()} : ${AppConstants().numFormat.format(point?.y)} (m3/s)',
+                                              style: const TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                          trackballBehavior: TrackballBehavior(
+                            shouldAlwaysShow: true,
+                            markerSettings: const TrackballMarkerSettings(
+                              markerVisibility: TrackballVisibilityMode
+                                  .visible, // Show markers
+                              color:
+                                  Colors.white, // Color of the trackball marker
+                            ),
+                            tooltipSettings: const InteractiveTooltip(
+                              enable: true,
+                              color:
+                                  Color(0xFF2CAFFE), // Tooltip background color
+                              textStyle: TextStyle(
+                                  color: Colors.white), // Tooltip text color
+                            ),
+                            activationMode: ActivationMode.singleTap,
+                            enable: true,
+                            builder: (BuildContext context,
+                                TrackballDetails trackballDetails) {
+                              final DateTime date = trackballDetails.point?.x;
+                              final String formattedDate =
+                                  AppConstants().dateTimeFormatID.format(date);
+                              return SingleChildScrollView(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.black.withOpacity(0.75),
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        decoration: const BoxDecoration(
+                                            border: Border(
+                                                bottom: BorderSide(
+                                          color: Colors.blue,
+                                        ))),
+                                        padding: EdgeInsets.all(8),
+                                        child: Text(
+                                          formattedDate,
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.all(8),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Debit : ${AppConstants().numFormat.format(trackballDetails.point?.y)} (m3/s)",
+                                              style: const TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                          zoomPanBehavior: ZoomPanBehavior(
+                            enablePinching: true, // Enable pinch zoom
+                            enablePanning: true, // Enable panning
+                            zoomMode: ZoomMode
+                                .x, // Allow zooming only on the x-axis (can be both x, y or both)
+                            enableDoubleTapZooming:
+                                true, // Enable double-tap zoom
+                          ),
+                          series: <CartesianSeries>[
+                            AreaSeries<AwlrDetailMinuteModel, DateTime>(
+                              borderDrawMode: BorderDrawMode.top,
+                              markerSettings: const MarkerSettings(
+                                  color: Colors.white,
+                                  // isVisible: true,
+                                  // Marker shape is set to diamond
+                                  shape: DataMarkerType.circle),
+                              dataSource: listData,
+                              xValueMapper: (AwlrDetailMinuteModel data, _) =>
+                                  data.readingAt,
+                              yValueMapper: (AwlrDetailMinuteModel data, _) =>
+                                  data.debit ?? 0,
+                              name: 'Debit',
+                              borderColor: const Color(0xFF2CAFFE),
+                              borderWidth: 2,
+                              color: const Color(0xFF2CAFFE),
+                              gradient: LinearGradient(
+                                colors: [
+                                  const Color(0xFF2CAFFE).withOpacity(0.5),
+                                  Colors.white,
+                                ],
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                              ),
+                            ),
+                          ]),
                     ),
                   );
                 });
           } else {
             return SingleChildScrollView(
-              child: GFCard(
-                margin: EdgeInsets.all(10.r),
-                color: GFColors.WHITE,
-                padding: EdgeInsets.zero,
-                content: SizedBox(
-                  height: 300.r,
+              child: Container(
+                margin: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: GFColors.WHITE,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade600,
+                      spreadRadius: 0,
+                      blurRadius: 2,
+                      offset: const Offset(-1, 1),
+                    ),
+                  ],
+                ),
+                child: SizedBox(
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -1753,15 +1962,26 @@ class AwlrDetailView extends StatelessWidget {
           }
         }
         return SingleChildScrollView(
-          child: GFCard(
-            margin: EdgeInsets.all(10.r),
-            color: GFColors.WHITE,
-            padding: EdgeInsets.zero,
-            content: SizedBox(
-              height: 300.r,
+          child: Container(
+            margin: const EdgeInsets.all(5),
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: GFColors.WHITE,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.shade600,
+                  spreadRadius: 0,
+                  blurRadius: 2,
+                  offset: const Offset(-1, 1),
+                ),
+              ],
+            ),
+            child: SizedBox(
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
@@ -1785,8 +2005,8 @@ class AwlrDetailView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: const EdgeInsets.all(5),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: GFColors.WHITE,
@@ -1797,15 +2017,26 @@ class AwlrDetailView extends StatelessWidget {
         } else if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
             return SingleChildScrollView(
-              child: GFCard(
-                margin: EdgeInsets.all(10.r),
-                color: GFColors.WHITE,
-                padding: EdgeInsets.zero,
-                content: SizedBox(
-                  height: 300.r,
+              child: Container(
+                margin: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: GFColors.WHITE,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade600,
+                      spreadRadius: 0,
+                      blurRadius: 2,
+                      offset: const Offset(-1, 1),
+                    ),
+                  ],
+                ),
+                child: SizedBox(
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -1824,198 +2055,213 @@ class AwlrDetailView extends StatelessWidget {
                 id: 'grafik',
                 builder: (controller) {
                   return SingleChildScrollView(
-                    child: GFCard(
-                      margin: EdgeInsets.all(10.r),
-                      color: GFColors.WHITE,
-                      padding: EdgeInsets.zero,
-                      content: SizedBox(
-                        height: 300.r,
-                        child: SfCartesianChart(
-                          primaryXAxis: DateTimeAxis(
-                            dateFormat: DateFormat.MMMd('id_ID'),
-                            autoScrollingDeltaType: DateTimeIntervalType.auto,
-                            labelFormat: '{value}',
-                            title: const AxisTitle(
-                                text: "Waktu",
-                                alignment: ChartAlignment.center),
+                    child: Container(
+                      margin: const EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: GFColors.WHITE,
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.shade600,
+                            spreadRadius: 0,
+                            blurRadius: 2,
+                            offset: const Offset(-1, 1),
                           ),
-                          primaryYAxis: const NumericAxis(
-                            labelFormat: '{value}',
-                            title: AxisTitle(text: 'Baterai (%)'),
-                          ),
-                          title: ChartTitle(
-                            textStyle: TextStyle(
-                                height: 2.r,
-                                fontSize: 14.r,
-                                fontWeight: FontWeight.bold),
-                            alignment: ChartAlignment.center,
-                            text: 'Grafik Baterai',
-                          ),
-                          tooltipBehavior: TooltipBehavior(
-                            enable: true,
-                            builder: (dynamic data,
-                                dynamic point,
-                                dynamic series,
-                                int pointIndex,
-                                int seriesIndex) {
-                              final cColor = series.color;
-                              final DateTime date = point?.x;
-                              final String formattedDate =
-                                  AppConstants().dateTimeFormatID.format(date);
-                              return SingleChildScrollView(
-                                child: Container(
-                                  width: 180.r,
-                                  decoration: BoxDecoration(
-                                    color: Colors.black.withOpacity(0.75),
-                                    borderRadius: BorderRadius.circular(6.r),
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.all(8.r),
-                                        child: Text(
-                                          formattedDate,
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            border: Border(
-                                                top: BorderSide(
-                                          color: cColor,
-                                        ))),
-                                        padding: EdgeInsets.all(8.r),
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Container(
-                                              width: 10.r,
-                                              height: 10.r,
-                                              decoration: BoxDecoration(
-                                                color: cColor, // Fill color
-                                                shape: BoxShape
-                                                    .circle, // Makes it a circle
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: 5.r,
-                                            ),
-                                            Text(
-                                              '${series.name.toString()} : ${AppConstants().numFormat.format(point?.y)} (%)',
-                                              style: const TextStyle(
-                                                  color: Colors.white),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                          trackballBehavior: TrackballBehavior(
-                            markerSettings: const TrackballMarkerSettings(
-                              markerVisibility: TrackballVisibilityMode
-                                  .visible, // Show markers
-                              color:
-                                  Colors.white, // Color of the trackball marker
-                            ),
-                            activationMode: ActivationMode.singleTap,
-                            enable: true,
-                            builder: (BuildContext context,
-                                TrackballDetails trackballDetails) {
-                              final DateTime date = trackballDetails.point?.x;
-                              final String formattedDate =
-                                  AppConstants().dateTimeFormatID.format(date);
-                              return SingleChildScrollView(
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.black.withOpacity(0.75),
-                                    borderRadius: BorderRadius.circular(6),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.all(8.r),
-                                        child: Text(
-                                          formattedDate,
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      Container(
-                                        decoration: const BoxDecoration(
-                                            border: Border(
-                                                top: BorderSide(
-                                          color: Colors.blue,
-                                        ))),
-                                        padding: EdgeInsets.all(8.r),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Baterai : ${AppConstants().numFormat.format(trackballDetails.point?.y)} (%)",
-                                              style: const TextStyle(
-                                                  color: Colors.white),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                          zoomPanBehavior: ZoomPanBehavior(
-                            enablePinching: true, // Enable pinch zoom
-                            enablePanning: true, // Enable panning
-                            zoomMode: ZoomMode
-                                .x, // Allow zooming only on the x-axis (can be both x, y or both)
-                            enableDoubleTapZooming:
-                                true, // Enable double-tap zoom
-                          ),
-                          series: <CartesianSeries<AwlrDetailMinuteModel,
-                              DateTime>>[
-                            FastLineSeries<AwlrDetailMinuteModel, DateTime>(
-                              color: const Color(0xFFFF9800),
-                              markerSettings: MarkerSettings(
-                                  color: Colors.orange[900]!,
-                                  // isVisible: true,
-                                  // Marker shape is set to diamond
-                                  shape: DataMarkerType.circle),
-                              dataSource: listData,
-                              xValueMapper: (AwlrDetailMinuteModel data, _) =>
-                                  data.readingAt,
-                              yValueMapper: (AwlrDetailMinuteModel data, _) =>
-                                  data.batteryCapacity ?? 0,
-                              name: 'Baterai',
-                            ),
-                          ],
+                        ],
+                      ),
+                      child: SfCartesianChart(
+                        primaryXAxis: DateTimeAxis(
+                          dateFormat: DateFormat.MMMd('id_ID'),
+                          autoScrollingDeltaType: DateTimeIntervalType.auto,
+                          labelFormat: '{value}',
+                          title: const AxisTitle(
+                              text: "Waktu", alignment: ChartAlignment.center),
                         ),
+                        primaryYAxis: const NumericAxis(
+                          labelFormat: '{value}',
+                          title: AxisTitle(text: 'Baterai (%)'),
+                        ),
+                        title: ChartTitle(
+                          textStyle: TextStyle(
+                              height: 2,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold),
+                          alignment: ChartAlignment.center,
+                          text: 'Grafik Baterai',
+                        ),
+                        tooltipBehavior: TooltipBehavior(
+                          enable: true,
+                          builder: (dynamic data, dynamic point, dynamic series,
+                              int pointIndex, int seriesIndex) {
+                            final cColor = series.color;
+                            final DateTime date = point?.x;
+                            final String formattedDate =
+                                AppConstants().dateTimeFormatID.format(date);
+                            return SingleChildScrollView(
+                              child: Container(
+                                width: 180,
+                                decoration: BoxDecoration(
+                                  color: Colors.black.withOpacity(0.75),
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.all(8),
+                                      child: Text(
+                                        formattedDate,
+                                        style: const TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          border: Border(
+                                              top: BorderSide(
+                                        color: cColor,
+                                      ))),
+                                      padding: EdgeInsets.all(8),
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            width: 10,
+                                            height: 10,
+                                            decoration: BoxDecoration(
+                                              color: cColor, // Fill color
+                                              shape: BoxShape
+                                                  .circle, // Makes it a circle
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(
+                                            '${series.name.toString()} : ${AppConstants().numFormat.format(point?.y)} (%)',
+                                            style: const TextStyle(
+                                                color: Colors.white),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                        trackballBehavior: TrackballBehavior(
+                          shouldAlwaysShow: true,
+                          markerSettings: const TrackballMarkerSettings(
+                            markerVisibility:
+                                TrackballVisibilityMode.visible, // Show markers
+                            color:
+                                Colors.white, // Color of the trackball marker
+                          ),
+                          activationMode: ActivationMode.singleTap,
+                          enable: true,
+                          builder: (BuildContext context,
+                              TrackballDetails trackballDetails) {
+                            final DateTime date = trackballDetails.point?.x;
+                            final String formattedDate =
+                                AppConstants().dateTimeFormatID.format(date);
+                            return SingleChildScrollView(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.black.withOpacity(0.75),
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.all(8),
+                                      child: Text(
+                                        formattedDate,
+                                        style: const TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    Container(
+                                      decoration: const BoxDecoration(
+                                          border: Border(
+                                              top: BorderSide(
+                                        color: Colors.blue,
+                                      ))),
+                                      padding: EdgeInsets.all(8),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "Baterai : ${AppConstants().numFormat.format(trackballDetails.point?.y)} (%)",
+                                            style: const TextStyle(
+                                                color: Colors.white),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                        zoomPanBehavior: ZoomPanBehavior(
+                          enablePinching: true, // Enable pinch zoom
+                          enablePanning: true, // Enable panning
+                          zoomMode: ZoomMode
+                              .x, // Allow zooming only on the x-axis (can be both x, y or both)
+                          enableDoubleTapZooming:
+                              true, // Enable double-tap zoom
+                        ),
+                        series: <CartesianSeries<AwlrDetailMinuteModel,
+                            DateTime>>[
+                          FastLineSeries<AwlrDetailMinuteModel, DateTime>(
+                            color: const Color(0xFFFF9800),
+                            markerSettings: MarkerSettings(
+                                color: Colors.orange[900]!,
+                                // isVisible: true,
+                                // Marker shape is set to diamond
+                                shape: DataMarkerType.circle),
+                            dataSource: listData,
+                            xValueMapper: (AwlrDetailMinuteModel data, _) =>
+                                data.readingAt,
+                            yValueMapper: (AwlrDetailMinuteModel data, _) =>
+                                data.batteryCapacity ?? 0,
+                            name: 'Baterai',
+                          ),
+                        ],
                       ),
                     ),
                   );
                 });
           } else {
             return SingleChildScrollView(
-              child: GFCard(
-                margin: EdgeInsets.all(10.r),
-                color: GFColors.WHITE,
-                padding: EdgeInsets.zero,
-                content: SizedBox(
-                  height: 300.r,
+              child: Container(
+                margin: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: GFColors.WHITE,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade600,
+                      spreadRadius: 0,
+                      blurRadius: 2,
+                      offset: const Offset(-1, 1),
+                    ),
+                  ],
+                ),
+                child: SizedBox(
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -2028,15 +2274,26 @@ class AwlrDetailView extends StatelessWidget {
           }
         }
         return SingleChildScrollView(
-          child: GFCard(
-            margin: EdgeInsets.all(10.r),
-            color: GFColors.WHITE,
-            padding: EdgeInsets.zero,
-            content: SizedBox(
-              height: 300.r,
+          child: Container(
+            margin: const EdgeInsets.all(5),
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: GFColors.WHITE,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.shade600,
+                  spreadRadius: 0,
+                  blurRadius: 2,
+                  offset: const Offset(-1, 1),
+                ),
+              ],
+            ),
+            child: SizedBox(
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
@@ -2060,8 +2317,8 @@ class AwlrDetailView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: const EdgeInsets.all(5),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: GFColors.WHITE,
@@ -2072,15 +2329,26 @@ class AwlrDetailView extends StatelessWidget {
         } else if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
             return SingleChildScrollView(
-              child: GFCard(
-                margin: EdgeInsets.all(10.r),
-                color: GFColors.WHITE,
-                padding: EdgeInsets.zero,
-                content: SizedBox(
-                  height: 300.r,
+              child: Container(
+                margin: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: GFColors.WHITE,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade600,
+                      spreadRadius: 0,
+                      blurRadius: 2,
+                      offset: const Offset(-1, 1),
+                    ),
+                  ],
+                ),
+                child: SizedBox(
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -2099,227 +2367,243 @@ class AwlrDetailView extends StatelessWidget {
                 id: 'grafik',
                 builder: (controller) {
                   return SingleChildScrollView(
-                    child: GFCard(
-                      margin: EdgeInsets.all(10.r),
-                      color: GFColors.WHITE,
-                      padding: EdgeInsets.zero,
-                      content: SizedBox(
-                        height: 300.r,
-                        child: SfCartesianChart(
-                          legend: const Legend(
-                              isVisible: true, position: LegendPosition.bottom),
-                          primaryXAxis: DateTimeAxis(
-                            dateFormat: DateFormat.MMMd('id_ID'),
-                            autoScrollingDeltaType: DateTimeIntervalType.auto,
-                            labelFormat: '{value}',
-                            title: const AxisTitle(
-                                text: "Waktu",
-                                alignment: ChartAlignment.center),
+                    child: Container(
+                      margin: const EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: GFColors.WHITE,
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.shade600,
+                            spreadRadius: 0,
+                            blurRadius: 2,
+                            offset: const Offset(-1, 1),
                           ),
-                          primaryYAxis: const NumericAxis(
-                            labelFormat: '{value}',
-                            title: AxisTitle(text: 'TMA (mdpl)'),
-                          ),
-                          title: ChartTitle(
-                            textStyle: TextStyle(
-                                height: 2.r,
-                                fontSize: 14.r,
-                                fontWeight: FontWeight.bold),
-                            alignment: ChartAlignment.center,
-                            text: 'Grafik Tinggi Muka Air',
-                          ),
-                          tooltipBehavior: TooltipBehavior(
-                            enable: true,
-                            builder: (dynamic data,
-                                dynamic point,
-                                dynamic series,
-                                int pointIndex,
-                                int seriesIndex) {
-                              final cColor = series.color;
-                              final DateTime date = point?.x;
-                              final String formattedDate =
-                                  AppConstants().dateFormatID.format(date);
-                              return SingleChildScrollView(
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.black.withOpacity(0.75),
-                                    borderRadius: BorderRadius.circular(6.r),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.all(8.r),
-                                        child: Text(
-                                          formattedDate,
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            border: Border(
-                                                top: BorderSide(
-                                          color: cColor,
-                                        ))),
-                                        padding: EdgeInsets.all(8.r),
-                                        child: Column(
-                                          // crossAxisAlignment: CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'Rentang TMA : ${AppConstants().numFormat.format(data?.waterLevelMin ?? 0)} - ${AppConstants().numFormat.format(data?.waterLevelMax ?? 0)} (mdpl)',
-                                              style: const TextStyle(
-                                                  color: Colors.white),
-                                            ),
-                                            Text(
-                                              'Rerata TMA : ${AppConstants().numFormat.format(data?.waterLevelAvg ?? 0)} (mdpl)',
-                                              style: const TextStyle(
-                                                  color: Colors.white),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                          trackballBehavior: TrackballBehavior(
-                            markerSettings: const TrackballMarkerSettings(
-                              markerVisibility: TrackballVisibilityMode
-                                  .visible, // Show markers
-                              // color: Colors.white, // Color of the trackball marker
-                            ),
-                            tooltipSettings: const InteractiveTooltip(
-                              enable: true,
-                              color: Colors.black, // Tooltip background color
-                              textStyle: TextStyle(
-                                  color: Colors.white), // Tooltip text color
-                            ),
-                            activationMode: ActivationMode.singleTap,
-                            enable: true,
-                            tooltipDisplayMode:
-                                TrackballDisplayMode.groupAllPoints,
-                            builder: (BuildContext context,
-                                TrackballDetails trackballDetails) {
-                              List<CartesianChartPoint> listCharts =
-                                  trackballDetails.groupingModeInfo!.points;
-                              String dateTime = AppConstants()
-                                  .dateTimeFormatID
-                                  .format(listCharts.first.x as DateTime);
-                              String sMin =
-                                  '${listCharts[0].low == null ? 'N/A' : listCharts[0].low!.toStringAsFixed(2)} (mdpl)';
-                              String sMax =
-                                  '${listCharts[0].high == null ? 'N/A' : listCharts[0].high!.toStringAsFixed(2)} (mdpl)';
-                              String sAvg = 'N/A';
-                              if (listCharts.length > 1) {
-                                sAvg =
-                                    '${listCharts[1].y == null ? 'N/A' : listCharts[1].y!.toStringAsFixed(2)} °C';
-                              }
-
-                              return SingleChildScrollView(
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.black.withOpacity(0.75),
-                                    borderRadius: BorderRadius.circular(6),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.all(8.r),
-                                        child: Text(
-                                          dateTime,
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      Container(
-                                        decoration: const BoxDecoration(
-                                            border: Border(
-                                                top: BorderSide(
-                                          color: Colors.blue,
-                                        ))),
-                                        padding: EdgeInsets.all(8.r),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'Rentang thermometer : $sMin - $sMax',
-                                              style: const TextStyle(
-                                                  color: Colors.white),
-                                            ),
-                                            Text(
-                                              'Rerata thermometer : $sAvg',
-                                              style: const TextStyle(
-                                                  color: Colors.white),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                          zoomPanBehavior: ZoomPanBehavior(
-                            enablePinching: true, // Enable pinch zoom
-                            enablePanning: true, // Enable panning
-                            zoomMode: ZoomMode
-                                .x, // Allow zooming only on the x-axis (can be both x, y or both)
-                            enableDoubleTapZooming:
-                                true, // Enable double-tap zoom
-                          ),
-                          series: <CartesianSeries>[
-                            RangeAreaSeries<AwlrDetailDayModel, DateTime>(
-                              dataSource: listData,
-                              xValueMapper: (AwlrDetailDayModel data, _) =>
-                                  data.readingDate,
-                              highValueMapper: (AwlrDetailDayModel data, _) =>
-                                  data.waterLevelMax ?? 0,
-                              lowValueMapper: (AwlrDetailDayModel data, _) =>
-                                  data.waterLevelMin ?? 0,
-                              borderColor: const Color(0xFF2CAFFE),
-                              borderWidth: 2.r,
-                              color: const Color(0xFF2CAFFE),
-                              name: 'Rentang TMA',
-                            ),
-                            FastLineSeries<AwlrDetailDayModel, DateTime>(
-                              color: Colors.blue[900]!,
-                              markerSettings: MarkerSettings(
-                                  color: Colors.blue[900]!,
-                                  // isVisible: true,
-                                  // Marker shape is set to diamond
-                                  shape: DataMarkerType.diamond),
-                              dataSource: listData,
-                              xValueMapper: (AwlrDetailDayModel data, _) =>
-                                  data.readingDate,
-                              yValueMapper: (AwlrDetailDayModel data, _) =>
-                                  data.waterLevelAvg ?? 0,
-                              name: 'TMA Rata - Rata',
-                            ),
-                          ],
+                        ],
+                      ),
+                      child: SfCartesianChart(
+                        legend: const Legend(
+                            isVisible: true, position: LegendPosition.bottom),
+                        primaryXAxis: DateTimeAxis(
+                          dateFormat: DateFormat.MMMd('id_ID'),
+                          autoScrollingDeltaType: DateTimeIntervalType.auto,
+                          labelFormat: '{value}',
+                          title: const AxisTitle(
+                              text: "Waktu", alignment: ChartAlignment.center),
                         ),
+                        primaryYAxis: const NumericAxis(
+                          labelFormat: '{value}',
+                          title: AxisTitle(text: 'TMA (mdpl)'),
+                        ),
+                        title: ChartTitle(
+                          textStyle: TextStyle(
+                              height: 2,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold),
+                          alignment: ChartAlignment.center,
+                          text: 'Grafik Tinggi Muka Air',
+                        ),
+                        tooltipBehavior: TooltipBehavior(
+                          enable: true,
+                          builder: (dynamic data, dynamic point, dynamic series,
+                              int pointIndex, int seriesIndex) {
+                            final cColor = series.color;
+                            final DateTime date = point?.x;
+                            final String formattedDate =
+                                AppConstants().dateFormatID.format(date);
+                            return SingleChildScrollView(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.black.withOpacity(0.75),
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.all(8),
+                                      child: Text(
+                                        formattedDate,
+                                        style: const TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          border: Border(
+                                              top: BorderSide(
+                                        color: cColor,
+                                      ))),
+                                      padding: EdgeInsets.all(8),
+                                      child: Column(
+                                        // crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Rentang TMA : ${AppConstants().numFormat.format(data?.waterLevelMin ?? 0)} - ${AppConstants().numFormat.format(data?.waterLevelMax ?? 0)} (mdpl)',
+                                            style: const TextStyle(
+                                                color: Colors.white),
+                                          ),
+                                          Text(
+                                            'Rerata TMA : ${AppConstants().numFormat.format(data?.waterLevelAvg ?? 0)} (mdpl)',
+                                            style: const TextStyle(
+                                                color: Colors.white),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                        trackballBehavior: TrackballBehavior(
+                          shouldAlwaysShow: true,
+                          markerSettings: const TrackballMarkerSettings(
+                            markerVisibility:
+                                TrackballVisibilityMode.visible, // Show markers
+                            // color: Colors.white, // Color of the trackball marker
+                          ),
+                          tooltipSettings: const InteractiveTooltip(
+                            enable: true,
+                            color: Colors.black, // Tooltip background color
+                            textStyle: TextStyle(
+                                color: Colors.white), // Tooltip text color
+                          ),
+                          activationMode: ActivationMode.singleTap,
+                          enable: true,
+                          tooltipDisplayMode:
+                              TrackballDisplayMode.groupAllPoints,
+                          builder: (BuildContext context,
+                              TrackballDetails trackballDetails) {
+                            List<CartesianChartPoint> listCharts =
+                                trackballDetails.groupingModeInfo!.points;
+                            String dateTime = AppConstants()
+                                .dateTimeFormatID
+                                .format(listCharts.first.x as DateTime);
+                            String sMin =
+                                '${listCharts[0].low == null ? 'N/A' : listCharts[0].low!.toStringAsFixed(2)} (mdpl)';
+                            String sMax =
+                                '${listCharts[0].high == null ? 'N/A' : listCharts[0].high!.toStringAsFixed(2)} (mdpl)';
+                            String sAvg = 'N/A';
+                            if (listCharts.length > 1) {
+                              sAvg =
+                                  '${listCharts[1].y == null ? 'N/A' : listCharts[1].y!.toStringAsFixed(2)} °C';
+                            }
+
+                            return SingleChildScrollView(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.black.withOpacity(0.75),
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.all(8),
+                                      child: Text(
+                                        dateTime,
+                                        style: const TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    Container(
+                                      decoration: const BoxDecoration(
+                                          border: Border(
+                                              top: BorderSide(
+                                        color: Colors.blue,
+                                      ))),
+                                      padding: EdgeInsets.all(8),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Rentang thermometer : $sMin - $sMax',
+                                            style: const TextStyle(
+                                                color: Colors.white),
+                                          ),
+                                          Text(
+                                            'Rerata thermometer : $sAvg',
+                                            style: const TextStyle(
+                                                color: Colors.white),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                        zoomPanBehavior: ZoomPanBehavior(
+                          enablePinching: true, // Enable pinch zoom
+                          enablePanning: true, // Enable panning
+                          zoomMode: ZoomMode
+                              .x, // Allow zooming only on the x-axis (can be both x, y or both)
+                          enableDoubleTapZooming:
+                              true, // Enable double-tap zoom
+                        ),
+                        series: <CartesianSeries>[
+                          RangeAreaSeries<AwlrDetailDayModel, DateTime>(
+                            dataSource: listData,
+                            xValueMapper: (AwlrDetailDayModel data, _) =>
+                                data.readingDate,
+                            highValueMapper: (AwlrDetailDayModel data, _) =>
+                                data.waterLevelMax ?? 0,
+                            lowValueMapper: (AwlrDetailDayModel data, _) =>
+                                data.waterLevelMin ?? 0,
+                            borderColor: const Color(0xFF2CAFFE),
+                            borderWidth: 2,
+                            color: const Color(0xFF2CAFFE),
+                            name: 'Rentang TMA',
+                          ),
+                          FastLineSeries<AwlrDetailDayModel, DateTime>(
+                            color: Colors.blue[900]!,
+                            markerSettings: MarkerSettings(
+                                color: Colors.blue[900]!,
+                                // isVisible: true,
+                                // Marker shape is set to diamond
+                                shape: DataMarkerType.diamond),
+                            dataSource: listData,
+                            xValueMapper: (AwlrDetailDayModel data, _) =>
+                                data.readingDate,
+                            yValueMapper: (AwlrDetailDayModel data, _) =>
+                                data.waterLevelAvg ?? 0,
+                            name: 'TMA Rata - Rata',
+                          ),
+                        ],
                       ),
                     ),
                   );
                 });
           } else {
             return SingleChildScrollView(
-              child: GFCard(
-                margin: EdgeInsets.all(10.r),
-                color: GFColors.WHITE,
-                padding: EdgeInsets.zero,
-                content: SizedBox(
-                  height: 300.r,
+              child: Container(
+                margin: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: GFColors.WHITE,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade600,
+                      spreadRadius: 0,
+                      blurRadius: 2,
+                      offset: const Offset(-1, 1),
+                    ),
+                  ],
+                ),
+                child: SizedBox(
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -2332,15 +2616,26 @@ class AwlrDetailView extends StatelessWidget {
           }
         }
         return SingleChildScrollView(
-          child: GFCard(
-            margin: EdgeInsets.all(10.r),
-            color: GFColors.WHITE,
-            padding: EdgeInsets.zero,
-            content: SizedBox(
-              height: 300.r,
+          child: Container(
+            margin: const EdgeInsets.all(5),
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: GFColors.WHITE,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.shade600,
+                  spreadRadius: 0,
+                  blurRadius: 2,
+                  offset: const Offset(-1, 1),
+                ),
+              ],
+            ),
+            child: SizedBox(
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
@@ -2360,19 +2655,15 @@ class AwlrDetailView extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SingleChildScrollView(
-            child: GFCard(
-              margin: EdgeInsets.all(10.r),
-              color: GFColors.WHITE,
-              padding: EdgeInsets.zero,
-              content: GFShimmer(
-                mainColor: Colors.grey[300]!,
-                secondaryColor: Colors.grey[100]!,
-                child: Container(
-                  height: 300.r,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.r),
-                    color: GFColors.WHITE,
-                  ),
+            child: GFShimmer(
+              mainColor: Colors.grey[300]!,
+              secondaryColor: Colors.grey[100]!,
+              child: Container(
+                margin: const EdgeInsets.all(5),
+                height: 300,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: GFColors.WHITE,
                 ),
               ),
             ),
@@ -2380,15 +2671,26 @@ class AwlrDetailView extends StatelessWidget {
         } else if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
             return SingleChildScrollView(
-              child: GFCard(
-                margin: EdgeInsets.all(10.r),
-                color: GFColors.WHITE,
-                padding: EdgeInsets.zero,
-                content: SizedBox(
-                  height: 300.r,
+              child: Container(
+                margin: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: GFColors.WHITE,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade600,
+                      spreadRadius: 0,
+                      blurRadius: 2,
+                      offset: const Offset(-1, 1),
+                    ),
+                  ],
+                ),
+                child: SizedBox(
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -2404,18 +2706,17 @@ class AwlrDetailView extends StatelessWidget {
                 id: 'table',
                 builder: (controller) {
                   return Container(
+                    margin: const EdgeInsets.all(5),
                     padding: EdgeInsets.zero,
-                    margin: EdgeInsets.all(10.r),
                     decoration: BoxDecoration(
-                      color: Colors.white, // Background color
-                      borderRadius:
-                          BorderRadius.circular(10.r), // Rounded corners
+                      color: GFColors.WHITE,
+                      borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey.shade600,
                           spreadRadius: 0,
-                          blurRadius: 5,
-                          offset: const Offset(-2, 5),
+                          blurRadius: 2,
+                          offset: const Offset(-1, 1),
                         ),
                       ],
                     ),
@@ -2424,14 +2725,15 @@ class AwlrDetailView extends StatelessWidget {
                         Expanded(
                           child: SfDataGridTheme(
                             data: const SfDataGridThemeData(
-                                headerColor: GFColors.LIGHT,
+                                headerColor: Colors.grey,
                                 gridLineColor: GFColors.LIGHT),
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10.r),
+                              borderRadius: BorderRadius.circular(10),
                               child: SfDataGrid(
+                                headerRowHeight: 60,
                                 onQueryRowHeight: (details) {
                                   if (details.rowIndex == 0) {
-                                    return 50.r;
+                                    return 50;
                                   }
                                   return details
                                       .getIntrinsicRowHeight(details.rowIndex);
@@ -2440,20 +2742,20 @@ class AwlrDetailView extends StatelessWidget {
                                 columnWidthMode: ColumnWidthMode.fill,
                                 columns: <GridColumn>[
                                   GridColumn(
-                                      minimumWidth: 140.r,
+                                      minimumWidth: 140,
                                       columnName: 'readingHour',
                                       label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: const EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           child: const Text('Tanggal',
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
-                                                  color: Colors.black)))),
+                                                  color: GFColors.WHITE)))),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 100,
                                     columnName: 'hourMinuteFormat',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       child: RichText(
                                         text: const TextSpan(
@@ -2462,22 +2764,22 @@ class AwlrDetailView extends StatelessWidget {
                                                 text: 'Jam ',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
-                                                    color: Colors.black)),
+                                                    color: GFColors.WHITE)),
                                             TextSpan(
                                                 text: '(WITA)',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
-                                                    color: Colors.grey))
+                                                    color: Colors.white70))
                                           ],
                                         ),
                                       ),
                                     ),
                                   ),
                                   GridColumn(
-                                      minimumWidth: 100.r,
+                                      minimumWidth: 100,
                                       columnName: 'waterLevel',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: const EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         child: RichText(
                                           text: const TextSpan(
@@ -2487,22 +2789,22 @@ class AwlrDetailView extends StatelessWidget {
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
-                                                      color: Colors.black)),
+                                                      color: GFColors.WHITE)),
                                               TextSpan(
                                                   text: '(mdpl)',
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
-                                                      color: Colors.grey))
+                                                      color: Colors.white70))
                                             ],
                                           ),
                                         ),
                                       )),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'debit',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       child: RichText(
                                         textAlign: TextAlign.center,
@@ -2512,17 +2814,17 @@ class AwlrDetailView extends StatelessWidget {
                                                 text: 'Debit ',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
-                                                    color: Colors.black)),
+                                                    color: GFColors.WHITE)),
                                             TextSpan(
                                                 text: '(m',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
-                                                    color: Colors.grey)),
+                                                    color: Colors.white70)),
                                             TextSpan(
                                                 text: '3',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
-                                                    color: Colors.grey,
+                                                    color: Colors.white70,
                                                     fontFeatures: [
                                                       FontFeature.superscripts()
                                                     ])),
@@ -2530,17 +2832,17 @@ class AwlrDetailView extends StatelessWidget {
                                                 text: ')',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
-                                                    color: Colors.grey)),
+                                                    color: Colors.white70)),
                                           ],
                                         ),
                                       ),
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'warningStatus',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       child: RichText(
                                         text: const TextSpan(
@@ -2549,7 +2851,7 @@ class AwlrDetailView extends StatelessWidget {
                                                 text: 'Status Siaga ',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
-                                                    color: Colors.black)),
+                                                    color: GFColors.WHITE)),
                                           ],
                                         ),
                                       ),
@@ -2561,7 +2863,7 @@ class AwlrDetailView extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.all(10.r),
+                          padding: const EdgeInsets.all(10),
                           child: SfDataPager(
                             delegate: ds,
                             pageCount: controller.detailHourModel.isNotEmpty
@@ -2577,15 +2879,26 @@ class AwlrDetailView extends StatelessWidget {
                 });
           } else {
             return SingleChildScrollView(
-              child: GFCard(
-                margin: EdgeInsets.all(10.r),
-                color: GFColors.WHITE,
-                padding: EdgeInsets.zero,
-                content: SizedBox(
-                  height: 300.r,
+              child: Container(
+                margin: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: GFColors.WHITE,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade600,
+                      spreadRadius: 0,
+                      blurRadius: 2,
+                      offset: const Offset(-1, 1),
+                    ),
+                  ],
+                ),
+                child: SizedBox(
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -2598,15 +2911,26 @@ class AwlrDetailView extends StatelessWidget {
           }
         }
         return SingleChildScrollView(
-          child: GFCard(
-            margin: EdgeInsets.all(10.r),
-            color: GFColors.WHITE,
-            padding: EdgeInsets.zero,
-            content: SizedBox(
-              height: 300.r,
+          child: Container(
+            margin: const EdgeInsets.all(5),
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: GFColors.WHITE,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.shade600,
+                  spreadRadius: 0,
+                  blurRadius: 2,
+                  offset: const Offset(-1, 1),
+                ),
+              ],
+            ),
+            child: SizedBox(
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
@@ -2627,19 +2951,15 @@ class AwlrDetailView extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SingleChildScrollView(
-            child: GFCard(
-              margin: EdgeInsets.all(10.r),
-              color: GFColors.WHITE,
-              padding: EdgeInsets.zero,
-              content: GFShimmer(
-                mainColor: Colors.grey[300]!,
-                secondaryColor: Colors.grey[100]!,
-                child: Container(
-                  height: 300.r,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.r),
-                    color: GFColors.WHITE,
-                  ),
+            child: GFShimmer(
+              mainColor: Colors.grey[300]!,
+              secondaryColor: Colors.grey[100]!,
+              child: Container(
+                height: 300,
+                margin: const EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: GFColors.WHITE,
                 ),
               ),
             ),
@@ -2647,15 +2967,26 @@ class AwlrDetailView extends StatelessWidget {
         } else if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
             return SingleChildScrollView(
-              child: GFCard(
-                margin: EdgeInsets.all(10.r),
-                color: GFColors.WHITE,
-                padding: EdgeInsets.zero,
-                content: SizedBox(
-                  height: 300.r,
+              child: Container(
+                margin: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: GFColors.WHITE,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade600,
+                      spreadRadius: 0,
+                      blurRadius: 2,
+                      offset: const Offset(-1, 1),
+                    ),
+                  ],
+                ),
+                child: SizedBox(
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -2671,18 +3002,17 @@ class AwlrDetailView extends StatelessWidget {
                 id: 'table',
                 builder: (controller) {
                   return Container(
+                    margin: const EdgeInsets.all(5),
                     padding: EdgeInsets.zero,
-                    margin: EdgeInsets.all(10.r),
                     decoration: BoxDecoration(
-                      color: Colors.white, // Background color
-                      borderRadius:
-                          BorderRadius.circular(10.r), // Rounded corners
+                      color: GFColors.WHITE,
+                      borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey.shade600,
                           spreadRadius: 0,
-                          blurRadius: 5,
-                          offset: const Offset(-2, 5),
+                          blurRadius: 2,
+                          offset: const Offset(-1, 1),
                         ),
                       ],
                     ),
@@ -2691,14 +3021,15 @@ class AwlrDetailView extends StatelessWidget {
                         Expanded(
                           child: SfDataGridTheme(
                             data: const SfDataGridThemeData(
-                                headerColor: GFColors.LIGHT,
+                                headerColor: Colors.grey,
                                 gridLineColor: GFColors.LIGHT),
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10.r),
+                              borderRadius: BorderRadius.circular(10),
                               child: SfDataGrid(
+                                headerRowHeight: 60,
                                 onQueryRowHeight: (details) {
                                   if (details.rowIndex == 0) {
-                                    return 50.r;
+                                    return 50;
                                   }
                                   return details
                                       .getIntrinsicRowHeight(details.rowIndex);
@@ -2707,20 +3038,20 @@ class AwlrDetailView extends StatelessWidget {
                                 columnWidthMode: ColumnWidthMode.fill,
                                 columns: <GridColumn>[
                                   GridColumn(
-                                      minimumWidth: 140.r,
+                                      minimumWidth: 140,
                                       columnName: 'readingAt',
                                       label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: const EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           child: const Text('Tanggal',
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
-                                                  color: Colors.black)))),
+                                                  color: GFColors.WHITE)))),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 100,
                                     columnName: 'hourMinuteFormat',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       child: RichText(
                                         text: const TextSpan(
@@ -2729,22 +3060,22 @@ class AwlrDetailView extends StatelessWidget {
                                                 text: 'Jam ',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
-                                                    color: Colors.black)),
+                                                    color: GFColors.WHITE)),
                                             TextSpan(
                                                 text: '(WITA)',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
-                                                    color: Colors.grey))
+                                                    color: Colors.white70))
                                           ],
                                         ),
                                       ),
                                     ),
                                   ),
                                   GridColumn(
-                                      minimumWidth: 80.r,
+                                      minimumWidth: 100,
                                       columnName: 'waterLevel',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: const EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         child: RichText(
                                           text: const TextSpan(
@@ -2754,22 +3085,22 @@ class AwlrDetailView extends StatelessWidget {
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
-                                                      color: Colors.black)),
+                                                      color: GFColors.WHITE)),
                                               TextSpan(
                                                   text: '(mdpl)',
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
-                                                      color: Colors.grey))
+                                                      color: Colors.white70))
                                             ],
                                           ),
                                         ),
                                       )),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 100,
                                     columnName: 'debit',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       child: RichText(
                                         textAlign: TextAlign.center,
@@ -2779,17 +3110,17 @@ class AwlrDetailView extends StatelessWidget {
                                                 text: 'Debit ',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
-                                                    color: Colors.black)),
+                                                    color: GFColors.WHITE)),
                                             TextSpan(
                                                 text: '(m',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
-                                                    color: Colors.grey)),
+                                                    color: Colors.white70)),
                                             TextSpan(
                                                 text: '3',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
-                                                    color: Colors.grey,
+                                                    color: Colors.white70,
                                                     fontFeatures: [
                                                       FontFeature.superscripts()
                                                     ])),
@@ -2797,17 +3128,17 @@ class AwlrDetailView extends StatelessWidget {
                                                 text: ')',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
-                                                    color: Colors.grey)),
+                                                    color: Colors.white70)),
                                           ],
                                         ),
                                       ),
                                     ),
                                   ),
                                   GridColumn(
-                                      minimumWidth: 100.r,
+                                      minimumWidth: 100,
                                       columnName: 'changeValue',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: const EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         child: RichText(
                                           text: const TextSpan(
@@ -2817,16 +3148,16 @@ class AwlrDetailView extends StatelessWidget {
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
-                                                      color: Colors.black)),
+                                                      color: GFColors.WHITE)),
                                             ],
                                           ),
                                         ),
                                       )),
                                   GridColumn(
-                                      minimumWidth: 80.r,
+                                      minimumWidth: 100,
                                       columnName: 'warningStatus',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: const EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         child: RichText(
                                           text: const TextSpan(
@@ -2836,16 +3167,16 @@ class AwlrDetailView extends StatelessWidget {
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
-                                                      color: Colors.black)),
+                                                      color: GFColors.WHITE)),
                                             ],
                                           ),
                                         ),
                                       )),
                                   GridColumn(
-                                      minimumWidth: 80.r,
+                                      minimumWidth: 100,
                                       columnName: 'battery',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: const EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         child: RichText(
                                           textAlign: TextAlign.center,
@@ -2856,14 +3187,13 @@ class AwlrDetailView extends StatelessWidget {
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
-                                                      color: Colors.black)),
+                                                      color: GFColors.WHITE)),
                                               TextSpan(
                                                   text: '(%)',
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
-                                                      color: Color.fromRGBO(
-                                                          158, 158, 158, 1))),
+                                                      color: Colors.white70)),
                                             ],
                                           ),
                                         ),
@@ -2874,7 +3204,7 @@ class AwlrDetailView extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.all(10.r),
+                          padding: const EdgeInsets.all(10),
                           child: SfDataPager(
                             delegate: ds,
                             pageCount: controller.detailMinuteModel.isNotEmpty
@@ -2890,15 +3220,26 @@ class AwlrDetailView extends StatelessWidget {
                 });
           } else {
             return SingleChildScrollView(
-              child: GFCard(
-                margin: EdgeInsets.all(10.r),
-                color: GFColors.WHITE,
-                padding: EdgeInsets.zero,
-                content: SizedBox(
-                  height: 300.r,
+              child: Container(
+                margin: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: GFColors.WHITE,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade600,
+                      spreadRadius: 0,
+                      blurRadius: 2,
+                      offset: const Offset(-1, 1),
+                    ),
+                  ],
+                ),
+                child: SizedBox(
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -2911,15 +3252,26 @@ class AwlrDetailView extends StatelessWidget {
           }
         }
         return SingleChildScrollView(
-          child: GFCard(
-            margin: EdgeInsets.all(10.r),
-            color: GFColors.WHITE,
-            padding: EdgeInsets.zero,
-            content: SizedBox(
-              height: 300.r,
+          child: Container(
+            margin: const EdgeInsets.all(5),
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: GFColors.WHITE,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.shade600,
+                  spreadRadius: 0,
+                  blurRadius: 2,
+                  offset: const Offset(-1, 1),
+                ),
+              ],
+            ),
+            child: SizedBox(
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
@@ -2939,19 +3291,15 @@ class AwlrDetailView extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SingleChildScrollView(
-            child: GFCard(
-              margin: EdgeInsets.all(10.r),
-              color: GFColors.WHITE,
-              padding: EdgeInsets.zero,
-              content: GFShimmer(
-                mainColor: Colors.grey[300]!,
-                secondaryColor: Colors.grey[100]!,
-                child: Container(
-                  height: 300.r,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.r),
-                    color: GFColors.WHITE,
-                  ),
+            child: GFShimmer(
+              mainColor: Colors.grey[300]!,
+              secondaryColor: Colors.grey[100]!,
+              child: Container(
+                height: 300,
+                margin: const EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: GFColors.WHITE,
                 ),
               ),
             ),
@@ -2959,15 +3307,26 @@ class AwlrDetailView extends StatelessWidget {
         } else if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
             return SingleChildScrollView(
-              child: GFCard(
-                margin: EdgeInsets.all(10.r),
-                color: GFColors.WHITE,
-                padding: EdgeInsets.zero,
-                content: SizedBox(
-                  height: 300.r,
+              child: Container(
+                margin: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: GFColors.WHITE,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade600,
+                      spreadRadius: 0,
+                      blurRadius: 2,
+                      offset: const Offset(-1, 1),
+                    ),
+                  ],
+                ),
+                child: SizedBox(
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -2983,18 +3342,17 @@ class AwlrDetailView extends StatelessWidget {
                 id: 'table',
                 builder: (controller) {
                   return Container(
+                    margin: const EdgeInsets.all(5),
                     padding: EdgeInsets.zero,
-                    margin: EdgeInsets.all(10.r),
                     decoration: BoxDecoration(
-                      color: Colors.white, // Background color
-                      borderRadius:
-                          BorderRadius.circular(10.r), // Rounded corners
+                      color: GFColors.WHITE,
+                      borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey.shade600,
                           spreadRadius: 0,
-                          blurRadius: 5,
-                          offset: const Offset(-2, 5),
+                          blurRadius: 2,
+                          offset: const Offset(-1, 1),
                         ),
                       ],
                     ),
@@ -3003,14 +3361,15 @@ class AwlrDetailView extends StatelessWidget {
                         Expanded(
                           child: SfDataGridTheme(
                             data: const SfDataGridThemeData(
-                                headerColor: GFColors.LIGHT,
+                                headerColor: Colors.grey,
                                 gridLineColor: GFColors.LIGHT),
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10.r),
+                              borderRadius: BorderRadius.circular(10),
                               child: SfDataGrid(
+                                headerRowHeight: 60,
                                 onQueryRowHeight: (details) {
                                   if (details.rowIndex == 0) {
-                                    return 50.r;
+                                    return 50;
                                   }
                                   return details
                                       .getIntrinsicRowHeight(details.rowIndex);
@@ -3019,54 +3378,54 @@ class AwlrDetailView extends StatelessWidget {
                                 columnWidthMode: ColumnWidthMode.fill,
                                 columns: <GridColumn>[
                                   GridColumn(
-                                      minimumWidth: 140.r,
+                                      minimumWidth: 140,
                                       columnName: 'readingDate',
                                       label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: const EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           child: const Text('Tanggal',
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
-                                                  color: Colors.black)))),
+                                                  color: GFColors.WHITE)))),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'waterLevelMin',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       child: const Text(
                                         'Min',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            color: Colors.black),
+                                            color: GFColors.WHITE),
                                       ),
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'waterLevelMax',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       child: const Text(
                                         'Max',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            color: Colors.black),
+                                            color: GFColors.WHITE),
                                       ),
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'waterLevelAvg',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       child: const Text(
                                         'Rerata',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            color: Colors.black),
+                                            color: GFColors.WHITE),
                                       ),
                                     ),
                                   ),
@@ -3085,7 +3444,7 @@ class AwlrDetailView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: Center(
@@ -3098,13 +3457,14 @@ class AwlrDetailView extends StatelessWidget {
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold,
-                                                          color: Colors.black)),
+                                                          color:
+                                                              GFColors.WHITE)),
                                                   TextSpan(
                                                     text: '(mdpl)',
                                                     style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
-                                                      color: Colors.grey,
+                                                      color: Colors.white70,
                                                     ),
                                                   ),
                                                 ],
@@ -3121,7 +3481,7 @@ class AwlrDetailView extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.all(10.r),
+                          padding: const EdgeInsets.all(10),
                           child: SfDataPager(
                             delegate: ds,
                             pageCount: controller.detailDayModel.isNotEmpty
@@ -3137,15 +3497,26 @@ class AwlrDetailView extends StatelessWidget {
                 });
           } else {
             return SingleChildScrollView(
-              child: GFCard(
-                margin: EdgeInsets.all(10.r),
-                color: GFColors.WHITE,
-                padding: EdgeInsets.zero,
-                content: SizedBox(
-                  height: 300.r,
+              child: Container(
+                margin: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: GFColors.WHITE,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade600,
+                      spreadRadius: 0,
+                      blurRadius: 2,
+                      offset: const Offset(-1, 1),
+                    ),
+                  ],
+                ),
+                child: SizedBox(
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -3158,15 +3529,26 @@ class AwlrDetailView extends StatelessWidget {
           }
         }
         return SingleChildScrollView(
-          child: GFCard(
-            margin: EdgeInsets.all(10.r),
-            color: GFColors.WHITE,
-            padding: EdgeInsets.zero,
-            content: SizedBox(
-              height: 300.r,
+          child: Container(
+            margin: const EdgeInsets.all(5),
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: GFColors.WHITE,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.shade600,
+                  spreadRadius: 0,
+                  blurRadius: 2,
+                  offset: const Offset(-1, 1),
+                ),
+              ],
+            ),
+            child: SizedBox(
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(

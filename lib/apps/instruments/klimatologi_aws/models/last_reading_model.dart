@@ -1,27 +1,93 @@
 import 'dart:convert';
 
-WeatherModel weatherModelFromJson(String str) =>
-    WeatherModel.fromJson(json.decode(str));
+LastReadingModel lastReadingModelFromJson(String str) =>
+    LastReadingModel.fromJson(json.decode(str));
 
-String weatherModelToJson(WeatherModel data) => json.encode(data.toJson());
+String lastReadingModelToJson(LastReadingModel data) =>
+    json.encode(data.toJson());
 
-class WeatherModel {
-  final Lokasi lokasi;
-  final List<Datum> data;
+class LastReadingModel {
+  int? id;
+  String? deviceId;
+  DateTime? readingAt;
+  double? humidity;
+  String? humidityStatus;
+  double? pressure;
+  double? solarRadiation;
+  double? windDirection;
+  String? windDirectionStatus;
+  double? windSpeed;
+  double? evaporation;
+  double? rainfall;
+  double? rainfallLastHour;
+  String? rainfallHourIntensity;
+  double? sunshineHour;
+  double? batteryVoltage;
+  double? temperature;
+  int? batteryCapacity;
 
-  WeatherModel({
-    required this.lokasi,
-    required this.data,
+  LastReadingModel({
+    this.id,
+    this.deviceId,
+    this.readingAt,
+    this.humidity,
+    this.humidityStatus,
+    this.pressure,
+    this.solarRadiation,
+    this.windDirection,
+    this.windDirectionStatus,
+    this.windSpeed,
+    this.evaporation,
+    this.rainfall,
+    this.rainfallLastHour,
+    this.rainfallHourIntensity,
+    this.sunshineHour,
+    this.batteryVoltage,
+    this.temperature,
+    this.batteryCapacity,
   });
 
-  factory WeatherModel.fromJson(Map<String, dynamic> json) => WeatherModel(
-        lokasi: Lokasi.fromJson(json["lokasi"]),
-        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+  factory LastReadingModel.fromJson(Map<String, dynamic> json) =>
+      LastReadingModel(
+        id: json["id"],
+        deviceId: json["device_id"],
+        readingAt: DateTime.parse(json["reading_at"]),
+        humidity: json["humidity"]?.toDouble(),
+        humidityStatus: json["humidity_status"],
+        pressure: json["pressure"]?.toDouble(),
+        solarRadiation: json["solar_radiation"]?.toDouble(),
+        windDirection: json["wind_direction"],
+        windDirectionStatus: json["wind_direction_status"],
+        windSpeed: json["wind_speed"]?.toDouble(),
+        evaporation: json["evaporation"]?.toDouble(),
+        rainfall: json["rainfall"]?.toDouble(),
+        rainfallLastHour: json["rainfall_last_hour"]?.toDouble(),
+        rainfallHourIntensity: json["rainfall_hour_intensity"],
+        sunshineHour: json["sunshine_hour"]?.toDouble(),
+        batteryVoltage: json["battery_voltage"]?.toDouble(),
+        temperature: json["temperature"]?.toDouble(),
+        batteryCapacity: json["battery_capacity"],
       );
 
   Map<String, dynamic> toJson() => {
-        "lokasi": lokasi.toJson(),
-        "data": List<dynamic>.from(data.map((x) => x.toJson())),
+        "id": id,
+        "device_id": deviceId,
+        "reading_at": readingAt?.toIso8601String(),
+        "humidity": humidity,
+        "humidity_status": humidityStatus,
+        "pressure": pressure,
+        "solar_radiation": solarRadiation,
+        "wind_direction": windDirection,
+        "wind_direction_status": windDirectionStatus,
+        "wind_speed": windSpeed,
+        "evaporation": evaporation,
+        "rainfall": rainfall,
+        "rainfall_last_hour": rainfallLastHour,
+        "rainfall_hour_intensity": rainfallHourIntensity,
+        "sunshine_hour": sunshineHour,
+        "battery_voltage": batteryVoltage,
+        "temperature": temperature,
+        "battery_capacity": batteryCapacity,
       };
 }
 

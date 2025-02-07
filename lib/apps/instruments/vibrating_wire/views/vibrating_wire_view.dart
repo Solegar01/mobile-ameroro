@@ -1,6 +1,5 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
@@ -31,14 +30,14 @@ class VibratingWireView extends StatelessWidget {
             appBar: AppBar(
               foregroundColor: GFColors.WHITE,
               title: GetBuilder<VibratingWireController>(
-                builder: (controller) => Text(
+                builder: (controller) => const Text(
                   'VIBRATING WIRE',
                   style: TextStyle(
-                    fontSize: 20.r,
+                    fontSize: 20,
                   ),
                 ),
               ),
-              actions: [],
+              actions: const [],
             ),
             body: controller.obx(
               (state) => _detail(context, controller),
@@ -57,7 +56,7 @@ class VibratingWireView extends StatelessWidget {
     return ListView(
       children: [
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -73,7 +72,7 @@ class VibratingWireView extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 10.r),
+              const SizedBox(height: 10),
               GFShimmer(
                 mainColor: Colors.grey[300]!,
                 secondaryColor: Colors.grey[100]!,
@@ -86,7 +85,7 @@ class VibratingWireView extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 10.r),
+              const SizedBox(height: 10),
               GFShimmer(
                 mainColor: Colors.grey[300]!,
                 secondaryColor: Colors.grey[100]!,
@@ -99,7 +98,7 @@ class VibratingWireView extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 10.r),
+              const SizedBox(height: 10),
               GFShimmer(
                 mainColor: Colors.grey[300]!,
                 secondaryColor: Colors.grey[100]!,
@@ -108,7 +107,7 @@ class VibratingWireView extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.grey[300],
                     borderRadius:
-                        BorderRadius.circular(30.r), // Optional rounded corners
+                        BorderRadius.circular(30), // Optional rounded corners
                   ),
                 ),
               ),
@@ -151,7 +150,7 @@ class VibratingWireView extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: 680.r,
+              height: 680,
               child: TabBarView(
                 controller: controller.tabController,
                 children: [
@@ -160,8 +159,8 @@ class VibratingWireView extends StatelessWidget {
                       mainColor: Colors.grey[300]!,
                       secondaryColor: Colors.grey[100]!,
                       child: Container(
-                        margin: EdgeInsets.all(10.r),
-                        height: 305.r,
+                        margin: const EdgeInsets.all(10),
+                        height: 305,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
                           color: GFColors.WHITE,
@@ -174,8 +173,8 @@ class VibratingWireView extends StatelessWidget {
                       mainColor: Colors.grey[300]!,
                       secondaryColor: Colors.grey[100]!,
                       child: Container(
-                        margin: EdgeInsets.all(10.r),
-                        height: 300.r,
+                        margin: const EdgeInsets.all(10),
+                        height: 300,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
                           color: GFColors.WHITE,
@@ -188,8 +187,8 @@ class VibratingWireView extends StatelessWidget {
                       mainColor: Colors.grey[300]!,
                       secondaryColor: Colors.grey[100]!,
                       child: Container(
-                        margin: EdgeInsets.all(10.r),
-                        height: 300.r,
+                        margin: const EdgeInsets.all(10),
+                        height: 300,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
                           color: GFColors.WHITE,
@@ -215,7 +214,7 @@ class VibratingWireView extends StatelessWidget {
       child: ListView(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: Form(
               key: _formKey,
               child: Column(
@@ -262,8 +261,8 @@ class VibratingWireView extends StatelessWidget {
                       constraints: BoxConstraints(),
                     ),
                   ),
-                  SizedBox(
-                    height: 10.r,
+                  const SizedBox(
+                    height: 10,
                   ),
                   DropdownSearch<Map<String, dynamic>>(
                     key: elevationKey,
@@ -310,8 +309,8 @@ class VibratingWireView extends StatelessWidget {
                       constraints: BoxConstraints(),
                     ),
                   ),
-                  SizedBox(
-                    height: 10.r,
+                  const SizedBox(
+                    height: 10,
                   ),
                   TextFormField(
                     onTap: () async {
@@ -326,9 +325,9 @@ class VibratingWireView extends StatelessWidget {
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius:
-                            BorderRadius.circular(5.r), // Rounded corners
-                        borderSide:
-                            BorderSide(color: GFColors.DARK), // Border color
+                            BorderRadius.circular(5), // Rounded corners
+                        borderSide: const BorderSide(
+                            color: GFColors.DARK), // Border color
                       ),
                       labelText: 'Periode',
                       suffixIcon: Row(
@@ -337,7 +336,7 @@ class VibratingWireView extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min, // added line
                         children: <Widget>[
                           IconButton(
-                            icon: Icon(Icons.calendar_month),
+                            icon: const Icon(Icons.calendar_month),
                             onPressed: () async {
                               await _selectDate(context, controller);
                             },
@@ -348,8 +347,8 @@ class VibratingWireView extends StatelessWidget {
                     controller: controller.dateRangeController,
                     readOnly: true,
                   ),
-                  SizedBox(
-                    height: 10.r,
+                  const SizedBox(
+                    height: 10,
                   ),
                   ElevatedButton(
                     onPressed: () async {
@@ -365,18 +364,18 @@ class VibratingWireView extends StatelessWidget {
                           color: AppConfig.primaryColor,
                         ),
                         borderRadius:
-                            BorderRadius.circular(30.r), // Rounded corners
+                            BorderRadius.circular(30), // Rounded corners
                       ),
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 10.r, vertical: 10.r),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 10),
                     ),
-                    child: SizedBox(
+                    child: const SizedBox(
                       width: double.infinity,
                       child: Center(
                         child: Text(
                           'Tampilkan',
                           style: TextStyle(
-                            fontSize: 16.r,
+                            fontSize: 16,
                             color: AppConfig.primaryColor,
                           ),
                         ),
@@ -430,7 +429,7 @@ class VibratingWireView extends StatelessWidget {
           ],
         ),
         SizedBox(
-          height: 680.r,
+          height: 680,
           child: TabBarView(
             controller: controller.tabController,
             children: [
@@ -462,14 +461,14 @@ class VibratingWireView extends StatelessWidget {
   Widget _gambarPondasi(BuildContext context) {
     return SingleChildScrollView(
       child: GFCard(
-        margin: EdgeInsets.all(10.r),
-        padding: EdgeInsets.all(5.r),
+        margin: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(5),
         boxFit: BoxFit.cover,
         color: GFColors.WHITE,
         content: SvgPicture.asset(
           'assets/images/gambar-pondasi.svg',
           width: double.infinity,
-          height: 300.r,
+          height: 300,
           fit: BoxFit.contain,
           placeholderBuilder: (context) => const Center(
             child: GFLoader(
@@ -481,39 +480,39 @@ class VibratingWireView extends StatelessWidget {
     );
   }
 
-  bool _isWithinTargetArea(Offset position) {
-    // Define the specific target coordinates and dimensions
-    const double targetX = 100; // X position of target area
-    const double targetY = 100; // Y position of target area
-    const double targetWidth = 50; // Width of target area
-    const double targetHeight = 50; // Height of target area
+  // bool _isWithinTargetArea(Offset position) {
+  //   // Define the specific target coordinates and dimensions
+  //   const double targetX = 100; // X position of target area
+  //   const double targetY = 100; // Y position of target area
+  //   const double targetWidth = 50; // Width of target area
+  //   const double targetHeight = 50; // Height of target area
 
-    return position.dx >= targetX &&
-        position.dx <= targetX + targetWidth &&
-        position.dy >= targetY &&
-        position.dy <= targetY + targetHeight;
-  }
+  //   return position.dx >= targetX &&
+  //       position.dx <= targetX + targetWidth &&
+  //       position.dy >= targetY &&
+  //       position.dy <= targetY + targetHeight;
+  // }
 
-  void _showCoordinateDialog(BuildContext context, Offset position) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text("Coordinates"),
-          content: Text(
-              "X: ${position.dx.toStringAsFixed(2)}, Y: ${position.dy.toStringAsFixed(2)}"),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text("OK"),
-            ),
-          ],
-        );
-      },
-    );
-  }
+  // void _showCoordinateDialog(BuildContext context, Offset position) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (context) {
+  //       return AlertDialog(
+  //         title: Text("Coordinates"),
+  //         content: Text(
+  //             "X: ${position.dx.toStringAsFixed(2)}, Y: ${position.dy.toStringAsFixed(2)}"),
+  //         actions: [
+  //           TextButton(
+  //             onPressed: () {
+  //               Navigator.of(context).pop();
+  //             },
+  //             child: Text("OK"),
+  //           ),
+  //         ],
+  //       );
+  //     },
+  //   );
+  // }
 
   Widget _chartTab(BuildContext context, VibratingWireController controller) {
     return FutureBuilder(
@@ -525,8 +524,8 @@ class VibratingWireView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: const EdgeInsets.all(10),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: GFColors.WHITE,
@@ -538,14 +537,14 @@ class VibratingWireView extends StatelessWidget {
           if (snapshot.hasError) {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: const EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -565,11 +564,11 @@ class VibratingWireView extends StatelessWidget {
                 builder: (controller) {
                   return SingleChildScrollView(
                     child: GFCard(
-                      margin: EdgeInsets.all(10.r),
+                      margin: const EdgeInsets.all(10),
                       color: GFColors.WHITE,
                       padding: EdgeInsets.zero,
                       content: SizedBox(
-                        height: 300.r,
+                        height: 300,
                         child: SfCartesianChart(
                           legend: const Legend(
                               isVisible: true, position: LegendPosition.bottom),
@@ -585,20 +584,20 @@ class VibratingWireView extends StatelessWidget {
                             labelFormat: '{value}',
                             title: AxisTitle(text: 'TMA (mdpl)'),
                           ),
-                          axes: [
+                          axes: const [
                             NumericAxis(
                               title: AxisTitle(text: 'Curah Hujan (mm)'),
                               labelFormat: '{value}',
                               name: 'InvertedAxis',
                               opposedPosition: true,
                               isInversed: true,
-                              majorGridLines: MajorGridLines(width: 0.r),
+                              majorGridLines: MajorGridLines(width: 0),
                             )
                           ],
-                          title: ChartTitle(
+                          title: const ChartTitle(
                             textStyle: TextStyle(
-                                height: 2.r,
-                                fontSize: 14.r,
+                                height: 2,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold),
                             alignment: ChartAlignment.center,
                             text: 'Grafik Tinggi Muka Air &  Curah Hujan',
@@ -634,7 +633,7 @@ class VibratingWireView extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: const EdgeInsets.all(8),
                                         child: Text(
                                           formattedDate,
                                           style: const TextStyle(
@@ -648,7 +647,7 @@ class VibratingWireView extends StatelessWidget {
                                                 top: BorderSide(
                                           color: Colors.blue,
                                         ))),
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: const EdgeInsets.all(8),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -731,7 +730,7 @@ class VibratingWireView extends StatelessWidget {
                                   data.waterLevel ?? 0,
                               yAxisName: 'primaryYAxis',
                               name: 'TMA',
-                              borderWidth: 2.r,
+                              borderWidth: 2,
                               color: const Color(0xFF2CAFFE),
                               gradient: LinearGradient(
                                 colors: [
@@ -757,7 +756,7 @@ class VibratingWireView extends StatelessWidget {
                               yAxisName: 'InvertedAxis',
                               name: 'Curah Hujan',
                               borderRadius: BorderRadius.circular(5),
-                              width: 0.5.r,
+                              width: 0.5,
                             ),
                             LineSeries<VibratingWire, DateTime>(
                               markerSettings: const MarkerSettings(
@@ -948,14 +947,14 @@ class VibratingWireView extends StatelessWidget {
           } else {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: const EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -969,14 +968,14 @@ class VibratingWireView extends StatelessWidget {
         }
         return SingleChildScrollView(
           child: GFCard(
-            margin: EdgeInsets.all(10.r),
+            margin: const EdgeInsets.all(10),
             color: GFColors.WHITE,
             padding: EdgeInsets.zero,
             content: SizedBox(
-              height: 300.r,
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
@@ -1000,8 +999,8 @@ class VibratingWireView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: const EdgeInsets.all(10),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: GFColors.WHITE,
@@ -1013,14 +1012,14 @@ class VibratingWireView extends StatelessWidget {
           if (snapshot.hasError) {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: const EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -1037,7 +1036,7 @@ class VibratingWireView extends StatelessWidget {
               builder: (controller) {
                 return SingleChildScrollView(
                   child: GFCard(
-                    margin: EdgeInsets.all(10.r),
+                    margin: const EdgeInsets.all(10),
                     color: GFColors.WHITE,
                     padding: EdgeInsets.zero,
                     content: Column(
@@ -1045,33 +1044,33 @@ class VibratingWireView extends StatelessWidget {
                         SizedBox(
                           height: (AppConstants.dataRowHeight *
                                   controller.rowsPerPage) +
-                              160.r,
+                              160,
                           child: SfDataGridTheme(
                             data: const SfDataGridThemeData(
                                 headerColor: GFColors.LIGHT,
                                 gridLineColor: GFColors.LIGHT),
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10.r),
+                              borderRadius: BorderRadius.circular(10),
                               child: SfDataGrid(
-                                headerRowHeight: 50.r,
+                                headerRowHeight: 50,
                                 rowHeight: AppConstants.dataRowHeight,
                                 source: ds,
                                 columnWidthMode: ColumnWidthMode.fill,
                                 columns: <GridColumn>[
                                   GridColumn(
-                                    minimumWidth: 140.r,
+                                    minimumWidth: 140,
                                     columnName: 'readingDate',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(10.r),
+                                        borderRadius: const BorderRadius.only(
+                                          topLeft: Radius.circular(10),
                                         ),
                                       ),
                                       child: const Text(
@@ -1084,32 +1083,32 @@ class VibratingWireView extends StatelessWidget {
                                   ),
                                   //EP1
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp1R1',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'R₁',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Hz²/1000)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1118,32 +1117,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp1WaterPressureE',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'E',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (kPa)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1152,32 +1151,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp1WaterPressureM',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'm',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (H₂O)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1186,32 +1185,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp1Elevation',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Elevasi',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Mdpl)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1221,32 +1220,32 @@ class VibratingWireView extends StatelessWidget {
                                   ),
                                   //EP2
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp2R1',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'R₁',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Hz²/1000)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1255,32 +1254,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp2WaterPressureE',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'E',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (kPa)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1289,32 +1288,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp2WaterPressureM',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'm',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (H₂O)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1323,32 +1322,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp2Elevation',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Elevasi',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Mdpl)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1358,32 +1357,32 @@ class VibratingWireView extends StatelessWidget {
                                   ),
                                   //EP3
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp3R1',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'R₁',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Hz²/1000)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1392,32 +1391,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp3WaterPressureE',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'E',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (kPa)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1426,32 +1425,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp3WaterPressureM',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'm',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (H₂O)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1460,32 +1459,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp3Elevation',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Elevasi',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Mdpl)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1495,32 +1494,32 @@ class VibratingWireView extends StatelessWidget {
                                   ),
                                   //EP4
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp4R1',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'R₁',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Hz²/1000)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1529,32 +1528,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp4WaterPressureE',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'E',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (kPa)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1563,32 +1562,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp4WaterPressureM',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'm',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (H₂O)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1597,32 +1596,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp4Elevation',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Elevasi',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Mdpl)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1632,32 +1631,32 @@ class VibratingWireView extends StatelessWidget {
                                   ),
                                   //EP5
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp5R1',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'R₁',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Hz²/1000)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1666,32 +1665,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp5WaterPressureE',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'E',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (kPa)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1700,32 +1699,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp5WaterPressureM',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'm',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (H₂O)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1734,32 +1733,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp5Elevation',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Elevasi',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Mdpl)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1769,32 +1768,32 @@ class VibratingWireView extends StatelessWidget {
                                   ),
                                   //EP6
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp6R1',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'R₁',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Hz²/1000)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1803,32 +1802,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp6WaterPressureE',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'E',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (kPa)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1837,32 +1836,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp6WaterPressureM',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'm',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (H₂O)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1871,32 +1870,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp6Elevation',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Elevasi',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Mdpl)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1906,32 +1905,32 @@ class VibratingWireView extends StatelessWidget {
                                   ),
                                   //EP7
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp7R1',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'R₁',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Hz²/1000)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1940,32 +1939,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp7WaterPressureE',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'E',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (kPa)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -1974,32 +1973,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp7WaterPressureM',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'm',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (H₂O)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -2008,32 +2007,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp7Elevation',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Elevasi',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Mdpl)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -2043,32 +2042,32 @@ class VibratingWireView extends StatelessWidget {
                                   ),
                                   //EP8
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp8R1',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'R₁',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Hz²/1000)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -2077,32 +2076,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp8WaterPressureE',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'E',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (kPa)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -2111,32 +2110,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp8WaterPressureM',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'm',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (H₂O)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -2145,32 +2144,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp8Elevation',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Elevasi',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Mdpl)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -2180,32 +2179,32 @@ class VibratingWireView extends StatelessWidget {
                                   ),
                                   //EP9
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp9R1',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'R₁',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Hz²/1000)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -2214,32 +2213,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp9WaterPressureE',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'E',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (kPa)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -2248,32 +2247,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp9WaterPressureM',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'm',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (H₂O)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -2282,32 +2281,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp9Elevation',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Elevasi',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Mdpl)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -2317,32 +2316,32 @@ class VibratingWireView extends StatelessWidget {
                                   ),
                                   //EP10
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp10R1',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'R₁',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Hz²/1000)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -2351,32 +2350,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp10WaterPressureE',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'E',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (kPa)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -2385,25 +2384,25 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp10WaterPressureM',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'm',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (H₂O)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -2412,32 +2411,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp10Elevation',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Elevasi',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Mdpl)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -2447,32 +2446,32 @@ class VibratingWireView extends StatelessWidget {
                                   ),
                                   //EP11
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp11R1',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'R₁',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Hz²/1000)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -2481,32 +2480,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp11WaterPressureE',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'E',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (kPa)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -2515,32 +2514,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp11WaterPressureM',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'm',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (H₂O)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -2549,32 +2548,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp11Elevation',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Elevasi',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Mdpl)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -2584,32 +2583,32 @@ class VibratingWireView extends StatelessWidget {
                                   ),
                                   //EP12
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp12R1',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'R₁',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Hz²/1000)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -2618,32 +2617,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp12WaterPressureE',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'E',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (kPa)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -2652,32 +2651,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp12WaterPressureM',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'm',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (H₂O)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -2686,32 +2685,32 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'sensorEp12Elevation',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
                                       ),
                                       child: RichText(
                                         textAlign: TextAlign.center,
-                                        text: TextSpan(
+                                        text: const TextSpan(
                                           children: [
                                             TextSpan(
                                                 text: 'Elevasi',
                                                 style: TextStyle(
-                                                    fontSize: 10.r,
+                                                    fontSize: 10,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                             TextSpan(
                                                 text: ' (Mdpl)',
                                                 style: TextStyle(
-                                                    fontSize: 12.r,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.grey))
                                           ],
@@ -2720,19 +2719,19 @@ class VibratingWireView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 180.r,
+                                    minimumWidth: 180,
                                     columnName: 'pileElevation',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: Colors
                                               .grey.shade400, // Border color
-                                          width: 1.r, // Border width
+                                          width: 1, // Border width
                                         ),
-                                        borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(10.r),
+                                        borderRadius: const BorderRadius.only(
+                                          topRight: Radius.circular(10),
                                         ),
                                       ),
                                       child: RichText(
@@ -2769,7 +2768,7 @@ class VibratingWireView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -2791,7 +2790,7 @@ class VibratingWireView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -2813,7 +2812,7 @@ class VibratingWireView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -2835,7 +2834,7 @@ class VibratingWireView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -2857,7 +2856,7 @@ class VibratingWireView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -2879,7 +2878,7 @@ class VibratingWireView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -2901,7 +2900,7 @@ class VibratingWireView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -2923,7 +2922,7 @@ class VibratingWireView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -2945,7 +2944,7 @@ class VibratingWireView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -2967,7 +2966,7 @@ class VibratingWireView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -2989,7 +2988,7 @@ class VibratingWireView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -3011,7 +3010,7 @@ class VibratingWireView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -3033,7 +3032,7 @@ class VibratingWireView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -3053,7 +3052,7 @@ class VibratingWireView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -3073,7 +3072,7 @@ class VibratingWireView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -3093,7 +3092,7 @@ class VibratingWireView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -3113,7 +3112,7 @@ class VibratingWireView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -3133,7 +3132,7 @@ class VibratingWireView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -3153,7 +3152,7 @@ class VibratingWireView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -3173,7 +3172,7 @@ class VibratingWireView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -3193,7 +3192,7 @@ class VibratingWireView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -3213,7 +3212,7 @@ class VibratingWireView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -3233,7 +3232,7 @@ class VibratingWireView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -3253,7 +3252,7 @@ class VibratingWireView extends StatelessWidget {
                                             border: Border.all(
                                               color: Colors.grey
                                                   .shade400, // Border color
-                                              width: 1.r, // Border width
+                                              width: 1, // Border width
                                             ),
                                           ),
                                           child: const Center(
@@ -3269,8 +3268,8 @@ class VibratingWireView extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: 10.r,
+                        const SizedBox(
+                          height: 10,
                         ),
                         SfDataPager(
                           delegate: ds,
@@ -3289,14 +3288,14 @@ class VibratingWireView extends StatelessWidget {
           } else {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: const EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -3310,14 +3309,14 @@ class VibratingWireView extends StatelessWidget {
         }
         return SingleChildScrollView(
           child: GFCard(
-            margin: EdgeInsets.all(10.r),
+            margin: const EdgeInsets.all(10),
             color: GFColors.WHITE,
             padding: EdgeInsets.zero,
             content: SizedBox(
-              height: 300.r,
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(

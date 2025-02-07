@@ -5,6 +5,8 @@ class CctvModel {
   double? latitude;
   double? longitude;
   String? note;
+  DateTime createdAt;
+  DateTime updatedAt;
 
   CctvModel({
     required this.id,
@@ -13,10 +15,17 @@ class CctvModel {
     this.latitude,
     this.longitude,
     this.note,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   // static function to create an empty user model.
-  static CctvModel empty() => CctvModel(id: '', name: '', url: '');
+  static CctvModel empty() => CctvModel(
+      id: '',
+      name: '',
+      url: '',
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now());
 
   // Convert model to JSON structure
   Map<String, dynamic> toJson() {
@@ -27,6 +36,8 @@ class CctvModel {
       'latitude': latitude,
       'longitude': longitude,
       'note': note,
+      'created_at': createdAt,
+      'updated_at': updatedAt,
     };
   }
 
@@ -37,6 +48,8 @@ class CctvModel {
         latitude: json["latitude"]?.toDouble(),
         longitude: json["longitude"]?.toDouble(),
         note: json['note'],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json['updated_at']),
       );
 
   // Factory method to create a CctvModel
@@ -48,6 +61,8 @@ class CctvModel {
       latitude: map['latitude']?.toDouble(),
       longitude: map['longitude']?.toDouble(),
       note: map['note'],
+      createdAt: DateTime.parse(map["created_at"]),
+      updatedAt: DateTime.parse(map["updated_at"]),
     );
   }
 }

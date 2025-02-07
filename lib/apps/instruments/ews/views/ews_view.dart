@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:mobile_ameroro_app/apps/instruments/ews/controllers/ews_controller.dart';
@@ -21,7 +20,7 @@ class EwsView extends StatelessWidget {
                 builder: (controller) => Text(
                   'EARLY WARNING SYSTEM',
                   style: TextStyle(
-                    fontSize: 20.r,
+                    fontSize: 20,
                   ),
                 ),
               ),

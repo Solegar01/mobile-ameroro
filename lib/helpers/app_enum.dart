@@ -1,9 +1,7 @@
-import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/colors/gf_color.dart';
-import 'package:mobile_ameroro_app/helpers/app_constant.dart';
 
 enum StatusLevel {
   normal,

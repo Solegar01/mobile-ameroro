@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:mobile_ameroro_app/apps/config/app_config.dart';
@@ -30,8 +29,8 @@ class MenuView extends StatelessWidget {
                     const GFAvatar(
                       backgroundImage: AssetImage('assets/images/logo-pu.png'),
                     ),
-                    SizedBox(
-                      width: 10.r,
+                    const SizedBox(
+                      width: 10,
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -42,7 +41,7 @@ class MenuView extends StatelessWidget {
                           style: TextStyle(fontSize: AppConfig.fontSize),
                         ),
                         Text(controller.username.value,
-                            style: TextStyle(fontSize: 12.r)),
+                            style: const TextStyle(fontSize: 12)),
                       ],
                     )
                   ],

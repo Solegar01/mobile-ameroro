@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/colors/gf_color.dart';
 import 'package:mobile_ameroro_app/apps/instruments/vnotch/models/vnotch_model.dart';
@@ -212,7 +211,7 @@ class TableDataSource extends DataGridSource {
       }
       return Container(
         alignment: Alignment.center,
-        padding: EdgeInsets.all(10.r),
+        padding: const EdgeInsets.all(10),
         child: Text(e.value != null ? e.value.toString() : ' - '),
       );
     }).toList());

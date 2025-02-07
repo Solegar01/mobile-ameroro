@@ -1,6 +1,5 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
@@ -26,10 +25,10 @@ class KlimatologiAwsView extends StatelessWidget {
             appBar: AppBar(
               foregroundColor: GFColors.WHITE,
               title: GetBuilder<KlimatologiAwsController>(
-                builder: (controller) => Text(
+                builder: (controller) => const Text(
                   'AWS',
                   style: TextStyle(
-                    fontSize: 20.r,
+                    fontSize: 20,
                   ),
                 ),
               ),
@@ -37,11 +36,14 @@ class KlimatologiAwsView extends StatelessWidget {
             ),
             body: controller.obx(
               (state) => _detail(context, controller),
-              onLoading: _loader(context, controller),
+              onLoading: const GFLoader(
+                type: GFLoaderType.circle,
+              ),
               onEmpty: const Text('Empty Data'),
               onError: (error) => Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Center(child: Text(error!)),
+                child: Center(
+                    child: Text(error ?? "Error while loading data...!")),
               ),
             ),
           ),
@@ -56,167 +58,366 @@ class KlimatologiAwsView extends StatelessWidget {
       },
       child: ListView(
         children: [
-          _weatherSlider(context, controller),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
-            child: TextFormField(
-              onTap: () async {
-                await _selectDate(context, controller);
-              },
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Pilih periode';
-                }
-                return null;
-              },
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5.r), // Rounded corners
-                  borderSide:
-                      const BorderSide(color: GFColors.DARK), // Border color
-                ),
-                labelText: 'Periode',
-                suffixIcon: Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment.spaceBetween, // added line
-                  mainAxisSize: MainAxisSize.min, // added line
-                  children: <Widget>[
-                    IconButton(
-                      icon: const Icon(Icons.calendar_month),
-                      onPressed: () async {
-                        await _selectDate(context, controller);
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              controller: controller.dateRangeController,
-              readOnly: true,
-            ),
-          ),
-          SizedBox(
-            height: 650.r,
-            child: _graphTableTab(context, controller),
-          ),
+          _lastReading(context, controller),
+          // Padding(
+          //   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          //   child: TextFormField(
+          //     onTap: () async {
+          //       await _selectDate(context, controller);
+          //     },
+          //     validator: (value) {
+          //       if (value == null || value.isEmpty) {
+          //         return 'Pilih periode';
+          //       }
+          //       return null;
+          //     },
+          //     decoration: InputDecoration(
+          //       border: OutlineInputBorder(
+          //         borderRadius: BorderRadius.circular(5), // Rounded corners
+          //         borderSide:
+          //             const BorderSide(color: GFColors.DARK), // Border color
+          //       ),
+          //       labelText: 'Periode',
+          //       suffixIcon: Row(
+          //         mainAxisAlignment:
+          //             MainAxisAlignment.spaceBetween, // added line
+          //         mainAxisSize: MainAxisSize.min, // added line
+          //         children: <Widget>[
+          //           IconButton(
+          //             icon: const Icon(Icons.calendar_month),
+          //             onPressed: () async {
+          //               await _selectDate(context, controller);
+          //             },
+          //           ),
+          //         ],
+          //       ),
+          //     ),
+          //     controller: controller.dateRangeController,
+          //     readOnly: true,
+          //   ),
+          // ),
+          // SizedBox(
+          //   height: 650,
+          //   child: _graphTableTab(context, controller),
+          // ),
         ],
       ),
     );
   }
 
-  _loader(BuildContext context, KlimatologiAwsController controller) {
-    List<String> loadStr = ['loading...', 'loading...', 'loading...'];
-    return SizedBox(
-      child: ListView(
-        children: [
-          GFCarousel(
-            items: loadStr.map((load) {
-              return GFShimmer(
-                mainColor: Colors.grey[100]!,
-                secondaryColor: Colors.grey[300]!,
-                child: Container(
-                  margin: EdgeInsets.all(8.r),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(8.r),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        blurRadius: 5,
-                        spreadRadius: 2,
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            }).toList(),
-            autoPlay: false,
-            enlargeMainPage: false,
-            hasPagination: false,
-            passiveIndicator: Colors.grey,
-            activeIndicator: Colors.blue,
-            autoPlayInterval: const Duration(seconds: 5), // Adjust as needed
-            autoPlayAnimationDuration: const Duration(milliseconds: 800),
-            height: 180.r,
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                GFShimmer(
-                  mainColor: Colors.grey[300]!,
-                  secondaryColor: Colors.grey[100]!,
-                  child: Container(
-                    height: 55,
-                    decoration: BoxDecoration(
-                      color: Colors.grey[300],
-                      borderRadius:
-                          BorderRadius.circular(8), // Optional rounded corners
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Column(
-            children: [
-              TabBar(
-                controller: controller.tabController,
-                tabs: const [
-                  Tab(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [Text('GRAFIK')],
-                    ),
-                  ),
-                  Tab(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [Text('TABEL')],
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 650.r,
-                child: TabBarView(
-                  controller: controller.tabController,
-                  children: [
-                    SingleChildScrollView(
-                      child: GFShimmer(
-                        mainColor: Colors.grey[300]!,
-                        secondaryColor: Colors.grey[100]!,
-                        child: Container(
-                          margin: EdgeInsets.all(10.r),
-                          height: 355.r,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: GFColors.WHITE,
-                          ),
-                        ),
-                      ),
-                    ),
-                    SingleChildScrollView(
-                      child: GFShimmer(
-                        mainColor: Colors.grey[300]!,
-                        secondaryColor: Colors.grey[100]!,
-                        child: Container(
-                          margin: EdgeInsets.all(10.r),
-                          height: 355.r,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: GFColors.WHITE,
-                          ),
-                        ),
-                      ),
+  Widget _lastReading(
+      BuildContext context, KlimatologiAwsController controller) {
+    return FutureBuilder(
+      future: controller.getLastReading(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return SingleChildScrollView(
+            child: GFShimmer(
+              mainColor: Colors.grey[300]!,
+              secondaryColor: Colors.grey[100]!,
+              child: Container(
+                margin: const EdgeInsets.all(5),
+                height: 200,
+                decoration: BoxDecoration(
+                  color: GFColors.WHITE,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade600,
+                      spreadRadius: 0,
+                      blurRadius: 2,
+                      offset: const Offset(-1, 1),
                     ),
                   ],
                 ),
               ),
-            ],
+            ),
+          );
+        } else if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasError) {
+            return SingleChildScrollView(
+              child: Container(
+                margin: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: GFColors.WHITE,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade600,
+                      spreadRadius: 0,
+                      blurRadius: 2,
+                      offset: const Offset(-1, 1),
+                    ),
+                  ],
+                ),
+                child: SizedBox(
+                  height: 200,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: GFColors.WHITE,
+                    ),
+                    child: Center(
+                      child: Text('${snapshot.error}'),
+                    ),
+                  ),
+                ),
+              ),
+            );
+          } else if (snapshot.hasData) {
+            if (snapshot.data != null) {
+              var data = snapshot.data;
+              return GetBuilder<KlimatologiAwsController>(
+                  id: 'lastReading',
+                  builder: (controller) {
+                    return SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                              color: GFColors.WHITE,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: ExpansionTile(
+                              shape: Border(),
+                              title: Text('Tap to Expand'),
+                              subtitle: Text('This is a subtitle'),
+                              leading: Icon(Icons.info),
+                              children: [
+                                ListTile(
+                                  title: Text('Item 1'),
+                                  subtitle: Text('Details about Item 1'),
+                                ),
+                                ListTile(
+                                  title: Text('Item 2'),
+                                  subtitle: Text('Details about Item 2'),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                              margin: const EdgeInsets.all(5),
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: GFColors.WHITE,
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.shade600,
+                                    spreadRadius: 0,
+                                    blurRadius: 2,
+                                    offset: const Offset(-1, 1),
+                                  ),
+                                ],
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Center(
+                                    child: Text(
+                                      '${AppConstants().dateTimeFullFormatID.format(data!.readingAt!)} WITA',
+                                      style: TextStyle(
+                                          fontSize: AppConfig.fontMedion,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Wrap(
+                                    alignment: WrapAlignment.start,
+                                    spacing: 10,
+                                    children: [
+                                      IntrinsicWidth(
+                                        child: Container(
+                                          padding: const EdgeInsets.all(10),
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                                width: 1,
+                                                color: GFColors.LIGHT),
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                            color: GFColors.WHITE,
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              Container(
+                                                padding:
+                                                    const EdgeInsets.all(5),
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      width: 1,
+                                                      color: GFColors.SUCCESS),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                  color: GFColors.SUCCESS
+                                                      .withOpacity(0.2),
+                                                ),
+                                                child: const Icon(
+                                                  Icons.water_drop_outlined,
+                                                  color: GFColors.SUCCESS,
+                                                  size: 30,
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                width: 10,
+                                              ),
+                                              Column(
+                                                children: [
+                                                  Text(
+                                                    '${AppConstants().numFormat.format(data.humidity ?? 0.00)} % ',
+                                                    style: TextStyle(
+                                                        color: Colors.grey,
+                                                        fontSize: AppConfig
+                                                            .fontSizeLarge,
+                                                        fontWeight:
+                                                            FontWeight.w700),
+                                                  ),
+                                                  Text(
+                                                    data.humidityStatus ?? '',
+                                                    style: TextStyle(
+                                                        color: Colors.grey,
+                                                        fontSize: AppConfig
+                                                            .fontSizeSmall,
+                                                        fontWeight:
+                                                            FontWeight.w700),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        height: 100,
+                                        width: 100,
+                                        padding: const EdgeInsets.all(5),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          color: AppConfig.primaryColor
+                                              .withOpacity(0.2),
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                const Icon(
+                                                    Icons.water_drop_outlined),
+                                                Text(
+                                                    '${AppConstants().numFormat.format(data.humidity ?? 0.00)} % ')
+                                              ],
+                                            ),
+                                            Text(data.humidityStatus ?? '')
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              )),
+                        ],
+                      ),
+                    );
+                  });
+            } else {
+              return SingleChildScrollView(
+                child: Container(
+                  margin: const EdgeInsets.all(5),
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: GFColors.WHITE,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.shade600,
+                        spreadRadius: 0,
+                        blurRadius: 2,
+                        offset: const Offset(-1, 1),
+                      ),
+                    ],
+                  ),
+                  child: SizedBox(
+                    height: 200,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: GFColors.WHITE,
+                      ),
+                      child: const Center(
+                        child: Text('Data is empty!'),
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            }
+          } else {
+            return SingleChildScrollView(
+              child: Container(
+                margin: EdgeInsets.all(5),
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: GFColors.WHITE,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade600,
+                      spreadRadius: 0,
+                      blurRadius: 2,
+                      offset: const Offset(-1, 1),
+                    ),
+                  ],
+                ),
+                child: SizedBox(
+                  height: 300,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: GFColors.WHITE,
+                    ),
+                    child: const Center(
+                      child: Text('No data available'),
+                    ),
+                  ),
+                ),
+              ),
+            );
+          }
+        }
+        return SingleChildScrollView(
+          child: Container(
+            margin: EdgeInsets.all(5),
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: GFColors.WHITE,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.shade600,
+                  spreadRadius: 0,
+                  blurRadius: 2,
+                  offset: const Offset(-1, 1),
+                ),
+              ],
+            ),
+            child: SizedBox(
+              height: 300,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: GFColors.WHITE,
+                ),
+                child: const Center(
+                  child: Text('No data available'),
+                ),
+              ),
+            ),
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 
@@ -286,11 +487,11 @@ class KlimatologiAwsView extends StatelessWidget {
       children: [
         TabBar(
           tabAlignment: TabAlignment.start,
-          padding: EdgeInsets.only(top: 10.r),
+          padding: EdgeInsets.only(top: 10),
           indicatorColor: Colors.transparent,
           isScrollable: true,
           controller: controller.sensorTabController,
-          dividerHeight: 0.r,
+          dividerHeight: 0,
           onTap: (index) {
             controller.selectedSensorIndex.value = index;
           },
@@ -299,14 +500,14 @@ class KlimatologiAwsView extends StatelessWidget {
               Tab(
                 child: Obx(
                   () => Container(
-                    padding: EdgeInsets.all(8.r),
+                    padding: EdgeInsets.all(8),
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: controller.selectedSensorIndex.value == i
                             ? AppConfig.primaryColor
                             : GFColors.LIGHT,
                       ),
-                      borderRadius: BorderRadius.circular(20.r),
+                      borderRadius: BorderRadius.circular(20),
                     ),
                     child: Text(
                       sensors[i],
@@ -357,291 +558,6 @@ class KlimatologiAwsView extends StatelessWidget {
     }
   }
 
-  _weatherSlider(BuildContext context, KlimatologiAwsController controller) {
-    return FutureBuilder(
-      future: controller.getCuacaList(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          List<String> loadStr = ['loading...', 'loading...', 'loading...'];
-          return GFCarousel(
-            items: loadStr.map((load) {
-              return GFShimmer(
-                mainColor: Colors.grey[100]!,
-                secondaryColor: Colors.grey[300]!,
-                child: Container(
-                  margin: EdgeInsets.all(8.r),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(8.r),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        blurRadius: 5,
-                        spreadRadius: 2,
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            }).toList(),
-            autoPlay: false,
-            enlargeMainPage: false,
-            hasPagination: false,
-            passiveIndicator: Colors.grey,
-            activeIndicator: Colors.blue,
-            autoPlayInterval: const Duration(seconds: 5), // Adjust as needed
-            autoPlayAnimationDuration: const Duration(milliseconds: 800),
-            height: 180.r,
-          );
-        } else if (snapshot.hasError) {
-          return _errorWeather(context);
-        } else if (snapshot.hasData) {
-          if (snapshot.data!.isNotEmpty) {
-            return GFCarousel(
-              items: snapshot.data!.map((cuaca) {
-                return GFCard(
-                  margin: EdgeInsets.all(8.r),
-                  padding: EdgeInsets.zero,
-                  boxFit: BoxFit.cover,
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(8.r),
-                  elevation: 5.r,
-                  content: Column(
-                    children: [
-                      SingleChildScrollView(
-                        child: Container(
-                          padding: EdgeInsets.only(right: 10.r, left: 10.r),
-                          decoration: BoxDecoration(
-                            color: Colors.grey[100],
-                            borderRadius: BorderRadius.circular(8.r),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.all(8.r),
-                                child: Column(
-                                  children: [
-                                    _getSvgPic(cuaca.image),
-                                    Text(
-                                      cuaca.weatherDesc,
-                                      style: TextStyle(fontSize: 12.r),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(8.r),
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      AppConstants()
-                                          .dateFullDayFormatID
-                                          .format(cuaca.localDatetime),
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 12.r),
-                                    ),
-                                    Text(
-                                      '${AppConstants().hourMinuteFormat.format(cuaca.localDatetime)} WIB',
-                                      style: TextStyle(fontSize: 12.r),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          _buildWeatherInfoRow(cuaca),
-                          Divider(
-                            height: 1.r,
-                            color: Colors.grey[400],
-                          ),
-                          _buildAdditionalInfoRow(cuaca),
-                        ],
-                      ),
-                    ],
-                  ),
-                );
-              }).toList(),
-              autoPlay: true,
-              enlargeMainPage: false,
-              hasPagination: false,
-              passiveIndicator: Colors.grey,
-              activeIndicator: Colors.blue,
-              autoPlayInterval: const Duration(seconds: 5), // Adjust as needed
-              autoPlayAnimationDuration: const Duration(milliseconds: 800),
-              height: 180.r,
-            );
-          } else {
-            return _errorWeather(context);
-          }
-        } else {
-          return _errorWeather(context);
-        }
-      },
-    );
-  }
-
-  _errorWeather(BuildContext context) {
-    List<String> errorStr = [
-      'Error loading weather data',
-      'Error loading weather data',
-      'Error loading weather data'
-    ];
-    return GFCarousel(
-      items: errorStr.map((error) {
-        return GFCard(
-          margin: EdgeInsets.all(8.r),
-          padding: EdgeInsets.zero,
-          boxFit: BoxFit.cover,
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(8.r),
-          elevation: 5.r,
-          content: SizedBox(
-            height: 150.r,
-            width: double.infinity,
-            child: Center(
-              child: Text(
-                error,
-              ),
-            ),
-          ),
-        );
-      }).toList(),
-      autoPlay: false,
-      enlargeMainPage: false,
-      hasPagination: false,
-      passiveIndicator: Colors.grey,
-      activeIndicator: Colors.blue,
-      autoPlayInterval: const Duration(seconds: 5), // Adjust as needed
-      autoPlayAnimationDuration: const Duration(milliseconds: 800),
-      height: 180.r,
-    );
-  }
-
-  _buildWeatherInfoRow(cuaca) {
-    return SingleChildScrollView(
-      child: Container(
-        width: double.infinity,
-        padding: EdgeInsets.all(8.r),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _buildWeatherInfoItem(
-                Icons.thermostat, '${cuaca.t} \u00B0C', 'Suhu'),
-            _buildWeatherInfoItem(
-                Icons.water_drop_outlined, '${cuaca.hu} %', 'Kelembaban'),
-            _buildWeatherInfoItem(
-                FluentIcons.compass_northwest_28_regular,
-                '${cuaca.wdDeg} \u00B0C (${cuaca.wd} → ${cuaca.wdTo})',
-                'Arah mata angin'),
-          ],
-        ),
-      ),
-    );
-  }
-
-  _buildAdditionalInfoRow(cuaca) {
-    return SingleChildScrollView(
-      child: Container(
-        width: double.infinity,
-        padding: EdgeInsets.all(8.r),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _buildWeatherInfoItem(
-                FluentIcons.dust_20_filled, '${cuaca.ws} m/s', 'Kec. angin'),
-            _buildWeatherInfoItem(
-                Icons.cloud, '${cuaca.tcc} %', 'Tutupan awan'),
-            _buildWeatherInfoItem(
-                Icons.remove_red_eye_outlined, cuaca.vsText, 'Jarak pandang'),
-          ],
-        ),
-      ),
-    );
-  }
-
-  _buildWeatherInfoItem(IconData icon, String data, String label) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(icon, size: 20.r),
-        SizedBox(width: 5.r),
-        Column(
-          children: [
-            RichText(
-              text: TextSpan(
-                children: [
-                  TextSpan(
-                    text: data,
-                    style: TextStyle(
-                        fontSize: 10.r,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
-                  ),
-                ],
-              ),
-            ),
-            Text(
-              label,
-              style: TextStyle(fontSize: 10.r),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  _getSvgPic(String svgUrl) {
-    return FutureBuilder<String>(
-      future: controller.getSvgPic(svgUrl),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
-            child: SizedBox(
-              height: 20.r,
-              width: 20.r,
-              child: const CircularProgressIndicator(),
-            ),
-          );
-        } else if (snapshot.hasError) {
-          return SizedBox(
-            width: 30.r,
-            height: 30.r,
-            child: Icon(
-              Icons.image_not_supported_rounded,
-              size: 30.r,
-              color: Colors.grey,
-            ),
-          );
-        } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-          return SvgPicture.string(
-            snapshot.data!,
-            width: 30.r,
-            height: 30.r,
-            fit: BoxFit.contain,
-          );
-        } else {
-          // Optional fallback if no data is returned but no error
-          return SizedBox(
-            width: 30.r,
-            height: 30.r,
-            child: Icon(
-              Icons.image,
-              size: 30.r,
-              color: Colors.grey,
-            ),
-          );
-        }
-      },
-    );
-  }
-
   _batteryChart(BuildContext context, KlimatologiAwsController controller) {
     return FutureBuilder(
       future: controller.getChartData(),
@@ -652,8 +568,8 @@ class KlimatologiAwsView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: EdgeInsets.all(10),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: GFColors.WHITE,
@@ -665,14 +581,14 @@ class KlimatologiAwsView extends StatelessWidget {
           if (snapshot.hasError) {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -692,11 +608,11 @@ class KlimatologiAwsView extends StatelessWidget {
                 builder: (controller) {
                   return SingleChildScrollView(
                     child: GFCard(
-                      margin: EdgeInsets.all(10.r),
+                      margin: EdgeInsets.all(10),
                       color: GFColors.WHITE,
                       padding: EdgeInsets.zero,
                       content: SizedBox(
-                        height: 300.r,
+                        height: 300,
                         child: SfCartesianChart(
                           primaryXAxis: DateTimeAxis(
                             dateFormat: DateFormat.MMMd('id_ID'),
@@ -712,8 +628,8 @@ class KlimatologiAwsView extends StatelessWidget {
                           ),
                           title: ChartTitle(
                             textStyle: TextStyle(
-                                height: 2.r,
-                                fontSize: 14.r,
+                                height: 2,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold),
                             alignment: ChartAlignment.center,
                             text: 'Grafik Baterai',
@@ -747,7 +663,7 @@ class KlimatologiAwsView extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Text(
                                           formattedDate,
                                           style: const TextStyle(
@@ -761,7 +677,7 @@ class KlimatologiAwsView extends StatelessWidget {
                                                 top: BorderSide(
                                           color: Colors.blue,
                                         ))),
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -813,14 +729,14 @@ class KlimatologiAwsView extends StatelessWidget {
           } else {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -834,14 +750,14 @@ class KlimatologiAwsView extends StatelessWidget {
         }
         return SingleChildScrollView(
           child: GFCard(
-            margin: EdgeInsets.all(10.r),
+            margin: EdgeInsets.all(10),
             color: GFColors.WHITE,
             padding: EdgeInsets.zero,
             content: SizedBox(
-              height: 300.r,
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
@@ -865,8 +781,8 @@ class KlimatologiAwsView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: EdgeInsets.all(10),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: GFColors.WHITE,
@@ -878,14 +794,14 @@ class KlimatologiAwsView extends StatelessWidget {
           if (snapshot.hasError) {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -905,11 +821,11 @@ class KlimatologiAwsView extends StatelessWidget {
                 builder: (controller) {
                   return SingleChildScrollView(
                     child: GFCard(
-                      margin: EdgeInsets.all(10.r),
+                      margin: EdgeInsets.all(10),
                       color: GFColors.WHITE,
                       padding: EdgeInsets.zero,
                       content: SizedBox(
-                        height: 300.r,
+                        height: 300,
                         child: SfCartesianChart(
                           primaryXAxis: DateTimeAxis(
                             dateFormat: DateFormat.MMMd('id_ID'),
@@ -925,8 +841,8 @@ class KlimatologiAwsView extends StatelessWidget {
                           ),
                           title: ChartTitle(
                             textStyle: TextStyle(
-                                height: 2.r,
-                                fontSize: 14.r,
+                                height: 2,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold),
                             alignment: ChartAlignment.center,
                             text: 'Grafik Radiasi Matahari',
@@ -953,9 +869,9 @@ class KlimatologiAwsView extends StatelessWidget {
                                   AppConstants().dateTimeFormatID.format(date);
                               return SingleChildScrollView(
                                 child: Container(
-                                  // height: 50.r,
-                                  width: 150.r,
-                                  padding: EdgeInsets.all(8.r),
+                                  // height: 50,
+                                  width: 150,
+                                  padding: EdgeInsets.all(8),
                                   decoration: const BoxDecoration(
                                     color: Color.fromRGBO(0, 8, 22, 0.75),
                                     borderRadius:
@@ -1017,14 +933,14 @@ class KlimatologiAwsView extends StatelessWidget {
           } else {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -1038,14 +954,14 @@ class KlimatologiAwsView extends StatelessWidget {
         }
         return SingleChildScrollView(
           child: GFCard(
-            margin: EdgeInsets.all(10.r),
+            margin: EdgeInsets.all(10),
             color: GFColors.WHITE,
             padding: EdgeInsets.zero,
             content: SizedBox(
-              height: 300.r,
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
@@ -1069,8 +985,8 @@ class KlimatologiAwsView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: EdgeInsets.all(10),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: GFColors.WHITE,
@@ -1082,14 +998,14 @@ class KlimatologiAwsView extends StatelessWidget {
           if (snapshot.hasError) {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -1109,11 +1025,11 @@ class KlimatologiAwsView extends StatelessWidget {
                 builder: (controller) {
                   return SingleChildScrollView(
                     child: GFCard(
-                      margin: EdgeInsets.all(10.r),
+                      margin: EdgeInsets.all(10),
                       color: GFColors.WHITE,
                       padding: EdgeInsets.zero,
                       content: SizedBox(
-                        height: 300.r,
+                        height: 300,
                         child: SfCartesianChart(
                           legend: const Legend(
                             isVisible: true,
@@ -1133,8 +1049,8 @@ class KlimatologiAwsView extends StatelessWidget {
                           ),
                           title: ChartTitle(
                             textStyle: TextStyle(
-                                height: 2.r,
-                                fontSize: 14.r,
+                                height: 2,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold),
                             alignment: ChartAlignment.center,
                             text: 'Grafik Suhu',
@@ -1182,7 +1098,7 @@ class KlimatologiAwsView extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Text(
                                           dateTime,
                                           style: const TextStyle(
@@ -1196,7 +1112,7 @@ class KlimatologiAwsView extends StatelessWidget {
                                                 top: BorderSide(
                                           color: Colors.blue,
                                         ))),
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -1238,7 +1154,7 @@ class KlimatologiAwsView extends StatelessWidget {
                               lowValueMapper: (KlimatologiAwsModel data, _) =>
                                   data.airtempMin,
                               borderColor: const Color(0xFF2CAFFE),
-                              borderWidth: 2.r,
+                              borderWidth: 2,
                               color: const Color(0xFF2CAFFE),
                               name: 'Rentang Suhu',
                             ),
@@ -1268,14 +1184,14 @@ class KlimatologiAwsView extends StatelessWidget {
           } else {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -1289,14 +1205,14 @@ class KlimatologiAwsView extends StatelessWidget {
         }
         return SingleChildScrollView(
           child: GFCard(
-            margin: EdgeInsets.all(10.r),
+            margin: EdgeInsets.all(10),
             color: GFColors.WHITE,
             padding: EdgeInsets.zero,
             content: SizedBox(
-              height: 300.r,
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
@@ -1320,8 +1236,8 @@ class KlimatologiAwsView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: EdgeInsets.all(10),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: GFColors.WHITE,
@@ -1333,14 +1249,14 @@ class KlimatologiAwsView extends StatelessWidget {
           if (snapshot.hasError) {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -1360,11 +1276,11 @@ class KlimatologiAwsView extends StatelessWidget {
                 builder: (controller) {
                   return SingleChildScrollView(
                     child: GFCard(
-                      margin: EdgeInsets.all(10.r),
+                      margin: EdgeInsets.all(10),
                       color: GFColors.WHITE,
                       padding: EdgeInsets.zero,
                       content: SizedBox(
-                        height: 300.r,
+                        height: 300,
                         child: SfCartesianChart(
                           legend: const Legend(
                             isVisible: true,
@@ -1384,8 +1300,8 @@ class KlimatologiAwsView extends StatelessWidget {
                           ),
                           title: ChartTitle(
                             textStyle: TextStyle(
-                                height: 2.r,
-                                fontSize: 14.r,
+                                height: 2,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold),
                             alignment: ChartAlignment.center,
                             text: 'Grafik Kelembaban',
@@ -1433,7 +1349,7 @@ class KlimatologiAwsView extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Text(
                                           dateTime,
                                           style: const TextStyle(
@@ -1447,7 +1363,7 @@ class KlimatologiAwsView extends StatelessWidget {
                                                 top: BorderSide(
                                           color: Colors.blue,
                                         ))),
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -1489,7 +1405,7 @@ class KlimatologiAwsView extends StatelessWidget {
                               lowValueMapper: (KlimatologiAwsModel data, _) =>
                                   data.rhMin,
                               borderColor: const Color(0xFF2CAFFE),
-                              borderWidth: 2.r,
+                              borderWidth: 2,
                               color: const Color(0xFF2CAFFE),
                               name: 'Rentang Kelembaban',
                             ),
@@ -1518,14 +1434,14 @@ class KlimatologiAwsView extends StatelessWidget {
           } else {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -1539,14 +1455,14 @@ class KlimatologiAwsView extends StatelessWidget {
         }
         return SingleChildScrollView(
           child: GFCard(
-            margin: EdgeInsets.all(10.r),
+            margin: EdgeInsets.all(10),
             color: GFColors.WHITE,
             padding: EdgeInsets.zero,
             content: SizedBox(
-              height: 300.r,
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
@@ -1570,8 +1486,8 @@ class KlimatologiAwsView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: EdgeInsets.all(10),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: GFColors.WHITE,
@@ -1583,14 +1499,14 @@ class KlimatologiAwsView extends StatelessWidget {
           if (snapshot.hasError) {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -1610,11 +1526,11 @@ class KlimatologiAwsView extends StatelessWidget {
                 builder: (controller) {
                   return SingleChildScrollView(
                     child: GFCard(
-                      margin: EdgeInsets.all(10.r),
+                      margin: EdgeInsets.all(10),
                       color: GFColors.WHITE,
                       padding: EdgeInsets.zero,
                       content: SizedBox(
-                        height: 300.r,
+                        height: 300,
                         child: SfCartesianChart(
                           legend: const Legend(
                             isVisible: true,
@@ -1634,8 +1550,8 @@ class KlimatologiAwsView extends StatelessWidget {
                           ),
                           title: ChartTitle(
                             textStyle: TextStyle(
-                                height: 2.r,
-                                fontSize: 14.r,
+                                height: 2,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold),
                             alignment: ChartAlignment.center,
                             text: 'Grafik Titik Embun',
@@ -1683,7 +1599,7 @@ class KlimatologiAwsView extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Text(
                                           dateTime,
                                           style: const TextStyle(
@@ -1697,7 +1613,7 @@ class KlimatologiAwsView extends StatelessWidget {
                                                 top: BorderSide(
                                           color: Colors.blue,
                                         ))),
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -1739,7 +1655,7 @@ class KlimatologiAwsView extends StatelessWidget {
                               lowValueMapper: (KlimatologiAwsModel data, _) =>
                                   data.dewpointMin,
                               borderColor: const Color(0xFF2CAFFE),
-                              borderWidth: 2.r,
+                              borderWidth: 2,
                               color: const Color(0xFF2CAFFE),
                               name: 'Rentang Titik Embun',
                             ),
@@ -1769,14 +1685,14 @@ class KlimatologiAwsView extends StatelessWidget {
           } else {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -1790,14 +1706,14 @@ class KlimatologiAwsView extends StatelessWidget {
         }
         return SingleChildScrollView(
           child: GFCard(
-            margin: EdgeInsets.all(10.r),
+            margin: EdgeInsets.all(10),
             color: GFColors.WHITE,
             padding: EdgeInsets.zero,
             content: SizedBox(
-              height: 300.r,
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
@@ -1821,8 +1737,8 @@ class KlimatologiAwsView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: EdgeInsets.all(10),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: GFColors.WHITE,
@@ -1834,14 +1750,14 @@ class KlimatologiAwsView extends StatelessWidget {
           if (snapshot.hasError) {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -1861,11 +1777,11 @@ class KlimatologiAwsView extends StatelessWidget {
                 builder: (controller) {
                   return SingleChildScrollView(
                     child: GFCard(
-                      margin: EdgeInsets.all(10.r),
+                      margin: EdgeInsets.all(10),
                       color: GFColors.WHITE,
                       padding: EdgeInsets.zero,
                       content: SizedBox(
-                        height: 300.r,
+                        height: 300,
                         child: SfCartesianChart(
                           legend: const Legend(
                             isVisible: true,
@@ -1885,8 +1801,8 @@ class KlimatologiAwsView extends StatelessWidget {
                           ),
                           title: ChartTitle(
                             textStyle: TextStyle(
-                                height: 2.r,
-                                fontSize: 14.r,
+                                height: 2,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold),
                             alignment: ChartAlignment.center,
                             text: 'Grafik Kecepatan Angin',
@@ -1934,7 +1850,7 @@ class KlimatologiAwsView extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Text(
                                           dateTime,
                                           style: const TextStyle(
@@ -1948,7 +1864,7 @@ class KlimatologiAwsView extends StatelessWidget {
                                                 top: BorderSide(
                                           color: Colors.blue,
                                         ))),
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -1990,7 +1906,7 @@ class KlimatologiAwsView extends StatelessWidget {
                               lowValueMapper: (KlimatologiAwsModel data, _) =>
                                   data.wsMin,
                               borderColor: const Color(0xFF2CAFFE),
-                              borderWidth: 2.r,
+                              borderWidth: 2,
                               color: const Color(0xFF2CAFFE),
                               name: 'Rentang Kec. Angin',
                             ),
@@ -2019,14 +1935,14 @@ class KlimatologiAwsView extends StatelessWidget {
           } else {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -2040,14 +1956,14 @@ class KlimatologiAwsView extends StatelessWidget {
         }
         return SingleChildScrollView(
           child: GFCard(
-            margin: EdgeInsets.all(10.r),
+            margin: EdgeInsets.all(10),
             color: GFColors.WHITE,
             padding: EdgeInsets.zero,
             content: SizedBox(
-              height: 300.r,
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
@@ -2071,8 +1987,8 @@ class KlimatologiAwsView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: EdgeInsets.all(10),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: GFColors.WHITE,
@@ -2084,14 +2000,14 @@ class KlimatologiAwsView extends StatelessWidget {
           if (snapshot.hasError) {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -2111,11 +2027,11 @@ class KlimatologiAwsView extends StatelessWidget {
                 builder: (controller) {
                   return SingleChildScrollView(
                     child: GFCard(
-                      margin: EdgeInsets.all(10.r),
+                      margin: EdgeInsets.all(10),
                       color: GFColors.WHITE,
                       padding: EdgeInsets.zero,
                       content: SizedBox(
-                        height: 300.r,
+                        height: 300,
                         child: SfCartesianChart(
                           primaryXAxis: DateTimeAxis(
                             dateFormat: DateFormat.MMMd('id_ID'),
@@ -2131,8 +2047,8 @@ class KlimatologiAwsView extends StatelessWidget {
                           ),
                           title: ChartTitle(
                             textStyle: TextStyle(
-                                height: 2.r,
-                                fontSize: 14.r,
+                                height: 2,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold),
                             alignment: ChartAlignment.center,
                             text: 'Grafik Curah Hujan',
@@ -2154,9 +2070,9 @@ class KlimatologiAwsView extends StatelessWidget {
                                   AppConstants().dateTimeFormatID.format(date);
                               return SingleChildScrollView(
                                 child: Container(
-                                  // height: 50.r,
-                                  width: 150.r,
-                                  padding: EdgeInsets.all(8.r),
+                                  // height: 50,
+                                  width: 150,
+                                  padding: EdgeInsets.all(8),
                                   decoration: const BoxDecoration(
                                     color: Color.fromRGBO(0, 8, 22, 0.75),
                                     borderRadius:
@@ -2220,14 +2136,14 @@ class KlimatologiAwsView extends StatelessWidget {
           } else {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -2241,14 +2157,14 @@ class KlimatologiAwsView extends StatelessWidget {
         }
         return SingleChildScrollView(
           child: GFCard(
-            margin: EdgeInsets.all(10.r),
+            margin: EdgeInsets.all(10),
             color: GFColors.WHITE,
             padding: EdgeInsets.zero,
             content: SizedBox(
-              height: 300.r,
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
@@ -2272,8 +2188,8 @@ class KlimatologiAwsView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: EdgeInsets.all(10),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: GFColors.WHITE,
@@ -2285,14 +2201,14 @@ class KlimatologiAwsView extends StatelessWidget {
           if (snapshot.hasError) {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -2312,11 +2228,11 @@ class KlimatologiAwsView extends StatelessWidget {
                 builder: (controller) {
                   return SingleChildScrollView(
                     child: GFCard(
-                      margin: EdgeInsets.all(10.r),
+                      margin: EdgeInsets.all(10),
                       color: GFColors.WHITE,
                       padding: EdgeInsets.zero,
                       content: SizedBox(
-                        height: 300.r,
+                        height: 300,
                         child: SfCartesianChart(
                           legend: const Legend(
                             isVisible: true,
@@ -2336,8 +2252,8 @@ class KlimatologiAwsView extends StatelessWidget {
                           ),
                           title: ChartTitle(
                             textStyle: TextStyle(
-                                height: 2.r,
-                                fontSize: 14.r,
+                                height: 2,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold),
                             alignment: ChartAlignment.center,
                             text: 'Grafik Tekanan Barometrik',
@@ -2385,7 +2301,7 @@ class KlimatologiAwsView extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Text(
                                           dateTime,
                                           style: const TextStyle(
@@ -2394,13 +2310,13 @@ class KlimatologiAwsView extends StatelessWidget {
                                         ),
                                       ),
                                       Container(
-                                        width: 250.r,
+                                        width: 250,
                                         decoration: const BoxDecoration(
                                             border: Border(
                                                 top: BorderSide(
                                           color: Colors.blue,
                                         ))),
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: EdgeInsets.all(8),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -2450,7 +2366,7 @@ class KlimatologiAwsView extends StatelessWidget {
                               lowValueMapper: (KlimatologiAwsModel data, _) =>
                                   data.bpMin,
                               borderColor: const Color(0xFF2CAFFE),
-                              borderWidth: 2.r,
+                              borderWidth: 2,
                               color: const Color(0xFF2CAFFE),
                               name: 'Rentang Tekanan Barometrik',
                             ),
@@ -2479,14 +2395,14 @@ class KlimatologiAwsView extends StatelessWidget {
           } else {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -2500,14 +2416,14 @@ class KlimatologiAwsView extends StatelessWidget {
         }
         return SingleChildScrollView(
           child: GFCard(
-            margin: EdgeInsets.all(10.r),
+            margin: EdgeInsets.all(10),
             color: GFColors.WHITE,
             padding: EdgeInsets.zero,
             content: SizedBox(
-              height: 300.r,
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
@@ -2531,8 +2447,8 @@ class KlimatologiAwsView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: EdgeInsets.all(10),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: GFColors.WHITE,
@@ -2544,14 +2460,14 @@ class KlimatologiAwsView extends StatelessWidget {
           if (snapshot.hasError) {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -2568,7 +2484,7 @@ class KlimatologiAwsView extends StatelessWidget {
                 builder: (controller) {
                   return SingleChildScrollView(
                     child: GFCard(
-                      margin: EdgeInsets.all(10.r),
+                      margin: EdgeInsets.all(10),
                       color: GFColors.WHITE,
                       padding: EdgeInsets.zero,
                       content: Column(
@@ -2576,33 +2492,33 @@ class KlimatologiAwsView extends StatelessWidget {
                           SizedBox(
                             height: (AppConstants.dataRowHeight *
                                     controller.rowsPerPage) +
-                                80.r,
+                                80,
                             child: SfDataGridTheme(
                               data: const SfDataGridThemeData(
                                   headerColor: GFColors.LIGHT,
                                   gridLineColor: GFColors.LIGHT),
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10.r),
+                                borderRadius: BorderRadius.circular(10),
                                 child: SfDataGrid(
-                                  headerRowHeight: 40.r,
+                                  headerRowHeight: 40,
                                   rowHeight: AppConstants.dataRowHeight,
                                   source: ds,
                                   columnWidthMode: ColumnWidthMode.fill,
                                   columns: <GridColumn>[
                                     GridColumn(
-                                        minimumWidth: 140.r,
+                                        minimumWidth: 140,
                                         columnName: 'readingDate',
                                         label: Container(
-                                            padding: EdgeInsets.all(10.r),
+                                            padding: EdgeInsets.all(10),
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
                                               border: Border.all(
                                                 color: Colors.grey
                                                     .shade400, // Border color
-                                                width: 1.r, // Border width
+                                                width: 1, // Border width
                                               ),
                                               borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(10.r),
+                                                topLeft: Radius.circular(10),
                                               ),
                                             ),
                                             child: const Text('Waktu',
@@ -2610,16 +2526,16 @@ class KlimatologiAwsView extends StatelessWidget {
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)))),
                                     GridColumn(
-                                        minimumWidth: 80.r,
+                                        minimumWidth: 80,
                                         columnName: 'record',
                                         label: Container(
-                                            padding: EdgeInsets.all(10.r),
+                                            padding: EdgeInsets.all(10),
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
                                               border: Border.all(
                                                 color: Colors.grey
                                                     .shade400, // Border color
-                                                width: 1.r, // Border width
+                                                width: 1, // Border width
                                               ),
                                             ),
                                             child: const Text('Record',
@@ -2627,16 +2543,16 @@ class KlimatologiAwsView extends StatelessWidget {
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)))),
                                     GridColumn(
-                                        minimumWidth: 80.r,
+                                        minimumWidth: 80,
                                         columnName: 'battery',
                                         label: Container(
-                                            padding: EdgeInsets.all(10.r),
+                                            padding: EdgeInsets.all(10),
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
                                               border: Border.all(
                                                 color: Colors.grey
                                                     .shade400, // Border color
-                                                width: 1.r, // Border width
+                                                width: 1, // Border width
                                               ),
                                             ),
                                             child: const Text('Battery',
@@ -2645,16 +2561,16 @@ class KlimatologiAwsView extends StatelessWidget {
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)))),
                                     GridColumn(
-                                        minimumWidth: 80.r,
+                                        minimumWidth: 80,
                                         columnName: 'airtempMin',
                                         label: Container(
-                                            padding: EdgeInsets.all(10.r),
+                                            padding: EdgeInsets.all(10),
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
                                               border: Border.all(
                                                 color: Colors.grey
                                                     .shade400, // Border color
-                                                width: 1.r, // Border width
+                                                width: 1, // Border width
                                               ),
                                             ),
                                             child: const Text('Min',
@@ -2663,16 +2579,16 @@ class KlimatologiAwsView extends StatelessWidget {
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)))),
                                     GridColumn(
-                                        minimumWidth: 80.r,
+                                        minimumWidth: 80,
                                         columnName: 'airtempMax',
                                         label: Container(
-                                            padding: EdgeInsets.all(10.r),
+                                            padding: EdgeInsets.all(10),
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
                                               border: Border.all(
                                                 color: Colors.grey
                                                     .shade400, // Border color
-                                                width: 1.r, // Border width
+                                                width: 1, // Border width
                                               ),
                                             ),
                                             child: const Text('Max',
@@ -2681,16 +2597,16 @@ class KlimatologiAwsView extends StatelessWidget {
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)))),
                                     GridColumn(
-                                        minimumWidth: 80.r,
+                                        minimumWidth: 80,
                                         columnName: 'rhMin',
                                         label: Container(
-                                            padding: EdgeInsets.all(10.r),
+                                            padding: EdgeInsets.all(10),
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
                                               border: Border.all(
                                                 color: Colors.grey
                                                     .shade400, // Border color
-                                                width: 1.r, // Border width
+                                                width: 1, // Border width
                                               ),
                                             ),
                                             child: const Text('Min',
@@ -2699,16 +2615,16 @@ class KlimatologiAwsView extends StatelessWidget {
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)))),
                                     GridColumn(
-                                        minimumWidth: 100.r,
+                                        minimumWidth: 100,
                                         columnName: 'rhMax',
                                         label: Container(
-                                            padding: EdgeInsets.all(10.r),
+                                            padding: EdgeInsets.all(10),
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
                                               border: Border.all(
                                                 color: Colors.grey
                                                     .shade400, // Border color
-                                                width: 1.r, // Border width
+                                                width: 1, // Border width
                                               ),
                                             ),
                                             child: const Text('Max',
@@ -2717,16 +2633,16 @@ class KlimatologiAwsView extends StatelessWidget {
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)))),
                                     GridColumn(
-                                        minimumWidth: 80.r,
+                                        minimumWidth: 80,
                                         columnName: 'dewpointMin',
                                         label: Container(
-                                            padding: EdgeInsets.all(10.r),
+                                            padding: EdgeInsets.all(10),
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
                                               border: Border.all(
                                                 color: Colors.grey
                                                     .shade400, // Border color
-                                                width: 1.r, // Border width
+                                                width: 1, // Border width
                                               ),
                                             ),
                                             child: const Text('Min',
@@ -2735,16 +2651,16 @@ class KlimatologiAwsView extends StatelessWidget {
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)))),
                                     GridColumn(
-                                        minimumWidth: 80.r,
+                                        minimumWidth: 80,
                                         columnName: 'dewpointMax',
                                         label: Container(
-                                            padding: EdgeInsets.all(10.r),
+                                            padding: EdgeInsets.all(10),
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
                                               border: Border.all(
                                                 color: Colors.grey
                                                     .shade400, // Border color
-                                                width: 1.r, // Border width
+                                                width: 1, // Border width
                                               ),
                                             ),
                                             child: const Text('Max',
@@ -2753,16 +2669,16 @@ class KlimatologiAwsView extends StatelessWidget {
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)))),
                                     GridColumn(
-                                        minimumWidth: 80.r,
+                                        minimumWidth: 80,
                                         columnName: 'wsMin',
                                         label: Container(
-                                            padding: EdgeInsets.all(10.r),
+                                            padding: EdgeInsets.all(10),
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
                                               border: Border.all(
                                                 color: Colors.grey
                                                     .shade400, // Border color
-                                                width: 1.r, // Border width
+                                                width: 1, // Border width
                                               ),
                                             ),
                                             child: const Text('Min',
@@ -2771,16 +2687,16 @@ class KlimatologiAwsView extends StatelessWidget {
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)))),
                                     GridColumn(
-                                        minimumWidth: 80.r,
+                                        minimumWidth: 80,
                                         columnName: 'wsMax',
                                         label: Container(
-                                            padding: EdgeInsets.all(10.r),
+                                            padding: EdgeInsets.all(10),
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
                                               border: Border.all(
                                                 color: Colors.grey
                                                     .shade400, // Border color
-                                                width: 1.r, // Border width
+                                                width: 1, // Border width
                                               ),
                                             ),
                                             child: const Text('Max',
@@ -2789,16 +2705,16 @@ class KlimatologiAwsView extends StatelessWidget {
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)))),
                                     GridColumn(
-                                        minimumWidth: 180.r,
+                                        minimumWidth: 180,
                                         columnName: 'solar',
                                         label: Container(
-                                            padding: EdgeInsets.all(10.r),
+                                            padding: EdgeInsets.all(10),
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
                                               border: Border.all(
                                                 color: Colors.grey
                                                     .shade400, // Border color
-                                                width: 1.r, // Border width
+                                                width: 1, // Border width
                                               ),
                                             ),
                                             child: const Text(
@@ -2808,16 +2724,16 @@ class KlimatologiAwsView extends StatelessWidget {
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)))),
                                     GridColumn(
-                                        minimumWidth: 140.r,
+                                        minimumWidth: 140,
                                         columnName: 'rainfall',
                                         label: Container(
-                                            padding: EdgeInsets.all(10.r),
+                                            padding: EdgeInsets.all(10),
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
                                               border: Border.all(
                                                 color: Colors.grey
                                                     .shade400, // Border color
-                                                width: 1.r, // Border width
+                                                width: 1, // Border width
                                               ),
                                             ),
                                             child: const Text(
@@ -2827,16 +2743,16 @@ class KlimatologiAwsView extends StatelessWidget {
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)))),
                                     GridColumn(
-                                        minimumWidth: 100.r,
+                                        minimumWidth: 100,
                                         columnName: 'bpMin',
                                         label: Container(
-                                            padding: EdgeInsets.all(10.r),
+                                            padding: EdgeInsets.all(10),
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
                                               border: Border.all(
                                                 color: Colors.grey
                                                     .shade400, // Border color
-                                                width: 1.r, // Border width
+                                                width: 1, // Border width
                                               ),
                                             ),
                                             child: const Text('Min',
@@ -2845,16 +2761,16 @@ class KlimatologiAwsView extends StatelessWidget {
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)))),
                                     GridColumn(
-                                        minimumWidth: 100.r,
+                                        minimumWidth: 100,
                                         columnName: 'bpMax',
                                         label: Container(
-                                            padding: EdgeInsets.all(10.r),
+                                            padding: EdgeInsets.all(10),
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
                                               border: Border.all(
                                                 color: Colors.grey
                                                     .shade400, // Border color
-                                                width: 1.r, // Border width
+                                                width: 1, // Border width
                                               ),
                                             ),
                                             child: const Text('Max',
@@ -2875,7 +2791,7 @@ class KlimatologiAwsView extends StatelessWidget {
                                               border: Border.all(
                                                 color: Colors.grey
                                                     .shade400, // Border color
-                                                width: 1.r, // Border width
+                                                width: 1, // Border width
                                               ),
                                             ),
                                             child: const Center(
@@ -2895,7 +2811,7 @@ class KlimatologiAwsView extends StatelessWidget {
                                               border: Border.all(
                                                 color: Colors.grey
                                                     .shade400, // Border color
-                                                width: 1.r, // Border width
+                                                width: 1, // Border width
                                               ),
                                             ),
                                             child: const Center(
@@ -2915,7 +2831,7 @@ class KlimatologiAwsView extends StatelessWidget {
                                               border: Border.all(
                                                 color: Colors.grey
                                                     .shade400, // Border color
-                                                width: 1.r, // Border width
+                                                width: 1, // Border width
                                               ),
                                             ),
                                             child: const Center(
@@ -2935,7 +2851,7 @@ class KlimatologiAwsView extends StatelessWidget {
                                               border: Border.all(
                                                 color: Colors.grey
                                                     .shade400, // Border color
-                                                width: 1.r, // Border width
+                                                width: 1, // Border width
                                               ),
                                             ),
                                             child: const Center(
@@ -2952,10 +2868,10 @@ class KlimatologiAwsView extends StatelessWidget {
                                               border: Border.all(
                                                 color: Colors.grey
                                                     .shade400, // Border color
-                                                width: 1.r, // Border width
+                                                width: 1, // Border width
                                               ),
                                               borderRadius: BorderRadius.only(
-                                                topRight: Radius.circular(10.r),
+                                                topRight: Radius.circular(10),
                                               ),
                                             ),
                                             child: const Center(
@@ -2973,7 +2889,7 @@ class KlimatologiAwsView extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            height: 10.r,
+                            height: 10,
                           ),
                           SfDataPager(
                             delegate: ds,
@@ -2991,14 +2907,14 @@ class KlimatologiAwsView extends StatelessWidget {
           } else {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -3012,14 +2928,14 @@ class KlimatologiAwsView extends StatelessWidget {
         }
         return SingleChildScrollView(
           child: GFCard(
-            margin: EdgeInsets.all(10.r),
+            margin: EdgeInsets.all(10),
             color: GFColors.WHITE,
             padding: EdgeInsets.zero,
             content: SizedBox(
-              height: 300.r,
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(

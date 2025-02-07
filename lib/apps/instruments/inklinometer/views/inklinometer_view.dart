@@ -1,10 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:mobile_ameroro_app/apps/config/app_config.dart';
 import 'package:mobile_ameroro_app/apps/instruments/inklinometer/controllers/inklinometer_controller.dart';
 import 'package:mobile_ameroro_app/apps/instruments/inklinometer/models/inklinometer_model.dart';
 import 'package:mobile_ameroro_app/helpers/app_constant.dart';
@@ -27,7 +25,7 @@ class InklinometerView extends StatelessWidget {
                 builder: (controller) => Text(
                   'INKLINOMETER',
                   style: TextStyle(
-                    fontSize: 20.r,
+                    fontSize: 20,
                   ),
                 ),
               ),
@@ -55,7 +53,7 @@ class InklinometerView extends StatelessWidget {
       child: ListView(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: TextFormField(
               onTap: () async {
                 await _selectDate(context, controller);
@@ -68,7 +66,7 @@ class InklinometerView extends StatelessWidget {
               },
               decoration: InputDecoration(
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5.r), // Rounded corners
+                  borderRadius: BorderRadius.circular(5), // Rounded corners
                   borderSide:
                       const BorderSide(color: GFColors.DARK), // Border color
                 ),
@@ -92,7 +90,7 @@ class InklinometerView extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 600.r,
+            height: 600,
             child: _graphTableTab(context, controller),
           ),
         ],
@@ -105,7 +103,7 @@ class InklinometerView extends StatelessWidget {
       child: ListView(
         children: [
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -144,7 +142,7 @@ class InklinometerView extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: 600.r,
+                height: 600,
                 child: TabBarView(
                   controller: controller.tabController,
                   children: [
@@ -153,8 +151,8 @@ class InklinometerView extends StatelessWidget {
                         mainColor: Colors.grey[300]!,
                         secondaryColor: Colors.grey[100]!,
                         child: Container(
-                          margin: EdgeInsets.all(10.r),
-                          height: 300.r,
+                          margin: EdgeInsets.all(10),
+                          height: 300,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
                             color: GFColors.WHITE,
@@ -167,8 +165,8 @@ class InklinometerView extends StatelessWidget {
                         mainColor: Colors.grey[300]!,
                         secondaryColor: Colors.grey[100]!,
                         child: Container(
-                          margin: EdgeInsets.all(10.r),
-                          height: 300.r,
+                          margin: EdgeInsets.all(10),
+                          height: 300,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
                             color: GFColors.WHITE,
@@ -262,8 +260,8 @@ class InklinometerView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: EdgeInsets.all(10),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: GFColors.WHITE,
@@ -275,14 +273,14 @@ class InklinometerView extends StatelessWidget {
           if (snapshot.hasError) {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -298,13 +296,13 @@ class InklinometerView extends StatelessWidget {
                 builder: (controller) {
                   return SingleChildScrollView(
                     child: GFCard(
-                      margin: EdgeInsets.all(10.r),
+                      margin: EdgeInsets.all(10),
                       color: GFColors.WHITE,
                       padding: EdgeInsets.zero,
                       content: GetBuilder<InklinometerController>(
                         builder: (controller) {
                           return SizedBox(
-                            height: 300.r,
+                            height: 300,
                             child: SfCartesianChart(
                                 legend: const Legend(
                                     isVisible: true,
@@ -323,8 +321,8 @@ class InklinometerView extends StatelessWidget {
                                 ),
                                 title: ChartTitle(
                                   textStyle: TextStyle(
-                                      height: 2.r,
-                                      fontSize: 14.r,
+                                      height: 2,
+                                      fontSize: 14,
                                       fontWeight: FontWeight.bold),
                                   alignment: ChartAlignment.center,
                                   text: 'Monitoring Inklinometer',
@@ -354,7 +352,7 @@ class InklinometerView extends StatelessWidget {
                                         decoration: BoxDecoration(
                                           color: Colors.black.withOpacity(0.75),
                                           borderRadius:
-                                              BorderRadius.circular(6.r),
+                                              BorderRadius.circular(6),
                                         ),
                                         child: Container(
                                           decoration: const BoxDecoration(
@@ -362,7 +360,7 @@ class InklinometerView extends StatelessWidget {
                                                   top: BorderSide(
                                             color: Colors.blue,
                                           ))),
-                                          padding: EdgeInsets.all(8.r),
+                                          padding: EdgeInsets.all(8),
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -403,14 +401,14 @@ class InklinometerView extends StatelessWidget {
           } else {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -424,14 +422,14 @@ class InklinometerView extends StatelessWidget {
         }
         return SingleChildScrollView(
           child: GFCard(
-            margin: EdgeInsets.all(10.r),
+            margin: EdgeInsets.all(10),
             color: GFColors.WHITE,
             padding: EdgeInsets.zero,
             content: SizedBox(
-              height: 300.r,
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
@@ -490,8 +488,8 @@ class InklinometerView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: EdgeInsets.all(10),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: GFColors.WHITE,
@@ -503,14 +501,14 @@ class InklinometerView extends StatelessWidget {
           if (snapshot.hasError) {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -527,7 +525,7 @@ class InklinometerView extends StatelessWidget {
                 builder: (controller) {
                   return SingleChildScrollView(
                     child: GFCard(
-                      margin: EdgeInsets.all(10.r),
+                      margin: EdgeInsets.all(10),
                       color: GFColors.WHITE,
                       padding: EdgeInsets.zero,
                       content: Column(
@@ -535,24 +533,24 @@ class InklinometerView extends StatelessWidget {
                           SizedBox(
                             height: (AppConstants.dataRowHeight *
                                     controller.rowsPerPage) +
-                                50.r,
+                                50,
                             child: SfDataGridTheme(
                               data: const SfDataGridThemeData(
                                   headerColor: GFColors.LIGHT,
                                   gridLineColor: GFColors.LIGHT),
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10.r),
+                                borderRadius: BorderRadius.circular(10),
                                 child: SfDataGrid(
-                                  headerRowHeight: 50.r,
+                                  headerRowHeight: 50,
                                   rowHeight: AppConstants.dataRowHeight,
                                   source: ds,
                                   columnWidthMode: ColumnWidthMode.fill,
                                   columns: <GridColumn>[
                                     GridColumn(
-                                      minimumWidth: 140.r,
+                                      minimumWidth: 140,
                                       columnName: 'readingDate',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         child: const Text(
                                           'Tanggal',
@@ -563,10 +561,10 @@ class InklinometerView extends StatelessWidget {
                                       ),
                                     ),
                                     GridColumn(
-                                      minimumWidth: 80.r,
+                                      minimumWidth: 80,
                                       columnName: 'depth',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         child: const Text(
                                           'Depth',
@@ -577,10 +575,10 @@ class InklinometerView extends StatelessWidget {
                                       ),
                                     ),
                                     GridColumn(
-                                      minimumWidth: 80.r,
+                                      minimumWidth: 80,
                                       columnName: 'faceAPlus',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         child: const Text(
                                           'Face A+',
@@ -591,10 +589,10 @@ class InklinometerView extends StatelessWidget {
                                       ),
                                     ),
                                     GridColumn(
-                                      minimumWidth: 80.r,
+                                      minimumWidth: 80,
                                       columnName: 'faceAMinus',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         child: const Text(
                                           'Face A-',
@@ -605,10 +603,10 @@ class InklinometerView extends StatelessWidget {
                                       ),
                                     ),
                                     GridColumn(
-                                      minimumWidth: 80.r,
+                                      minimumWidth: 80,
                                       columnName: 'faceBPlus',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         child: const Text(
                                           'Face B+',
@@ -619,10 +617,10 @@ class InklinometerView extends StatelessWidget {
                                       ),
                                     ),
                                     GridColumn(
-                                      minimumWidth: 80.r,
+                                      minimumWidth: 80,
                                       columnName: 'faceBMinus',
                                       label: Container(
-                                        padding: EdgeInsets.all(10.r),
+                                        padding: EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         child: const Text(
                                           'Face B-',
@@ -638,7 +636,7 @@ class InklinometerView extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            height: 10.r,
+                            height: 10,
                           ),
                           SfDataPager(
                             delegate: ds,
@@ -656,14 +654,14 @@ class InklinometerView extends StatelessWidget {
           } else {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -677,14 +675,14 @@ class InklinometerView extends StatelessWidget {
         }
         return SingleChildScrollView(
           child: GFCard(
-            margin: EdgeInsets.all(10.r),
+            margin: EdgeInsets.all(10),
             color: GFColors.WHITE,
             padding: EdgeInsets.zero,
             content: SizedBox(
-              height: 300.r,
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(

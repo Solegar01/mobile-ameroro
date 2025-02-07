@@ -1,7 +1,5 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
@@ -31,7 +29,7 @@ class IntakeView extends StatelessWidget {
                 title: Text(
                   'BSH-INTAKE',
                   style: TextStyle(
-                    fontSize: 20.r,
+                    fontSize: 20,
                   ),
                 ),
                 actions: [
@@ -50,7 +48,7 @@ class IntakeView extends StatelessWidget {
                 onLoading: _loader(context, controller),
                 onEmpty: const Text('Empty Data'),
                 onError: (error) => Padding(
-                  padding: EdgeInsets.all(8.r),
+                  padding: EdgeInsets.all(8),
                   child: Center(child: Text(error!)),
                 ),
               ),
@@ -66,13 +64,13 @@ class IntakeView extends StatelessWidget {
           mainColor: Colors.grey[300]!,
           secondaryColor: Colors.grey[100]!,
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
-            margin: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             width: double.infinity,
             decoration: BoxDecoration(
               color: GFColors.WHITE,
-              borderRadius: BorderRadius.circular(10.r),
-              border: Border.all(color: AppConfig.primaryColor, width: 1.r),
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: AppConfig.primaryColor, width: 1),
             ),
             child: Column(
               children: [
@@ -83,7 +81,7 @@ class IntakeView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text('', style: TextStyle(fontSize: 12.r)),
+                        Text('', style: TextStyle(fontSize: 12)),
                         Text(
                           '',
                           style: TextStyle(fontSize: AppConfig.fontSize),
@@ -97,7 +95,7 @@ class IntakeView extends StatelessWidget {
                       ],
                     ),
                     Padding(
-                      padding: EdgeInsets.all(8.r),
+                      padding: EdgeInsets.all(8),
                     )
                   ],
                 ),
@@ -106,7 +104,7 @@ class IntakeView extends StatelessWidget {
           ),
         ),
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -122,7 +120,7 @@ class IntakeView extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 15.r),
+              SizedBox(height: 15),
               GFShimmer(
                 mainColor: Colors.grey[300]!,
                 secondaryColor: Colors.grey[100]!,
@@ -135,7 +133,7 @@ class IntakeView extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 15.r),
+              SizedBox(height: 15),
               GFShimmer(
                 mainColor: Colors.grey[300]!,
                 secondaryColor: Colors.grey[100]!,
@@ -171,7 +169,7 @@ class IntakeView extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: 550.r,
+              height: 550,
               child: TabBarView(
                 controller: controller.tabController,
                 children: [
@@ -180,8 +178,8 @@ class IntakeView extends StatelessWidget {
                       mainColor: Colors.grey[300]!,
                       secondaryColor: Colors.grey[100]!,
                       child: Container(
-                        margin: EdgeInsets.all(10.r),
-                        height: 300.r,
+                        margin: EdgeInsets.all(10),
+                        height: 300,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
                           color: GFColors.WHITE,
@@ -194,8 +192,8 @@ class IntakeView extends StatelessWidget {
                       mainColor: Colors.grey[300]!,
                       secondaryColor: Colors.grey[100]!,
                       child: Container(
-                        margin: EdgeInsets.all(10.r),
-                        height: 300.r,
+                        margin: EdgeInsets.all(10),
+                        height: 300,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
                           color: GFColors.WHITE,
@@ -230,13 +228,13 @@ class IntakeView extends StatelessWidget {
 
   Widget _lastDataCard(BuildContext context, IntakeController controller) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
-      margin: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       width: double.infinity,
       decoration: BoxDecoration(
         color: GFColors.WHITE,
-        borderRadius: BorderRadius.circular(10.r),
-        border: Border.all(color: AppConfig.primaryColor, width: 1.r),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: AppConfig.primaryColor, width: 1),
       ),
       child: Column(
         children: [
@@ -247,7 +245,7 @@ class IntakeView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text('DATA TERAKHIR', style: TextStyle(fontSize: 12.r)),
+                  Text('DATA TERAKHIR', style: TextStyle(fontSize: 12)),
                   Text(
                     '${controller.station.value.lastReading == null ? '-' : DateFormatter.formatFullDateTimeToLocal(controller.station.value.lastReading!)} WIB',
                     style: TextStyle(fontSize: AppConfig.fontSize),
@@ -261,7 +259,7 @@ class IntakeView extends StatelessWidget {
                 ],
               ),
               Padding(
-                padding: EdgeInsets.all(8.r),
+                padding: EdgeInsets.all(8),
                 child: _statusContainer(controller),
               )
             ],
@@ -293,7 +291,7 @@ class IntakeView extends StatelessWidget {
         color: statusLevel != null
             ? statusLevel.color.withOpacity(0.65)
             : AppConfig.bgLogin.withOpacity(0.65),
-        borderRadius: BorderRadius.all(Radius.circular(5.r)),
+        borderRadius: BorderRadius.all(Radius.circular(5)),
       ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -314,7 +312,7 @@ class IntakeView extends StatelessWidget {
   Widget _periodAndDropdowns(
       BuildContext context, IntakeController controller) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -326,7 +324,7 @@ class IntakeView extends StatelessWidget {
                 value == null || value.isEmpty ? 'Pilih periode' : null,
             decoration: InputDecoration(
               border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5.r),
+                  borderRadius: BorderRadius.circular(5),
                   borderSide: const BorderSide(color: GFColors.DARK)),
               labelText: 'Periode',
               suffixIcon: IconButton(
@@ -339,7 +337,7 @@ class IntakeView extends StatelessWidget {
             controller: controller.dateRangeController,
             readOnly: true,
           ),
-          SizedBox(height: 15.r),
+          SizedBox(height: 15),
           _dropdowns(controller),
         ],
       ),
@@ -389,7 +387,7 @@ class IntakeView extends StatelessWidget {
             constraints: BoxConstraints(),
           ),
         ),
-        SizedBox(height: 15.r),
+        SizedBox(height: 15),
         DropdownSearch<String>(
           selectedItem: controller.selectedHollowPerc.value,
           items: (filter, infiniteScrollProps) =>
@@ -436,7 +434,7 @@ class IntakeView extends StatelessWidget {
           ],
         ),
         SizedBox(
-          height: 550.r,
+          height: 550,
           child: TabBarView(
             controller: controller.tabController,
             children: [
@@ -452,11 +450,11 @@ class IntakeView extends StatelessWidget {
   Widget detailPos(BuildContext context, Station station) {
     return Dialog(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10.r)), // Tanpa radius
+        borderRadius: BorderRadius.all(Radius.circular(10)), // Tanpa radius
       ),
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(10.r)),
+          borderRadius: BorderRadius.all(Radius.circular(10)),
           color: GFColors.WHITE,
         ),
         width: MediaQuery.of(context).size.width,
@@ -468,12 +466,12 @@ class IntakeView extends StatelessWidget {
             Container(
               margin: EdgeInsets.zero,
               width: double.infinity,
-              height: 50.r,
+              height: 50,
               decoration: BoxDecoration(
                 color: GFColors.INFO.withOpacity(0.75),
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10.r),
-                  topRight: Radius.circular(10.r),
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
                 ),
               ),
               child: Center(
@@ -489,9 +487,9 @@ class IntakeView extends StatelessWidget {
             ),
             SizedBox(
               width: double.infinity,
-              height: 120.r,
+              height: 120,
               child: Padding(
-                padding: EdgeInsets.all(10.r),
+                padding: EdgeInsets.all(10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -520,12 +518,12 @@ class IntakeView extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 20.r,
+              height: 20,
             ),
             Container(
               margin: EdgeInsets.zero,
               width: double.infinity,
-              height: 50.r,
+              height: 50,
               decoration: const BoxDecoration(
                   color: GFColors.LIGHT, borderRadius: BorderRadius.zero),
               child: Center(
@@ -540,9 +538,9 @@ class IntakeView extends StatelessWidget {
             ),
             SizedBox(
               width: double.infinity,
-              height: 120.r,
+              height: 120,
               child: Padding(
-                padding: EdgeInsets.all(10.r),
+                padding: EdgeInsets.all(10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -553,12 +551,12 @@ class IntakeView extends StatelessWidget {
                         Row(
                           children: [
                             Container(
-                              width: 18.r,
-                              height: 18.r,
+                              width: 18,
+                              height: 18,
                               color: StatusLevel.siaga1.color,
                             ),
                             SizedBox(
-                              width: 5.r,
+                              width: 5,
                             ),
                             const Text('AWAS BANJIR'),
                           ],
@@ -566,12 +564,12 @@ class IntakeView extends StatelessWidget {
                         Row(
                           children: [
                             Container(
-                              width: 18.r,
-                              height: 18.r,
+                              width: 18,
+                              height: 18,
                               color: StatusLevel.siaga2.color,
                             ),
                             SizedBox(
-                              width: 5.r,
+                              width: 5,
                             ),
                             const Text('SIAGA BANJIR'),
                           ],
@@ -579,12 +577,12 @@ class IntakeView extends StatelessWidget {
                         Row(
                           children: [
                             Container(
-                              width: 18.r,
-                              height: 18.r,
+                              width: 18,
+                              height: 18,
                               color: StatusLevel.siaga3.color,
                             ),
                             SizedBox(
-                              width: 5.r,
+                              width: 5,
                             ),
                             const Text('WASPADA BANJIR'),
                           ],
@@ -592,12 +590,12 @@ class IntakeView extends StatelessWidget {
                         Row(
                           children: [
                             Container(
-                              width: 18.r,
-                              height: 18.r,
+                              width: 18,
+                              height: 18,
                               color: StatusLevel.normal.color,
                             ),
                             SizedBox(
-                              width: 5.r,
+                              width: 5,
                             ),
                             const Text('NORMAL'),
                           ],
@@ -605,12 +603,12 @@ class IntakeView extends StatelessWidget {
                         Row(
                           children: [
                             Container(
-                              width: 18.r,
-                              height: 18.r,
+                              width: 18,
+                              height: 18,
                               color: StatusLevel.siagakekeringan.color,
                             ),
                             SizedBox(
-                              width: 5.r,
+                              width: 5,
                             ),
                             const Text('SIAGA KEKERINGAN'),
                           ],
@@ -640,7 +638,7 @@ class IntakeView extends StatelessWidget {
             Container(
               margin: EdgeInsets.zero,
               width: double.infinity,
-              height: 50.r,
+              height: 50,
               decoration: const BoxDecoration(
                   color: GFColors.LIGHT, borderRadius: BorderRadius.zero),
               child: Center(
@@ -655,9 +653,9 @@ class IntakeView extends StatelessWidget {
             ),
             SizedBox(
               width: double.infinity,
-              height: 50.r,
+              height: 50,
               child: Padding(
-                padding: EdgeInsets.all(10.r),
+                padding: EdgeInsets.all(10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -692,8 +690,8 @@ class IntakeView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: EdgeInsets.all(10),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: GFColors.WHITE,
@@ -705,14 +703,14 @@ class IntakeView extends StatelessWidget {
           if (snapshot.hasError) {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -732,11 +730,11 @@ class IntakeView extends StatelessWidget {
                 builder: (controller) {
                   return SingleChildScrollView(
                     child: GFCard(
-                      margin: EdgeInsets.all(10.r),
+                      margin: EdgeInsets.all(10),
                       color: GFColors.WHITE,
                       padding: EdgeInsets.zero,
                       content: SizedBox(
-                        height: 300.r,
+                        height: 300,
                         child: SfCartesianChart(
                             primaryXAxis: DateTimeAxis(
                               dateFormat: DateFormat.MMMd('id_ID'),
@@ -752,8 +750,8 @@ class IntakeView extends StatelessWidget {
                             ),
                             title: ChartTitle(
                               textStyle: TextStyle(
-                                  height: 2.r,
-                                  fontSize: 14.r,
+                                  height: 2,
+                                  fontSize: 14,
                                   fontWeight: FontWeight.bold),
                               alignment: ChartAlignment.center,
                               text: 'Grafik Tinggi Muka Air BSH-INTAKE',
@@ -772,17 +770,17 @@ class IntakeView extends StatelessWidget {
                                     .format(date);
                                 return SingleChildScrollView(
                                   child: Container(
-                                    width: 180.r,
+                                    width: 180,
                                     decoration: BoxDecoration(
                                       color: Colors.black.withOpacity(0.75),
-                                      borderRadius: BorderRadius.circular(6.r),
+                                      borderRadius: BorderRadius.circular(6),
                                     ),
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
                                         Padding(
-                                          padding: EdgeInsets.all(8.r),
+                                          padding: EdgeInsets.all(8),
                                           child: Text(
                                             formattedDate,
                                             style: const TextStyle(
@@ -796,14 +794,14 @@ class IntakeView extends StatelessWidget {
                                                   top: BorderSide(
                                             color: cColor,
                                           ))),
-                                          padding: EdgeInsets.all(8.r),
+                                          padding: EdgeInsets.all(8),
                                           child: Row(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.center,
                                             children: [
                                               Container(
-                                                width: 10.r,
-                                                height: 10.r,
+                                                width: 10,
+                                                height: 10,
                                                 decoration: BoxDecoration(
                                                   color: cColor, // Fill color
                                                   shape: BoxShape
@@ -811,7 +809,7 @@ class IntakeView extends StatelessWidget {
                                                 ),
                                               ),
                                               SizedBox(
-                                                width: 5.r,
+                                                width: 5,
                                               ),
                                               Text(
                                                 '${series.name.toString()} : ${AppConstants().numFormat.format(point?.y)} (mdpl)',
@@ -853,7 +851,7 @@ class IntakeView extends StatelessWidget {
                                   child: Container(
                                     decoration: BoxDecoration(
                                       color: Colors.black.withOpacity(0.75),
-                                      borderRadius: BorderRadius.circular(6.r),
+                                      borderRadius: BorderRadius.circular(6),
                                     ),
                                     child: Column(
                                       children: [
@@ -863,7 +861,7 @@ class IntakeView extends StatelessWidget {
                                                   bottom: BorderSide(
                                             color: Colors.blue,
                                           ))),
-                                          padding: EdgeInsets.all(8.r),
+                                          padding: EdgeInsets.all(8),
                                           child: Text(
                                             formattedDate,
                                             style: const TextStyle(
@@ -872,7 +870,7 @@ class IntakeView extends StatelessWidget {
                                           ),
                                         ),
                                         Container(
-                                          padding: EdgeInsets.all(8.r),
+                                          padding: EdgeInsets.all(8),
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -914,7 +912,7 @@ class IntakeView extends StatelessWidget {
                                     data.waterLevel,
                                 name: 'TMA',
                                 borderColor: const Color(0xFF2CAFFE),
-                                borderWidth: 2.r,
+                                borderWidth: 2,
                                 color: const Color(0xFF2CAFFE),
                                 gradient: LinearGradient(
                                   colors: [
@@ -933,14 +931,14 @@ class IntakeView extends StatelessWidget {
           } else {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -954,14 +952,14 @@ class IntakeView extends StatelessWidget {
         }
         return SingleChildScrollView(
           child: GFCard(
-            margin: EdgeInsets.all(10.r),
+            margin: EdgeInsets.all(10),
             color: GFColors.WHITE,
             padding: EdgeInsets.zero,
             content: SizedBox(
-              height: 300.r,
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
@@ -985,8 +983,8 @@ class IntakeView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: EdgeInsets.all(10),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: GFColors.WHITE,
@@ -998,14 +996,14 @@ class IntakeView extends StatelessWidget {
           if (snapshot.hasError) {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -1022,7 +1020,7 @@ class IntakeView extends StatelessWidget {
                 builder: (controller) {
                   return SingleChildScrollView(
                     child: GFCard(
-                      margin: EdgeInsets.all(10.r),
+                      margin: EdgeInsets.all(10),
                       color: GFColors.WHITE,
                       padding: EdgeInsets.zero,
                       content: Column(
@@ -1030,44 +1028,44 @@ class IntakeView extends StatelessWidget {
                           SizedBox(
                             height: (controller.rowsPerPage *
                                     AppConstants.dataRowHeight) +
-                                60.r,
+                                60,
                             child: SfDataGridTheme(
                               data: const SfDataGridThemeData(
                                   headerColor: GFColors.LIGHT,
                                   gridLineColor: GFColors.LIGHT),
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10.r),
+                                borderRadius: BorderRadius.circular(10),
                                 child: SfDataGrid(
-                                  headerRowHeight: 60.r,
+                                  headerRowHeight: 60,
                                   rowHeight: AppConstants.dataRowHeight,
                                   source: ds,
                                   columnWidthMode: ColumnWidthMode.fill,
                                   columns: <GridColumn>[
                                     GridColumn(
-                                        minimumWidth: 140.r,
+                                        minimumWidth: 140,
                                         columnName: 'readingAt',
                                         label: Container(
-                                            padding: EdgeInsets.all(10.r),
+                                            padding: EdgeInsets.all(10),
                                             alignment: Alignment.center,
                                             child: const Text('Tanggal',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)))),
                                     GridColumn(
-                                        minimumWidth: 80.r,
+                                        minimumWidth: 80,
                                         columnName: 'hourMinuteFormat',
                                         label: Container(
-                                            padding: EdgeInsets.all(10.r),
+                                            padding: EdgeInsets.all(10),
                                             alignment: Alignment.center,
                                             child: const Text('Jam',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black)))),
                                     GridColumn(
-                                        minimumWidth: 80.r,
+                                        minimumWidth: 80,
                                         columnName: 'waterLevel',
                                         label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           child: RichText(
                                             textAlign: TextAlign.center,
@@ -1090,10 +1088,10 @@ class IntakeView extends StatelessWidget {
                                           ),
                                         )),
                                     GridColumn(
-                                        minimumWidth: 140.r,
+                                        minimumWidth: 140,
                                         columnName: 'storageVolume',
                                         label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           child: RichText(
                                             textAlign: TextAlign.center,
@@ -1132,10 +1130,10 @@ class IntakeView extends StatelessWidget {
                                           ),
                                         )),
                                     GridColumn(
-                                        minimumWidth: 140.r,
+                                        minimumWidth: 140,
                                         columnName: 'floodArea',
                                         label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           child: RichText(
                                             textAlign: TextAlign.center,
@@ -1158,10 +1156,10 @@ class IntakeView extends StatelessWidget {
                                           ),
                                         )),
                                     GridColumn(
-                                        minimumWidth: 80.r,
+                                        minimumWidth: 80,
                                         columnName: 'debit',
                                         label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           child: RichText(
                                             textAlign: TextAlign.center,
@@ -1200,10 +1198,10 @@ class IntakeView extends StatelessWidget {
                                           ),
                                         )),
                                     GridColumn(
-                                        minimumWidth: 140.r,
+                                        minimumWidth: 140,
                                         columnName: 'hollJetVal',
                                         label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           child: RichText(
                                             textAlign: TextAlign.center,
@@ -1226,10 +1224,10 @@ class IntakeView extends StatelessWidget {
                                           ),
                                         )),
                                     GridColumn(
-                                        minimumWidth: 140.r,
+                                        minimumWidth: 140,
                                         columnName: 'hollJetPercVal',
                                         label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           child: RichText(
                                             textAlign: TextAlign.center,
@@ -1253,10 +1251,10 @@ class IntakeView extends StatelessWidget {
                                           ),
                                         )),
                                     GridColumn(
-                                        minimumWidth: 100.r,
+                                        minimumWidth: 100,
                                         columnName: 'overflow',
                                         label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           child: RichText(
                                             textAlign: TextAlign.center,
@@ -1295,10 +1293,10 @@ class IntakeView extends StatelessWidget {
                                           ),
                                         )),
                                     GridColumn(
-                                        minimumWidth: 150.r,
+                                        minimumWidth: 150,
                                         columnName: 'totalRunoffPlusHollowJet',
                                         label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           child: RichText(
                                             textAlign: TextAlign.center,
@@ -1338,10 +1336,10 @@ class IntakeView extends StatelessWidget {
                                           ),
                                         )),
                                     GridColumn(
-                                        minimumWidth: 100.r,
+                                        minimumWidth: 100,
                                         columnName: 'battery',
                                         label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           child: RichText(
                                             textAlign: TextAlign.center,
@@ -1370,7 +1368,7 @@ class IntakeView extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            height: 10.r,
+                            height: 10,
                           ),
                           SfDataPager(
                             delegate: ds,
@@ -1388,14 +1386,14 @@ class IntakeView extends StatelessWidget {
           } else {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -1409,14 +1407,14 @@ class IntakeView extends StatelessWidget {
         }
         return SingleChildScrollView(
           child: GFCard(
-            margin: EdgeInsets.all(10.r),
+            margin: EdgeInsets.all(10),
             color: GFColors.WHITE,
             padding: EdgeInsets.zero,
             content: SizedBox(
-              height: 300.r,
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
@@ -23,10 +22,10 @@ class VNotchView extends StatelessWidget {
             appBar: AppBar(
               foregroundColor: GFColors.WHITE,
               title: GetBuilder<VNotchController>(
-                builder: (controller) => Text(
+                builder: (controller) => const Text(
                   'V-NOTCH',
                   style: TextStyle(
-                    fontSize: 20.r,
+                    fontSize: 20,
                   ),
                 ),
               ),
@@ -54,7 +53,7 @@ class VNotchView extends StatelessWidget {
       child: ListView(
         children: [
           Padding(
-            padding: EdgeInsets.all(10.r),
+            padding: const EdgeInsets.all(10),
             child: TextFormField(
               onTap: () async {
                 await _selectDate(context, controller);
@@ -67,7 +66,7 @@ class VNotchView extends StatelessWidget {
               },
               decoration: InputDecoration(
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5.r), // Rounded corners
+                  borderRadius: BorderRadius.circular(5), // Rounded corners
                   borderSide:
                       const BorderSide(color: GFColors.DARK), // Border color
                 ),
@@ -91,7 +90,7 @@ class VNotchView extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 620.r,
+            height: 620,
             child: _graphTableTab(context, controller),
           ),
         ],
@@ -104,7 +103,7 @@ class VNotchView extends StatelessWidget {
       child: ListView(
         children: [
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -143,7 +142,7 @@ class VNotchView extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: 550.r,
+                height: 550,
                 child: TabBarView(
                   controller: controller.tabController,
                   children: [
@@ -152,8 +151,8 @@ class VNotchView extends StatelessWidget {
                         mainColor: Colors.grey[300]!,
                         secondaryColor: Colors.grey[100]!,
                         child: Container(
-                          height: 355.r,
-                          margin: EdgeInsets.all(10.r),
+                          height: 355,
+                          margin: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
                             color: GFColors.WHITE,
@@ -166,8 +165,8 @@ class VNotchView extends StatelessWidget {
                         mainColor: Colors.grey[300]!,
                         secondaryColor: Colors.grey[100]!,
                         child: Container(
-                          height: 355.r,
-                          margin: EdgeInsets.all(10.r),
+                          height: 355,
+                          margin: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
                             color: GFColors.WHITE,
@@ -251,11 +250,11 @@ class VNotchView extends StatelessWidget {
       children: [
         TabBar(
           tabAlignment: TabAlignment.start,
-          padding: EdgeInsets.only(top: 10.r),
+          padding: const EdgeInsets.only(top: 10),
           indicatorColor: Colors.transparent,
           isScrollable: true,
           controller: controller.sensorTabController,
-          dividerHeight: 0.r,
+          dividerHeight: 0,
           onTap: (index) {
             controller.selectedSensorIndex.value = index;
           },
@@ -264,14 +263,14 @@ class VNotchView extends StatelessWidget {
               Tab(
                 child: Obx(
                   () => Container(
-                    padding: EdgeInsets.all(8.r),
+                    padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: controller.selectedSensorIndex.value == i
                             ? AppConfig.primaryColor
                             : GFColors.LIGHT,
                       ),
-                      borderRadius: BorderRadius.circular(20.r),
+                      borderRadius: BorderRadius.circular(20),
                     ),
                     child: Text(
                       sensors[i],
@@ -322,8 +321,8 @@ class VNotchView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: const EdgeInsets.all(10),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: GFColors.WHITE,
@@ -335,14 +334,14 @@ class VNotchView extends StatelessWidget {
           if (snapshot.hasError) {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: const EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -362,11 +361,11 @@ class VNotchView extends StatelessWidget {
                 builder: (controller) {
                   return SingleChildScrollView(
                     child: GFCard(
-                      margin: EdgeInsets.all(10.r),
+                      margin: const EdgeInsets.all(10),
                       color: GFColors.WHITE,
                       padding: EdgeInsets.zero,
                       content: SizedBox(
-                        height: 300.r,
+                        height: 300,
                         child: SfCartesianChart(
                           primaryXAxis: DateTimeAxis(
                             dateFormat: DateFormat.MMMd('id_ID'),
@@ -380,10 +379,10 @@ class VNotchView extends StatelessWidget {
                             labelFormat: '{value}',
                             title: AxisTitle(text: 'Baterai (Volt)'),
                           ),
-                          title: ChartTitle(
+                          title: const ChartTitle(
                             textStyle: TextStyle(
-                                height: 2.r,
-                                fontSize: 14.r,
+                                height: 2,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold),
                             alignment: ChartAlignment.center,
                             text: 'Grafik Baterai',
@@ -417,7 +416,7 @@ class VNotchView extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: const EdgeInsets.all(8),
                                         child: Text(
                                           formattedDate,
                                           style: const TextStyle(
@@ -431,7 +430,7 @@ class VNotchView extends StatelessWidget {
                                                 top: BorderSide(
                                           color: Colors.blue,
                                         ))),
-                                        padding: EdgeInsets.all(8.r),
+                                        padding: const EdgeInsets.all(8),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -482,14 +481,14 @@ class VNotchView extends StatelessWidget {
           } else {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: const EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -503,14 +502,14 @@ class VNotchView extends StatelessWidget {
         }
         return SingleChildScrollView(
           child: GFCard(
-            margin: EdgeInsets.all(10.r),
+            margin: const EdgeInsets.all(10),
             color: GFColors.WHITE,
             padding: EdgeInsets.zero,
             content: SizedBox(
-              height: 300.r,
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
@@ -534,8 +533,8 @@ class VNotchView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: const EdgeInsets.all(10),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: GFColors.WHITE,
@@ -547,14 +546,14 @@ class VNotchView extends StatelessWidget {
           if (snapshot.hasError) {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: const EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -574,11 +573,11 @@ class VNotchView extends StatelessWidget {
                 builder: (controller) {
                   return SingleChildScrollView(
                     child: GFCard(
-                      margin: EdgeInsets.all(10.r),
+                      margin: const EdgeInsets.all(10),
                       color: GFColors.WHITE,
                       padding: EdgeInsets.zero,
                       content: SizedBox(
-                        height: 300.r,
+                        height: 300,
                         child: SfCartesianChart(
                             primaryXAxis: DateTimeAxis(
                               dateFormat: DateFormat.MMMd('id_ID'),
@@ -592,10 +591,10 @@ class VNotchView extends StatelessWidget {
                               labelFormat: '{value}',
                               title: AxisTitle(text: 'TMA (cm)'),
                             ),
-                            title: ChartTitle(
+                            title: const ChartTitle(
                               textStyle: TextStyle(
-                                  height: 2.r,
-                                  fontSize: 14.r,
+                                  height: 2,
+                                  fontSize: 14,
                                   fontWeight: FontWeight.bold),
                               alignment: ChartAlignment.center,
                               text: 'Grafik Tinggi Muka Air BSH-V-NOTCH',
@@ -627,12 +626,12 @@ class VNotchView extends StatelessWidget {
                                   child: Container(
                                     decoration: BoxDecoration(
                                       color: Colors.black.withOpacity(0.75),
-                                      borderRadius: BorderRadius.circular(6.r),
+                                      borderRadius: BorderRadius.circular(6),
                                     ),
                                     child: Column(
                                       children: [
                                         Padding(
-                                          padding: EdgeInsets.all(8.r),
+                                          padding: const EdgeInsets.all(8),
                                           child: Text(
                                             formattedDate,
                                             style: const TextStyle(
@@ -646,7 +645,7 @@ class VNotchView extends StatelessWidget {
                                                   top: BorderSide(
                                             color: Colors.blue,
                                           ))),
-                                          padding: EdgeInsets.all(8.r),
+                                          padding: const EdgeInsets.all(8),
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -688,7 +687,7 @@ class VNotchView extends StatelessWidget {
                                     data.waterLevel,
                                 name: 'TMA',
                                 borderColor: const Color(0xFF2CAFFE),
-                                borderWidth: 2.r,
+                                borderWidth: 2,
                                 color: const Color(0xFF2CAFFE),
                                 gradient: LinearGradient(
                                   colors: [
@@ -707,14 +706,14 @@ class VNotchView extends StatelessWidget {
           } else {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: const EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -728,14 +727,14 @@ class VNotchView extends StatelessWidget {
         }
         return SingleChildScrollView(
           child: GFCard(
-            margin: EdgeInsets.all(10.r),
+            margin: const EdgeInsets.all(10),
             color: GFColors.WHITE,
             padding: EdgeInsets.zero,
             content: SizedBox(
-              height: 300.r,
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
@@ -759,8 +758,8 @@ class VNotchView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: const EdgeInsets.all(10),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: GFColors.WHITE,
@@ -772,14 +771,14 @@ class VNotchView extends StatelessWidget {
           if (snapshot.hasError) {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: const EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -799,11 +798,11 @@ class VNotchView extends StatelessWidget {
                 builder: (controller) {
                   return SingleChildScrollView(
                     child: GFCard(
-                      margin: EdgeInsets.all(10.r),
+                      margin: const EdgeInsets.all(10),
                       color: GFColors.WHITE,
                       padding: EdgeInsets.zero,
                       content: SizedBox(
-                        height: 300.r,
+                        height: 300,
                         child: SfCartesianChart(
                             primaryXAxis: DateTimeAxis(
                               dateFormat: DateFormat.MMMd('id_ID'),
@@ -817,10 +816,10 @@ class VNotchView extends StatelessWidget {
                               labelFormat: '{value}',
                               title: AxisTitle(text: 'TMA (lt/d)'),
                             ),
-                            title: ChartTitle(
+                            title: const ChartTitle(
                               textStyle: TextStyle(
-                                  height: 2.r,
-                                  fontSize: 14.r,
+                                  height: 2,
+                                  fontSize: 14,
                                   fontWeight: FontWeight.bold),
                               alignment: ChartAlignment.center,
                               text: 'Grafik Debit',
@@ -852,12 +851,12 @@ class VNotchView extends StatelessWidget {
                                   child: Container(
                                     decoration: BoxDecoration(
                                       color: Colors.black.withOpacity(0.75),
-                                      borderRadius: BorderRadius.circular(6.r),
+                                      borderRadius: BorderRadius.circular(6),
                                     ),
                                     child: Column(
                                       children: [
                                         Padding(
-                                          padding: EdgeInsets.all(8.r),
+                                          padding: const EdgeInsets.all(8),
                                           child: Text(
                                             formattedDate,
                                             style: const TextStyle(
@@ -871,7 +870,7 @@ class VNotchView extends StatelessWidget {
                                                   top: BorderSide(
                                             color: Colors.blue,
                                           ))),
-                                          padding: EdgeInsets.all(8.r),
+                                          padding: const EdgeInsets.all(8),
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -913,7 +912,7 @@ class VNotchView extends StatelessWidget {
                                     data.debit,
                                 name: 'TMA',
                                 borderColor: const Color(0xFF2CAFFE),
-                                borderWidth: 2.r,
+                                borderWidth: 2,
                                 color: const Color(0xFF2CAFFE),
                                 gradient: LinearGradient(
                                   colors: [
@@ -932,14 +931,14 @@ class VNotchView extends StatelessWidget {
           } else {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: const EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -953,14 +952,14 @@ class VNotchView extends StatelessWidget {
         }
         return SingleChildScrollView(
           child: GFCard(
-            margin: EdgeInsets.all(10.r),
+            margin: const EdgeInsets.all(10),
             color: GFColors.WHITE,
             padding: EdgeInsets.zero,
             content: SizedBox(
-              height: 300.r,
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
@@ -984,8 +983,8 @@ class VNotchView extends StatelessWidget {
               mainColor: Colors.grey[300]!,
               secondaryColor: Colors.grey[100]!,
               child: Container(
-                margin: EdgeInsets.all(10.r),
-                height: 300.r,
+                margin: const EdgeInsets.all(10),
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: GFColors.WHITE,
@@ -997,14 +996,14 @@ class VNotchView extends StatelessWidget {
           if (snapshot.hasError) {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: const EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: Center(
@@ -1021,7 +1020,7 @@ class VNotchView extends StatelessWidget {
               builder: (controller) {
                 return SingleChildScrollView(
                   child: GFCard(
-                    margin: EdgeInsets.all(10.r),
+                    margin: const EdgeInsets.all(10),
                     color: GFColors.WHITE,
                     padding: EdgeInsets.zero,
                     content: Column(
@@ -1029,44 +1028,44 @@ class VNotchView extends StatelessWidget {
                         SizedBox(
                           height: (AppConstants.dataRowHeight *
                                   controller.rowsPerPage) +
-                              50.r,
+                              50,
                           child: SfDataGridTheme(
                             data: const SfDataGridThemeData(
                                 headerColor: GFColors.LIGHT,
                                 gridLineColor: GFColors.LIGHT),
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10.r),
+                              borderRadius: BorderRadius.circular(10),
                               child: SfDataGrid(
-                                headerRowHeight: 50.r,
+                                headerRowHeight: 50,
                                 rowHeight: AppConstants.dataRowHeight,
                                 source: ds,
                                 columnWidthMode: ColumnWidthMode.fill,
                                 columns: <GridColumn>[
                                   GridColumn(
-                                      minimumWidth: 140.r,
+                                      minimumWidth: 140,
                                       columnName: 'readingAt',
                                       label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: const EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           child: const Text('Waktu',
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black)))),
                                   GridColumn(
-                                      minimumWidth: 80.r,
+                                      minimumWidth: 80,
                                       columnName: 'hourMinuteFormat',
                                       label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: const EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           child: const Text('Jam',
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black)))),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'waterLevel',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       child: RichText(
                                         textAlign: TextAlign.center,
@@ -1088,10 +1087,10 @@ class VNotchView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                    minimumWidth: 100.r,
+                                    minimumWidth: 100,
                                     columnName: 'debit',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       child: RichText(
                                         textAlign: TextAlign.center,
@@ -1113,10 +1112,10 @@ class VNotchView extends StatelessWidget {
                                     ),
                                   ),
                                   GridColumn(
-                                      minimumWidth: 140.r,
+                                      minimumWidth: 140,
                                       columnName: 'changeValue',
                                       label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: const EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           child: const Text('Perubahan',
                                               overflow: TextOverflow.ellipsis,
@@ -1124,10 +1123,10 @@ class VNotchView extends StatelessWidget {
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black)))),
                                   GridColumn(
-                                      minimumWidth: 80.r,
+                                      minimumWidth: 80,
                                       columnName: 'warningStatus',
                                       label: Container(
-                                          padding: EdgeInsets.all(10.r),
+                                          padding: const EdgeInsets.all(10),
                                           alignment: Alignment.center,
                                           child: const Text('Status',
                                               overflow: TextOverflow.ellipsis,
@@ -1135,10 +1134,10 @@ class VNotchView extends StatelessWidget {
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black)))),
                                   GridColumn(
-                                    minimumWidth: 80.r,
+                                    minimumWidth: 80,
                                     columnName: 'battery',
                                     label: Container(
-                                      padding: EdgeInsets.all(10.r),
+                                      padding: const EdgeInsets.all(10),
                                       alignment: Alignment.center,
                                       child: RichText(
                                         textAlign: TextAlign.center,
@@ -1164,8 +1163,8 @@ class VNotchView extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: 10.r,
+                        const SizedBox(
+                          height: 10,
                         ),
                         SfDataPager(
                           delegate: ds,
@@ -1184,14 +1183,14 @@ class VNotchView extends StatelessWidget {
           } else {
             return SingleChildScrollView(
               child: GFCard(
-                margin: EdgeInsets.all(10.r),
+                margin: const EdgeInsets.all(10),
                 color: GFColors.WHITE,
                 padding: EdgeInsets.zero,
                 content: SizedBox(
-                  height: 300.r,
+                  height: 300,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(10),
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
@@ -1205,14 +1204,14 @@ class VNotchView extends StatelessWidget {
         }
         return SingleChildScrollView(
           child: GFCard(
-            margin: EdgeInsets.all(10.r),
+            margin: const EdgeInsets.all(10),
             color: GFColors.WHITE,
             padding: EdgeInsets.zero,
             content: SizedBox(
-              height: 300.r,
+              height: 300,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10),
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
