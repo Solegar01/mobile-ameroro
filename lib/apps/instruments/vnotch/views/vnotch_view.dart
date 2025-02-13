@@ -34,10 +34,11 @@ class VNotchView extends StatelessWidget {
             body: controller.obx(
               (state) => _detail(context, controller),
               onLoading: _loader(context, controller),
-              onEmpty: const Text('Empty Data'),
+              onEmpty: const Text('Tidak ada data yang tersedia'),
               onError: (error) => Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Center(child: Text(error!)),
+                child: Center(
+                    child: Text(error ?? 'Terjadi kesalahan saat memuat data')),
               ),
             ),
           ),
@@ -492,7 +493,7 @@ class VNotchView extends StatelessWidget {
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
-                      child: Text('No data available'),
+                      child: Text('Tidak ada data yang tersedia'),
                     ),
                   ),
                 ),
@@ -513,7 +514,7 @@ class VNotchView extends StatelessWidget {
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
-                  child: Text('No data available'),
+                  child: Text('Tidak ada data yang tersedia'),
                 ),
               ),
             ),
@@ -717,7 +718,7 @@ class VNotchView extends StatelessWidget {
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
-                      child: Text('No data available'),
+                      child: Text('Tidak ada data yang tersedia'),
                     ),
                   ),
                 ),
@@ -738,7 +739,7 @@ class VNotchView extends StatelessWidget {
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
-                  child: Text('No data available'),
+                  child: Text('Tidak ada data yang tersedia'),
                 ),
               ),
             ),
@@ -942,7 +943,7 @@ class VNotchView extends StatelessWidget {
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
-                      child: Text('No data available'),
+                      child: Text('Tidak ada data yang tersedia'),
                     ),
                   ),
                 ),
@@ -963,7 +964,7 @@ class VNotchView extends StatelessWidget {
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
-                  child: Text('No data available'),
+                  child: Text('Tidak ada data yang tersedia'),
                 ),
               ),
             ),
@@ -1194,7 +1195,7 @@ class VNotchView extends StatelessWidget {
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
-                      child: Text('No data available'),
+                      child: Text('Tidak ada data yang tersedia'),
                     ),
                   ),
                 ),
@@ -1215,7 +1216,7 @@ class VNotchView extends StatelessWidget {
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
-                  child: Text('No data available'),
+                  child: Text('Tidak ada data yang tersedia'),
                 ),
               ),
             ),

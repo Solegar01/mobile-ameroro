@@ -4,6 +4,7 @@ import 'package:getwidget/colors/gf_color.dart';
 import 'package:getwidget/components/loader/gf_loader.dart';
 import 'package:getwidget/types/gf_loader_type.dart';
 import 'package:mobile_ameroro_app/apps/cctv/controllers/cctv_controller.dart';
+import 'package:mobile_ameroro_app/apps/widgets/loader_animation.dart';
 
 class CctvView extends StatelessWidget {
   final CctvController controller = Get.find<CctvController>();
@@ -25,11 +26,9 @@ class CctvView extends StatelessWidget {
           body: controller.obx(
             (state) => _detail(context, controller),
             onLoading: const Center(
-              child: GFLoader(
-                type: GFLoaderType.circle,
-              ),
+              child: LoaderAnimation(),
             ),
-            onEmpty: const Text('Empty Data'),
+            onEmpty: const Text('Tidak ada data yang tersedia'),
             onError: (error) => Padding(
               padding: const EdgeInsets.all(8),
               child:
@@ -42,25 +41,28 @@ class CctvView extends StatelessWidget {
   }
 
   _detail(BuildContext context, CctvController controller) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: RefreshIndicator(
-        backgroundColor: GFColors.LIGHT,
-        onRefresh: () async {
-          await controller.fetchAllCctv();
-        },
-        child: LayoutBuilder(builder: (context, constraints) {
-          return (controller.cctvs.isEmpty)
-              ? const Center(
-                  child: Text("Tidak ada data CCTV tersedia"),
-                )
-              : ListView.separated(
-                  itemCount: controller.cctvs.length,
-                  itemBuilder: (context, index) {
-                    final cctv = controller.cctvs[index];
-                    final imageUrl = cctv.url;
+    return RefreshIndicator(
+      backgroundColor: GFColors.LIGHT,
+      onRefresh: () async {
+        await controller.fetchAllCctv();
+      },
+      child: LayoutBuilder(builder: (context, constraints) {
+        return (controller.cctvs.isEmpty)
+            ? const Center(
+                child: Text("Tidak ada data CCTV tersedia"),
+              )
+            : ListView.separated(
+                itemCount: controller.cctvs.length,
+                itemBuilder: (context, index) {
+                  final cctv = controller.cctvs[index];
+                  final imageUrl = cctv.url;
 
-                    return ListTile(
+                  return Container(
+                    color: GFColors.WHITE,
+                    margin: EdgeInsets.zero,
+                    padding: EdgeInsets.zero,
+                    child: ListTile(
+                      contentPadding: EdgeInsets.all(10),
                       onTap: () async {
                         await controller.toDetail(cctv);
                       },
@@ -78,9 +80,7 @@ class CctvView extends StatelessWidget {
                                 return child;
                               }
                               return const Center(
-                                child: GFLoader(
-                                  type: GFLoaderType.android,
-                                ),
+                                child: LoaderAnimation(),
                               );
                             },
                             errorBuilder: (context, error, stackTrace) {
@@ -100,15 +100,14 @@ class CctvView extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                       ),
                       trailing: const Icon(Icons.arrow_forward_ios),
-                    );
-                  },
-                  separatorBuilder: (context, index) => Divider(
-                    thickness: 1,
-                    color: Colors.grey.withOpacity(0.2),
-                  ),
-                );
-        }),
-      ),
+                    ),
+                  );
+                },
+                separatorBuilder: (context, index) => const SizedBox(
+                  height: 5,
+                ),
+              );
+      }),
     );
   }
 }

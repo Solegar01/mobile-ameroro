@@ -22,7 +22,7 @@ class KlimatologiManualRepository {
         if (response.statusCode == 200) {
           model = (WeatherModel.fromJson(jsonResponse));
         } else {
-          throw Exception("An error occured during call BMKG API service");
+          throw Exception("Terjadi kesalahan saat memanggil service API BMKG");
         }
       }
     } catch (e) {

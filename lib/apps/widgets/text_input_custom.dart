@@ -27,28 +27,28 @@ class TextInputCustom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      cursorColor: GFColors.WHITE.withOpacity(0.65),
+      cursorColor: GFColors.WHITE,
       controller: controller,
       style: TextStyle(
         fontSize: AppConfig.fontSize,
-        color: GFColors.LIGHT,
+        color: GFColors.WHITE,
       ),
       decoration: InputDecoration(
           contentPadding: const EdgeInsets.symmetric(vertical: 0),
           labelText: label,
           labelStyle: TextStyle(
             fontSize: AppConfig.fontSize,
-            color: GFColors.WHITE.withOpacity(0.65),
+            color: GFColors.WHITE,
           ),
-          border: OutlineInputBorder(
+          border: const OutlineInputBorder(
             borderSide: BorderSide(
-              color: GFColors.WHITE.withOpacity(0.65),
+              color: GFColors.WHITE,
               width: 2.0,
             ),
           ),
-          enabledBorder: OutlineInputBorder(
+          enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(
-              color: GFColors.WHITE.withOpacity(0.65),
+              color: GFColors.WHITE,
               width: 2.0,
             ),
           ),
@@ -58,23 +58,22 @@ class TextInputCustom extends StatelessWidget {
               width: 2.0,
             ),
           ),
-          focusedBorder: OutlineInputBorder(
+          focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(
-              color: GFColors.WHITE.withOpacity(0.65),
+              color: GFColors.WHITE,
               width: 2.0,
             ),
           ),
-          floatingLabelStyle:
-              TextStyle(color: GFColors.WHITE.withOpacity(0.65)),
+          floatingLabelStyle: const TextStyle(color: GFColors.WHITE),
           prefixIcon: Icon(
             icon,
-            color: GFColors.INFO.withOpacity(0.65),
+            color: const Color(0XFF213265),
           ),
           suffixIcon: enableSuffixIcon == true
               ? GestureDetector(
                   onTap: onTapSuffixIcon,
                   child: Icon(
-                    color: GFColors.INFO.withOpacity(0.65),
+                    color: const Color(0XFF213265),
                     suffixIcon,
                   ),
                 )

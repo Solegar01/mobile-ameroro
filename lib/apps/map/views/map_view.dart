@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/colors/gf_color.dart';
@@ -10,8 +12,10 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mobile_ameroro_app/apps/config/app_config.dart';
 import 'package:mobile_ameroro_app/apps/map/controllers/map_controller.dart';
 import 'package:mobile_ameroro_app/apps/map/models/map_model.dart';
+import 'package:mobile_ameroro_app/apps/widgets/loader_animation.dart';
 import 'package:mobile_ameroro_app/helpers/app_constant.dart';
 import 'package:mobile_ameroro_app/helpers/app_enum.dart';
+import 'package:photo_view/photo_view.dart';
 
 class PetaView extends StatelessWidget {
   final MapController controller = Get.find<MapController>();
@@ -39,14 +43,12 @@ class PetaView extends StatelessWidget {
       ),
       body: controller.obx(
         (state) => _detail(context, controller),
-        onLoading: const GFLoader(
-          type: GFLoaderType.circle,
-        ),
-        onEmpty: const Text('Empty Data'),
+        onLoading: const LoaderAnimation(),
+        onEmpty: const Text('Tidak ada data yang tersedia'),
         onError: (error) => Padding(
           padding: const EdgeInsets.all(8.0),
           child: Center(
-              child: Text(error ?? 'An error occured while loading data...!')),
+              child: Text(error ?? 'Terjadi kesalahan saat memuat data peta')),
         ),
       ),
     );
@@ -59,7 +61,7 @@ class PetaView extends StatelessWidget {
           Obx(
             () => controller.mapIsLoading.isTrue
                 ? const Center(
-                    child: GFLoader(type: GFLoaderType.circle),
+                    child: LoaderAnimation(),
                   )
                 : GoogleMap(
                     indoorViewEnabled: true,
@@ -270,7 +272,7 @@ class MarkerManager {
     );
   }
 
-  static Future _showMarkerInfo({required MapModel data}) {
+  static Future _showMarkerInfo({required MapModel data}) async {
     DeviceStatus deviceStatus = DeviceStatus.offline;
     if ((data.deviceStatus ?? "").toLowerCase() == 'online') {
       deviceStatus = DeviceStatus.online;
@@ -355,7 +357,7 @@ class MarkerManager {
                   const SizedBox(
                     height: 20,
                   ),
-                  _bottomContent(data),
+                  await _bottomContent(data),
                 ],
               ),
             ),
@@ -364,7 +366,7 @@ class MarkerManager {
         isScrollControlled: true);
   }
 
-  static Widget _bottomContent(MapModel data) {
+  static Future<Widget> _bottomContent(MapModel data) async {
     if (data.instrumentType!.toLowerCase() == 'aws') {
       List<String> content =
           data.lastData == null ? [] : data.lastData?.split('|') ?? [];
@@ -739,24 +741,13 @@ class MarkerManager {
       );
     } else if (data.instrumentType!.toLowerCase() == 'cctv') {
       if (data.url != null) {
-        return Container(
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-          child: Image.network(
-            data.url!,
-            fit: BoxFit.cover, // Ensures the image fits the box
-            errorBuilder: (context, error, stackTrace) {
-              return const Icon(Icons.broken_image, size: 50);
-            },
-            loadingBuilder: (context, child, loadingProgress) =>
-                loadingProgress == null
-                    ? child
-                    : GFShimmer(
-                        child: Container(
-                          height: 210,
-                          width: double.infinity,
-                          color: GFColors.LIGHT,
-                        ),
-                      ),
+        return SizedBox(
+          height: 220,
+          child: PhotoView(
+            imageProvider: NetworkImage(data.url!),
+            backgroundDecoration: const BoxDecoration(color: GFColors.WHITE),
+            minScale: PhotoViewComputedScale.contained,
+            maxScale: PhotoViewComputedScale.covered * 2,
           ),
         );
       } else {
@@ -960,5 +951,40 @@ class MarkerManager {
     return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
         .buffer
         .asUint8List();
+  }
+}
+
+// Widget Foto yang Bisa Diperbesar
+class PhotoViewScreen extends StatelessWidget {
+  final String imageUrl;
+
+  const PhotoViewScreen({required this.imageUrl});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.blueGrey[50],
+      child: Center(
+        child: imageUrl.isEmpty
+            ? const Text('Tidak ada gambar yang ditampilkan')
+            : PhotoView(
+                basePosition: Alignment.topCenter,
+                imageProvider: NetworkImage(imageUrl),
+                minScale: PhotoViewComputedScale.contained,
+                maxScale: PhotoViewComputedScale.covered * 2,
+                backgroundDecoration: BoxDecoration(color: Colors.blueGrey[50]),
+                loadingBuilder: (context, event) {
+                  if (event == null) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  final double progress = event.cumulativeBytesLoaded /
+                      (event.expectedTotalBytes ?? 1);
+                  return Center(
+                    child: CircularProgressIndicator(value: progress),
+                  );
+                },
+              ),
+      ),
+    );
   }
 }

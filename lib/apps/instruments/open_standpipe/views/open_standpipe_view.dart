@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:mobile_ameroro_app/apps/config/app_config.dart';
 import 'package:mobile_ameroro_app/apps/instruments/open_standpipe/controllers/open_standpipe_controller.dart';
 import 'package:mobile_ameroro_app/apps/instruments/open_standpipe/models/open_standpipe_model.dart';
+import 'package:mobile_ameroro_app/apps/widgets/loader_animation.dart';
 import 'package:mobile_ameroro_app/helpers/app_constant.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
@@ -42,10 +43,11 @@ class OpenStandpipeView extends StatelessWidget {
             body: controller.obx(
               (state) => _detail(context, controller),
               onLoading: _loader(context, controller),
-              onEmpty: const Text('Empty Data'),
+              onEmpty: const Text('Tidak ada data yang tersedia'),
               onError: (error) => Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Center(child: Text(error!)),
+                child: Center(
+                    child: Text(error ?? 'Terjadi kesalahan saat memuat data')),
               ),
             ),
           ),
@@ -520,9 +522,7 @@ class OpenStandpipeView extends StatelessWidget {
             width: double.infinity,
             height: 300,
             fit: BoxFit.contain,
-            placeholderBuilder: (context) => const GFLoader(
-              type: GFLoaderType.circle,
-            ),
+            placeholderBuilder: (context) => const LoaderAnimation(),
           ),
         );
       }).toList(),
@@ -980,7 +980,7 @@ class OpenStandpipeView extends StatelessWidget {
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
-                      child: Text('No data available'),
+                      child: Text('Tidak ada data yang tersedia'),
                     ),
                   ),
                 ),
@@ -1001,7 +1001,7 @@ class OpenStandpipeView extends StatelessWidget {
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
-                  child: Text('No data available'),
+                  child: Text('Tidak ada data yang tersedia'),
                 ),
               ),
             ),
@@ -2642,7 +2642,7 @@ class OpenStandpipeView extends StatelessWidget {
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
-                      child: Text('No data available'),
+                      child: Text('Tidak ada data yang tersedia'),
                     ),
                   ),
                 ),
@@ -2663,7 +2663,7 @@ class OpenStandpipeView extends StatelessWidget {
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
-                  child: Text('No data available'),
+                  child: Text('Tidak ada data yang tersedia'),
                 ),
               ),
             ),

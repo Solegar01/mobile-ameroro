@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mobile_ameroro_app/apps/instruments/klimatologi_aws/models/klimatologi_aws_day_model.dart';
+import 'package:mobile_ameroro_app/apps/instruments/klimatologi_aws/models/klimatologi_aws_hour_model.dart';
+import 'package:mobile_ameroro_app/apps/instruments/klimatologi_aws/models/klimatologi_aws_minute_model.dart';
 import 'package:mobile_ameroro_app/apps/instruments/klimatologi_aws/models/klimatologi_aws_model.dart';
 import 'package:mobile_ameroro_app/apps/instruments/klimatologi_aws/models/last_reading_model.dart';
 import 'package:mobile_ameroro_app/apps/instruments/klimatologi_aws/repository/klimatologi_aws_repository.dart';
 import 'package:mobile_ameroro_app/apps/instruments/klimatologi_manual/models/weather_model.dart';
 import 'package:mobile_ameroro_app/apps/widgets/custom_toast.dart';
 import 'package:mobile_ameroro_app/helpers/app_constant.dart';
+import 'package:mobile_ameroro_app/helpers/app_enum.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class KlimatologiAwsController extends GetxController
@@ -14,24 +18,33 @@ class KlimatologiAwsController extends GetxController
   KlimatologiAwsController(this.repository);
   late TabController tabController;
   late TabController sensorTabController;
+  late AnimationController animationController;
+  late Animation<double> animation;
   final List<String> sensors = [
-    'Baterai',
-    'Suhu',
     'Kelembaban',
-    'Titik Embun',
-    'Kecepatan Angin',
-    'Radiasi Matahari',
     'Curah Hujan',
-    'Tekanan Barometrik'
+    'Tekanan',
+    'Suhu',
+    'Radiasi Matahari',
+    'Arah Angin',
+    'Kecepatan Angin',
+    'Penguapan',
+    'Baterai',
   ];
 
   var selectedSensorIndex = 0.obs;
   var selectedTabIndex = 0.obs;
-  LastReadingModel? lastReadingModel;
+  Rx<LastReadingModel?> lastReadingModel = Rx(null);
+  RxBool pemantauanIsLoading = false.obs;
   RxList<KlimatologiAwsModel> listModel = RxList.empty(growable: true);
+  RxList<KlimatologiAwsMinuteModel> listMinuteModel =
+      RxList.empty(growable: true);
+  RxList<KlimatologiAwsHourModel> listHourModel = RxList.empty(growable: true);
+  RxList<KlimatologiAwsDayModel> listDayModel = RxList.empty(growable: true);
   var selectedDateRange = Rxn<DateTimeRange>(
       DateTimeRange(start: DateTime.now(), end: DateTime.now()));
   TextEditingController dateRangeController = TextEditingController();
+  Rx<DataFilterType> filterType = DataFilterType.fiveMinutely.obs;
 
   final int rowsPerPage = 10; // Rows per page
   RxList<KlimatologiAwsModel> displayedData =
@@ -42,16 +55,129 @@ class KlimatologiAwsController extends GetxController
 
   @override
   void onInit() async {
-    tabController = TabController(length: 2, vsync: this);
+    tabController = TabController(length: 3, vsync: this);
     sensorTabController = TabController(length: sensors.length, vsync: this);
+    // Initialize the AnimationController
+    animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 1),
+    )..repeat(reverse: true); // Repeat animation back and forth
+
+    // Define the animation as a tween between 0.0 (invisible) and 1.0 (fully visible)
+    animation =
+        Tween<double>(begin: 0.0, end: 1.0).animate(animationController);
     await formInit();
     super.onInit();
   }
 
-  formInit() async {
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void onClose() {
+    animationController.dispose();
+    super.dispose();
+  }
+
+  Future<void> formInit() async {
     dateRangeController.text =
         '${AppConstants().dateFormatID.format(selectedDateRange.value!.start)} - ${AppConstants().dateFormatID.format(selectedDateRange.value!.end)}';
+    await getLastReading();
+    switch (filterType.value) {
+      case DataFilterType.fiveMinutely:
+        await getDataMinute();
+        break;
+      case DataFilterType.hourly:
+        await getDataHour();
+        break;
+      case DataFilterType.daily:
+        await getDataDay();
+        break;
+    }
     change(null, status: RxStatus.success());
+  }
+
+  Future<void> telemetriOnRefresh() async {
+    switch (filterType.value) {
+      case DataFilterType.fiveMinutely:
+        await getDataMinute();
+        break;
+      case DataFilterType.hourly:
+        await getDataHour();
+        break;
+      case DataFilterType.daily:
+        await getDataDay();
+        break;
+    }
+  }
+
+  Future<void> getDataHour() async {
+    // change(null, status: RxStatus.loading());
+    listHourModel.clear();
+    try {
+      await repository
+          .getDataDetailHour(DateTime(2024, 12, 11), DateTime(2024, 12, 13))
+          // .getDataDetailHour(selectedDateRange.value!.start, selectedDateRange.value!.end)
+          .then((response) {
+        response.sort((a, b) => b.readingHour!.compareTo(a.readingHour!));
+        listHourModel.value = response;
+      });
+      // tableDataSourceHour = TableDataSourceHour();
+      // updateDisplayedDataHour();
+      // change(null, status: RxStatus.success());
+    } catch (e) {
+      // change(null, status: RxStatus.error(e.toString()));
+      msgToast(e.toString());
+    } finally {
+      update();
+    }
+  }
+
+  Future<void> getDataDay() async {
+    // change(null, status: RxStatus.loading());
+    listDayModel.clear();
+    try {
+      await repository
+          .getDataDetailDay(DateTime(2024, 12, 11), DateTime(2024, 12, 15))
+          // .getDataDetailDay(selectedDateRange.value!.start, selectedDateRange.value!.end)
+          .then((response) {
+        response.sort((a, b) => b.readingDate!.compareTo(a.readingDate!));
+        listDayModel.value = response;
+      });
+      // tableDataSourceDay = TableDataSourceDay();
+      // updateDisplayedDataDay();
+      // change(null, status: RxStatus.success());
+    } catch (e) {
+      change(null, status: RxStatus.error(e.toString()));
+      // msgToast(e.toString());
+    } finally {
+      update();
+    }
+  }
+
+  Future<void> getDataMinute() async {
+    // change(null, status: RxStatus.loading());
+    listMinuteModel.clear();
+    try {
+      await repository
+          .getDataDetailMinute(DateTime(2024, 12, 12), DateTime(2024, 12, 13))
+          // .getDataDetailMinute(selectedDateRange.value!.start, selectedDateRange.value!.end)
+          .then((response) {
+        response.sort((a, b) => b.readingAt!.compareTo(a.readingAt!));
+        listMinuteModel.value = response;
+      });
+      // tableDataSourceMinute = TableDataSourceMinute();
+      // updateDisplayedDataMinute();
+      // change(null, status: RxStatus.success());
+    } catch (e) {
+      // change(null, status: RxStatus.error(e.toString()));
+      msgToast(e.toString());
+    } finally {
+      update();
+    }
   }
 
   Future<TableDataSource> getTableDataSource() async {
@@ -64,14 +190,36 @@ class KlimatologiAwsController extends GetxController
     return listModel;
   }
 
-  Future<LastReadingModel?> getLastReading() async {
-    LastReadingModel? model;
+  Future<List<KlimatologiAwsMinuteModel>> getChartDataMinute() async {
+    await Future.delayed(const Duration(milliseconds: 1500));
+    return listMinuteModel;
+  }
+
+  Future<List<KlimatologiAwsHourModel>> getChartDataHour() async {
+    await Future.delayed(const Duration(milliseconds: 1500));
+    return listHourModel;
+  }
+
+  Future<List<KlimatologiAwsDayModel>> getChartDataDay() async {
+    await Future.delayed(const Duration(milliseconds: 1500));
+    return listDayModel;
+  }
+
+  Future<Rx<LastReadingModel?>> getPemantauan() async {
+    await Future.delayed(const Duration(seconds: 5));
+    return lastReadingModel;
+  }
+
+  Future<void> getLastReading() async {
+    pemantauanIsLoading.value = true;
     try {
-      model = await repository.getLastReading();
+      lastReadingModel.value = await repository.getLastReading();
     } catch (e) {
       msgToast(e.toString());
+    } finally {
+      pemantauanIsLoading.value = false;
+      update();
     }
-    return model;
   }
 
   Future<void> getData() async {

@@ -5,6 +5,7 @@ import 'package:mobile_ameroro_app/apps/config/app_config.dart';
 import 'package:mobile_ameroro_app/apps/login/controllers/login_controller.dart';
 import 'package:mobile_ameroro_app/apps/login/models/login_request_model.dart';
 import 'package:mobile_ameroro_app/apps/login/repository/login_repository.dart';
+import 'package:mobile_ameroro_app/apps/widgets/loader_animation.dart';
 import 'package:mobile_ameroro_app/apps/widgets/text_input_custom.dart';
 import 'package:mobile_ameroro_app/services/api/api_service.dart';
 
@@ -36,7 +37,7 @@ class LoginView extends StatelessWidget {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: GFColors.LIGHT,
+                color: GFColors.WHITE,
               ),
             ),
             Row(
@@ -47,7 +48,7 @@ class LoginView extends StatelessWidget {
                   style: TextStyle(
                     fontSize: AppConfig.fontSizeXL,
                     fontWeight: FontWeight.bold,
-                    color: GFColors.LIGHT,
+                    color: GFColors.WHITE,
                   ),
                 ),
                 Text(
@@ -121,7 +122,7 @@ class LoginView extends StatelessWidget {
                         fontSize: AppConfig.fontMedion,
                         color: controller.rememberMe.value
                             ? AppConfig.focusTextField
-                            : GFColors.WHITE.withOpacity(0.65),
+                            : GFColors.WHITE,
                       ),
                     ),
                   ],
@@ -133,10 +134,7 @@ class LoginView extends StatelessWidget {
               builder: (controller) {
                 return GFButton(
                   icon: controller.status.isLoading
-                      ? const GFLoader(
-                          type: GFLoaderType.ios,
-                          loaderColorOne: GFColors.LIGHT,
-                        )
+                      ? const LoaderAnimation()
                       : null,
                   size: 45,
                   textStyle: TextStyle(

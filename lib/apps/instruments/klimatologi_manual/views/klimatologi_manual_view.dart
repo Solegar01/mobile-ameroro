@@ -36,10 +36,12 @@ class KlimatologiManualView extends StatelessWidget {
               body: controller.obx(
                 (state) => _detail(context, controller),
                 onLoading: _loader(context, controller),
-                onEmpty: const Text('Empty Data'),
+                onEmpty: const Text('Tidak ada data yang tersedia'),
                 onError: (error) => Padding(
                   padding: EdgeInsets.all(8),
-                  child: Center(child: Text(error!)),
+                  child: Center(
+                      child:
+                          Text(error ?? 'Terjadi kesalahan saat memuat data')),
                 ),
               ),
             ),
@@ -905,7 +907,7 @@ class KlimatologiManualView extends StatelessWidget {
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
-                      child: Text('No data available'),
+                      child: Text('Tidak ada data yang tersedia'),
                     ),
                   ),
                 ),
@@ -926,7 +928,7 @@ class KlimatologiManualView extends StatelessWidget {
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
-                  child: Text('No data available'),
+                  child: Text('Tidak ada data yang tersedia'),
                 ),
               ),
             ),
@@ -1266,7 +1268,7 @@ class KlimatologiManualView extends StatelessWidget {
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
-                      child: Text('No data available'),
+                      child: Text('Tidak ada data yang tersedia'),
                     ),
                   ),
                 ),
@@ -1287,7 +1289,7 @@ class KlimatologiManualView extends StatelessWidget {
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
-                  child: Text('No data available'),
+                  child: Text('Tidak ada data yang tersedia'),
                 ),
               ),
             ),
@@ -1573,7 +1575,7 @@ class KlimatologiManualView extends StatelessWidget {
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
-                      child: Text('No data available'),
+                      child: Text('Tidak ada data yang tersedia'),
                     ),
                   ),
                 ),
@@ -1594,7 +1596,7 @@ class KlimatologiManualView extends StatelessWidget {
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
-                  child: Text('No data available'),
+                  child: Text('Tidak ada data yang tersedia'),
                 ),
               ),
             ),
@@ -1905,7 +1907,7 @@ class KlimatologiManualView extends StatelessWidget {
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
-                      child: Text('No data available'),
+                      child: Text('Tidak ada data yang tersedia'),
                     ),
                   ),
                 ),
@@ -1926,7 +1928,7 @@ class KlimatologiManualView extends StatelessWidget {
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
-                  child: Text('No data available'),
+                  child: Text('Tidak ada data yang tersedia'),
                 ),
               ),
             ),
@@ -2208,7 +2210,7 @@ class KlimatologiManualView extends StatelessWidget {
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
-                      child: Text('No data available'),
+                      child: Text('Tidak ada data yang tersedia'),
                     ),
                   ),
                 ),
@@ -2229,7 +2231,7 @@ class KlimatologiManualView extends StatelessWidget {
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
-                  child: Text('No data available'),
+                  child: Text('Tidak ada data yang tersedia'),
                 ),
               ),
             ),
@@ -2511,7 +2513,7 @@ class KlimatologiManualView extends StatelessWidget {
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
-                      child: Text('No data available'),
+                      child: Text('Tidak ada data yang tersedia'),
                     ),
                   ),
                 ),
@@ -2532,7 +2534,7 @@ class KlimatologiManualView extends StatelessWidget {
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
-                  child: Text('No data available'),
+                  child: Text('Tidak ada data yang tersedia'),
                 ),
               ),
             ),
@@ -3125,7 +3127,7 @@ class KlimatologiManualView extends StatelessWidget {
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
-                      child: Text('No data available'),
+                      child: Text('Tidak ada data yang tersedia'),
                     ),
                   ),
                 ),
@@ -3146,7 +3148,7 @@ class KlimatologiManualView extends StatelessWidget {
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
-                  child: Text('No data available'),
+                  child: Text('Tidak ada data yang tersedia'),
                 ),
               ),
             ),

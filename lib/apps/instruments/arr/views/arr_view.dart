@@ -18,9 +18,11 @@ class ArrView extends StatelessWidget {
             child: Scaffold(
               appBar: AppBar(
                 foregroundColor: GFColors.WHITE,
-                title: Padding(
-                  padding: EdgeInsets.all(10),
-                  child: const Text('ARR'),
+                title: const Text(
+                  'Automatic Rainfall Recorder (ARR)',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
                 ),
                 actions: [
                   IconButton(
@@ -37,10 +39,12 @@ class ArrView extends StatelessWidget {
                 onLoading: const Center(
                   child: CircularProgressIndicator(),
                 ),
-                onEmpty: const Text('Empty Data'),
+                onEmpty: const Text('Tidak ada data yang tersedia'),
                 onError: (error) => Padding(
                   padding: EdgeInsets.all(8),
-                  child: Center(child: Text(error!)),
+                  child: Center(
+                      child:
+                          Text(error ?? 'Terjadi kesalahan saat memuat data')),
                 ),
               ),
             ),
@@ -60,109 +64,110 @@ class ArrView extends StatelessWidget {
 
   _listCard(BuildContext context, ArrController controller) {
     return ListView.separated(
-      separatorBuilder: (BuildContext context, int index) {
-        return Container(color: GFColors.LIGHT, height: 2);
-      },
-      padding: EdgeInsets.all(8),
+      separatorBuilder: (BuildContext context, int index) => const SizedBox(
+        height: 5,
+      ),
       itemCount: controller.listArr.length,
       itemBuilder: (context, index) {
         final data = controller.listArr[index];
 
-        return ListTile(
-          title: Text(
-            data.name ?? '-',
-            style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: AppConfig.primaryColor),
-          ),
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
+        return Container(
+          color: GFColors.WHITE,
+          child: ListTile(
+            title: Text(
+              data.name ?? '-',
+              style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: AppConfig.primaryColor),
+            ),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      _buildInfoBadge(GFColors.INFO, data.brandName ?? '-'),
+                      const SizedBox(width: 8),
+                      _buildInfoBadge(GFColors.DARK, data.deviceId ?? '-'),
+                      const SizedBox(width: 8),
+                      _buildInfoBadge(
+                        (data.status ?? '').toLowerCase() == 'offline'
+                            ? GFColors.DANGER
+                            : GFColors.SUCCESS,
+                        data.status ?? '-',
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    _buildInfoBadge(GFColors.INFO, data.brandName ?? '-'),
-                    SizedBox(width: 8),
-                    _buildInfoBadge(GFColors.DARK, data.deviceId ?? '-'),
-                    SizedBox(width: 8),
-                    _buildInfoBadge(
-                      (data.status ?? '').toLowerCase() == 'offline'
-                          ? GFColors.DANGER
-                          : GFColors.SUCCESS,
-                      data.status ?? '-',
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Waktu : ${AppConstants().dateTimeFullFormatID.format(data.readingAt!)} WITA',
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            'Curah Hujan : ${AppConstants().numFormat.format(data.rainfallLastHour ?? 0)} mm',
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            'Kapasitas Baterai : ${AppConstants().numFormat.format(data.batteryCapacity ?? 0)} %',
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ((data.intensityLastHour ?? '').toLowerCase() ==
+                                  'tidak ada hujan')
+                              ? _getImage(data)
+                              : FadeTransition(
+                                  opacity: controller.animation,
+                                  child: _getImage(data),
+                                ),
+                          Text(
+                            data.intensityLastHour ?? '',
+                            style: const TextStyle(
+                              color: GFColors.DARK,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
-              ),
-              SizedBox(height: 8),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.4,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Waktu : ${AppConstants().dateTimeFullFormatID.format(data.readingAt!)} WITA',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          'Curah Hujan : ${AppConstants().numFormat.format(data.rainfallLastHour ?? 0)} mm',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          'Kapasitas Baterai : ${AppConstants().numFormat.format(data.batteryCapacity ?? 0)} %',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.4,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ((data.intensityLastHour ?? '').toLowerCase() ==
-                                'tidak ada hujan')
-                            ? _getImage(data)
-                            : FadeTransition(
-                                opacity: controller.animation,
-                                child: _getImage(data),
-                              ),
-                        Text(
-                          data.intensityLastHour ?? '',
-                          style: const TextStyle(
-                            color: GFColors.DARK,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                ],
-              ),
-            ],
+              ],
+            ),
+            onTap: () async {
+              await controller.toDetail(data);
+            },
           ),
-          onTap: () async {
-            await controller.toDetail(data);
-          },
         );
       },
     );

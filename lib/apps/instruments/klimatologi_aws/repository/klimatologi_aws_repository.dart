@@ -1,6 +1,9 @@
 import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:mobile_ameroro_app/apps/instruments/klimatologi_aws/models/klimatologi_aws_day_model.dart';
+import 'package:mobile_ameroro_app/apps/instruments/klimatologi_aws/models/klimatologi_aws_hour_model.dart';
+import 'package:mobile_ameroro_app/apps/instruments/klimatologi_aws/models/klimatologi_aws_minute_model.dart';
 import 'package:mobile_ameroro_app/apps/instruments/klimatologi_aws/models/klimatologi_aws_model.dart';
 import 'package:mobile_ameroro_app/apps/instruments/klimatologi_aws/models/last_reading_model.dart';
 import 'package:mobile_ameroro_app/apps/instruments/klimatologi_manual/models/weather_model.dart';
@@ -23,7 +26,7 @@ class KlimatologiAwsRepository {
         if (response.statusCode == 200) {
           model = (LastReadingModel.fromJson(jsonResponse['data']));
         } else {
-          throw Exception("An error occured during load last data");
+          throw Exception("Terjadi kesalahan saat mamuat data terakhir");
         }
       }
     } catch (e) {
@@ -31,6 +34,84 @@ class KlimatologiAwsRepository {
     }
 
     return model;
+  }
+
+  Future<List<KlimatologiAwsMinuteModel>> getDataDetailMinute(
+      DateTime? startDate, DateTime? endDate) async {
+    List<KlimatologiAwsMinuteModel> listModel = List.empty(growable: true);
+    try {
+      if (await connectivityService.checkInternetConnection()) {
+        String formattedStart = DateFormat('yyyy-MM-dd').format(startDate!);
+        String formattedEnd = DateFormat('yyyy-MM-dd').format(endDate!);
+        final response = await apiService.get(
+            '${AppConstants.awsReadingUrl}?selected_time=minute&StartDate=$formattedStart&EndDate=$formattedEnd');
+        final jsonResponse = json.decode(response.body);
+
+        if (response.statusCode == 200) {
+          for (var item in jsonResponse['data'] as List) {
+            listModel.add(KlimatologiAwsMinuteModel.fromJson(item));
+          }
+        } else {
+          throw Exception(jsonResponse['message']);
+        }
+      }
+    } catch (e) {
+      rethrow;
+    }
+
+    return listModel;
+  }
+
+  Future<List<KlimatologiAwsHourModel>> getDataDetailHour(
+      DateTime? startDate, DateTime? endDate) async {
+    List<KlimatologiAwsHourModel> listModel = List.empty(growable: true);
+    try {
+      if (await connectivityService.checkInternetConnection()) {
+        String formattedStart = DateFormat('yyyy-MM-dd').format(startDate!);
+        String formattedEnd = DateFormat('yyyy-MM-dd').format(endDate!);
+        final response = await apiService.get(
+            '${AppConstants.awsReadingUrl}?selected_time=hour&StartDate=$formattedStart&EndDate=$formattedEnd');
+        final jsonResponse = json.decode(response.body);
+
+        if (response.statusCode == 200) {
+          for (var item in jsonResponse['data'] as List) {
+            listModel.add(KlimatologiAwsHourModel.fromJson(item));
+          }
+        } else {
+          throw Exception(jsonResponse['message']);
+        }
+      }
+    } catch (e) {
+      rethrow;
+    }
+
+    return listModel;
+  }
+
+  Future<List<KlimatologiAwsDayModel>> getDataDetailDay(
+      DateTime? startDate, DateTime? endDate) async {
+    List<KlimatologiAwsDayModel> listModel = List.empty(growable: true);
+    try {
+      if (await connectivityService.checkInternetConnection()) {
+        String formattedStart = DateFormat('yyyy-MM-dd').format(startDate!);
+        String formattedEnd = DateFormat('yyyy-MM-dd').format(endDate!);
+        final response = await apiService.get(
+            '${AppConstants.awsReadingUrl}?selected_time=day&StartDate=$formattedStart&EndDate=$formattedEnd');
+        final jsonResponse = json.decode(response.body);
+
+        if (response.statusCode == 200) {
+          for (var item in jsonResponse['data'] as List) {
+            listModel.add(KlimatologiAwsDayModel.fromJson(item));
+          }
+        } else {
+          throw Exception(jsonResponse['message']);
+        }
+      }
+    } catch (e) {
+      rethrow;
+    }
+
+    return listModel;
   }
 
   Future<WeatherModel?> getWeather() async {
@@ -43,7 +124,7 @@ class KlimatologiAwsRepository {
         if (response.statusCode == 200) {
           model = (WeatherModel.fromJson(jsonResponse));
         } else {
-          throw Exception("An error occured during call BMKG API service");
+          throw Exception("Terjadi kesalahan saat memanggil service API BMKG");
         }
       }
     } catch (e) {

@@ -76,7 +76,7 @@ class HomeRepository {
         if (response.statusCode == 200) {
           model = (WeatherModel.fromJson(jsonResponse));
         } else {
-          throw Exception("An error occured during call BMKG API service");
+          throw Exception("Ter");
         }
       }
     } catch (e) {

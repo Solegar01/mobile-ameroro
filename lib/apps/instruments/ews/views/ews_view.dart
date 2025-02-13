@@ -29,10 +29,11 @@ class EwsView extends StatelessWidget {
             body: controller.obx(
               (state) => _detail(context, controller),
               onLoading: const Center(child: CircularProgressIndicator()),
-              onEmpty: const Text('Empty Data'),
+              onEmpty: const Text('Tidak ada data yang tersedia'),
               onError: (error) => Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Center(child: Text(error!)),
+                child: Center(
+                    child: Text(error ?? 'Terjadi kesalahan saat memuat data')),
               ),
             ),
           ),

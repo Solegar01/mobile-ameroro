@@ -39,6 +39,7 @@ class AppConstants {
   static String inklinometerUrl = 'inklinometer';
   static String intakeUrl = 'intake';
   static String awsLastReadingUrl = 'aws/last';
+  static String awsReadingUrl = 'aws/reading';
   static String awsUrl = 'klimatologi/aws';
   static String klimatologiManualUrl = 'klimatologi/manual';
   static String owsSensorUrl = 'observationwell/sensors';

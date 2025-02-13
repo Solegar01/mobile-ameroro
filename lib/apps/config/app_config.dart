@@ -14,6 +14,8 @@ class AppConfig {
   static Color bgLogin = const Color(0XFF3A57E8);
   static Color focusTextField = const Color(0xFFFFC828);
   static const Color primaryColor = Color(0XFF3A57E8);
+  static const Color secondaryColor = Color(0xFFFFC828);
+  static const Color errorColor = Color(0xFFEC4134);
 
   static ThemeData themeData = ThemeData(
     primaryColor: primaryColor,

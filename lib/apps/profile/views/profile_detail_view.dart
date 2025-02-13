@@ -4,6 +4,7 @@ import 'package:getwidget/components/loader/gf_loader.dart';
 import 'package:getwidget/types/gf_loader_type.dart';
 import 'package:mobile_ameroro_app/apps/config/app_config.dart';
 import 'package:mobile_ameroro_app/apps/profile/controllers/profile_controller.dart';
+import 'package:mobile_ameroro_app/apps/widgets/loader_animation.dart';
 
 class ProfileDetailView extends StatelessWidget {
   final ProfileController _controller = Get.find<ProfileController>();
@@ -28,14 +29,13 @@ class ProfileDetailView extends StatelessWidget {
       body: _controller.obx(
         (state) => _buildForm(),
         onLoading: const Center(
-          child: GFLoader(
-            type: GFLoaderType.circle,
-          ),
+          child: LoaderAnimation(),
         ),
-        onEmpty: const Text('Empty Data'),
+        onEmpty: const Text('Tidak ada data yang tersedia'),
         onError: (error) => Padding(
           padding: const EdgeInsets.all(8),
-          child: Center(child: Text(error!)),
+          child: Center(
+              child: Text(error ?? 'Terjadi kesalahan saat memuat data')),
         ),
       ),
     );

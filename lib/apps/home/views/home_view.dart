@@ -56,12 +56,13 @@ class HomeView extends StatelessWidget {
         onEmpty: Center(
           child: Padding(
             padding: EdgeInsets.all(5),
-            child: const Text('Empty Data'),
+            child: const Text('Tidak ada data yang tersedia'),
           ),
         ),
         onError: (error) => Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Center(child: Text(error!)),
+          child: Center(
+              child: Text(error ?? 'Terjadi kesalahan saat memuat data')),
         ),
       ),
     );
@@ -1896,7 +1897,7 @@ class HomeView extends StatelessWidget {
                     Center(
                       child: Padding(
                         padding: EdgeInsets.all(5),
-                        child: const Text('Empty Data'),
+                        child: const Text('Tidak ada data yang tersedia'),
                       ),
                     )
                   ],
@@ -1933,7 +1934,7 @@ class HomeView extends StatelessWidget {
                     Center(
                       child: Padding(
                         padding: EdgeInsets.all(5),
-                        child: const Text('Empty Data'),
+                        child: const Text('Tidak ada data yang tersedia'),
                       ),
                     )
                   ],
@@ -1970,7 +1971,7 @@ class HomeView extends StatelessWidget {
                     Center(
                       child: Padding(
                         padding: EdgeInsets.all(5),
-                        child: const Text('Empty Data'),
+                        child: const Text('Tidak ada data yang tersedia'),
                       ),
                     )
                   ],
@@ -2007,7 +2008,7 @@ class HomeView extends StatelessWidget {
                     Center(
                       child: Padding(
                         padding: EdgeInsets.all(5),
-                        child: const Text('Empty Data'),
+                        child: const Text('Tidak ada data yang tersedia'),
                       ),
                     )
                   ],
@@ -2044,7 +2045,7 @@ class HomeView extends StatelessWidget {
                     Center(
                       child: Padding(
                         padding: EdgeInsets.all(5),
-                        child: const Text('Empty Data'),
+                        child: const Text('Tidak ada data yang tersedia'),
                       ),
                     )
                   ],
@@ -2089,7 +2090,7 @@ class HomeView extends StatelessWidget {
               ? Center(
                   child: Padding(
                     padding: EdgeInsets.all(5),
-                    child: const Text('Empty Data'),
+                    child: const Text('Tidak ada data yang tersedia'),
                   ),
                 )
               : SfCartesianChart(
@@ -2240,7 +2241,7 @@ class HomeView extends StatelessWidget {
               ? Center(
                   child: Padding(
                     padding: EdgeInsets.all(5),
-                    child: const Text('Empty Data'),
+                    child: const Text('Tidak ada data yang tersedia'),
                   ),
                 )
               : SfCartesianChart(
@@ -2391,7 +2392,7 @@ class HomeView extends StatelessWidget {
               ? Center(
                   child: Padding(
                     padding: EdgeInsets.all(5),
-                    child: const Text('Empty Data'),
+                    child: const Text('Tidak ada data yang tersedia'),
                   ),
                 )
               : SfCartesianChart(
@@ -2532,7 +2533,7 @@ class HomeView extends StatelessWidget {
             ? Center(
                 child: Padding(
                   padding: EdgeInsets.all(5),
-                  child: const Text('Empty Data'),
+                  child: const Text('Tidak ada data yang tersedia'),
                 ),
               )
             : _awlrGraph(context, listAwlrDetail),
@@ -2549,7 +2550,7 @@ class HomeView extends StatelessWidget {
           ? Center(
               child: Padding(
                 padding: EdgeInsets.all(5),
-                child: const Text('Empty Data'),
+                child: const Text('Tidak ada data yang tersedia'),
               ),
             )
           : Padding(

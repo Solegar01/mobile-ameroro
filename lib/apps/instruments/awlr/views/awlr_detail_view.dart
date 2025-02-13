@@ -37,10 +37,12 @@ class AwlrDetailView extends StatelessWidget {
                 onLoading: const Center(
                   child: CircularProgressIndicator(),
                 ),
-                onEmpty: const Text('Empty Data'),
+                onEmpty: const Text('Tidak ada data yang tersedia'),
                 onError: (error) => Padding(
                   padding: EdgeInsets.all(8),
-                  child: Center(child: Text(error!)),
+                  child: Center(
+                      child:
+                          Text(error ?? 'Terjadi kesalahan saat memuat data')),
                 ),
               ),
             ),
@@ -643,7 +645,7 @@ class AwlrDetailView extends StatelessWidget {
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
-                      child: Text('No data available'),
+                      child: Text('Tidak ada data yang tersedia'),
                     ),
                   ),
                 ),
@@ -675,7 +677,7 @@ class AwlrDetailView extends StatelessWidget {
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
-                  child: Text('No data available'),
+                  child: Text('Tidak ada data yang tersedia'),
                 ),
               ),
             ),
@@ -976,7 +978,7 @@ class AwlrDetailView extends StatelessWidget {
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
-                      child: Text('No data available'),
+                      child: Text('Tidak ada data yang tersedia'),
                     ),
                   ),
                 ),
@@ -1008,7 +1010,7 @@ class AwlrDetailView extends StatelessWidget {
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
-                  child: Text('No data available'),
+                  child: Text('Tidak ada data yang tersedia'),
                 ),
               ),
             ),
@@ -1288,7 +1290,7 @@ class AwlrDetailView extends StatelessWidget {
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
-                      child: Text('No data available'),
+                      child: Text('Tidak ada data yang tersedia'),
                     ),
                   ),
                 ),
@@ -1320,7 +1322,7 @@ class AwlrDetailView extends StatelessWidget {
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
-                  child: Text('No data available'),
+                  child: Text('Tidak ada data yang tersedia'),
                 ),
               ),
             ),
@@ -1620,7 +1622,7 @@ class AwlrDetailView extends StatelessWidget {
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
-                      child: Text('No data available'),
+                      child: Text('Tidak ada data yang tersedia'),
                     ),
                   ),
                 ),
@@ -1652,7 +1654,7 @@ class AwlrDetailView extends StatelessWidget {
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
-                  child: Text('No data available'),
+                  child: Text('Tidak ada data yang tersedia'),
                 ),
               ),
             ),
@@ -1953,7 +1955,7 @@ class AwlrDetailView extends StatelessWidget {
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
-                      child: Text('No data available'),
+                      child: Text('Tidak ada data yang tersedia'),
                     ),
                   ),
                 ),
@@ -1985,7 +1987,7 @@ class AwlrDetailView extends StatelessWidget {
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
-                  child: Text('No data available'),
+                  child: Text('Tidak ada data yang tersedia'),
                 ),
               ),
             ),
@@ -2265,7 +2267,7 @@ class AwlrDetailView extends StatelessWidget {
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
-                      child: Text('No data available'),
+                      child: Text('Tidak ada data yang tersedia'),
                     ),
                   ),
                 ),
@@ -2297,7 +2299,7 @@ class AwlrDetailView extends StatelessWidget {
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
-                  child: Text('No data available'),
+                  child: Text('Tidak ada data yang tersedia'),
                 ),
               ),
             ),
@@ -2607,7 +2609,7 @@ class AwlrDetailView extends StatelessWidget {
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
-                      child: Text('No data available'),
+                      child: Text('Tidak ada data yang tersedia'),
                     ),
                   ),
                 ),
@@ -2639,7 +2641,7 @@ class AwlrDetailView extends StatelessWidget {
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
-                  child: Text('No data available'),
+                  child: Text('Tidak ada data yang tersedia'),
                 ),
               ),
             ),
@@ -2902,7 +2904,7 @@ class AwlrDetailView extends StatelessWidget {
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
-                      child: Text('No data available'),
+                      child: Text('Tidak ada data yang tersedia'),
                     ),
                   ),
                 ),
@@ -2934,7 +2936,7 @@ class AwlrDetailView extends StatelessWidget {
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
-                  child: Text('No data available'),
+                  child: Text('Tidak ada data yang tersedia'),
                 ),
               ),
             ),
@@ -3243,7 +3245,7 @@ class AwlrDetailView extends StatelessWidget {
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
-                      child: Text('No data available'),
+                      child: Text('Tidak ada data yang tersedia'),
                     ),
                   ),
                 ),
@@ -3275,7 +3277,7 @@ class AwlrDetailView extends StatelessWidget {
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
-                  child: Text('No data available'),
+                  child: Text('Tidak ada data yang tersedia'),
                 ),
               ),
             ),
@@ -3520,7 +3522,7 @@ class AwlrDetailView extends StatelessWidget {
                       color: GFColors.WHITE,
                     ),
                     child: const Center(
-                      child: Text('No data available'),
+                      child: Text('Tidak ada data yang tersedia'),
                     ),
                   ),
                 ),
@@ -3552,7 +3554,7 @@ class AwlrDetailView extends StatelessWidget {
                   color: GFColors.WHITE,
                 ),
                 child: const Center(
-                  child: Text('No data available'),
+                  child: Text('Tidak ada data yang tersedia'),
                 ),
               ),
             ),
